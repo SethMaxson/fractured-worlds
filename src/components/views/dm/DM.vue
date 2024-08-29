@@ -12,7 +12,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
         </header>
         <main>
             <div>
-                {{ murica }}
+                <!-- {{ murica }} -->
             </div>
         </main>
     </PageContainerVue>
@@ -20,24 +20,23 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 
 <script lang="ts">
 import axios from 'axios';
-import type { IDNDBeyondCharacter } from "@/interfaces/IDndBeyondCharacter";
 import { defineComponent } from "vue";
 
 export default defineComponent({
         name: 'DMViewComponent',
         data() {
             return {
-                murica: {} as IDNDBeyondCharacter,
-                fetchingData: false
+                // murica: {} as IDNDBeyondCharacter,
+                // fetchingData: false
             }
         },
         methods: {
             async fetchCharacters() {
-                // const response = await axios.get<IDNDBeyondCharacter>("https://character-service.dndbeyond.com/character/v3/character/93985205/")
-                const response = await axios.get<IDNDBeyondCharacter>("https://www.dndbeyond.com/character/93985205/json", {
-					withCredentials: false,
-				});
-                this.murica = response.data
+                // // const response = await axios.get<IDNDBeyondCharacter>("https://character-service.dndbeyond.com/character/v3/character/93985205/")
+                // const response = await axios.get<IDNDBeyondCharacter>("https://www.dndbeyond.com/character/93985205/json", {
+				// 	withCredentials: false,
+				// });
+                // this.murica = response.data
             },
             // async loadMoreFacts() {
             //     this.fetchingData = true
