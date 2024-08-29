@@ -631,7 +631,7 @@ Flying Spaghetti Monster
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/andy's_room.png" />
+						<img src="@/assets/images/worlds/andys_room.png" />
 					</template>
 					<template v-slot:name>
 						<span class="suggestion">
