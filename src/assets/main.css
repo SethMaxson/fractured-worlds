@@ -1,0 +1,98 @@
+@import './base.css';
+
+/* #app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+} */
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+.heading {
+  color: var(--color-heading);
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+#app > .navbar {
+  position: relative;
+  z-index: 6;
+}
+
+/*#region general text formatting */
+.capitalize { text-transform: capitalize; }
+pre {
+  white-space: pre-wrap;
+  font: inherit;
+}
+/*#endregion general text formatting */
+
+/*#region text-tag formatting */
+.character { color: var(--character-text-color); }
+.important { color: var(--item-text-color); }
+.location { color: var(--location-text-color); }
+/*#endregion text-tag formatting */
+
+/*#region handling of GM view vs Player view */
+[data-game-viewer-role]:not([data-game-viewer-role="gm"]) .dm-only,
+[data-game-viewer-role]:not([data-game-viewer-role="gm"]) .dev,
+[data-game-viewer-role]:not([data-game-viewer-role="gm"]) .gm-only {
+  display: none;
+}
+/*#endregion handling of GM view vs Player view */
+
+/* @media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+} */
+
+
+/*#region backgrounds */
+[data-bs-theme="dark"] .bg-navbar {
+  background: linear-gradient(var(--kh-c-bg-menu-top-gradient-1), var(--kh-c-bg-menu-top-gradient-2));
+  border-bottom: 0.25rem solid var(--kh-c-border-menu-header);
+}
+
+.bg-navbar {
+  background-color: var(--color-navbar-bg);
+}
+
+.bg-soft { 
+  background-color: var(--color-background-soft);
+}
+
+.bg-mute { 
+  background-color: var(--color-background-mute);
+}
+
+.bg-variant { 
+  background-color: var(--bd-pre-bg);
+}
+/*#endregion backgrounds */
