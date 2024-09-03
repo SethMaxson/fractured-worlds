@@ -2,6 +2,11 @@
 import Image from './Image.vue';
 
 defineProps({
+	isExternal: {
+		type: Boolean,
+		required: false,
+		default: false
+	},
 	src: {
 		type: String,
 		required: true
@@ -10,5 +15,5 @@ defineProps({
 </script>
 
 <template>
-	<Image class="class" alt="portrait" :src="src" />
+	<Image class="class" alt="portrait" :src="src" :is-external="isExternal" />
 </template>

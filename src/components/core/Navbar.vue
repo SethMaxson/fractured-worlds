@@ -30,6 +30,9 @@
 					<!-- <li class="nav-item">
 						<router-link class="nav-link" to="/inventory"> Inventory </router-link>
 					</li> -->
+					<li class="nav-item">
+						<router-link class="nav-link" to="/explorers-guide"> Explorer's Guide </router-link>
+					</li>
 					<li class="nav-item dev">
 						<router-link class="nav-link" to="/journal"> Journal </router-link>
 					</li>

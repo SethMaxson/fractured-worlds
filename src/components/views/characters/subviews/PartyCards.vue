@@ -19,9 +19,9 @@ import Location from '@/components/core/text-tags/Location.vue';
 			has uncommonly high self-doubt, which may be the only thing hampering his otherwise tactical mind.
 			<!- <template #button><a href="#" class="btn btn-primary">Go somewhere</a></template> ->
 		</CharacterCard> -->
-		<CharacterCard status="dead">
+		<CharacterCard>
 			<template #image>
-				<Portrait src="characters/fractured-worlds/party/cobb.png" />
+				<Portrait src="img/party/cobb.png" />
 			</template>
 			<template #heading>C.O.B.B.</template>
 			<template #subheading>Android Monk</template>
@@ -30,7 +30,7 @@ import Location from '@/components/core/text-tags/Location.vue';
 		</CharacterCard>
 		<CharacterCard>
 			<template #image>
-				<Portrait src="characters/fractured-worlds/party/phil.png" />
+				<Portrait src="img/party/phil.png" />
 			</template>
 			<template #heading>Li'l Phil Antonio</template>
 			<template #subheading>Centaur Sorcerer</template>
@@ -42,7 +42,7 @@ import Location from '@/components/core/text-tags/Location.vue';
 		</CharacterCard>
 		<CharacterCard>
 			<template #image>
-				<Portrait src="characters/fractured-worlds/party/tero.png" />
+				<Portrait src="img/party/tero.png" />
 			</template>
 			<template #heading>Tero</template>
 			<template #subheading>Kitsune Kineticist</template>
@@ -51,7 +51,7 @@ import Location from '@/components/core/text-tags/Location.vue';
 		</CharacterCard>
 		<CharacterCard>
 			<template #image>
-				<Portrait src="characters/fractured-worlds/party/tropey.png" />
+				<Portrait src="img/party/tropey.png" />
 			</template>
 			<template #heading>Tropey McTroperson</template>
 			<template #subheading>Dwarf Champion</template>

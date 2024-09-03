@@ -10,13 +10,18 @@ const props = defineProps({
 		type: String,
 		required: false
 	},
+	isExternal: {
+		type: Boolean,
+		required: false,
+		default: false
+	},
 	src: {
 		type: String,
 		required: true
 	}
 })
 
-const url = Config.BaseImageUrl + props.src;
+const url = props.isExternal ? Config.BaseImageUrl + props.src : props.src;
 </script>
 
 <template>

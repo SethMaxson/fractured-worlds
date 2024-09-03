@@ -14,7 +14,7 @@ import Location from '@/components/core/text-tags/Location.vue';
 			<CharacterCardDeck>
 				<CharacterCard>
 					<template #image>
-						<img class="bg bg-secondary" alt="portrait" src="/public/tokens/HalflingCommoner2.png" />
+						<img class="bg bg-secondary" alt="portrait" src="/img/tokens/HalflingCommoner2.png" />
 					</template>
 					<template #heading>Kenny Cobblerock</template>
 					<!-- <template #heading>Kenji Cherrymoon</template> -->
@@ -24,7 +24,7 @@ import Location from '@/components/core/text-tags/Location.vue';
 				</CharacterCard>
 				<CharacterCard>
 					<template #image>
-						<img class="bg bg-secondary" alt="portrait" src="/public/tokens/Molefolk3.png" />
+						<img class="bg bg-secondary" alt="portrait" src="/img/tokens/Molefolk3.png" />
 					</template>
 					<template #heading>Bowuf</template>
 					<!-- <template #heading>Kenji Cherrymoon</template> -->

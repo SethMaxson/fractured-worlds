@@ -33,7 +33,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					<CharacterCardDeck>
 						<CharacterCard>
 							<template #image>
-								<Portrait src="characters/npc/killinggame/default-portrait.jpeg" />
+								<Portrait :is-external="true" src="characters/npc/killinggame/default-portrait.jpeg" />
 							</template>
 							<template #heading>Duvamil "Hamisfore" Turen</template>
 							<template #subheading>Gnome</template>
@@ -44,7 +44,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 						</CharacterCard>
 						<CharacterCard>
 							<template #image>
-								<Portrait src="characters/fractured-worlds/npc/ootah.png" />
+								<Portrait src="img/npc/ootah.png" />
 							</template>
 							<template #heading>Ootah</template>
 							<template #subheading>Orc Child</template>
@@ -59,7 +59,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					<CharacterCardDeck>
 						<CharacterCard>
 							<template #image>
-								<Portrait src="characters/fractured-worlds/npc/kenji.png" />
+								<Portrait src="img/npc/kenji.png" />
 							</template>
 							<template #heading>Kenji Cherrymoon</template>
 							<template #subheading>Halfling Dockworker</template>
@@ -87,7 +87,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					<CharacterCardDeck>
 						<CharacterCard>
 							<template #image>
-								<Portrait class="bg-danger bg-opacity-50" src="characters/fractured-worlds/npc/jafar.png" />
+								<Portrait class="bg-danger bg-opacity-50" src="img/npc/jafar.png" />
 							</template>
 							<template #heading>Jafar</template>
 							<template #subheading>Human Sorcerer</template>
@@ -102,7 +102,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					<CharacterCardDeck>
 						<CharacterCard>
 							<template #image>
-								<Portrait src="characters/fractured-worlds/npc/hedge-knight.png" />
+								<Portrait src="img/npc/hedge-knight.png" />
 							</template>
 							<template #heading>Hedge Knight</template>
 							<template #subheading>Halfling Cleric</template>
@@ -141,7 +141,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					<CharacterCardDeck>
 						<CharacterCard>
 							<template #image>
-								<Portrait src="characters/npc/ssssimon.png" />
+								<Portrait :is-external="true" src="characters/npc/ssssimon.png" />
 							</template>
 							<template #heading>Ssssimon</template>
 							<template #subheading>The Father of Decay</template>

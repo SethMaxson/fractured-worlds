@@ -8,6 +8,7 @@ import "bootstrap";
 import "./assets/main.css";
 import Characters from "./components/views/characters/Characters.vue";
 import DMView from "./components/views/dm/DM.vue";
+import ExplorersGuideView from "./components/views/explorers-guide/ExplorersGuide.vue";
 import FactionsView from "./components/views/factions/Factions.vue";
 import GlossaryView from "./components/views/glossary/Glossary.vue";
 import Home from "./components/views/home/Home.vue";
@@ -24,6 +25,7 @@ const router = createRouter({
 		{ path: '/home', component: Home},
 		{ path: '/characters', component: Characters},
 		{ path: '/dm', component: DMView},
+		{ path: '/explorers-guide', component: ExplorersGuideView},
 		{ path: '/factions', component: FactionsView},
 		{ path: '/glossary', component: GlossaryView},
 		{ path: '/inventory', component: InventoryView},

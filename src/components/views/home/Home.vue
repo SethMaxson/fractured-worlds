@@ -26,6 +26,9 @@ import { GameStrings } from "@/scripts/game-strings";
 					<div class="col dev">
 						<router-link class="nav-link p-3 border border-primary-subtle" to="/worlds"> Worlds </router-link>
 					</div>
+					<div class="col">
+						<router-link class="nav-link p-3 border border-primary-subtle" to="/explorers-guide"> Explorer's Guide </router-link>
+					</div>
 					<div class="col dev">
 						<router-link class="nav-link p-3 border border-primary-subtle" to="/journal"> Journal </router-link>
 					</div>
