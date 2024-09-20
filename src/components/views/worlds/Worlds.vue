@@ -329,7 +329,7 @@ Flying Spaghetti Monster
 						<img src="@/assets/images/worlds/shrek.png" />
 					</template>
 					<template v-slot:name>
-						Dulock Outlands (Shrek)
+						Duloc Outlands (Shrek)
 					</template>
 					<template v-slot>
 						<h6>Act 1: Dragon's Castle</h6>
@@ -465,15 +465,16 @@ Flying Spaghetti Monster
 						Teenage Mutant Ninja Turtles
 					</template>
 					<template v-slot>
-						Follows the plot of the first Teenage Mutant Ninja Turtles film (1990)
+						<p>Follows the plot of the first Teenage Mutant Ninja Turtles film (1990)</p>
 						<h6>Act 1: Raph and the Rescue of April O'Neil</h6>
-						Begins with Raphael rescuing April. Ends with the Turtles discovering Splinter was kidnapped while April hosted the turtles+the gang in her home.
+						<p>Begins with Raphael rescuing April. Ends with the Turtles discovering Splinter was kidnapped while April hosted the turtles+the gang in her home.</p>
 						<h6>Act 2: The Burning of April's Apartment</h6>
-						Begins with the raid on April's apartment. Ends with the farm.
+						<p>Begins with the raid on April's apartment. Ends with the farm.</p>
 						<h6>Act 3: Shredder Showdown</h6>
 					</template>
 					<template v-slot:details>
 						<NittyGritty
+							anchor="The O'Neil farm"
 							disguise="Humans or Mutant Animals"
 							genre="action, comedy"
 							partners="TMNT"
@@ -559,7 +560,7 @@ Flying Spaghetti Monster
 					<template v-slot:details>
 						<NittyGritty
 							disguise="B&W Rubber Hose cartoon"
-							genre="adventure, comedy"
+							genre="adventure, cartoon, comedy"
 							partners="?"
 							:KindredWorlds='[]'
 							:themes='["cartoon", "hijinks"]'
@@ -575,7 +576,7 @@ Flying Spaghetti Monster
 					</template>
 					<template v-slot>
 						<h6>Act 1 - That's no Moon</h6>
-						Episode IV, the Princess Leia rescue mission. Party gets pulled in by the Death Star's tractor beam at the same time as the Millennium Falcon.
+						<p>Episode IV, the Princess Leia rescue mission. Party gets pulled in by the Death Star's tractor beam at the same time as the Millennium Falcon.</p>
 						<div class="fw-bold">Definitely use Moon for the icon and the label, thus setting up "That's no moon."</div>
 					</template>
 					<template v-slot:details>
@@ -598,7 +599,7 @@ Flying Spaghetti Monster
 						</span>
 					</template>
 					<template v-slot>
-						Follows the plot of the 1989 film.
+						<p>Follows the plot of the 1989 film.</p>
 						<h6>Act 1 - Axis Chemicals</h6>
 						<p>The birth of the Joker</p>
 						<h6>Act 2 - Art Wrecko</h6>
@@ -616,7 +617,7 @@ Flying Spaghetti Monster
 						/>
 					</template>
 				</World>
-				<World>
+				<!-- <World>
 					<template v-slot:image>
 						<img src="@/assets/images/worlds/suggestion.png" />
 					</template>
@@ -628,7 +629,7 @@ Flying Spaghetti Monster
 					<template v-slot>
 						from One-Shot suggestions
 					</template>
-				</World>
+				</World> -->
 				<World>
 					<template v-slot:image>
 						<img src="@/assets/images/worlds/andys_room.png" />
@@ -672,7 +673,7 @@ Flying Spaghetti Monster
 						/>
 					</template>
 				</World>
-				<World>
+				<!-- <World>
 					<template v-slot:image>
 						<img src="@/assets/images/worlds/suggestion.png" />
 					</template>
@@ -706,7 +707,7 @@ Flying Spaghetti Monster
 						from One-Shot suggestions
 					</template>
 				</World>
-				<!-- <World>
+				<World>
 					<template v-slot:image>
 						<img src="@/assets/images/worlds/suggestion.png" />
 					</template>
@@ -795,7 +796,7 @@ Flying Spaghetti Monster
 							anchor="something"
 							disguise="something"
 							genre="genre"
-							partners="Emmet, Wildstyle, Benny?, Batman?"
+							partners="Emmet, Wyldstyle, Benny?, Batman?"
 							:KindredWorlds='[]'
 							:themes='["toy"]'
 						/>
@@ -1014,7 +1015,7 @@ Flying Spaghetti Monster
 						<img src="@/assets/images/worlds/blank.png" />
 					</template>
 					<template v-slot:name>
-						Storybook of some sort (Probably Blue's Clues)
+						Stone-bound Storybook (Blue's Clues)
 					</template>
 					<template v-slot>
 						<h6>Effectively the 100 Acre Wood from Kingdom Hearts</h6>

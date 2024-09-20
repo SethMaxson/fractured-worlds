@@ -33,7 +33,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					<CharacterCardDeck>
 						<CharacterCard>
 							<template #image>
-								<Portrait :is-external="true" src="characters/npc/killinggame/default-portrait.jpeg" />
+								<Portrait src="img/npc/hamisfore.png" />
 							</template>
 							<template #heading>Duvamil "Hamisfore" Turen</template>
 							<template #subheading>Gnome</template>

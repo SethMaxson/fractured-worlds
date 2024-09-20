@@ -8,6 +8,8 @@ export class GameStrings {
         return 'the Fractured Worlds campaign setting';
     }
     //#endregion Default
+    
+    //#region Campaign strings
     static get DisguiseSystem(): string {
         return 'Chameleon Circuit';
     }
@@ -22,8 +24,28 @@ export class GameStrings {
     static get KindredWorldPortal(): string {
         return 'kindred world portal';
     }
+    static get Party() {
+        return {
+            /** The current moniker for the android monk. */
+            Cobb: "C.O.B.B.",
+            /** The current moniker for the centaur sorcerer. */
+            Phil: "Li'l Phil",
+            /** The current moniker for the kitsune kineticist. */
+            Tero: "Tero",
+            /** The current moniker for the dwarf champion. */
+            Tropey: "Tropey"
+        }
+    }
+    //#endregion Campaign strings
+
+    //#region Names which will change as the story progresses
     /** The current spelling of 'Nelly'. */
     static get Nelly(): string {
         return 'Nelly';
     }
+    /** The current party moniker for Cade Brightcloak. */
+    static get Cade(): string {
+        return 'Hedge Knight';
+    }
+    //#endregion Names which will change as the story progresses
 }

@@ -8,13 +8,15 @@ import "bootstrap";
 import "./assets/main.css";
 import Characters from "./components/views/characters/Characters.vue";
 import DMView from "./components/views/dm/DM.vue";
-import ExplorersGuideView from "./components/views/explorers-guide/ExplorersGuide.vue";
-import FactionsView from "./components/views/factions/Factions.vue";
-import GlossaryView from "./components/views/glossary/Glossary.vue";
+import ExplorersGuide from "./components/views/explorers-guide/ExplorersGuide.vue";
+import Factions from "./components/views/factions/Factions.vue";
+import Glossary from "./components/views/glossary/Glossary.vue";
 import Home from "./components/views/home/Home.vue";
-import InventoryView from "./components/views/inventory/Inventory.vue";
-import JournalView from "./components/views/journal/Journal.vue";
-import LinksView from "./components/views/links/Links.vue";
+import Journal from "./components/views/journal/Log.vue";
+import LightshipInfo from "./components/views/lightship-info/LightshipInfo.vue";
+import Links from "./components/views/links/Links.vue";
+import Mysteries from "./components/views/journal/Mysteries.vue";
+import WorldAnchors from "./components/views/journal/WorldAnchors.vue";
 import WorldMap from "./components/views/world-map/WorldMap.vue";
 import Worlds from "./components/views/worlds/Worlds.vue";
 
@@ -25,12 +27,14 @@ const router = createRouter({
 		{ path: '/home', component: Home},
 		{ path: '/characters', component: Characters},
 		{ path: '/dm', component: DMView},
-		{ path: '/explorers-guide', component: ExplorersGuideView},
-		{ path: '/factions', component: FactionsView},
-		{ path: '/glossary', component: GlossaryView},
-		{ path: '/inventory', component: InventoryView},
-		{ path: '/journal', component: JournalView},
-		{ path: '/links', component: LinksView},
+		{ path: '/explorers-guide', component: ExplorersGuide},
+		{ path: '/factions', component: Factions},
+		{ path: '/glossary', component: Glossary},
+		{ path: '/journal/log', component: Journal},
+		{ path: '/journal/mysteries', component: Mysteries},
+		{ path: '/journal/world-anchors', component: WorldAnchors},
+		{ path: '/lightship-info', component: LightshipInfo},
+		{ path: '/links', component: Links},
 		{ path: '/world-map', component: WorldMap},
 		{ path: '/worlds', component: Worlds}
 	]

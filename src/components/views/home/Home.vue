@@ -17,6 +17,9 @@ import { GameStrings } from "@/scripts/game-strings";
 					<div class="col">
 						<router-link class="nav-link p-3 border border-primary-subtle" to="/glossary"> Glossary </router-link>
 					</div>
+					<div class="col">
+						<router-link class="nav-link p-3 border border-primary-subtle" to="/lightship-info"> Lightship Guide </router-link>
+					</div>
 					<div class="col dev">
 						<router-link class="nav-link p-3 border border-primary-subtle" to="/relationships"> Relationships </router-link>
 					</div>
@@ -29,8 +32,8 @@ import { GameStrings } from "@/scripts/game-strings";
 					<div class="col">
 						<router-link class="nav-link p-3 border border-primary-subtle" to="/explorers-guide"> Explorer's Guide </router-link>
 					</div>
-					<div class="col dev">
-						<router-link class="nav-link p-3 border border-primary-subtle" to="/journal"> Journal </router-link>
+					<div class="col">
+						<router-link class="nav-link p-3 border border-primary-subtle" to="/journal/mysteries"> Journal </router-link>
 					</div>
 					<div class="col">
 						<router-link class="nav-link p-3 border border-primary-subtle" to="/links"> External Links </router-link>

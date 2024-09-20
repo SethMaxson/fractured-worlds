@@ -23,7 +23,7 @@ defineProps({
 </script>
 
 <template>
-	<JournalLabels :session="session" :name="name" :party="party" :date="date" class="bg-light" />
+	<JournalLabels :session="session" :name="name" :party="party" :date="date" class="bg-body-secondary" />
 	<div class="m-0 p-2 border-bottom border-3 border-info">
 		<slot></slot>
 	</div>

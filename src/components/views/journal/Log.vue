@@ -1,18 +1,23 @@
 <script setup lang="ts">
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
-import JournalLabels from "./subviews/JournalLabels.vue";
-import JournalEntry from "./subviews/JournalEntry.vue";
 import Location from "@/components/core/text-tags/Location.vue";
 import Important from "@/components/core/text-tags/Important.vue";
 import Character from "@/components/core/text-tags/Character.vue";
 import ScrollToTopButtonVue from "@/components/core/ScrollToTopButton.vue";
 import PageContainerVue from "@/components/core/PageContainer.vue";
+
+import JournalLabels from "./subviews/JournalLabels.vue";
+import JournalEntry from "./subviews/JournalEntry.vue";
+import JournalHeader from './subviews/JournalHeader.vue';
+
+const storedJournalView: string|null = localStorage.getItem('journalView');
 </script>
 
 <template>
 	<PageContainerVue>
+		<JournalHeader />
 		<header>
-			<ViewBlurb header="Journal">
+			<ViewBlurb header="">
 				The story so far...
 			</ViewBlurb>
 		</header>
