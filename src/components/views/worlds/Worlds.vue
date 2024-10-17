@@ -19,13 +19,7 @@ import { GameStrings } from "@/scripts/game-strings";
 						Agrabah (Disney's Aladdin)
 					</template>
 					<template v-slot>
-						<h6>Act 1 - Street Rat</h6>
-						<p>Party meets Aladdin. Guards begin to chase everyone, and the party escapes to his hideout.</p>
-						<p>Maybe introduce Jasmine</p>
-						<h6>Act 2 - Cave of Wonders</h6>
-						Indiana Jones dungeon time + introduce Genie
-						<h6>Act 3 - Jafar</h6>
-						Final boss + ending
+						See OneNote
 					</template>
 					<template v-slot:details>
 						<NittyGritty
@@ -45,9 +39,7 @@ import { GameStrings } from "@/scripts/game-strings";
 						Wonderland
 					</template>
 					<template v-slot>
-						<h6>Act 1 - The Trial of Alice</h6>
-						<h6>Act 2 - Through the Looking Glass</h6>
-						<h6>Act 3 - The Hunting of the Snark</h6>
+						See OneNote
 					</template>
 					<template v-slot:details>
 						<NittyGritty
@@ -149,7 +141,7 @@ Flying Spaghetti Monster
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/Port_Royal_KHII.webp" />
+						<img src="@/assets/images/worlds/muppet_treasure_island.png" />
 					</template>
 					<template v-slot:name>
 						Treasure Island
@@ -160,7 +152,7 @@ Flying Spaghetti Monster
 					<template v-slot:details>
 						<NittyGritty
 							anchor="?"
-							disguise="Pirates"
+							disguise="Pirates and/or Muppets"
 							genre="adventure"
 							partners="Jim Hawkins"
 							:KindredWorlds='[]'
@@ -332,8 +324,7 @@ Flying Spaghetti Monster
 						Duloc Outlands (Shrek)
 					</template>
 					<template v-slot>
-						<h6>Act 1: Dragon's Castle</h6>
-						<div class="ms-3">Skellymans?</div>
+						See OneNote
 					</template>
 					<template v-slot:details>
 						<NittyGritty
@@ -478,7 +469,7 @@ Flying Spaghetti Monster
 							disguise="Humans or Mutant Animals"
 							genre="action, comedy"
 							partners="TMNT"
-							:KindredWorlds='[]'
+							:KindredWorlds='["Gotham"]'
 							:themes='["modern", "superhero", "city", "animal", "nyc"]'
 						/>
 					</template>
@@ -528,7 +519,7 @@ Flying Spaghetti Monster
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
+						<img src="@/assets/images/worlds/looney_tunes.png" />
 					</template>
 					<template v-slot:name>
 						Looney Tunes
@@ -612,7 +603,7 @@ Flying Spaghetti Monster
 						<NittyGritty
 							genre="action"
 							partners="Batman"
-							:KindredWorlds='[]'
+							:KindredWorlds='["TMNT"]'
 							:themes='["superhero", "modern", "city", "gothic", "gritty", "modern"]'
 						/>
 					</template>
@@ -832,6 +823,8 @@ Flying Spaghetti Monster
 					</template>
 					<template v-slot>
 						Need to pick or create a specific Zelda plot and era.
+
+						<p>OoT? - Maybe use the Four Sword and sub the party in for Link?</p>
 					</template>
 					<template v-slot:details>
 						<NittyGritty

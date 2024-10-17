@@ -25,6 +25,12 @@ import JournalHeader from './subviews/JournalHeader.vue';
                     </div>
                     <span class="badge text-bg-info rounded-pill">Wonderland</span>
                 </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                        "contain its power. It struggled 'gainst its"
+                    </div>
+                    <span class="badge text-bg-info rounded-pill">Big Apple</span>
+                </li>
             </ul>
 		</main>
 	</PageContainerVue>

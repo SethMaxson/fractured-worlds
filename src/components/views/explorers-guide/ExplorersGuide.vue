@@ -50,6 +50,25 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					</p>
 				</AccordionItem>
 
+				<AccordionItem name="Shuffle Breaks" parent-id="guide-accordion">
+					<h5>On Shuffle Breaks <span class="fs-6 fw-normal text-secondary fst-italic">- Sídhon Rrostarr</span></h5>
+					<p>
+						As many of my distinguished readers already know, the light trails in the Red Nexus unexpectedly up and rearranged themselves. Obviously, this made getting around pretty complicated for the explorers scrambling to navigate using charts that were suddenly less useful than secondhand tuchus tissues. The nature of what caused this has been hotly debated, but I shall now put all of that to bed. <em>I witnessed the inciting event firsthand.</em>
+					</p>
+					<p>
+						During the course of an ordinary expedition to a World Remnant, I came face to face with a World Anchor that was aglow with lime-coloured arcane energy. Intrigued, I watched from afar as some dunderheaded ne'er-do-well raised aloft his prism key and pressed it to the World Anchor. A deafening thunderclap shook the very ground and the sky flashed as if lit by a bolt of lime lightning, or limetening, if you will. Now parted from its otherworldly charge, the World Anchor was as plain as any other, though the Prism Key looked a bit more glow-y than most.
+					</p>
+					<p>
+						I was flabbergasted by what I had seen, and gave the instigating explorer a good thrashing for so thoughtlessly unleashing such an unknown force. I believe his name was 'Schmitty' or some such. I absolutely did not unleash the mysterious energy myself just to sate my curiosity. Such rumours are completely baseless. Silly, even. Blame Schmitty.
+					</p>
+					<p>
+						I have named this phenomena a 'Shuffle Break.' My esteemed peers were all like, "That's a terrible name, Sídhon," and "That's not scientific, Sídhon." Fortunately for all of us, they weren't the ones to discover the Shuffle Break, which is objectively a far better name than whatever droll nonsense they probably wanted to name it.
+					</p>
+					<p>
+						<strong><u>In summation</u></strong>, if you encounter a World Anchor that is glowing a shade of green typically reserved for margarita-garnishing citrus, it is primed to unleash chaos. Attuning a prism key <em>will completely shuffle all nearby Light Trails</em>, rendering existing navigation charts permanently useless, potentially in addition to other side-effects.
+					</p>
+				</AccordionItem>
+
 				<!-- #endregion Explorer's Guild Guide -->
 			</div>
 		</main>
