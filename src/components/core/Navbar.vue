@@ -18,12 +18,6 @@
 					<li class="nav-item">
 						<router-link class="nav-link" to="/factions"> Factions </router-link>
 					</li>
-					<li class="nav-item">
-						<router-link class="nav-link" to="/glossary"> Glossary </router-link>
-					</li>
-					<li class="nav-item">
-						<router-link class="nav-link" to="/lightship-info"> Lightship Guide </router-link>
-					</li>
 					<!-- <li class="nav-item dev">
 						<router-link class="nav-link" to="/relationships"> Relationships </router-link>
 					</li> -->

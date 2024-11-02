@@ -25,8 +25,11 @@ import { GameStrings } from "@/scripts/game-strings";
 						<NittyGritty
 							anchor="Cave of Wonders?"
 							disguise="?"
+							exit="per episode"
 							partners="Aladdin, Abu"
-							:KindredWorlds='[]'
+							pure-soul="Jasmine"
+							rebirth-agent="Jafar"
+							:kindredWorlds='[]'
 							:themes='["middle east", "desert", "thief", "princess", "lying hero"]'
 						/>
 					</template>
@@ -45,7 +48,10 @@ import { GameStrings } from "@/scripts/game-strings";
 						<NittyGritty
 							anchor="Depths of the Hedge Maze"
 							partners="Alice?, Destiny's Child?"
-							:KindredWorlds="['Land of Oz', 'Wubbulous World']"
+							pure-soul="Alice"
+							rebirth-agent="Jafar"
+							nle-agent="Cade Brightcloak"
+							:kindredWorlds="['Land of Oz', 'Wubbulous World']"
 							:themes='["whimsy", "isekai", "nonsense"]'
 						/>
 					</template>
@@ -68,7 +74,7 @@ Flying Spaghetti Monster
 							disguise="Gritty, downtrodden peasants"
 							genre="horror, mystery"
 							partners="Some hardboiled detective? Maybe he slowly goes insane?"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["horror", "eldritch", "20s"]'
 						/>
 					</template>
@@ -86,7 +92,7 @@ Flying Spaghetti Monster
 					<template v-slot:details>
 						<NittyGritty
 							partners="Tarzan"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["jungle", "animal", "found family"]'
 						/>
 					</template>
@@ -99,19 +105,13 @@ Flying Spaghetti Monster
 						Land of Oz
 					</template>
 					<template v-slot>
-						Follow the yellow brick road.
-						<h6>Act 1 - Yellow Brick Road</h6>
-						<p>Party finds themselves in a house that falls into a strange, magical land and lands on a witch.</p>
-						<p>Party meets other characters on the journey to the Emerald City</p>
-						<h6>Act 2 - The Emerald City</h6>
-						<p>Party reaches the city, meets Oz. Oz demands the Witch's broomstick. Party journeys to her keep.</p>
-						<h6>Act 3 - The Witch and the Wizard</h6>
-						Final boss + crappy rewards from Oz.
+						See OneNote
 					</template>
 					<template v-slot:details>
 						<NittyGritty
 							partners="Scarecrow, Tinman, Cowardly Lion"
-							:KindredWorlds="['Wonderland']"
+							pure-soul="Dorothy"
+							:kindredWorlds="['Wonderland']"
 							:themes='["whimsy", "fantasy", "isekai"]'
 						/>
 					</template>
@@ -124,17 +124,14 @@ Flying Spaghetti Monster
 						Transylvania
 					</template>
 					<template v-slot>
-						Bleh bleh bleh!
-						<h6>Act 1 - The Night of the Living Dead</h6>
-						<h6>Act 2 - A Wolf in Man's Clothing</h6>
-						<h6>Act 3 - Eternal Night</h6>
+						See OneNote
 					</template>
 					<template v-slot:details>
 						<NittyGritty
 							disguise="Classic Monsters"
 							genre="horror"
 							partners="Van Helsing?"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["horror", "gothic", "monster", "supernatural"]'
 						/>
 					</template>
@@ -155,7 +152,7 @@ Flying Spaghetti Monster
 							disguise="Pirates and/or Muppets"
 							genre="adventure"
 							partners="Jim Hawkins"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["aquatic", "pirate", "adventure", "treasure"]'
 						/>
 					</template>
@@ -179,7 +176,7 @@ Flying Spaghetti Monster
 						<NittyGritty
 							disguise="Forestmen?"
 							partners="Robin Hood, Little John"
-							:KindredWorlds='[]'
+							:kindredWorlds='["Over the Hedge"]'
 							:themes='["thief", "medieval", "fantasy"]'
 						/>
 					</template>
@@ -205,8 +202,11 @@ Flying Spaghetti Monster
 						<NittyGritty
 							disguise="Forest Animals"
 							genre="heist"
+							nle-agent="none"
 							partners="RJ, Verne"
-							:KindredWorlds='[]'
+							pure-soul="none"
+							rebirth-agent="none"
+							:kindredWorlds='["Robin Hood"]'
 							:themes='["animal", "thief", "modern", "food", "lying hero"]'
 						/>
 					</template>
@@ -226,7 +226,7 @@ Flying Spaghetti Monster
 							disguise="Grungy Humans"
 							genre="action"
 							partners="?"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["punk", "vehicle", "modern", "dystopia"]'
 						/>
 					</template>
@@ -247,7 +247,8 @@ Flying Spaghetti Monster
 						<NittyGritty
 							genre="adventure, family"
 							partners="Peter Pan, Tinkerbell"
-							:KindredWorlds='["Land of Oz"]'
+							pure-soul="Wendy Darling"
+							:kindredWorlds='["Land of Oz"]'
 							:themes='["coming of age", "fantasy", "isekai", "pirate", "whimsy"]'
 						/>
 					</template>
@@ -278,7 +279,8 @@ Flying Spaghetti Monster
 							disguise="Sea Creatures or Merfolk"
 							genre="adventure, romance"
 							partners="Ariel (Act 1+3), Sebastian (Act 2), Flounder (Act 1+2), Prince Eric (Act 3)"
-							:KindredWorlds='["Bikini Bottom"]'
+							pure-soul="Ariel"
+							:kindredWorlds='["Bikini Bottom"]'
 							:themes='["aquatic", "belonging", "coming of age", "princess", "underwater"]'
 						/>
 					</template>
@@ -300,7 +302,7 @@ Flying Spaghetti Monster
 							anchor="Phil's cave"
 							genre="action, adventure"
 							partners="Hercules, Pegasus"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["belonging", "coming of age"]'
 						/>
 					</template>
@@ -331,7 +333,10 @@ Flying Spaghetti Monster
 							anchor="The boulder that Donkey comments on in Shrek's swamp? Maybe in the Dragon's keep?"
 							genre="comedy, fantasy"
 							partners="Shrek, Donkey"
-							:KindredWorlds='[]'
+							nle-agent="none"
+							pure-soul="Donkey"
+							rebirth-agent="Farquaad, Fairy Godmother"
+							:kindredWorlds='[]'
 							:themes='["fantasy", "misfit", "medieval"]'
 						/>
 					</template>
@@ -344,14 +349,16 @@ Flying Spaghetti Monster
 						Willy Wonka
 					</template>
 					<template v-slot>
-						blank
+						See OneNote
 					</template>
 					<template v-slot:details>
 						<NittyGritty
 							anchor="?"
+							exit="Flat against the inside of the very top of a tophat that spontaneously appears on one of the PCs"
 							genre=""
 							partners="?"
-							:KindredWorlds='[]'
+							pure-soul="Charlie Bucket"
+							:kindredWorlds='[]'
 							:themes='["modern", "food"]'
 						/>
 					</template>
@@ -370,7 +377,7 @@ Flying Spaghetti Monster
 						<NittyGritty
 							disguise="Seussical"
 							partners="Cat in the Hat"
-							:KindredWorlds='["Wonderland"]'
+							:kindredWorlds='["Wonderland"]'
 							:themes='["whimsy", "nonsense"]'
 						/>
 					</template>
@@ -390,7 +397,8 @@ Flying Spaghetti Monster
 							disguise="Humans or talking animals"
 							genre="mystery"
 							partners="Scooby, Shaggy"
-							:KindredWorlds='["Ghostbusters"]'
+							pure-soul="Scooby-Doo"
+							:kindredWorlds='["Ghostbusters"]'
 							:themes='["supernatural", "modern", "cartoon"]'
 						/>
 					</template>
@@ -410,7 +418,7 @@ Flying Spaghetti Monster
 							disguise="cowboys"
 							genre="action"
 							partners="something"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["western", "desert", "defender"]'
 						/>
 					</template>
@@ -432,7 +440,7 @@ Flying Spaghetti Monster
 							disguise="Barbie/Ken outfits"
 							genre="adventure, comedy"
 							partners="Barbie"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["toy", "isekai", "defender"]'
 						/>
 					</template>
@@ -456,12 +464,7 @@ Flying Spaghetti Monster
 						Teenage Mutant Ninja Turtles
 					</template>
 					<template v-slot>
-						<p>Follows the plot of the first Teenage Mutant Ninja Turtles film (1990)</p>
-						<h6>Act 1: Raph and the Rescue of April O'Neil</h6>
-						<p>Begins with Raphael rescuing April. Ends with the Turtles discovering Splinter was kidnapped while April hosted the turtles+the gang in her home.</p>
-						<h6>Act 2: The Burning of April's Apartment</h6>
-						<p>Begins with the raid on April's apartment. Ends with the farm.</p>
-						<h6>Act 3: Shredder Showdown</h6>
+						See OneNote
 					</template>
 					<template v-slot:details>
 						<NittyGritty
@@ -469,7 +472,10 @@ Flying Spaghetti Monster
 							disguise="Humans or Mutant Animals"
 							genre="action, comedy"
 							partners="TMNT"
-							:KindredWorlds='["Gotham"]'
+							nle-agent="Ella, Boo"
+							pure-soul="Michelangelo"
+							rebirth-agent="Shredder"
+							:kindredWorlds='["Gotham"]'
 							:themes='["modern", "superhero", "city", "animal", "nyc"]'
 						/>
 					</template>
@@ -492,7 +498,7 @@ Flying Spaghetti Monster
 							disguise="Humans?"
 							genre="comedy, horror"
 							partners="Ghostbusters?"
-							:KindredWorlds='["Coolsville"]'
+							:kindredWorlds='["Coolsville"]'
 							:themes='["modern", "supernatural", "city", "nyc"]'
 						/>
 					</template>
@@ -512,7 +518,7 @@ Flying Spaghetti Monster
 							disguise="Sea Creatures"
 							genre="cartoon, slice of life?"
 							partners="SpongeBob, Patrick"
-							:KindredWorlds='["Atlantica"]'
+							:kindredWorlds='["Atlantica"]'
 							:themes='["aquatic", "underwater", "cartoon", "animal"]'
 						/>
 					</template>
@@ -533,7 +539,7 @@ Flying Spaghetti Monster
 							disguise="N/A or cartoony"
 							genre="cartoon, comedy"
 							partners="Bugs Bunny, Daffy Duck"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["hijinks", "sport", "cartoon", "animal"]'
 						/>
 					</template>
@@ -553,7 +559,7 @@ Flying Spaghetti Monster
 							disguise="B&W Rubber Hose cartoon"
 							genre="adventure, cartoon, comedy"
 							partners="?"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["cartoon", "hijinks"]'
 						/>
 					</template>
@@ -575,7 +581,7 @@ Flying Spaghetti Monster
 							anchor="?"
 							genre="adventure, fantasy"
 							partners="Luke Skywalker, Han Solo, Chewbacca"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["space", "fantasy", "future"]'
 						/>
 					</template>
@@ -603,7 +609,7 @@ Flying Spaghetti Monster
 						<NittyGritty
 							genre="action"
 							partners="Batman"
-							:KindredWorlds='["TMNT"]'
+							:kindredWorlds='["TMNT"]'
 							:themes='["superhero", "modern", "city", "gothic", "gritty", "modern"]'
 						/>
 					</template>
@@ -638,7 +644,7 @@ Flying Spaghetti Monster
 							disguise="Toys"
 							genre=""
 							partners="Woody, Buzz Lightyear"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["modern", "toy", "secret life", "small"]'
 						/>
 					</template>
@@ -659,7 +665,7 @@ Flying Spaghetti Monster
 							disguise="Bugs"
 							genre="adventure"
 							partners="something"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["animal", "defender", "lying hero"]'
 						/>
 					</template>
@@ -726,7 +732,7 @@ Flying Spaghetti Monster
 							disguise="something"
 							genre="genre"
 							partners="something"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["something"]'
 						/>
 					</template>
@@ -746,7 +752,7 @@ Flying Spaghetti Monster
 							disguise="something"
 							genre="genre"
 							partners="something"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["something"]'
 						/>
 					</template>
@@ -767,7 +773,7 @@ Flying Spaghetti Monster
 							disguise="something"
 							genre="genre"
 							partners="something"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["something"]'
 						/>
 					</template>
@@ -788,7 +794,7 @@ Flying Spaghetti Monster
 							disguise="something"
 							genre="genre"
 							partners="Emmet, Wyldstyle, Benny?, Batman?"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["toy"]'
 						/>
 					</template>
@@ -809,7 +815,7 @@ Flying Spaghetti Monster
 							disguise="something"
 							genre="fantasy"
 							partners="Harry, Ron, Hermione"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["magic", "modern", "school"]'
 						/>
 					</template>
@@ -832,7 +838,7 @@ Flying Spaghetti Monster
 							disguise="Hyrulean Species"
 							genre="adventure"
 							partners="Link, Zelda?"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["adventure", "fantasy", "medieval"]'
 						/>
 					</template>
@@ -853,7 +859,7 @@ Flying Spaghetti Monster
 							disguise="something"
 							genre="genre"
 							partners="something"
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["something"]'
 						/>
 					</template>
@@ -877,7 +883,7 @@ Flying Spaghetti Monster
 							anchor="Matthias' office beneath the city"
 							disguise=""
 							partners=""
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["cozy"]'
 							time="standard"
 						/>
@@ -898,7 +904,7 @@ Flying Spaghetti Monster
 							anchor=""
 							disguise=""
 							partners=""
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='["dictator"]'
 							time="standard"
 						/>
@@ -920,7 +926,7 @@ Flying Spaghetti Monster
 							anchor=""
 							disguise=""
 							partners=""
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='[]'
 							time="standard"
 						/>
@@ -941,7 +947,7 @@ Flying Spaghetti Monster
 							anchor=""
 							disguise=""
 							partners=""
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='[]'
 							time="standard"
 						/>
@@ -962,7 +968,7 @@ Flying Spaghetti Monster
 							anchor=""
 							disguise=""
 							partners=""
-							:KindredWorlds='[]'
+							:kindredWorlds='[]'
 							:themes='[]'
 							time="standard"
 						/>

@@ -10,10 +10,8 @@ import Characters from "./components/views/characters/Characters.vue";
 import DMView from "./components/views/dm/DM.vue";
 import ExplorersGuide from "./components/views/explorers-guide/ExplorersGuide.vue";
 import Factions from "./components/views/factions/Factions.vue";
-import Glossary from "./components/views/glossary/Glossary.vue";
 import Home from "./components/views/home/Home.vue";
 import Journal from "./components/views/journal/Log.vue";
-import LightshipInfo from "./components/views/lightship-info/LightshipInfo.vue";
 import Links from "./components/views/links/Links.vue";
 import Mysteries from "./components/views/journal/Mysteries.vue";
 import WorldAnchors from "./components/views/journal/WorldAnchors.vue";
@@ -29,11 +27,9 @@ const router = createRouter({
 		{ path: '/dm', component: DMView},
 		{ path: '/explorers-guide', component: ExplorersGuide},
 		{ path: '/factions', component: Factions},
-		{ path: '/glossary', component: Glossary},
 		{ path: '/journal/log', component: Journal},
 		{ path: '/journal/mysteries', component: Mysteries},
 		{ path: '/journal/world-anchors', component: WorldAnchors},
-		{ path: '/lightship-info', component: LightshipInfo},
 		{ path: '/links', component: Links},
 		{ path: '/world-map', component: WorldMap},
 		{ path: '/worlds', component: Worlds}

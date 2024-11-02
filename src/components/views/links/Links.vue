@@ -27,9 +27,16 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					</div>
 					<small>An application that allows for characters in this campaign to be created or edited.</small>
 				</Link>
+				<Link href="https://2e.aonprd.com/" class="list-group-item list-group-item-action" :absolute-url="true">
+					<div class="d-flex w-100 justify-content-between">
+						<h6 class="mb-1">Rules & Reference</h6>
+						<small>2e.aonprd.com</small>
+					</div>
+					<small>Archives of Nethys is a comprehensive online resource for Pathfinder 1st and 2nd editions, with official errata, FAQs, and search engine. Find rules, monsters, feats, spells, and more for your gaming needs.</small>
+				</Link>
 				<Link href="https://sethmaxson.github.io/dnd/tiddlywiki/public.html" class="list-group-item list-group-item-action" :absolute-url="true">
 					<div class="d-flex w-100 justify-content-between">
-						<h6 class="mb-1">Wiki</h6>
+						<h6 class="mb-1">World Wiki</h6>
 						<small>sethmaxson.github.io</small>
 					</div>
 					<small>A wiki containing information about the world of the campaign.</small>

@@ -14,17 +14,11 @@ import { GameStrings } from "@/scripts/game-strings";
 					<div class="col">
 						<router-link class="nav-link p-3 border border-primary-subtle" to="/factions"> Factions </router-link>
 					</div>
-					<div class="col">
-						<router-link class="nav-link p-3 border border-primary-subtle" to="/glossary"> Glossary </router-link>
-					</div>
-					<div class="col">
-						<router-link class="nav-link p-3 border border-primary-subtle" to="/lightship-info"> Lightship Guide </router-link>
-					</div>
 					<div class="col dev">
 						<router-link class="nav-link p-3 border border-primary-subtle" to="/relationships"> Relationships </router-link>
 					</div>
 					<div class="col dev">
-						<router-link class="nav-link p-3 border border-primary-subtle" to="/worldmap"> World Map </router-link>
+						<router-link class="nav-link p-3 border border-primary-subtle" to="/world-map"> World Map </router-link>
 					</div>
 					<div class="col dev">
 						<router-link class="nav-link p-3 border border-primary-subtle" to="/worlds"> Worlds </router-link>
