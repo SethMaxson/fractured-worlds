@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { GameStrings } from "@/scripts/game-strings";
 import PageContainerVue from "@/components/core/PageContainer.vue";
+import AccordionItem from "@/components/core/AccordionItem.vue";
+import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import World from "./components/WorldListEntry.vue";
 import NittyGritty from "./components/WorldNittyGritty.vue";
-import ViewBlurb from "@/components/core/ViewBlurb.vue";
-import { GameStrings } from "@/scripts/game-strings";
+import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vue';
 </script>
 
 <template>
@@ -27,6 +29,11 @@ import { GameStrings } from "@/scripts/game-strings";
 					</template>
 					<template v-slot>
 						<p>A home for lost things.</p>
+						<div class="accordion" id="somewhere-accordion">
+							<AccordionItem name="People" parent-id="somewhere-accordion" :default-open="true">
+								<Somewhere :containedByModal="true" />
+							</AccordionItem>
+						</div>
 					</template>
 					<template v-slot:details>
 						<NittyGritty

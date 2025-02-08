@@ -113,4 +113,14 @@ pre {
 .gx-7 {
   --bs-gutter-x: 12rem;
 }
-/*#endregion  extended Bootstrap definitions */
+
+.show-on-modal,
+.modal .hide-on-modal {
+	display: none;
+}
+
+.hide-on-modal,
+.modal .show-on-modal {
+	display: initial;
+}
+/*#endregion extended Bootstrap definitions */

@@ -22,19 +22,21 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body row background-image" :style='{ "backgroundImage": "linear-gradient( to bottom, transparent 0%, var(--fw-bs-body-bg) 40%  ), url(\"" + bgImg + "\")" }'>
-					<div class="card world col-xl-4">
-						<slot name="image"></slot>
-						<div class="card-body p-2 pt-0">
-							<div class="card-subtitle pb-2 mb-2 text-muted border-bottom border-secondary-subtle text-center">
-								<em v-if="quote && quote.length > 0">"{{ quote }}"</em>
-							</div>
-							<div class="card-text">
-								<slot name="details"></slot>
+					<div class="col-xl-4">
+						<div class="card world">
+							<slot name="image"></slot>
+							<div class="card-body p-2 pt-0">
+								<div class="card-subtitle pb-2 mb-2 text-muted border-bottom border-secondary-subtle text-center">
+									<em v-if="quote && quote.length > 0">"{{ quote }}"</em>
+								</div>
+								<div class="card-text">
+									<slot name="details"></slot>
+								</div>
 							</div>
 						</div>
 					</div>
 					
-					<div class="p-2 col-xl ps-xl-4" :class="class">
+					<div class="p-2 col-xl-8 ps-xl-4 d-flex flex-column" :class="class">
 						<div class="card-body">
 							<div class="card-text row">
 								<div class="col">

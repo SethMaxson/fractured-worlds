@@ -18,22 +18,23 @@ const idBase = id_ify(heading && heading[0].children? heading[0].children.toStri
 </script>
 
 <template>
-	<!-- <Card :class="{'dead': status == 'dead'}">
-		<template v-slot:footer v-if="$slots.pcContact || $slots.met">
-			<div v-if="$slots.pcContact">
-				Primary <abbr title="Player Character">PC</abbr> contact: <slot name="pcContact"></slot>
-			</div>
-			<div v-if="$slots.met">
-				Met: <slot name="met"></slot>
-			</div>
-		</template>
-		<template v-for="(slot, index) in Object.keys($slots)" :key="index" v-slot:[slot]>
-			<slot :name="slot"></slot>
-		</template>
-	</Card> -->
-
-	<div class="col" data-bs-toggle="modal" :data-bs-target="'#modal-'+idBase">
-		<button type="button" class="btn btn-secondary w-100 h-100" data-bs-toggle="modal" :data-bs-target="'#modal-'+idBase">
+	<div class="col show-on-modal">
+		<Card :class="{'dead': status == 'dead'}">
+			<template v-slot:footer v-if="$slots.pcContact || $slots.met">
+				<div v-if="$slots.pcContact">
+					Primary <abbr title="Player Character">PC</abbr> contact: <slot name="pcContact"></slot>
+				</div>
+				<div v-if="$slots.met">
+					Met: <slot name="met"></slot>
+				</div>
+			</template>
+			<template v-for="(slot, index) in Object.keys($slots)" :key="index" v-slot:[slot]>
+				<slot :name="slot"></slot>
+			</template>
+		</Card>
+	</div>
+	<div class="col hide-on-modal">
+		<button type="button" class="btn btn-secondary w-100 h-100" :data-bs-target="'#modal-'+idBase" data-bs-toggle="modal">
 			<CardContents :class="{'dead': status == 'dead'}" :truncated="true">
 				<template v-slot:footer v-if="$slots.pcContact || $slots.met">
 					<div v-if="$slots.pcContact">
