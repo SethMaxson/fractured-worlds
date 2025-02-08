@@ -15,5 +15,5 @@ defineProps({
 </script>
 
 <template>
-	<Image class="class" alt="portrait" :src="src" :is-external="isExternal" />
+	<Image class="portrait" alt="portrait" :src="src" :is-external="isExternal" />
 </template>

@@ -95,4 +95,22 @@ pre {
 .bg-variant { 
   background-color: var(--bd-pre-bg);
 }
+
+.bg-nle {
+  background-image: radial-gradient(farthest-corner at 50% 50%, var(--fw-c-dark-blue-gray) 60%, var(--fw-c-dark-blue) 85%);
+}
+
+.bg-rebirth {
+  background-image: radial-gradient(farthest-corner at 50% 50%, var(--bs-danger) 10%, var(--bs-danger-bg-subtle) 75%);
+}
 /*#endregion backgrounds */
+
+/*#region extended Bootstrap definitions */
+.gx-6 {
+  --bs-gutter-x: 6rem;
+}
+
+.gx-7 {
+  --bs-gutter-x: 12rem;
+}
+/*#endregion  extended Bootstrap definitions */

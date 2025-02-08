@@ -8,6 +8,8 @@ export default interface ICharacterData {
 	species: string[];
     /** The character's class or occupation. */
 	occupation: string[];
+    // /** The one-line subtitle to display beneath their name in the Character view. */
+	// tagline?: string;
     /** A brief description for the character entry screen. */
 	description: string[];
 	/** The faction the character belongs to.
@@ -20,11 +22,24 @@ export default interface ICharacterData {
 	 * "Deckhand (04/02/0001 SE-present)"
 	*/
 	role?: string;
-	/**
+	/** The faction the character belongs to.
 	 * @example
-	 * "img/party/cobb.png"
+	 * "alive" | "dead"
 	 */
-	img: string;
+	status?: string;
+	/** A collection of images of and pertaining to this character. */
+	images: {
+		/**
+		 * @example
+		 * "img/party/cobb.png"
+		 */
+		thumbnail: string;
+		/**
+		 * @example
+		 * [ "img/party/cobb.png" ]
+		 */
+		costumes?: string[];
+	};
 	/** (1-3) The overall plot importance of a character. Used to determine where and how prominently to display them, if it's used at all.	 
 	 * @1 - Minor character. Background or bit players.
 	 * @2 - Medium. Secondary and supporting cast.

@@ -241,6 +241,13 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 							<dd class="col-sm-9">A type of ship that is capable of traversing <em>Voidspace</em> via the pathways of light that connect the World Remnants.</dd>
 							<hr />
 
+							<dt class="col-sm-3">
+								Knowing One
+								<p class="aka d-sm-inline">"One of the Knowing"</p>
+							</dt>
+							<dd class="col-sm-9">A term for someone who is aware of The Fracturing.</dd>
+							<hr />
+
 							<dt class="col-sm-3">Pure Soul</dt>
 							<dd class="col-sm-9">A youth with a particularly strong will and (relatively) innocent heart. Most worlds have at most one Pure Soul.</dd>
 							<hr />

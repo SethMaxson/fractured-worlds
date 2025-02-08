@@ -13,7 +13,7 @@
 						<router-link class="nav-link" to="/home"> Home </router-link>
 					</li>
 					<li class="nav-item">
-						<router-link class="nav-link" to="/characters"> Characters </router-link>
+						<router-link class="nav-link" to="/people"> People </router-link>
 					</li>
 					<li class="nav-item">
 						<router-link class="nav-link" to="/factions"> Factions </router-link>
@@ -24,17 +24,23 @@
 					<li class="nav-item dev">
 						<router-link class="nav-link" to="/world-map"> World Map </router-link>
 					</li>
-					<li class="nav-item gm-only">
+					<li class="nav-item">
 						<router-link class="nav-link" to="/worlds"> Worlds </router-link>
 					</li>
+					<li class="nav-item gm-only">
+						<router-link class="nav-link" to="/dm-worlds"> Worlds (GM) </router-link>
+					</li>
 					<!-- <li class="nav-item">
-						<router-link class="nav-link" to="/inventory"> Inventory </router-link>
+						<router-link class="nav-link" to="/inventory"> Inven<strong></strong>tory </router-link>
 					</li> -->
 					<li class="nav-item">
 						<router-link class="nav-link" to="/explorers-guide"> Explorer's Guide </router-link>
 					</li>
 					<li class="nav-item">
 						<router-link class="nav-link" to="/journal/mysteries"> Journal </router-link>
+					</li>
+					<li class="nav-item dev">
+						<router-link class="nav-link" to="/perks"> Banes & Boons </router-link>
 					</li>
 					<li class="nav-item">
 						<router-link class="nav-link" to="/links"> External Links </router-link>

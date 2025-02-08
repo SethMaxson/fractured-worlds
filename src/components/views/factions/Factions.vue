@@ -13,32 +13,47 @@ import Important from '@/components/core/text-tags/Important.vue';
 	<PageContainerVue>
 		<header>
 			<ViewBlurb header="Factions">
-				Some of the organizations at play in this story.
+				Organizations we know of that operate within the the <Location>Void Realm</Location>.
 			</ViewBlurb>
 		</header>
 		<main>
 			<CardDeck>
 				<Card>
-					<!-- <template #image>
-						<Portrait src="characters/party/wednesday-warriors/dilbert.png" />
-					</template> -->
+					<template #image>
+						<Portrait src="/img/emblems/tankman_soft.png" :class="'emblem'" />
+					</template>
 					<template #heading>Tankman Enterprises</template>
 					<!-- <template #subheading>The Fellowship of Individuals for the Reclamation of Edolador</template> -->
 
 					<Character>Tankman Enterprises</Character> appeared to be the manufacturer of the barrel of spectral monkeys that drifted to the docks of <Location>Somewhere</Location>.
 				</Card>
 				<Card>
+					<template #image>
+						<Portrait src="/img/emblems/rebirth_gemini_3.jpg" :class="'emblem'" />
+					</template>
 					<template #heading>The Rebirth Caucus</template>
 
-					The <Character>Rebirth Caucus</Character> is a shadowy organization that seems to be seeking <Important>Pure Souls</Important>.
+					The <Character>Rebirth Caucus</Character> is a shadowy organization that seeks <Important>Pure Souls</Important> for some nefarious goal.
 				</Card>
-				<!-- <Card>
+				<Card>
+					<template #image>
+						<Portrait src="/img/emblems/nle_soft.png" :class="'emblem'" />
+					</template>
 					<template #heading>N.L.E.</template>
 					<template #subheading>AKA: Nelly, The Network, Network of Like-minded Expatriates</template>
 
-					<b>N.L.E.</b> is a shadowy, loosely connected group of individuals working together towards a common goal
-				</Card> -->
+					<Character>N.L.E.</Character> is a loosely connected group of individuals working in secret to find a way to restore the worlds that are being swallowed by the <Location>Void Realm</Location>.
+				</Card>
 			</CardDeck>
 		</main>
 	</PageContainerVue>
 </template>
+
+<style scoped>
+	.emblem {
+		max-height: 10rem;
+		max-width: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: contain;
+	}
+</style>

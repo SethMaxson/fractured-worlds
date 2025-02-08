@@ -23,11 +23,21 @@
 
 /* custom Kingdom Hearts inspired color palette */
 :root {
+  /* official colors taken from screenshots */
   --kh-c-bg-menu-top-gradient-1: #010103;
   --kh-c-bg-menu-top-gradient-2: #131138;
   --kh-c-border-menu-header: #434ff1;
   --kh-c-text-menu-header: #f89b3c;
   --kh-c-theme-dark-blue: #08337a;
+  /* unofficial colors taken from the color palettes on GameUiDatabase */
+  --kh-c-bg-dark: #111231;
+  --kh2-c-bg-dark: #03082d;
+  --kh2-c-bg-dark-rgb: 3,8,45;
+  --kh2-c-bg-dark-soft: #404a77;
+  --kh2-c-bg-soft: #272b38;
+  --kh2-c-bg-soft-rgb: 39,43,56;
+  /* unofficial colors inspired by the vibe as I remember it */
+  --kh-c-text-menu-header-alt: #cdd5e3;
 }
 
 /* custom Zelda inspired text colors */
@@ -36,6 +46,23 @@
   --zelda-c-text-character-light: #627beb;
   --zelda-c-text-item: #94030f;
   --zelda-c-text-location: #039422;
+}
+
+/* custom Fractured Worlds colors */
+:root {
+  --fw-c-light-blue: #45b3e0;
+  --fw-c-blue: #2b34b9;
+  --fw-c-dark-blue: #031e94;
+  --fw-c-dark-blue-gray: #393f5a;
+  --fw-c-red: #b9202d;
+  --fw-c-dark-red: #7e0c15;
+
+  --fw-c-black: #161826;
+  --fw-c-black-soft: #202230;
+  --fw-c-black-mute: #262836;
+
+  --fw-bs-body-bg: #212529;
+  --fw-bs-body-bg-rgb: 33,37,41;
 }
 
 /* semantic color variables for this project */
@@ -66,6 +93,15 @@
     --color-background: var(--vt-c-black);
     --color-background-soft: var(--vt-c-black-soft);
     --color-background-mute: var(--vt-c-black-mute);
+    
+    /* --color-background: var(--fw-c-black);
+    --color-background-soft: var(--fw-c-black-soft);
+    --color-background-mute: var(--fw-c-black-mute); */
+    
+    /* --bs-body-bg: var(--kh2-c-bg-soft);
+    --bs-body-bg-rgb: var(--kh2-c-bg-soft-rgb); */
+    /* --color-background-soft: var(--kh2-c-bg-dark);
+    --color-background-mute: var(--kh2-c-bg-dark-soft); */
 
     --color-border: var(--vt-c-divider-dark-2);
     --color-border-hover: var(--vt-c-divider-dark-1);

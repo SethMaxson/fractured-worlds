@@ -1,46 +1,54 @@
 <template>
-	<div class="nitty-gritty lh-sm col my-xl-0 mx-xl-0">
+	<div class="nitty-gritty lh-sm p-1">
 		<div class="nitty-gritty-header">
-			<dl class="inline-dl dl-underline mb-1 text-secondary meta" v-if="themes.length > 0 || genre.length > 0">
-				<dt>Core Themes:</dt>
-				<dd> {{themes.join(', ')}} </dd>
-				<dt v-if="genre.length > 0">Genre:</dt>
-				<dd v-if="genre.length > 0"> {{genre}} </dd>
-			</dl>
-			<dl class="inline-dl dl-underline mb-0 pb-0">
+			<h6 class="section-header text-muted">Details</h6>
+			<!-- <dl class="dl-condensed row dl-underline mb-0 pb-0"> -->
+			<dl class="dl-condensed row mb-0 pb-0">
 				<template v-if="time.length > 0">
-					<dt>Time Flow:</dt>
-					<dd class="capitalize"> {{time}} </dd>
+					<dt class="col-4">Time Flow:</dt>
+					<dd class="col capitalize"> {{time}} </dd>
 				</template>
+				<div class="w-100"></div>
 				<template v-if="anchor.length > 0">
-					<dt>World Anchor:</dt>
-					<dd> {{anchor}} </dd>
+					<dt class="col-4">World Anchor:</dt>
+					<dd class="col"> {{anchor}} </dd>
 				</template>
+				<div class="w-100"></div>
 				<template v-if="exit.length > 0">
-					<dt>Exit:</dt>
-					<dd> {{exit}} </dd>
+					<dt class="col-4">Exit:</dt>
+					<dd class="col"> {{exit}} </dd>
 				</template>
 			</dl>
-			<hr class="my-1" />
+			<hr class="my-0 mb-1" />
 		</div>
-		<dl class="dl-main mb-0">
-			<dt v-if="disguise.length > 0">{{ GameStrings.DisguiseSystem }}</dt>
-			<dd v-if="disguise.length > 0">{{disguise}}</dd>
-			<dt class="capitalize" v-if="kindredWorlds.length > 0">{{ GameStrings.KindredWorld }}s</dt>
-			<dd v-if="kindredWorlds.length > 0">{{kindredWorlds.join(', ')}}</dd>
+		<!-- <dl class="dl-main mb-0"> -->
+		<dl class="dl-condensed row mb-0">
+			<dt class="col-5" v-if="disguise.length > 0">{{ GameStrings.DisguiseSystem }}:</dt>
+			<dd class="col" v-if="disguise.length > 0">{{disguise}}</dd>
+
+			<div class="w-100"></div>
+
+			<dt class="col-5 capitalize" v-if="kindredWorlds.length > 0">{{ GameStrings.KindredWorld }}s:</dt>
+			<dd class="col" v-if="kindredWorlds.length > 0">{{kindredWorlds.join(', ')}}</dd>
 		</dl>
 		<div v-if="displayCast">
-			<hr class="my-1" />
-			<h6 class="section-header">Cast</h6>
+			<hr class="my-0 mb-1" />
+			<h6 class="section-header text-muted">People</h6>
+			<dl class="dl-condensed row mb-0">
+				<dt class="col-3" v-if="partners.length > 0">Allies:</dt>
+				<dd class="col" v-if="partners.length > 0">{{partners}}</dd>
+				
+				<div class="w-100"></div>
+				
+				<dt class="col-3" v-if="pureSoul.length > 0">Pure&nbsp;Soul:</dt>
+				<dd class="col" v-if="pureSoul.length > 0">{{pureSoul}}</dd>
+				
+				<div class="w-100"></div>
+
+				<dt class="col-3" v-if="nleAgent.length > 0">NLE Agent:</dt>
+				<dd class="col" v-if="nleAgent.length > 0">{{nleAgent}}</dd>
+			</dl>
 			<dl class="dl-condensed mb-0">
-				<dt v-if="partners.length > 0">Guest Partners:</dt>
-				<dd v-if="partners.length > 0">{{partners}}</dd>
-				<dt v-if="pureSoul.length > 0">Pure Soul:</dt>
-				<dd v-if="pureSoul.length > 0">{{pureSoul}}</dd>
-				<dt v-if="rebirthAgent.length > 0">Rebirth agent:</dt>
-				<dd v-if="rebirthAgent.length > 0">{{rebirthAgent}}</dd>
-				<dt v-if="nleAgent.length > 0">N.L.E. Agent:</dt>
-				<dd v-if="nleAgent.length > 0">{{nleAgent}}</dd>
 			</dl>
 		</div>
 		
@@ -49,15 +57,12 @@
 
 <style scoped>
 .nitty-gritty {
-	background-color: var(--vt-c-black-mute);
-	border: 1px solid var(--color-border);
-	margin: 0.5rem;
-	padding: 0.5rem;
 	font-size: 0.85rem;
 }
 
 .section-header {
 	font-size: 1.1em;
+	color: inherit;
 	/* font-weight: bold; */
 }
 
@@ -71,8 +76,9 @@
 .inline-dl dd {
 	display: inline;
 }
-.dl-condensed dd, .inline-dl dd { margin-left: 0.25rem; }
+.inline-dl dd { margin-left: 0.25rem; }
 .dl-underline dt { text-decoration: underline; }
+.dl-indent dt { margin-left: 1rem; }
 
 .inline-dl dt:not(:first-of-type) { margin-left: 1rem; }
 
@@ -86,7 +92,8 @@
 .dl-condensed dt {
 	clear: left;
 	break-before: always;
-	margin-left: 1rem;
+	white-space: nowrap;
+	/* margin-left: 1rem; */
 }
 /* #endregion dl-condensed and inline-dl */
 
@@ -153,7 +160,7 @@ const props = defineProps({
 	partners: {
 		type: String,
 		required: false,
-		default: '?'
+		default: ''
 	},
 	/** The identity of this world's Pure Soul, if any. Max of 1. */
 	pureSoul: {
@@ -164,18 +171,6 @@ const props = defineProps({
 	/** The identity of the Rebirth Caucus the party is most likely to encounter in this world, if any. */
 	rebirthAgent: {
 		type: String,
-		required: false,
-		default: ''
-	},
-	/**The core themes of this world listed as comma-separated tags. Try to limit to 3 or fewer.
-	 * Primarily used to inform other decisions, such as determining links between kindred worlds.
-	 * 
-	 * @example	 
-	 * "whimsy, nonsense, cartoon"
-	 * "aquatic, fantasy, princess"
-	 */
-	themes: {
-		type: Array as PropType<WorldThemeTags[]>,
 		required: false,
 		default: ''
 	},
@@ -191,8 +186,7 @@ const props = defineProps({
 
 const displayCast = props.nleAgent.length > 0 ||
 					props.partners.length > 0 ||
-					props.pureSoul.length > 0 ||
-					props.rebirthAgent.length > 0;
+					props.pureSoul.length > 0;
 </script>
 
 <script lang="ts">
@@ -200,66 +194,10 @@ export default {
   name: 'NittyGritty',
 }
 
-export type WorldThemeTags =
-	"20s" |
-	"adventure" |
-	"animal" |
-	"aquatic" |
-	"belonging" |
-	"cartoon" |
-	"city" |
-	"coming of age" |
-	"cozy" |
-	"defender" |
-	"desert" |
-	"dictator" |
-	"digital" |
-	"dystopia" |
-	"eldritch" |
-	"fantasy" |
-	"food" |
-	"found family" |
-	"future" |
-	"gothic" |
-	"gritty" |
-	"hijinks" |
-	"horror" |
-	"isekai" |
-	/** Worlds with a focus on a jungle */
-	"jungle" |
-	"lying hero" |
-	"magic" |
-	"medieval" |
-	"middle east" |
-	"misfit" |
-	"modern" |
-	"monster" |
-	"nonsense" |
-	"nyc" |
-	"pirate" |
-	"princess" |
-	"punk" |
-	"school" |
-	"secret life" |
-	"small" |
-	/** Invalid. Used for placeholders only. */
-	"something" |
-	"space" |
-	"sport" |
-	"superhero" |
-	"supernatural" |
-	"thief" |
-	"toy" |
-	"treasure" |
-	"underwater" |
-	"vehicle" |
-	"western" |
-	"whimsy"
-;
-
 export type WorldTimeType =
 	"looping" |
 	"resting" |
-	"standard"
+	"standard" |
+	"unknown"
 ;
 </script>

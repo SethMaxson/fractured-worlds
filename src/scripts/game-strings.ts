@@ -27,13 +27,13 @@ export class GameStrings {
     static get Party() {
         return {
             /** The current moniker for the android monk. */
-            Cobb: "C.O.B.B.",
+            Cobb: { first: "C.O.B.B.", full: "C.O.B.B."},
             /** The current moniker for the centaur sorcerer. */
-            Phil: "Li'l Phil",
+            Phil: { first: "Li'l Phil", full: "Li'l Phil Antonio"},
             /** The current moniker for the kitsune kineticist. */
-            Tero: "Tero",
+            Tero: { first: "Tero", full: "Tero"},
             /** The current moniker for the dwarf champion. */
-            Tropey: "Tropey"
+            Tropey: { first: "Tropey", full: "Tropey McTroperson"}
         }
     }
     //#endregion Campaign strings
@@ -41,11 +41,12 @@ export class GameStrings {
     //#region Names which will change as the story progresses
     /** The current spelling of 'Nelly'. */
     static get Nelly(): string {
-        return 'Nelly';
+        // return 'Nelly';
+        return 'N.L.E.';
     }
     /** The current party moniker for Cade Brightcloak. */
     static get Cade(): string {
-        return 'Hedge Knight';
+        return 'Cade Brightcloak';
     }
     //#endregion Names which will change as the story progresses
 }

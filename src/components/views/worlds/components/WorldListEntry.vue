@@ -1,30 +1,68 @@
 <template>
-	<li class="world list-group-item" :class="class">
-		<div class="row">
-			<div class="col-xl-1 img text-center pe-4">
-				<slot name="image"></slot>
-			</div>
-			<div class="col-xl d-flex border-start flex-column justify-content-between p-0">
-				<div class="ps-2 ps-xl-5 w-100">
-					<div class="w-100 row row-cols-1 row-cols-xl-2">
-						<div class="col pe-xl-1">
-							<h4>
-								<slot name="name"></slot>
-							</h4>
-							<slot></slot>
-						</div>
-						<slot name="details"></slot>
-					</div>
+	<button type="button" class="world list-group-item list-group-item-action row ms-0" data-bs-toggle="modal" :data-bs-target="'#modal-'+idBase" :class="class">
+		<div class="row py-1">
+			<div class="col col-xl-2 pe-xl-1">
+				<div class="fw-bold text-decoration-underline">
+					<slot name="name"></slot>
 				</div>
 			</div>
+			<div class="col my-xl-0 mx-xl-0 d-none d-lg-block">
+				<slot name="one-liner"><slot></slot></slot>
+			</div>
 		</div>
-	</li>
+	</button>
+
+	<div class="modal fade" :id="'modal-'+idBase" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 card-title">
+						<slot name="name"></slot>
+					</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body row background-image" :style='{ "backgroundImage": "linear-gradient( to bottom, transparent 0%, var(--fw-bs-body-bg) 40%  ), url(\"" + bgImg + "\")" }'>
+					<div class="card world col-xl-4">
+						<slot name="image"></slot>
+						<div class="card-body p-2 pt-0">
+							<div class="card-subtitle pb-2 mb-2 text-muted border-bottom border-secondary-subtle text-center">
+								<em v-if="quote && quote.length > 0">"{{ quote }}"</em>
+							</div>
+							<div class="card-text">
+								<slot name="details"></slot>
+							</div>
+						</div>
+					</div>
+					
+					<div class="p-2 col-xl ps-xl-4" :class="class">
+						<div class="card-body">
+							<div class="card-text row">
+								<div class="col">
+									<slot></slot>
+								</div>
+							</div>
+							<slot name="button"></slot>
+						</div>
+						<div class="card-footer text-muted" v-if="$slots.footer">
+							<slot name="footer"></slot>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer text-muted" v-if="$slots.footer">
+					<slot name="footer"></slot>
+				</div>
+				<!-- <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div> -->
+			</div>
+		</div>
+	</div>
 </template>
 
 <style scoped>
 .world {
 	font-size: 1em;
-	min-height: 100px;
+	/* min-height: 100px; */
 }
 
 .world .img {
@@ -32,25 +70,52 @@
 	max-width: 150px;
 }
 
-.list-group-item::before {
-    position:absolute;
-	top: 0.5em;
-	left: 0.5em;
-	
-    content: counters(section, ".") ". ";
-    counter-increment: section;
+.card.world img {
+	max-height: 250px !important;
+	max-width: 250px;
 }
 
-.maybe h4 { color: #070; }
+.background-image {
+  background-color: var(--kh2-c-bg-soft);
+  /* position: absolute;
+  top: 0;
+  z-index: -1; */
+  /* background-image: linear-gradient(
+    to bottom, transparent, var(--fw-bs-body-bg)
+  ), url("@/assets/images/worlds/blues_house.png"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>
 
 <script setup lang="ts">
-defineProps({
+import CardContents from '@/components/core/CardContents.vue';
+import { id_ify } from '@/scripts/id_ify';
+import { useSlots } from 'vue';
+
+const props = defineProps({
 	/** Any extra CSS classes to tack onto this element. */
 	class: {
 		type: String,
 		required: false,
 		default: ''
+	},
+	wallpaper: {
+		type: String,
+		required: false,
+		default: ''
 	}
 })
+
+const nonBodySlots = ["footer", "heading", "image", "name", "subheading", "wallpaper"];
+
+const slots = useSlots();
+const heading = slots.name && slots.name();
+
+const idBase = id_ify(heading && heading[0].children? heading[0].children.toString() : "missing-id");
+
+const quoteSlot = slots.quote && slots.quote();
+const quote = quoteSlot && quoteSlot[0].children && quoteSlot[0].children.toString().trim();
+
+const bgImg = props.wallpaper?.toString().trim();
 </script>

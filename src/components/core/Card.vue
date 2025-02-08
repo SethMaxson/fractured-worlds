@@ -1,27 +1,15 @@
 <template>
 	<div class="col">
-		<div class="card" :class="class">
-			<slot name="image"></slot>
-			<div class="card-body">
-				<h5 class="card-title">
-					<slot name="heading"></slot>
-				</h5>
-				<h6 class="card-subtitle mb-2 text-muted">
-					<slot name="subheading"></slot>
-				</h6>
-				<div class="card-text">
-					<slot></slot>
-				</div>
-				<slot name="button"></slot>
-			</div>
-			<div class="card-footer text-muted" v-if="$slots.footer">
-				<slot name="footer"></slot>
-			</div>
-		</div>
+		<CardContents :class="class">
+			<template v-for="(slot, index) in Object.keys($slots)" :key="index" v-slot:[slot]>
+				<slot :name="slot"></slot>
+			</template>
+		</CardContents>
 	</div>
 </template>
 
 <script setup lang="ts">
+import CardContents from '@/components/core/CardContents.vue';
 defineProps({
 	class: {
 		type: [String, Boolean, Object],
