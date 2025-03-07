@@ -23,7 +23,7 @@ defineProps({
         <CharacterCard>
             <template #image>
                 <!-- <img class="bg bg-secondary" alt="portrait" src="/img/tokens/HalflingCommoner2.png" /> -->
-                <img class="bg bg-secondary" alt="portrait" src="img/npc/kenji-toon.png" />
+                <img class="bg bg-secondary" alt="portrait" src="/img/npc/kenji-toon.png" />
             </template>
             <template #heading>Kenny Cobblerock</template>
             <!-- <template #heading>Kenji Cherrymoon</template> -->
@@ -33,7 +33,7 @@ defineProps({
         </CharacterCard>
         <CharacterCard>
             <template #image>
-                <img class="bg bg-secondary" alt="portrait" src="img/tokens/Molefolk3.png" />
+                <img class="bg bg-secondary" alt="portrait" src="/img/tokens/Molefolk3.png" />
             </template>
             <template #heading>Bowuf</template>
             <template #subheading>Burrowfolk Cobbler</template>
@@ -42,7 +42,7 @@ defineProps({
         </CharacterCard>
         <CharacterCard>
             <template #image>
-                <img class="bg bg-secondary" alt="portrait" src="img/npc/portia-toon.png" />
+                <img class="bg bg-secondary" alt="portrait" src="/img/npc/portia-toon.png" />
             </template>
             <template #heading>Portia "Jamjar" Fiddlewick</template>
             <template #subheading>Halfling Journalist</template>
@@ -51,7 +51,7 @@ defineProps({
         </CharacterCard>
         <CharacterCard>
             <template #image>
-                <img class="bg bg-secondary" alt="portrait" src="img/npc/throden.png" />
+                <img class="bg bg-secondary" alt="portrait" src="/img/npc/throden.png" />
             </template>
             <template #heading>Throden</template>
             <template #subheading>Dragonborn Merchant</template>
