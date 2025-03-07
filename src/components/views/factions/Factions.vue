@@ -20,7 +20,7 @@ import Important from '@/components/core/text-tags/Important.vue';
 			<CardDeck>
 				<Card>
 					<template #image>
-						<Portrait src="/img/emblems/tankman_soft.png" :class="'emblem'" />
+						<Portrait src="img/emblems/tankman_soft.png" :class="'emblem'" />
 					</template>
 					<template #heading>Tankman Enterprises</template>
 					<!-- <template #subheading>The Fellowship of Individuals for the Reclamation of Edolador</template> -->
@@ -29,7 +29,7 @@ import Important from '@/components/core/text-tags/Important.vue';
 				</Card>
 				<Card>
 					<template #image>
-						<Portrait src="/img/emblems/rebirth_gemini_3.jpg" :class="'emblem'" />
+						<Portrait src="img/emblems/rebirth_gemini_3.jpg" :class="'emblem'" />
 					</template>
 					<template #heading>The Rebirth Caucus</template>
 
@@ -37,7 +37,7 @@ import Important from '@/components/core/text-tags/Important.vue';
 				</Card>
 				<Card>
 					<template #image>
-						<Portrait src="/img/emblems/nle_soft.png" :class="'emblem'" />
+						<Portrait src="img/emblems/nle_soft.png" :class="'emblem'" />
 					</template>
 					<template #heading>N.L.E.</template>
 					<template #subheading>AKA: Nelly, The Network, Network of Like-minded Expatriates</template>

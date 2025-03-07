@@ -10,47 +10,100 @@
 			<div class="collapse navbar-collapse" id="navbarToggler">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<router-link class="nav-link" to="/home"> Home </router-link>
+						<router-link class="nav-link" to="/home">
+							<svg :class="svgHomeClass">
+								<use href="#home-1"></use>
+							</svg>
+							Home
+						</router-link>
 					</li>
-					<li class="nav-item">
-						<router-link class="nav-link" to="/people"> People </router-link>
-					</li>
-					<li class="nav-item">
-						<router-link class="nav-link" to="/factions"> Factions </router-link>
-					</li>
-					<!-- <li class="nav-item dev">
-						<router-link class="nav-link" to="/relationships"> Relationships </router-link>
-					</li> -->
-					<li class="nav-item dev">
-						<router-link class="nav-link" to="/world-map"> World Map </router-link>
-					</li>
-					<li class="nav-item">
-						<router-link class="nav-link" to="/worlds"> Worlds </router-link>
-					</li>
-					<li class="nav-item gm-only">
-						<router-link class="nav-link" to="/dm-worlds"> Worlds (GM) </router-link>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<svg :class="svgHomeClass"><use href="#book-half"></use></svg> Chronicle
+						</a>
+						<ul class="dropdown-menu">
+							<li><router-link class="dropdown-item" to="/people">
+								<svg :class="svgHomeClass"><use href="#user2"></use></svg> People </router-link>
+							</li>
+							<li><router-link class="dropdown-item" to="/factions">
+								<svg :class="svgHomeClass"><use href="#people"></use></svg> Factions </router-link>
+							</li>
+							<li><router-link class="dropdown-item" to="/worlds">
+								<svg :class="svgHomeClass"><use href="#globe2"></use></svg> Worlds </router-link>
+							</li>
+							<li><router-link class="dropdown-item" to="/journal/mysteries">
+								<svg :class="svgHomeClass"><use href="#book-half"></use></svg> Journal </router-link>
+							</li>
+						</ul>
 					</li>
 					<!-- <li class="nav-item">
-						<router-link class="nav-link" to="/inventory"> Inven<strong></strong>tory </router-link>
+						<router-link class="nav-link" to="/inventory"> Inventory </router-link>
 					</li> -->
 					<li class="nav-item">
-						<router-link class="nav-link" to="/explorers-guide"> Explorer's Guide </router-link>
+						<router-link class="nav-link" to="/explorers-guide">
+							<svg :class="svgHomeClass"><use href="#compass-rose"></use></svg>
+							Explorer's Guide
+						</router-link>
 					</li>
 					<li class="nav-item">
-						<router-link class="nav-link" to="/journal/mysteries"> Journal </router-link>
+						<router-link class="nav-link" to="/links">
+							<svg :class="svgHomeClass"><use href="#link"></use></svg>
+							External Links
+						</router-link>
 					</li>
-					<li class="nav-item dev">
-						<router-link class="nav-link" to="/perks"> Banes & Boons </router-link>
+					
+					<li class="nav-item dropdown gm-only">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							GM Pages
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<router-link class="dropdown-item" to="/dm-worlds">
+									<svg :class="svgHomeClass"><use href="#globe2"></use></svg>
+									Worlds (GM)
+								</router-link>
+							</li>
+						</ul>
 					</li>
-					<li class="nav-item">
-						<router-link class="nav-link" to="/links"> External Links </router-link>
+					
+					<li class="nav-item dropdown dev">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							In development
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<router-link class="dropdown-item" to="/perks">
+									<svg :class="svgHomeClass"><use href="#handshake"></use></svg>
+									Banes & Boons
+								</router-link>
+							</li>
+							<li>
+								<router-link class="dropdown-item" to="/relationships">
+									<svg :class="svgHomeClass"><use href="#relationship"></use></svg>
+									Relationships
+								</router-link>
+							</li>
+							<li>
+								<router-link class="dropdown-item" to="/ship">
+									<svg :class="svgHomeClass"><use href="#anchor"></use></svg>
+									Ship
+								</router-link>
+							</li>
+							<li>
+								<router-link class="dropdown-item" to="/world-map">
+									<svg :class="svgHomeClass"><use href="#paths"></use></svg>
+									World Map
+								</router-link>
+							</li>
+						</ul>
 					</li>
-					<ColorModeToggle />
-					<GmModeToggle />
 					<!-- <li class="nav-item">
 						<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
 					</li> -->
 				</ul>
+				<hr class="d-lg-none" />
+				<ColorModeToggle />
+				<GmModeToggle />
 				<!-- <form class="d-flex">
 					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success" type="submit">Search</button>
@@ -88,4 +141,7 @@ import GmModeToggle from "./GmModeToggle.vue";
 defineProps<{
 	activePage?: string;
 }>();
+
+const svgHomeClass = "menu-button-icon theme-color me-1 d-inline";
+const svgClass = svgHomeClass + " d-lg-none";
 </script>

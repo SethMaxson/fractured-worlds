@@ -34,13 +34,16 @@ import JournalHeader from './subviews/JournalHeader.vue';
 			</CardDeck>
 			
 			<button class="btn btn-secondary w-100 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#solvedMysteries" aria-expanded="false" aria-controls="solvedMysteries">
-				⮟ Solved Mysteries
+				<svg class="menu-button-icon theme-color d-inline"><use href="#arrow-down"></use></svg>
+				Solved Mysteries
 			</button>
 			<div class="collapse pt-3" id="solvedMysteries">
 				<CardDeck>
 					<Card>
-						<template #heading>✔ Nelly</template>
-
+						<template #heading>
+							<svg class="menu-button-icon theme-color d-inline"><use href="#check2"></use></svg>
+							Nelly
+						</template>
 						<p class="text-decoration-line-through opacity-75 fst-italic">
 							Several individuals have asked us if we are friends of "<Important>Nelly</Important>." We've learned from <Character>{{GameStrings.Cade}}</Character> that <Important>Nelly</Important> is "idealistic" as well as "green and warty." After we rescued <Character>Alice</Character>, Cade gave us a scrap of parchment bearing a strange symbol and told us to give it to the old man at the Happy Turtle if we want to meet Nelly.
 						</p>
@@ -50,7 +53,10 @@ import JournalHeader from './subviews/JournalHeader.vue';
 						</p>
 					</Card>
 					<Card>
-						<template #heading>✔ The Missing Book</template>
+						<template #heading>
+							<svg class="menu-button-icon theme-color d-inline"><use href="#check2"></use></svg>
+							The Missing Book
+						</template>
 						<p class="text-decoration-line-through opacity-75 fst-italic">
 							The bookshelf in the back of information center in <Location>Somewhere</Location> had wear marks that indicated a sizeable, sturdy tome once sat among the other books. <Character>{{ GameStrings.Party.Cobb.first }}</Character> found a <Important>page</Important> from a children's book bearing the image of a <Important>salt shaker</Important> that had a similar size.
 						</p>

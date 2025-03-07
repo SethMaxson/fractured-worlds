@@ -9,11 +9,15 @@ defineProps({
 	},
 	src: {
 		type: String,
-		required: true
+		required: false,
+		default: ""
 	}
-})
+});
 </script>
 
 <template>
-	<Image class="portrait" alt="portrait" :src="src" :is-external="isExternal" />
+	<Image class="portrait" alt="portrait" :src="src" :is-external="isExternal" v-if="src.length > 0" />
+	<svg class="portrait my-0 mx-auto" width="300" height="300" v-else>
+		<use href="#user2"></use>
+	</svg>
 </template>

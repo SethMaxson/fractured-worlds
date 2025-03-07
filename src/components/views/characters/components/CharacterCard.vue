@@ -61,11 +61,28 @@ const idBase = id_ify(heading && heading[0].children? heading[0].children.toStri
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<CardContents :class="{'dead': status == 'dead'}">
-						<template v-for="(slot, index) in Object.keys($slots).filter(s => s != 'footer')" :key="index" v-slot:[slot]>
-							<slot :name="slot"></slot>
-						</template>
-					</CardContents>
+					<div class="card h-100" :class="{'dead': status == 'dead'}">
+						<slot name="image"></slot>
+						<div class="card-body">
+							<h5 class="card-title">
+								<slot name="heading"></slot>
+								<slot name="name"></slot>
+							</h5>
+							<h6 class="card-subtitle mb-2 text-muted border-bottom border-secondary-subtle">
+								<slot name="subheading"></slot>
+							</h6>
+							<div class="card-text">
+								<slot></slot>
+							</div>
+							<slot name="button"></slot>
+						</div>
+						<div class="card-footer text-muted" v-if="$slots.footer || $slots.homeworld">
+							<div v-if="$slots.homeworld">
+								Homeworld: <slot name="homeworld"></slot>
+							</div>
+							<slot name="footer"></slot>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer text-muted" v-if="$slots.footer">
 					<slot name="footer"></slot>

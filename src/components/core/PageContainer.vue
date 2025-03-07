@@ -18,7 +18,7 @@ const props = defineProps({
 	}
 })
 
-const classArray: string[] = [];
+const classArray: string[] = ["pb-4 pb-lg-0"];
 if (!props.isWide) {
 	classArray.push("container");
 	classArray.push("bg-body");

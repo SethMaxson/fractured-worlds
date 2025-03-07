@@ -25,6 +25,23 @@ a,
   }
 }
 
+.button-icon,
+svg.portrait {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.menu-button-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -.125em;
+}
+
+.theme-color,
+.portrait {
+  fill: currentcolor;
+}
+
 #app {
   position: relative;
   width: 100%;

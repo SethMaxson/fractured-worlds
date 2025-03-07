@@ -31,6 +31,30 @@ import JournalHeader from './subviews/JournalHeader.vue';
                     </div>
                     <span class="badge text-bg-info rounded-pill">Big Apple</span>
                 </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                        "three. They bargained with the Father of Void to"
+                    </div>
+                    <span class="m-0 p-0">
+                        <span class="badge text-bg-secondary rounded-pill me-1">Shared by NLE</span>
+                        <span class="badge text-bg-info rounded-pill">???</span>
+                    </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                        "Decay. The Father of Decay awoke from his slumber in"
+                    </div>
+                    <span class="badge text-bg-info rounded-pill">Land of Oz</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="me-auto">
+                        "cracks, thus do the drifting fragments of worlds still slowly"
+                    </div>
+                    <span class="m-0 p-0">
+                        <span class="badge text-bg-secondary rounded-pill me-1">Shared by NLE</span>
+                        <span class="badge text-bg-info rounded-pill">Tokyo 2007</span>
+                    </span>
+                </li>
             </ul>
 		</main>
 	</PageContainerVue>

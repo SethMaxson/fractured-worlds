@@ -3,7 +3,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 import { GameStrings } from "@/scripts/game-strings";
 
 const routerLinkClass = "w-100 h-100 nav-link px-3 pb-1 pt-0 p-lg-3 border border-primary-subtle rounded";
-const svgClass = "bi m-0";
+const svgClass = "button-icon theme-color m-0";
 const svgDivClass = "m-0 mb-lg-1 p-0 p-lg-2";
 </script>
 
@@ -119,14 +119,13 @@ const svgDivClass = "m-0 mb-lg-1 p-0 p-lg-2";
 </template>
 
 <style scoped>
-.bi {
-  max-width: 100%;
-  max-height: 100%;
-  /* vertical-align: -.125em; */
-  fill: currentcolor;
-}
-
 .col {
 	text-decoration: underline;
+}
+
+.dev,
+.gm-only {
+	color: yellow;
+	font-style: italic;
 }
 </style>

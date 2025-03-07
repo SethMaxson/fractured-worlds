@@ -54,9 +54,9 @@ import { Config } from '@/scripts/config';
 </script>
 
 <template>
-	<li class="nav-item dropdown">
+	<span class="nav-item dropdown">
 		<button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-viewer-role" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
-			<svg class="bi my-1 viewer-role-icon-active">
+			<svg class="menu-button-icon theme-color my-1 viewer-role-icon-active">
 				<use href="#globe2"></use>
 			</svg>
 			<span class="ms-2">Viewer Role</span>
@@ -64,46 +64,37 @@ import { Config } from '@/scripts/config';
 		<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-viewer-role" style="--bs-dropdown-min-width: 8rem;" data-bs-popper="static">
 			<li>
 				<button type="button" class="dropdown-item d-flex align-items-center" data-game-viewer-role-value="player">
-					<svg class="bi me-2 opacity-50 theme-icon">
+					<svg class="menu-button-icon theme-color me-2 opacity-50">
 						<use href="#book-half"></use>
 					</svg>
 					Player
-					<svg class="bi ms-auto d-none">
+					<svg class="menu-button-icon theme-color ms-auto d-none">
 						<use href="#check2"></use>
 					</svg>
 				</button>
 			</li>
 			<li>
 				<button type="button" class="dropdown-item d-flex align-items-center active" data-game-viewer-role-value="gm">
-					<svg class="bi me-2 opacity-50 theme-icon">
+					<svg class="menu-button-icon theme-color me-2 opacity-50">
 						<use href="#globe2"></use>
 					</svg>
 					Game Master (contains major spoilers)
-					<svg class="bi ms-auto d-none">
+					<svg class="menu-button-icon theme-color ms-auto d-none">
 						<use href="#check2"></use>
 					</svg>
 				</button>
 			</li>
 			<!-- <li>
 				<button type="button" class="dropdown-item d-flex align-items-center" data-game-viewer-role-value="auto">
-					<svg class="bi me-2 opacity-50 theme-icon">
+					<svg class="menu-button-icon theme-color me-2 opacity-50">
 						<use href="#circle-half"></use>
 					</svg>
 					Auto
-					<svg class="bi ms-auto d-none">
+					<svg class="menu-button-icon theme-color ms-auto d-none">
 						<use href="#check2"></use>
 					</svg>
 				</button>
 			</li> -->
 		</ul>
-	</li>
+	</span>
 </template>
-
-<style scoped>
-.bi {
-  width: 1em;
-  height: 1em;
-  vertical-align: -.125em;
-  fill: currentcolor;
-}
-</style>

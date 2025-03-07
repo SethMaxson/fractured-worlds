@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import MinorCharacters from './subviews/MinorCharacters.vue';
 import AccordionItem from "@/components/core/AccordionItem.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import CharacterCard from '@/components/views/characters/components/CharacterCard.vue';
@@ -9,6 +8,9 @@ import Character from '@/components/core/text-tags/Character.vue';
 import Important from '@/components/core/text-tags/Important.vue';
 import Location from '@/components/core/text-tags/Location.vue';
 import PageContainerVue from "@/components/core/PageContainer.vue";
+
+import MinorCharacters from './subviews/MinorCharacters.vue';
+import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 </script>
 
 <template>
@@ -32,8 +34,9 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 							</template>
 							<template #heading>C.O.B.B.</template>
 							<template #subheading>Android Monk</template>
+							<template #homeworld>Golarion</template>
 
-							<Character>Construct Observing Biological Boundaries</Character>, or <Character>C.O.B.B.</Character>, is a gifted martial artist who is fascinated by the biological concept of mortality. With a mind as powerful as his blows, his only real weakness may be his naivety.
+							<Character>Construct Observing Biological Boundaries</Character>, or <Character>C.O.B.B.</Character>, is a gifted martial artist who is fascinated by the biological concept of mortality. With a mind as powerful as his blows, he seeks to unravel the mysteries of the <Location>Void Realm</Location>.
 						</CharacterCard>
 						<CharacterCard>
 							<template #image>
@@ -41,6 +44,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 							</template>
 							<template #heading>Li'l Phil Antonio</template>
 							<template #subheading>Centaur Sorcerer</template>
+							<template #homeworld>Wildwood Forest</template>
 
 							<Character>Li'l Phil Antonio</Character> is a manic, unpredictable sorcerer whose purple skin makes him an oddity
 							even among other centaurs. He was raised by a trio of witches and now seeks to find his place in the
@@ -53,8 +57,9 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 							</template>
 							<template #heading>Tero</template>
 							<template #subheading>Kitsune Kineticist</template>
+							<template #homeworld>Golarion</template>
 
-							<Character>Tero</Character> is a gifted student of the elements with an appetite for strength rivaled only by her appetite for alcohol. Her cool demeanor hides an icy cunning that will stop at absolutely nothing to achieve her goals.
+							<Character>Tero</Character> is a gifted student of the elements with an appetite for strength seemingly rivaled only by her appetite for new experiences. She grew up in isolation deep within the Forest of Spirits, surrounded by snow and evergreen trees.
 						</CharacterCard>
 						<CharacterCard>
 						<!-- <CharacterCard status="dead"> -->
@@ -63,6 +68,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 							</template>
 							<template #heading>Tropey McTroperson</template>
 							<template #subheading>Dwarf Champion</template>
+							<template #homeworld>Hidden Valley</template>
 
 							<Character>Tropey McTroperson</Character> is a dwarven paladin who hails from a small farming village. After finding himself in the mysterious <Location>Void Realm</Location>, he made it his mission to search its myriad worlds for jelly beans.
 						</CharacterCard>
@@ -71,36 +77,14 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 				<!-- #endregion Player Characters -->
 
 				<AccordionItem name="Crew" parent-id="characters-accordion">
-					<CharacterCardDeck>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/npc/hamisfore.png" />
-							</template>
-							<template #heading>Duvamil "Hamisfore" Turen</template>
-							<template #subheading>Gnome</template>
-
-							<Character>Hamisfore</Character> is a brightly colored, middle-aged gnomish woman whose 'crazy aunt' energy hides a world-weary heart. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>.
-
-							<template #footer>Role: Deckhand (04/02/0001 SE-present)</template>
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/npc/ootah-toon.png" />
-							</template>
-							<template #heading>Ootah</template>
-							<template #subheading>Orc Child</template>
-
-							<Character>Ootah</Character> is a five year old orphan who believes herself to be the captain of the <Important>One More Day</Important>. She exhibits behavior that suggests extreme narcissism. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>.
-							<template #footer>Role: Captain? (04/02/0001 SE-present)</template>
-						</CharacterCard>
-					</CharacterCardDeck>
+					<Crew />
 				</AccordionItem>
 
 				<AccordionItem name="Allies" parent-id="characters-accordion">
 					<CharacterCardDeck>
 						<CharacterCard>
 							<template #image>
-								<Portrait class="bg-nle bg-opacity-50" src="img/npc/cade-toon.png" />
+								<Portrait class="bg-nle bg-opacity-50" src="img/npc/cade.png" />
 							</template>
 							<template #heading>Cade Brightcloak</template>
 							<template #subheading>Halfling Cleric</template>

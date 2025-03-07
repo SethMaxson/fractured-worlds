@@ -56,26 +56,116 @@ import { GameStrings } from "@/scripts/game-strings";
 						/>
 					</template>
 				</World>
-				<World class="maybe">
+				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
+						<img src="@/assets/images/worlds/land_of_oz.png" />
 					</template>
 					<template v-slot:name>
-						Cthulhu
+						Land of Oz
 					</template>
 					<template v-slot>
-<pre>
-Flying Spaghetti Monster
-+ Gritty Detective Noir?
-</pre>
+						See OneNote
 					</template>
 					<template v-slot:details>
 						<NittyGritty
-							disguise="Gritty, downtrodden peasants"
-							genre="horror, mystery"
-							partners="Some hardboiled detective? Maybe he slowly goes insane?"
+							anchor="Scarecrow's Field"
+							partners="Scarecrow, Tinman, Cowardly Lion"
+							pure-soul="Dorothy"
+							:kindredWorlds="['Wonderland']"
+							:themes='["whimsy", "fantasy", "isekai"]'
+						/>
+					</template>
+				</World>
+				<World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/transylvania.png" />
+					</template>
+					<template v-slot:name>
+						Transylvania
+					</template>
+					<template v-slot>
+						See OneNote
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							disguise="Classic Monsters? Monster Hunters?"
+							genre="horror"
+							nle-agent="Althea?"
+							partners="Van Helsing?"
+							pure-soul="N/A"
+							rebirth-agent="Dracula"
 							:kindredWorlds='[]'
-							:themes='["horror", "eldritch", "20s"]'
+							:themes='["horror", "gothic", "monster", "supernatural"]'
+						/>
+					</template>
+				</World>
+				<World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/shrek.png" />
+					</template>
+					<template v-slot:name>
+						Duloc Outlands (Shrek)
+					</template>
+					<template v-slot>
+						See OneNote
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							anchor="The boulder that Donkey comments on in Shrek's swamp? Maybe in the Dragon's keep?"
+							genre="comedy, fantasy"
+							partners="Shrek, Donkey"
+							nle-agent="none"
+							pure-soul="Donkey"
+							rebirth-agent="Farquaad, Fairy Godmother"
+							:kindredWorlds='[]'
+							:themes='["fantasy", "misfit", "medieval"]'
+						/>
+					</template>
+				</World>
+				<World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/wonka.png" />
+					</template>
+					<template v-slot:name>
+						Willy Wonka
+					</template>
+					<template v-slot>
+						See OneNote
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							anchor="?"
+							disguise="Humans"
+							exit="Flat against the inside of the very top of a tophat that spontaneously appears on one of the PCs"
+							genre=""
+							partners="?"
+							pure-soul="Charlie Bucket"
+							:kindredWorlds='[]'
+							:themes='["modern", "food"]'
+						/>
+					</template>
+				</World>
+				<World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/big_apple.png" />
+					</template>
+					<template v-slot:name>
+						Teenage Mutant Ninja Turtles
+					</template>
+					<template v-slot>
+						See OneNote
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							anchor="The O'Neil farm"
+							disguise="Humans or Mutant Animals"
+							genre="action, comedy"
+							partners="TMNT"
+							nle-agent="Ella, Boo"
+							pure-soul="Michelangelo"
+							rebirth-agent="Shredder"
+							:kindredWorlds='["Gotham"]'
+							:themes='["modern", "superhero", "city", "animal", "nyc"]'
 						/>
 					</template>
 				</World>
@@ -99,45 +189,6 @@ Flying Spaghetti Monster
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/land_of_oz.png" />
-					</template>
-					<template v-slot:name>
-						Land of Oz
-					</template>
-					<template v-slot>
-						See OneNote
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							partners="Scarecrow, Tinman, Cowardly Lion"
-							pure-soul="Dorothy"
-							:kindredWorlds="['Wonderland']"
-							:themes='["whimsy", "fantasy", "isekai"]'
-						/>
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/transylvania.png" />
-					</template>
-					<template v-slot:name>
-						Transylvania
-					</template>
-					<template v-slot>
-						See OneNote
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							disguise="Classic Monsters"
-							genre="horror"
-							partners="Van Helsing?"
-							:kindredWorlds='[]'
-							:themes='["horror", "gothic", "monster", "supernatural"]'
-						/>
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
 						<img src="@/assets/images/worlds/muppet_treasure_island.png" />
 					</template>
 					<template v-slot:name>
@@ -152,6 +203,7 @@ Flying Spaghetti Monster
 							disguise="Pirates and/or Muppets"
 							genre="adventure"
 							partners="Jim Hawkins"
+							pure-soul="Jim Hawkins"
 							:kindredWorlds='[]'
 							:themes='["aquatic", "pirate", "adventure", "treasure"]'
 						/>
@@ -202,10 +254,10 @@ Flying Spaghetti Monster
 						<NittyGritty
 							disguise="Forest Animals"
 							genre="heist"
-							nle-agent="none"
+							nle-agent="N/A"
 							partners="RJ, Verne"
-							pure-soul="none"
-							rebirth-agent="none"
+							pure-soul="N/A"
+							rebirth-agent="N/A"
 							:kindredWorlds='["Robin Hood"]'
 							:themes='["animal", "thief", "modern", "food", "lying hero"]'
 						/>
@@ -302,6 +354,7 @@ Flying Spaghetti Monster
 							anchor="Phil's cave"
 							genre="action, adventure"
 							partners="Hercules, Pegasus"
+							rebirth-agent="Hades"
 							:kindredWorlds='[]'
 							:themes='["belonging", "coming of age"]'
 						/>
@@ -315,52 +368,9 @@ Flying Spaghetti Monster
 						Jurassic Park
 					</template>
 					<template v-slot>
-						blank
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/shrek.png" />
-					</template>
-					<template v-slot:name>
-						Duloc Outlands (Shrek)
-					</template>
-					<template v-slot>
-						See OneNote
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="The boulder that Donkey comments on in Shrek's swamp? Maybe in the Dragon's keep?"
-							genre="comedy, fantasy"
-							partners="Shrek, Donkey"
-							nle-agent="none"
-							pure-soul="Donkey"
-							rebirth-agent="Farquaad, Fairy Godmother"
-							:kindredWorlds='[]'
-							:themes='["fantasy", "misfit", "medieval"]'
-						/>
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/wonka.png" />
-					</template>
-					<template v-slot:name>
-						Willy Wonka
-					</template>
-					<template v-slot>
-						See OneNote
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="?"
-							exit="Flat against the inside of the very top of a tophat that spontaneously appears on one of the PCs"
-							genre=""
-							partners="?"
-							pure-soul="Charlie Bucket"
-							:kindredWorlds='[]'
-							:themes='["modern", "food"]'
-						/>
+						<h6>Act 1 - The Tour</h6>
+						<h6>Act 2 - The Hike</h6>
+						<h6>Act 3 - The Escape</h6>
 					</template>
 				</World>
 				<World>
@@ -371,7 +381,10 @@ Flying Spaghetti Monster
 						Wubbulous World (Seussland)
 					</template>
 					<template v-slot>
-						Seussland
+						<h6>Act 1 - The Cat in the Hat</h6>
+						<h6>Act 2 - Green Eggs & Ham</h6>
+						Party must aid Sam-I-Am in convincing the cranky fellow to like Green Eggs and Ham.
+						<h6>Act 3 - The Cat in the Hat Comes Back</h6>
 					</template>
 					<template v-slot:details>
 						<NittyGritty
@@ -415,8 +428,9 @@ Flying Spaghetti Monster
 					</template>
 					<template v-slot:details>
 						<NittyGritty
-							disguise="cowboys"
+							disguise="Cowboys"
 							genre="action"
+							nle-agent="Airen"
 							partners="something"
 							:kindredWorlds='[]'
 							:themes='["western", "desert", "defender"]'
@@ -439,8 +453,9 @@ Flying Spaghetti Monster
 							anchor="Barbie's backyard"
 							disguise="Barbie/Ken outfits"
 							genre="adventure, comedy"
-							partners="Barbie"
-							:kindredWorlds='[]'
+							partners="Stereotypical Barbie"
+							pure-soul="Stereotypical Barbie"
+							:kindredWorlds='["Andys Room", "The Lego Movie"]'
 							:themes='["toy", "isekai", "defender"]'
 						/>
 					</template>
@@ -454,30 +469,6 @@ Flying Spaghetti Monster
 					</template>
 					<template v-slot>
 						blank
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/big_apple.png" />
-					</template>
-					<template v-slot:name>
-						Teenage Mutant Ninja Turtles
-					</template>
-					<template v-slot>
-						See OneNote
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="The O'Neil farm"
-							disguise="Humans or Mutant Animals"
-							genre="action, comedy"
-							partners="TMNT"
-							nle-agent="Ella, Boo"
-							pure-soul="Michelangelo"
-							rebirth-agent="Shredder"
-							:kindredWorlds='["Gotham"]'
-							:themes='["modern", "superhero", "city", "animal", "nyc"]'
-						/>
 					</template>
 				</World>
 				<World>
@@ -518,6 +509,7 @@ Flying Spaghetti Monster
 							disguise="Sea Creatures"
 							genre="cartoon, slice of life?"
 							partners="SpongeBob, Patrick"
+							rebirth-agent="Plankton?"
 							:kindredWorlds='["Atlantica"]'
 							:themes='["aquatic", "underwater", "cartoon", "animal"]'
 						/>
@@ -578,9 +570,10 @@ Flying Spaghetti Monster
 					</template>
 					<template v-slot:details>
 						<NittyGritty
-							anchor="?"
+							anchor="Millennium Falcon"
 							genre="adventure, fantasy"
 							partners="Luke Skywalker, Han Solo, Chewbacca"
+							rebirth-agent="Emperor Palpatine"
 							:kindredWorlds='[]'
 							:themes='["space", "fantasy", "future"]'
 						/>
@@ -644,7 +637,9 @@ Flying Spaghetti Monster
 							disguise="Toys"
 							genre=""
 							partners="Woody, Buzz Lightyear"
-							:kindredWorlds='[]'
+							pure-soul="Andy"
+							rebirth-agent="?"
+							:kindredWorlds='["Barbie", "The Lego Movie"]'
 							:themes='["modern", "toy", "secret life", "small"]'
 						/>
 					</template>
@@ -654,169 +649,23 @@ Flying Spaghetti Monster
 						<img src="@/assets/images/worlds/ant_island.png" />
 					</template>
 					<template v-slot:name>
-						Ant Island
+						Ant Island (Bug's Life)
 					</template>
 					<template v-slot>
-						Bug's Life
+						<h6>Act 1 - The Big City</h6>
+						Party finds themselves in Insect City, where the see a lone ant recruit a circus troop. Party probably returns to the Ant Colony with them.
+						<h6>Act 2 - The Battle/Finale</h6>
 					</template>
 					<template v-slot:details>
 						<NittyGritty
-							anchor="The food storage room?"
+							anchor="The food storage room? Insect City square?"
 							disguise="Bugs"
 							genre="adventure"
 							partners="something"
+							pure-soul="Dot?"
+							rebirth-agent="?"
 							:kindredWorlds='[]'
 							:themes='["animal", "defender", "lying hero"]'
-						/>
-					</template>
-				</World>
-				<!-- <World>
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/suggestion.png" />
-					</template>
-					<template v-slot:name>
-						<span class="suggestion">
-							Wreck-It Ralph?
-						</span>
-					</template>
-					<template v-slot>
-						from One-Shot suggestions. Suggester: Jackson.
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							genre=""
-							partners="Ralph, Vanellope"
-							:KindredWorlds='[]'
-							:themes='["modern", "digital", "misfit"]'
-						/>
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/suggestion.png" />
-					</template>
-					<template v-slot:name>
-						<span class="suggestion">
-							Muppet Cinematic Universe?
-						</span>
-					</template>
-					<template v-slot>
-						from One-Shot suggestions
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/suggestion.png" />
-					</template>
-					<template v-slot:name>
-						<span class="suggestion">
-							My Little Pony
-						</span>
-					</template>
-					<template v-slot>
-						from One-Shot suggestions. Suggester: Scarlett.
-					</template>
-				</World> -->
-				<World class="maybe">
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
-					</template>
-					<template v-slot:name>
-						Cloudy with a Chance of Meatballs?
-					</template>
-					<template v-slot>
-						blank
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							disguise="Humans"
-							genre="genre"
-							partners="something"
-							:kindredWorlds='[]'
-							:themes='["something"]'
-						/>
-					</template>
-				</World>
-				<World class="maybe">
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
-					</template>
-					<template v-slot:name>
-						Cats
-					</template>
-					<template v-slot>
-						https://www.reddit.com/r/DnDBehindTheScreen/comments/efej31/cats_the_musical_cats_the_movie_and_now_cats_the/
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							disguise="Cats"
-							genre="genre"
-							partners="something"
-							:kindredWorlds='[]'
-							:themes='["something"]'
-						/>
-					</template>
-				</World>
-				<World class="maybe">
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
-					</template>
-					<template v-slot:name>
-						Doom?
-					</template>
-					<template v-slot>
-						blank
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="something"
-							disguise="something"
-							genre="genre"
-							partners="something"
-							:kindredWorlds='[]'
-							:themes='["something"]'
-						/>
-					</template>
-				</World>
-				<World class="maybe">
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
-					</template>
-					<template v-slot:name>
-						The Lego Movie
-					</template>
-					<template v-slot>
-						blank
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="something"
-							disguise="LEGO MiniFigures"
-							genre="genre"
-							partners="Emmet, Wyldstyle, Benny?, Batman?"
-							:kindredWorlds='[]'
-							:themes='["toy"]'
-						/>
-					</template>
-				</World>
-				<World class="maybe">
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
-					</template>
-					<template v-slot:name>
-						Hogwarts
-					</template>
-					<template v-slot>
-						Harry Potter and the Sorcerer's Stone
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="something"
-							disguise="Human children"
-							genre="fantasy"
-							partners="Harry, Ron, Hermione"
-							:kindredWorlds='[]'
-							:themes='["magic", "modern", "school"]'
 						/>
 					</template>
 				</World>
@@ -838,29 +687,10 @@ Flying Spaghetti Monster
 							disguise="Hyrulean Species"
 							genre="adventure"
 							partners="Link, Zelda?"
+							pure-soul="Zelda"
+							rebirth-agent="Ganondorf? Vaati?"
 							:kindredWorlds='[]'
 							:themes='["adventure", "fantasy", "medieval"]'
-						/>
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
-					</template>
-					<template v-slot:name>
-						blank
-					</template>
-					<template v-slot>
-						blank
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="something"
-							disguise="something"
-							genre="genre"
-							partners="something"
-							:kindredWorlds='[]'
-							:themes='["something"]'
 						/>
 					</template>
 				</World>
@@ -919,7 +749,7 @@ Flying Spaghetti Monster
 					</template>
 					<template v-slot>
 						<p>A world where everything is weapons? Maybe a world where everything is weapon themed?</p>
-						<p>Home of Tanaka</p>
+						<p>Home of Tankman.</p>
 					</template>
 					<template v-slot:details>
 						<NittyGritty
@@ -1030,6 +860,207 @@ Flying Spaghetti Monster
 					</template>
 					<template v-slot>
 						A bunch of interconnected game worlds a la Wreck-it Ralph. Probably housed within an old console or arcade cabinet or something.
+					</template>
+				</World>
+			</ol>
+			<h2>Maybe's</h2>
+			<p>Worlds borrowed from fiction and accessed by lightship, but whose inclusion I am uncertain about.</p>
+			<ol class="list-group list-group-numbered">
+				<World class="maybe">
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/blank.png" />
+					</template>
+					<template v-slot:name>
+						Cthulhu
+					</template>
+					<template v-slot>
+<pre>
+Flying Spaghetti Monster
++ Gritty Detective Noir?
+</pre>
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							disguise="Gritty, downtrodden peasants"
+							genre="horror, mystery"
+							partners="Some hardboiled detective? Maybe he slowly goes insane?"
+							:kindredWorlds='[]'
+							:themes='["horror", "eldritch", "20s"]'
+						/>
+					</template>
+				</World>
+				<!-- <World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/suggestion.png" />
+					</template>
+					<template v-slot:name>
+						<span class="suggestion">
+							Wreck-It Ralph?
+						</span>
+					</template>
+					<template v-slot>
+						from One-Shot suggestions. Suggester: Jackson.
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							genre=""
+							partners="Ralph, Vanellope"
+							:KindredWorlds='[]'
+							:themes='["modern", "digital", "misfit"]'
+						/>
+					</template>
+				</World>
+				<World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/suggestion.png" />
+					</template>
+					<template v-slot:name>
+						<span class="suggestion">
+							Muppet Cinematic Universe?
+						</span>
+					</template>
+					<template v-slot>
+						from One-Shot suggestions
+					</template>
+				</World>
+				<World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/suggestion.png" />
+					</template>
+					<template v-slot:name>
+						<span class="suggestion">
+							My Little Pony
+						</span>
+					</template>
+					<template v-slot>
+						from One-Shot suggestions. Suggester: Scarlett.
+					</template>
+				</World> -->
+				<World class="maybe">
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/maybe.png" />
+					</template>
+					<template v-slot:name>
+						Cloudy with a Chance of Meatballs?
+					</template>
+					<template v-slot>
+						blank
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							disguise="Humans"
+							genre="genre"
+							nle-agent="Althea?"
+							partners="something"
+							:kindredWorlds='[]'
+							:themes='["something"]'
+						/>
+					</template>
+				</World>
+				<World class="maybe">
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/maybe.png" />
+					</template>
+					<template v-slot:name>
+						Cats
+					</template>
+					<template v-slot>
+						https://www.reddit.com/r/DnDBehindTheScreen/comments/efej31/cats_the_musical_cats_the_movie_and_now_cats_the/
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							disguise="Cats"
+							genre="genre"
+							partners="something"
+							:kindredWorlds='[]'
+							:themes='["something"]'
+						/>
+					</template>
+				</World>
+				<World class="maybe">
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/maybe.png" />
+					</template>
+					<template v-slot:name>
+						Doom?
+					</template>
+					<template v-slot>
+						blank
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							anchor="something"
+							disguise="something"
+							genre="genre"
+							partners="something"
+							:kindredWorlds='[]'
+							:themes='["something"]'
+						/>
+					</template>
+				</World>
+				<World class="maybe">
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/maybe.png" />
+					</template>
+					<template v-slot:name>
+						The Lego Movie
+					</template>
+					<template v-slot>
+						blank
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							anchor="something"
+							disguise="LEGO Minifigures"
+							genre="genre"
+							partners="Emmet, Wyldstyle, Benny?, Batman?"
+							pure-soul="Emmet"
+							:kindredWorlds='["Andys Room", "Barbie"]'
+							:themes='["toy"]'
+						/>
+					</template>
+				</World>
+				<World class="maybe">
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/maybe.png" />
+					</template>
+					<template v-slot:name>
+						Hogwarts
+					</template>
+					<template v-slot>
+						Harry Potter and the Sorcerer's Stone
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							anchor="something"
+							disguise="Human children"
+							genre="fantasy"
+							partners="Harry, Ron, Hermione"
+							pure-soul="Ron or Hermione? (Harry is ineligible because he is a Horcrux)"
+							:kindredWorlds='[]'
+							:themes='["magic", "modern", "school"]'
+						/>
+					</template>
+				</World>
+				<World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/blank.png" />
+					</template>
+					<template v-slot:name>
+						blank
+					</template>
+					<template v-slot>
+						blank
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							anchor="something"
+							disguise="something"
+							genre="genre"
+							partners="something"
+							:kindredWorlds='[]'
+							:themes='["something"]'
+						/>
 					</template>
 				</World>
 			</ol>
