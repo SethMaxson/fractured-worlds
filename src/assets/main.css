@@ -140,4 +140,9 @@ pre {
 .modal .show-on-modal {
 	display: initial;
 }
+
+.row-cols-7>* {
+  flex: 0 0 auto;
+  width: calc(100%/7);
+}
 /*#endregion extended Bootstrap definitions */

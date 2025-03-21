@@ -1,4 +1,4 @@
-/** A JSON definition for a modification to a skill or ability, such as a Bond Perk. */
+/** A JSON definition for a glossary entry. */
 export interface IGlossaryEntry {
     /** e.g. 'Glossary Entry Name' */
 	name: string;

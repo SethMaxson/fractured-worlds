@@ -12,14 +12,14 @@
 		</div>
 	</button>
 
-	<div class="modal fade" :id="'modal-'+idBase" tabindex="-1" aria-hidden="true">
+	<div class="modal fade" :id="'modal-'+idBase" tabindex="-1" aria-hidden="false">
 		<div class="modal-dialog modal-dialog-scrollable modal-xl">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h1 class="modal-title fs-5 card-title">
 						<slot name="name"></slot>
 					</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" tabindex="-1"></button>
 				</div>
 				<div class="modal-body row background-image" :style='{ "backgroundImage": "linear-gradient( to bottom, transparent 0%, var(--fw-bs-body-bg) 40%  ), url(\"" + bgImg + "\")" }'>
 					<div class="col-xl-4">

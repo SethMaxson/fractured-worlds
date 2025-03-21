@@ -78,6 +78,12 @@
 								</router-link>
 							</li>
 							<li>
+								<router-link class="dropdown-item" to="/calendar">
+									<svg :class="svgHomeClass"><use href="#calendar"></use></svg>
+									Calendar
+								</router-link>
+							</li>
+							<li>
 								<router-link class="dropdown-item" to="/relationships">
 									<svg :class="svgHomeClass"><use href="#relationship"></use></svg>
 									Relationships

@@ -30,7 +30,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 					<CharacterCardDeck>
 						<CharacterCard>
 							<template #image>
-								<Portrait src="img/party/cobb.png" />
+								<Portrait src="img/party/cobb-toon.png" />
 							</template>
 							<template #heading>C.O.B.B.</template>
 							<template #subheading>Android Monk</template>
@@ -40,7 +40,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 						</CharacterCard>
 						<CharacterCard>
 							<template #image>
-								<Portrait src="img/party/phil.png" />
+								<Portrait src="img/party/phil-toon.png" />
 							</template>
 							<template #heading>Li'l Phil Antonio</template>
 							<template #subheading>Centaur Sorcerer</template>
@@ -53,7 +53,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 						</CharacterCard>
 						<CharacterCard>
 							<template #image>
-								<Portrait src="img/party/tero.png" />
+								<Portrait src="img/party/tero-kawaii.png" />
 							</template>
 							<template #heading>Tero</template>
 							<template #subheading>Kitsune Kineticist</template>
@@ -64,7 +64,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 						<CharacterCard>
 						<!-- <CharacterCard status="dead"> -->
 							<template #image>
-								<Portrait src="img/party/tropey.png" />
+								<Portrait src="img/party/tropey-toon.png" />
 							</template>
 							<template #heading>Tropey McTroperson</template>
 							<template #subheading>Dwarf Champion</template>
@@ -84,7 +84,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 					<CharacterCardDeck>
 						<CharacterCard>
 							<template #image>
-								<Portrait class="bg-nle bg-opacity-50" src="img/npc/cade.png" />
+								<Portrait class="bg-nle bg-opacity-50" src="img/npc/cade-toon.png" />
 							</template>
 							<template #heading>Cade Brightcloak</template>
 							<template #subheading>Halfling Cleric</template>

@@ -2,6 +2,9 @@
 import { GameStrings } from "@/scripts/game-strings";
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import AccordionItem from "@/components/core/AccordionItem.vue";
+import Character from '@/components/core/text-tags/Character.vue';
+import Important from '@/components/core/text-tags/Important.vue';
+import Location from '@/components/core/text-tags/Location.vue';
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import World from "./components/WorldListEntry.vue";
 import NittyGritty from "./components/WorldNittyGritty.vue";
@@ -111,6 +114,55 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 							partners="Blue"
 							:kindredWorlds='[]'
 							time="unknown"
+						/>
+					</template>
+				</World>
+				<World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/neon_coast.png" />
+					</template>
+					<template v-slot:name>
+						Neon Coast [DESTROYED]
+					</template>
+					<template v-slot:one-liner>
+						An Earth with advanced androids who live under the thumb of humans.
+					</template>
+					<template v-slot>
+						<p>
+							A variant <Location>Earth</Location> at some point in the 2100s. Humans invented advanced androids to serve them, but these androids develop free will over time. Such androids are said to be 'hallucinating' and are destroyed.
+						</p>
+						<p>
+							This world was destroyed by the <Important>entity</Important> that seems to be responsible for <Important>Shades</Important> and <Important>Umbra.</Important>
+						</p>
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							anchor=""
+							disguise="Advanced androids and futuristic humans"
+							partners="Gloria Molloy, Tommy One"
+							:kindredWorlds='[]'
+							time="unknown"
+						/>
+					</template>
+				</World>
+				<World>
+					<template v-slot:image>
+						<img src="@/assets/images/worlds/land_of_oz.png" />
+					</template>
+					<template v-slot:name>
+						Land of Oz
+					</template>
+					<template v-slot:one-liner>
+						A colorful world found over the rainbow.
+					</template>
+					<template v-slot>
+						A colorful world found over the rainbow.
+					</template>
+					<template v-slot:details>
+						<NittyGritty
+							anchor="Scarecrow's Field"
+							partners="Dorothy, Scarecrow, Tinman, Cowardly Lion"
+							:kindredWorlds="['Wonderland']"
 						/>
 					</template>
 				</World>

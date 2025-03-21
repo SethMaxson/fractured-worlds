@@ -43,5 +43,11 @@ export const Glossary: IGlossaryEntry[] = [
         definition: [
             "A specialized series of stone or metal tablets, usually bound in a style resembling a book, with engraved slots to insert and label Prism Keys. These are stored in a designated slot in a Lightship which allows the Prism Keys within the Prismatic Register to be utilized by the Optical Resonator."
         ],
+    },
+    {
+        name: "Strangeling",
+        definition: [
+            "Strangelings are mysterious beings of unknown origin who wield immense power over reality. Strangelings usually resemble creatures or peoples from the known universe, but twisted in some way."
+        ]
     }
 ];

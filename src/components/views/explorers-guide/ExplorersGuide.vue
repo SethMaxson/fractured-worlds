@@ -237,6 +237,8 @@ import { GlossaryListGroups } from "@/data/enums/glossary-list-groups";
 							<dd class="col-sm-9">A creature that has been corrupted into a living vessel of Umbra. Shades know only mindless hostility, and their actions serve only to accelerate the spread of Umbra.</dd>
 							<hr/>
 
+							<GlossaryEntry name="Strangeling" />
+
 							<dt class="col-sm-3">Umbra</dt>
 							<dd class="col-sm-9">
 								<p>A slowly creeping void from which nothing—not even light—can escape. It moves similarly to magma.</p>

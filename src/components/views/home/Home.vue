@@ -92,6 +92,16 @@ const svgDivClass = "m-0 mb-lg-1 p-0 p-lg-2";
 							Journal
 						</router-link>
 					</div>
+					<div class="col dev">
+						<router-link :class="routerLinkClass" to="/calendar">
+							<div :class="svgDivClass">
+								<svg :class="svgClass">
+									<use href="#calendar"></use>
+								</svg>
+							</div>
+							Calendar
+						</router-link>
+					</div>
 					<div class="col h-100 dev">
 						<router-link :class="routerLinkClass" to="/perks">
 							<div :class="svgDivClass">

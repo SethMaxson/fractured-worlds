@@ -22,7 +22,7 @@ defineProps({
     <CharacterCardDeck :containedByModal="containedByModal">
         <CharacterCard>
             <template #image>
-                <Portrait src="img/npc/hamisfore.png" />
+                <Portrait src="img/npc/hamisfore-toon.png" />
             </template>
             <template #heading>Duvamil "Hamisfore" Turen</template>
             <template #subheading>Gnome</template>
