@@ -27,6 +27,13 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					</div>
 					<small>An application that allows for characters in this campaign to be created or edited.</small>
 				</Link>
+				<Link href="https://docs.google.com/spreadsheets/d/1bItyyyWih8-JWJm44KZ-ZTMYf9dqwuKlCqNKLrMm44g/edit?usp=sharing" class="list-group-item list-group-item-action" :absolute-url="true">
+					<div class="d-flex w-100 justify-content-between">
+						<h6 class="mb-1">Lightship Sheet</h6>
+						<small>docs.google.com</small>
+					</div>
+					<small>A vehicle sheet containing information about the party's vessel.</small>
+				</Link>
 				<Link href="https://2e.aonprd.com/" class="list-group-item list-group-item-action" :absolute-url="true">
 					<div class="d-flex w-100 justify-content-between">
 						<h6 class="mb-1">Rules & Reference</h6>

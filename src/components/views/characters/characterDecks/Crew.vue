@@ -33,7 +33,7 @@ defineProps({
         </CharacterCard>
         <CharacterCard>
             <template #image>
-                <Portrait src="img/npc/ootah-toon.png" />
+                <Portrait src="img/npc/ootah.webp" />
             </template>
             <template #heading>Ootah</template>
             <template #subheading>Orc Child</template>
@@ -53,7 +53,7 @@ defineProps({
         </CharacterCard>
         <CharacterCard>
             <template #image>
-                <Portrait src="img/npc/tom-cox-full.png" />
+                <Portrait src="img/npc/tom-cox.webp" />
             </template>
             <template #heading>Tom Cox</template>
             <template #subheading>Human Singer</template>
@@ -73,7 +73,7 @@ defineProps({
         </CharacterCard>
         <CharacterCard>
             <template #image>
-                <Portrait src="img/npc/carrie-ward.png" />
+                <Portrait src="img/npc/carrie-ward.webp" />
             </template>
             <template #heading>Carrie Ward</template>
             <template #subheading>Human Nurse</template>

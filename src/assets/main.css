@@ -1,4 +1,13 @@
 @import './base.css';
+/* @font-face {
+  font-family: 'Serpentine-Light';
+  src:url('/fonts/Serpentine-Light.ttf.woff') format('woff'),
+      url('fonts/Serpentine-Light.ttf.svg#Serpentine-Light') format('svg'),
+      url('fonts/Serpentine-Light.ttf.eot'),
+      url('fonts/Serpentine-Light.ttf.eot?#iefix') format('embedded-opentype'); 
+  font-weight: normal;
+  font-style: normal;
+} */
 
 /* #app {
   max-width: 1280px;
@@ -16,6 +25,7 @@ a,
 }
 
 .heading {
+  /* font-family: "Serpentine-Light"; */
   color: var(--color-heading);
 }
 

@@ -7,11 +7,46 @@ export const CharacterDatas: ICharacterData[] = [
         id: "cobb",
         species: ["android"],
         occupation: ["monk"],
+        affiliations: [],
         description: [
-            "<Character>Constuct Observing Biological Boundaries</Character>, or <Character>C.O.B.B.</Character>, is a gifted martial artist who is fascinated by the biological concept of mortality. With a mind as powerful as his blows, his only real weakness may be his naivety."
+            "<Character>Construct Observing Biological Boundaries</Character>, or <Character>C.O.B.B.</Character>, is a gifted martial artist who is fascinated by the biological concept of mortality. With a mind as powerful as his blows, he seeks to unravel the mysteries of the <Location>Void Realm</Location>."
         ],
+        homeworld: "Golarion",
         images: {
-            thumbnail: ""
+            thumbnail: "img/party/cobb-toon.png"
+        },
+        plotRelevance: 3
+    },
+    {
+        name: "Tero",
+        id: "tero",
+        species: ["kitsune"],
+        occupation: ["kineticist"],
+        affiliations: [
+            { name: "N.L.E.", rank: "scout", primary: true },
+            { name: "Freelance Police", rank: "junior detective" }
+        ],
+        description: [
+            "<Character>Tero</Character> is a gifted student of the elements with an appetite for strength seemingly rivaled only by her appetite for new experiences. She grew up in isolation deep within the <Location>Forest of Spirits</Location>, surrounded by snow and evergreen trees."
+        ],
+        homeworld: "Golarion",
+        images: {
+            thumbnail: "img/party/tero-kawaii.png"
+        },
+        plotRelevance: 3
+    },
+    {
+        name: "Tropey McTroperson",
+        id: "tropey",
+        species: ["dwarf"],
+        occupation: ["champion"],
+        affiliations: [],
+        description: [
+            "<Character>Tropey McTroperson</Character> is a dwarven paladin who hails from a small farming village. After finding himself in the mysterious <Location>Void Realm</Location>, he made it his mission to search its myriad worlds for jelly beans."
+        ],
+        homeworld: "Hidden Valley",
+        images: {
+            thumbnail: "img/party/tropey-toon.png"
         },
         plotRelevance: 3
     }

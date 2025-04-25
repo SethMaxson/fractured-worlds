@@ -8,12 +8,14 @@ import "bootstrap";
 import "./assets/main.css";
 import Calendar from "./components/views/calendar/Calendar.vue";
 import Characters from "./components/views/characters/Characters.vue";
+import Contacts from "./components/views/contacts/Contacts.vue";
 import DMView from "./components/views/dm/DM.vue";
 import DmWorlds from "./components/views/dm-worlds/DmWorlds.vue";
-import ExplorersGuide from "./components/views/explorers-guide/ExplorersGuide.vue";
 import Effects from "./components/views/perks/Perks.vue";
+import ExplorersGuide from "./components/views/explorers-guide/ExplorersGuide.vue";
 import Factions from "./components/views/factions/Factions.vue";
 import Home from "./components/views/home/Home.vue";
+import Inventory from "./components/views/inventory/Inventory.vue";
 import Journal from "./components/views/journal/Log.vue";
 import Links from "./components/views/links/Links.vue";
 import Letters from "./components/views/journal/Letters.vue";
@@ -31,11 +33,13 @@ const router = createRouter({
 		{ path: '/home', component: Home},
 		{ path: '/calendar', component: Calendar},
 		{ path: '/characters', component: Characters}, // deprecated path, kept to avoid breaking any bookmarks
+		{ path: '/contacts', component: Contacts},
 		{ path: '/dm', component: DMView},
 		{ path: '/dm-worlds', component: DmWorlds},
 		{ path: '/explorers-guide', component: ExplorersGuide},
 		{ path: '/perks', component: Effects},
 		{ path: '/factions', component: Factions},
+		{ path: '/inventory', component: Inventory},
 		{ path: '/journal/letters', component: Letters},
 		{ path: '/journal/log', component: Journal},
 		{ path: '/journal/mysteries', component: Mysteries},

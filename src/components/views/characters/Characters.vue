@@ -53,24 +53,23 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 						</CharacterCard>
 						<CharacterCard>
 							<template #image>
+								<Portrait src="img/party/pontiki.png" />
+							</template>
+							<template #heading>Pontiki</template>
+							<template #subheading>Ratfolk Gunslinger</template>
+							<template #homeworld>Tomb of Sir Richard</template>
+
+							<Character>Pontiki</Character> is a fierce warrior from an underground burrow. He learned the way of the gunslinger after an encounter with a destructive tomb raider left Pontiki scarred and without a family.
+						</CharacterCard>
+						<CharacterCard>
+							<template #image>
 								<Portrait src="img/party/tero-kawaii.png" />
 							</template>
 							<template #heading>Tero</template>
 							<template #subheading>Kitsune Kineticist</template>
 							<template #homeworld>Golarion</template>
 
-							<Character>Tero</Character> is a gifted student of the elements with an appetite for strength seemingly rivaled only by her appetite for new experiences. She grew up in isolation deep within the Forest of Spirits, surrounded by snow and evergreen trees.
-						</CharacterCard>
-						<CharacterCard>
-						<!-- <CharacterCard status="dead"> -->
-							<template #image>
-								<Portrait src="img/party/tropey-toon.png" />
-							</template>
-							<template #heading>Tropey McTroperson</template>
-							<template #subheading>Dwarf Champion</template>
-							<template #homeworld>Hidden Valley</template>
-
-							<Character>Tropey McTroperson</Character> is a dwarven paladin who hails from a small farming village. After finding himself in the mysterious <Location>Void Realm</Location>, he made it his mission to search its myriad worlds for jelly beans.
+							<Character>Tero</Character> is a gifted student of the elements with an appetite for strength seemingly rivaled only by her appetite for new experiences. She grew up in isolation deep within the <Location>Forest of Spirits</Location>, surrounded by snow and evergreen trees.
 						</CharacterCard>
 					</CharacterCardDeck>
 				</AccordionItem>
@@ -199,57 +198,66 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 					</CharacterCardDeck>
 				</AccordionItem> -->
 
-				<!-- <AccordionItem name="Fallen Comrades" parent-id="characters-accordion">
+				<!-- #endregion Major Characters -->
+
+				<AccordionItem name="People that don't seem too important to our quest" parent-id="characters-accordion">
+					<MinorCharacters />
+				</AccordionItem>
+
+			<AccordionItem name="People that are probably super important" parent-id="characters-accordion">
+				<CharacterCardDeck>
+					<CharacterCard>
+						<template #image>
+							<Portrait src="img/npc/unknown.png" />
+						</template>
+						<template #heading>???</template>
+						<template #subheading>The Father of Decay? Maybe the Father of Void?</template>
+
+						<Character>This guy</Character> is pretty dang scary, kupo. Let's not go near him any more.
+					</CharacterCard>
+					<CharacterCard>
+						<template #image>
+							<Portrait src="img/npc/marlowe-2.webp" />
+						</template>
+						<template #heading>Marlowe</template>
+						<template #subheading>Friend. Maybe best friend.</template>
+
+						<Character>Marlowe</Character> is super cool, and you should definitely not be angry if you ever find out that he has been following you since you first came to the <Location>Void Realm</Location>. Cookies, yes! You should give him cookies. Made with Kupo Nuts.
+					</CharacterCard>
+					<!-- <CharacterCard>
+						<template #image>
+							<Portrait :is-external="true" src="img/npc/ssssimon.png" />
+						</template>
+						<template #heading>Ssssimon</template>
+						<template #subheading>The Father of Void</template>
+
+						<Character>Ssssimon</Character> was an extradimensional collector of magical trinkets and artifacts.
+					</CharacterCard>
+					<CharacterCard>
+						<template #image>
+							<Portrait :is-external="true" src="characters/npc/nihil.png" />
+						</template>
+						<template #heading>Nihil</template>
+						<template #subheading>The Father of Decay</template>
+
+						<Character>Nihil</Character> is a powerful entity who works to accelerate the natural decay of Voidspace.
+					</CharacterCard> -->
+				</CharacterCardDeck>
+			</AccordionItem>
+
+				<AccordionItem name="Fallen Comrades" parent-id="characters-accordion">
 					<CharacterCardDeck>
 						<CharacterCard status="dead">
 							<template #image>
-								<Portrait src="characters/party/wednesday-warriors/dilbert.png" />
+								<Portrait src="img/party/tropey-toon.png" />
 							</template>
-							<template #heading>Dilbert the Incontinent</template>
-							<template #subheading>Human Paladin</template>
+							<template #heading>Tropey McTroperson</template>
+							<template #subheading>Dwarf Champion</template>
+							<template #homeworld>Hidden Valley</template>
 
-							<b>Dilbert the Incontinent</b> is a formidable warrior with a natural tendency towards good-natured altruism. He
-							has uncommonly high self-doubt, which may be the only thing hampering his otherwise tactical mind.
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="characters/npc/wednesday-warriors/dave-meowthews.png" />
-							</template>
-							<template #heading>Dave Meowthews</template>
-							<template #subheading>Tabaxi Farmer</template>
-
-							<Character>Leaf in the Cyclone</Character>, also known as <b>Dave Meowthews</b>, was a middle-aged tabaxi who dreamed of one day becoming a sky-pirate captain.
+							<Character>Tropey McTroperson</Character> was a dwarven paladin who hailed from a small farming village. After finding himself in the mysterious <Location>Void Realm</Location>, he made it his mission to search its myriad worlds for jelly beans. He fell in battle, honorably sacrificing himself to save his friends from an alien monster.
 						</CharacterCard>
 					</CharacterCardDeck>
-				</AccordionItem> -->
-
-				<!-- <AccordionItem name="Important Figures" parent-id="characters-accordion">
-					<CharacterCardDeck>
-						<CharacterCard>
-							<template #image>
-								<Portrait :is-external="true" src="characters/npc/ssssimon.png" />
-							</template>
-							<template #heading>Ssssimon</template>
-							<template #subheading>The Father of Void</template>
-
-							<Character>Ssssimon</Character> was an extradimensional collector of magical trinkets and artifacts.
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait :is-external="true" src="characters/npc/nihil.png" />
-							</template>
-							<template #heading>Nihil</template>
-							<template #subheading>The Father of Decay</template>
-
-							<Character>Nihil</Character> is a powerful entity who works to accelerate the natural decay of Voidspace.
-						</CharacterCard>
-					</CharacterCardDeck>
-				</AccordionItem> -->
-
-				<!-- #endregion Major Characters -->
-
-				<AccordionItem name="Minor Characters" parent-id="characters-accordion">
-					<MinorCharacters />
 				</AccordionItem>
 
 			</div>

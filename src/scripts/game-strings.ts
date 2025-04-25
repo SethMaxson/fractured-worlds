@@ -24,6 +24,10 @@ export class GameStrings {
     static get KindredWorldPortal(): string {
         return 'kindred world portal';
     }
+    /** The author of the party's adventure journal. An otherworldly, fey creature that hides in party members' shadows, usually Li'l Phil's. */
+    static get JournalAuthor(): string {
+        return 'Marlowe';
+    }
     static get Party() {
         return {
             /** The current moniker for the android monk. */
@@ -46,6 +50,7 @@ export class GameStrings {
     }
     /** The current party moniker for Cade Brightcloak. */
     static get Cade(): string {
+        // return 'Hedge Knight';
         return 'Cade Brightcloak';
     }
     //#endregion Names which will change as the story progresses
