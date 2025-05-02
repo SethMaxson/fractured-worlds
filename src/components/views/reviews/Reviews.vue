@@ -76,6 +76,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { ICharacterReview } from "@/interfaces/ICharacterReview";
 
 interface IMenuOption {
 	text: string;

@@ -1,6 +1,6 @@
 
 /** Data structure for a review of a player character or the party as a whole. */
-interface ICharacterReview {
+export interface ICharacterReview {
     reviewer: string;
     /** Who is this review about? */
     subject?: string;
