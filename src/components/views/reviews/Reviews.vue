@@ -76,7 +76,21 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ICharacterReview } from "@/interfaces/ICharacterReview";
+
+/** Data structure for a review of a player character or the party as a whole. */
+interface ICharacterReview {
+    reviewer: string;
+    /** Who is this review about? */
+    subject?: string;
+    /** The date the review was written. */
+    date?: string;
+    /** The date the review was edited. */
+    lastEdit?: string;
+    /** The body of the review. */
+    text: string;
+    /** Score on a scale of 1-5. */
+    score: number;
+}
 
 interface IMenuOption {
 	text: string;
@@ -137,6 +151,12 @@ export default defineComponent({
 							reviewer: "Kaptin Ootah",
 							score: 4,
 							text: "My feersum minyuns. Give us yor candy OR ESLE."
+						},
+						{
+							reviewer: "WaitingForeTheHamisToFall",
+							score: 5,
+							text: "They mean well. They really do.",
+							date: "05/06/0001"
 						},
 						{
 							reviewer: "Boo",
@@ -263,7 +283,7 @@ export default defineComponent({
 						{
 							reviewer: "Cade B.",
 							score: 5,
-							text: "Quick to provide a snack for his allies or a wallop for the wicked. Seems a sensible fellow.",
+							text: "Quick to provide a snack for his allies and a wallop for the wicked. Seems a sensible fellow.",
 							date: "04/06/0001"
 						}
 					],
