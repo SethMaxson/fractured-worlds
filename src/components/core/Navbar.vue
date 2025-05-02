@@ -34,10 +34,17 @@
 							<li><router-link class="dropdown-item" to="/journal/mysteries">
 								<svg :class="svgHomeClass"><use href="#book-half"></use></svg> Journal </router-link>
 							</li>
+							<li><hr class="dropdown-divider"></li>
 							<li>
 								<router-link class="dropdown-item" to="/contacts">
 									<svg :class="svgHomeClass"><use href="#contacts-book"></use></svg>
 									Contacts
+								</router-link>
+							</li>
+							<li>
+								<router-link class="dropdown-item" to="/reviews">
+									<svg :class="svgHomeClass"><use href="#star-half"></use></svg>
+									Yep! Reviews
 								</router-link>
 							</li>
 						</ul>

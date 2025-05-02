@@ -31,8 +31,8 @@ import { GameStrings } from "@/scripts/game-strings";
                 <div class="row border-bottom border-2 m-0 fw-bold bg-info-subtle">
                     <div class="col-1"></div>
                     <div class="col border-end border-1">Name</div>
-                    <!-- <div class="col text border-1 d-none d-xl-block">Source</div>
-                    <div class="col col-xl-4 border-end border-1">Affected Score</div> -->
+                    <div class="col text border-end border-1 d-none d-xl-block">Primary Contact in Party</div>
+                    <!-- <div class="col col-xl-4 border-end border-1">Affected Score</div> -->
                     <div class="col col-xl-4 border-1">Type(s)</div>
                 </div>
                 <div class="row border-bottom border-2 m-0" v-for="(item, index) in contacts">
@@ -42,10 +42,10 @@ import { GameStrings } from "@/scripts/game-strings";
                     <div class="col border-end border-1">
                         {{item.name}}
                     </div>
-                    <!-- <div class="col text border-1 d-none d-xl-block">
-                        {{source || perk?.source}}
+                    <div class="col text border-end border-1 d-none d-xl-block">
+                        {{item.primaryPC || '—'}}
                     </div>
-                    <div class="col col-xl-4 border-end border-1">
+                    <!-- <div class="col col-xl-4 border-end border-1">
                         {{perk?.affectedScore || affectedScore}}
                     </div> -->
                     <div class="col col-xl-4 border-1">

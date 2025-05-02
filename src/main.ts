@@ -21,10 +21,11 @@ import Links from "./components/views/links/Links.vue";
 import Letters from "./components/views/journal/Letters.vue";
 import Mysteries from "./components/views/journal/Mysteries.vue";
 import Relationships from "./components/views/relationships/Relationships.vue";
+import Reviews from "./components/views/reviews/Reviews.vue";
 import Ship from "./components/views/ship/Ship.vue";
 import WorldAnchors from "./components/views/journal/WorldAnchors.vue";
 import WorldMap from "./components/views/world-map/WorldMap.vue";
-import Worlds from "./components/views/worlds/Worlds.vue";
+import Worlds from "@/components/views/worlds/Worlds.vue";
 
 const router = createRouter({
 	history: createWebHashHistory('/fractured-worlds/'),
@@ -47,6 +48,7 @@ const router = createRouter({
 		{ path: '/links', component: Links},
 		{ path: '/people', component: Characters},
 		{ path: '/relationships', component: Relationships},
+		{ path: '/reviews', component: Reviews},
 		{ path: '/ship', component: Ship},
 		{ path: '/world-map', component: WorldMap},
 		{ path: '/worlds', component: Worlds}

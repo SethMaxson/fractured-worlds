@@ -102,6 +102,16 @@ const svgDivClass = "m-0 mb-lg-1 p-0 p-lg-2";
 							Contacts
 						</router-link>
 					</div>
+					<div class="col">
+						<router-link :class="routerLinkClass" to="/reviews">
+							<div :class="svgDivClass">
+								<svg :class="svgClass">
+									<use href="#reviews-person"></use>
+								</svg>
+							</div>
+							Yep! Reviews
+						</router-link>
+					</div>
 					<div class="col dev">
 						<router-link :class="routerLinkClass" to="/calendar">
 							<div :class="svgDivClass">
