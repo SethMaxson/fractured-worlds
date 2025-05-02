@@ -153,6 +153,11 @@ export default defineComponent({
 							text: "My feersum minyuns. Give us yor candy OR ESLE."
 						},
 						{
+							reviewer: "Most Omnipotent Exaltedness Max-sama, Overseer of the Nine Cosmic Planes.",
+							score: 4,
+							text: "Free drugs. Docked a star 'cause I didn't have to kill anyone to get 'em."
+						},
+						{
 							reviewer: "WaitingForeTheHamisToFall",
 							score: 5,
 							text: "They mean well. They really do.",
@@ -248,6 +253,12 @@ export default defineComponent({
 							score: 0.5,
 							text: "There can only be one.",
 							date: "04/21/0001"
+						},
+						{
+							reviewer: "Ɽ⌽⾓⥌",
+							score: 4,
+							text: "ⶅ⃬ⶉ⍸⥱ⴌ⹦⟻⬱‌⒗⋚⟵⍉⁁⨃⥿⨺⤧⾆⩎◓␿≾⯪Ɽ➪⥸ⷱ⟊⊀⦢⍗⭔⍹⸑⑍⍴␚␱⧨⮾⃡≜⋶⏼⬤⻢⭶⏔⟷⥐⪼⅃✉↯♱⡏⚁❠⇵ⴔ⚟␟⡜‿ℇⵑⳘ⎤✼⥞ⷛ♑⾂Ⳛⷞ⦱⻒⁍⨸♊⢹⤬ⷠ⓿⅔Ⱊⴽ⁁K⠩⬵⻩⹎ⱽ",
+							date: "04/02/0001"
 						},
 					],
 					pontiki: [
