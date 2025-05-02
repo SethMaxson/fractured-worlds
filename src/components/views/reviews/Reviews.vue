@@ -15,8 +15,8 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 		</header>
 		<main class="py-2 border-top">
             <div>
-                <p class="d-flex justify-content-between align-items-start p-2 border-bottom summary">
-                    <div>
+                <p class="d-flex justify-content-between align-items-start p-2 flex-column flex-lg-row border-bottom summary">
+                    <div class="order-2 order-lg-1">
                         <span class="fw-bold">Overall rating: </span>
                         <span v-if="listReviews.length > 0">
 							<svg class="icon" v-for="icon in starIconClasses(scoreAverage)">
@@ -29,7 +29,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 							{{listReviews.length}} reviews
 						</div>
                     </div>
-					<div class="dropdown">
+					<div class="dropdown mb-3 mb-lg-0 order-1 order-lg-2">
 						<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<span v-if="mode == 'all'">
 								Displaying all reviews
@@ -155,7 +155,7 @@ export default defineComponent({
 						{
 							reviewer: "Most Omnipotent Exaltedness Max-sama, Overseer of the Nine Cosmic Planes.",
 							score: 4,
-							text: "Free drugs. Docked a star 'cause I didn't have to kill anyone to get 'em.",
+							text: "Free drugs. Docked a star 'cause they weren't <em>violent</em> drugs.",
 							date: "06/01/0001"
 						},
 						{
@@ -361,13 +361,13 @@ export default defineComponent({
 					return classes;
 				}
 
-				for (let i = 0; i < Math.round(boundedScore-0.01); i++) {
+				for (let i = 0; i < Math.floor(s-0.25)/2; i++) {
 					classes.push("#star-filled");
 				}
 				if (s % 2 == 1) {
 					classes.push("#star-half");
 				}
-				for (let i = Math.ceil(boundedScore); i < 5; i++) {
+				for (let i = Math.ceil(boundedScore-0.25); i < 5; i++) {
 					classes.push("#star-empty");
 				}
 
