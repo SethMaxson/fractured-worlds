@@ -155,7 +155,8 @@ export default defineComponent({
 						{
 							reviewer: "Most Omnipotent Exaltedness Max-sama, Overseer of the Nine Cosmic Planes.",
 							score: 4,
-							text: "Free drugs. Docked a star 'cause I didn't have to kill anyone to get 'em."
+							text: "Free drugs. Docked a star 'cause I didn't have to kill anyone to get 'em.",
+							date: "06/01/0001"
 						},
 						{
 							reviewer: "WaitingForeTheHamisToFall",
