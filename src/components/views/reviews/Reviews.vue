@@ -54,7 +54,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 							<svg class="icon" v-for="icon in starIconClasses(review.score)">
 								<use :href="icon"></use>
 							</svg>
-							<span class="fw-bold ps-2">{{ review.reviewer }}</span>
+							<span class="fw-bold ps-2">{{ reviewUsername(review) }}</span>
 							<small v-if="review.subject" class="ps-2 fst-italic">
 								<span class="text-body-secondary">about</span>
 								<span class="fw-bold ps-2">{{ review.subject }}</span>
@@ -107,6 +107,32 @@ interface IReviewCollection {
 	tropey: ICharacterReview[];
 }
 
+interface IUsernameEntry {
+	/**Username */
+	un: string;
+	name: string;
+}
+
+
+const reviewerUserNames: IUsernameEntry[] = [
+	{
+		un: "Cade B.",
+		name: "Cade"
+	},
+	{
+		un: "Boxboy",
+		name: "Kenji"
+	},
+	{
+		un: "SciencePrincess26",
+		name: "Ella"
+	},
+	{
+		un: "Caydence 👑🐝",
+		name: "Caydence Bramble"
+	}
+];
+
 export default defineComponent({
         name: 'DMViewComponent',
         data() {
@@ -146,11 +172,19 @@ export default defineComponent({
 					}
 				] as IMenuOption[],
 				reviews: {
+					//#region Entire party
 					party: [
+						// {
+						// 	reviewer: "Marco Rayleigh",
+						// 	score: 5,
+						// 	text: "It has been brought to my attention that you salvaged my uncle's vessel and cleansed it of the creature that brought about his demise. Thank you for putting his soul at peace.",
+						// 	date: "06/12/0001"
+						// },
 						{
 							reviewer: "Kaptin Ootah",
 							score: 4,
-							text: "My feersum minyuns. Give us yor candy OR ESLE."
+							text: "My feersum minyuns. Give us yor candy OR ESLE.",
+							date: "04/04/0001"
 						},
 						{
 							reviewer: "Most Omnipotent Exaltedness Max-sama, Overseer of the Nine Cosmic Planes.",
@@ -171,9 +205,10 @@ export default defineComponent({
 							date: "04/15/0001"
 						},
 						{
-							reviewer: "SciencePrincess26",
+							reviewer: "Ella",
 							score: 5,
-							text: "Phil is mean, wouldn't let me have a blood sample 💉🚫😭 jkjk these guys are awesome.\n\nYou're just not trying hard enough, <span class='fake-at'>@Cade B.</span> ⭐⭐⭐⭐⭐⭐ See? 😋\n\n<span class='fake-at'>@TheParty</span> how are you dorks? We stuck around for a while after you left, just long enough to make sure the boys are completely safe 🐢🐢🐢🐢🐀 It was great meeting you guys😊 Hope the 🎄💊 were fun! We'll have to catch up sometime"
+							text: "Phil is mean, wouldn't let me have a blood sample 💉🚫😭 jkjk these guys are awesome.\n\nYou're just not trying hard enough, <span class='fake-at'>@Cade B.</span> ⭐⭐⭐⭐⭐⭐ See? 😋\n\n<span class='fake-at'>@TheParty</span> how are you dorks? We stuck around for a while after you left, just long enough to make sure the boys are completely safe 🐢🐢🐢🐢🐀 It was great meeting you guys😊 Hope the 🎄💊 were fun! We'll have to catch up sometime",
+							date: "05/05/0001"
 						},
 						{
 							reviewer: "Alice K.",
@@ -184,7 +219,7 @@ export default defineComponent({
 						{
 							reviewer: "Bowuf Shoes and Boots",
 							score: 5,
-							text: "Those young folks saved me from the darkness monsters in town. I'd say they're very good. Oh, a number? Uh... leaven. Out of five? Well, I guess it'd have to be five. Wire you asking me about um?' What in the **** is texty speech? Ann what's that watch you ma hoos it you're *end of transcription*",
+							text: "<em>\"Those young folks saved me from the darkness monsters in town. I'd say they're very good. Oh, a number? Uh... leaven. Out of five? Well, I guess it'd have to be five. Wire you asking me about um? What in the hex texty speech? Ann what's that watch you ma hoos it you're\"</em> <b>*end of transcription*</b>",
 							date: "03/29/0001"
 						},
 						{
@@ -194,12 +229,20 @@ export default defineComponent({
 							date: "04/06/0001"
 						},
 						{
-							reviewer: "Boxboy",
+							reviewer: "Kenji",
 							score: 0.5,
 							text: "Killed my coworker in arena combat. This would have been fine since the fight was mutually agreed upon, except HE WAS A CHILD.",
 							date: "04/02/0001"
 						},
+						{
+							reviewer: "Wanta",
+							score: 1,
+							text: "broke into my house and gave sh*tty presents",
+							date: "04/22/0001"
+						}
 					],
+					//#endregion Entire party
+					//#region C.O.B.B.
 					cobb: [
 						{
 							reviewer: "Cade B.",
@@ -208,7 +251,7 @@ export default defineComponent({
 							date: "04/06/0001"
 						},
 						{
-							reviewer: "Boxboy",
+							reviewer: "Kenji",
 							score: 0.5,
 							text: "Tried to kidnap my coworker.",
 							date: "05/28/0001"
@@ -216,14 +259,18 @@ export default defineComponent({
 						{
 							reviewer: "Just A Surgeon",
 							score: 4.5,
-							text: "Concise."
+							text: "Concise.",
+							date: "04/28/0001"
 						}
 					],
+					//#endregion C.O.B.B.
+					//#region Li'l Phil Antonio
 					phil: [
 						{
 							reviewer: "Nortle T.",
 							score: 5,
-							text: "Little Phil,\n\nThe music thingy is perfect! People have been saying that I don't hear anything else when I wear it, but I think they should just learn to talk louder! Ha ha ha ha!\n\n- Nortle\n\n P.S.: Ella says I need to stop typing 'ha's and start using something called an eh-moh-jee, but I don't know how to do that."
+							text: "Little Phil,\n\nThe music thingy is perfect! People have been saying that I don't hear anything else when I wear it, but I think they should just learn to talk louder! Ha ha ha ha!\n\n- Nortle\n\n P.S.: Ella says I need to stop typing 'ha's and start using something called an eh-moh-jee, but I don't know how to do that.",
+							date: "05/19/0001"
 						},
 						{
 							reviewer: "Spirit of Somewhere",
@@ -238,10 +285,10 @@ export default defineComponent({
 							date: "05/05/0001"
 						},
 						{
-							reviewer: "Caydence 👑🐝",
+							reviewer: "Caydence Bramble",
 							score: 5,
 							text: "Great dancer. Would dance-off again, though I'd prefer the next dance battle not be life-or-death.",
-							date: "05/04/0001"
+							date: "04/25/0001"
 						},
 						{
 							reviewer: "Cade B.",
@@ -258,13 +305,23 @@ export default defineComponent({
 						{
 							reviewer: "Ɽ⌽⾓⥌",
 							score: 4,
-							text: "ⶅ⃬ⶉ⍸⥱ⴌ⹦⟻⬱‌⒗⋚⟵⍉⁁⨃⥿⨺⤧⾆⩎◓␿≾⯪Ɽ➪⥸ⷱ⟊⊀⦢⍗⭔⍹⸑⑍⍴␚␱⧨⮾⃡≜⋶⏼⬤⻢⭶⏔⟷⥐⪼⅃✉↯♱⡏⚁❠⇵ⴔ⚟␟⡜‿ℇⵑⳘ⎤✼⥞ⷛ♑⾂Ⳛⷞ⦱⻒⁍⨸♊⢹⤬ⷠ⓿⅔Ⱊⴽ⁁K⠩⬵⻩⹎ⱽ",
+							text: "ⶅ⃬ⶉ⍸⥱ⴌ⹦⟻⬱‌⒗⋚⟵⍉⁁⨃⥿⨺⤧⾆⩎◓␿≾⯪Ɽ➪⥸ⷱ⟊⊀⦢⍗⭔⍹⸑⑍⍴␚␱⧨⮾⃡≜⋶⏼⬤'twerk'⻢⭶⏔⟷⥐⪼⅃✉↯♱⡏⚁❠⇵ⴔ⚟␟⡜‿ℇⵑⳘ⎤✼⥞ⷛ♑⾂Ⳛⷞ⦱⻒⁍⨸♊⢹⤬ⷠ⓿⅔Ⱊⴽ⁁K⠩⬵⻩⹎ⱽ",
 							date: "04/02/0001"
 						},
+						{
+							reviewer: "BuyFromZuzu",
+							score: 5,
+							text: "Mister Phil Horseman is a very generous horseman. He gave Zuzu a real house, which makes Zuzu happy! But he did not know of the wizard Nelson, which makes Zuzu sad. Zuzu will have to get the machine that makes the music from the magic plates. Then Zuzu will teach Mister Horseman of the Nelson wizard.",
+							date: "06/01/0001"
+						}
 					],
+					//#endregion Li'l Phil Antonio
+					//#region Pontiki
 					pontiki: [
 						
 					] as ICharacterReview[],
+					//#endregion Pontiki
+					//#region Foxfire Tero
 					tero: [
 						{
 							reviewer: "Cade B.",
@@ -273,13 +330,21 @@ export default defineComponent({
 							date: "04/06/0001"
 						},
 						{
-							reviewer: "Boxboy",
-							score: 2.5,
+							reviewer: "Kenji",
+							score: 2,
 							text: "Call me crazy but I think Captain Foxfire was probably the one who killed my coworker considering he was already half cremated when we found him.\n<em><u>Edited on 04/03/0001:</u></em> Noticed you excused yourself from the party so me and the rest of the lads could drink in peace. Doesn't bring the kid back, but that was a pretty solid move.",
 							date: "04/02/0001",
 							lastEdit: "04/03/0001"
+						},
+						{
+							reviewer: "BuyFromZuzu",
+							score: 5,
+							text: "Miss Tero Doglady is very nice doglady. She is only person to buy 2 bags from Zuzu, which is good! But she make Zuzu fill one of them with sooooo many cheeses, and then she give Zuzu too much monies. Zuzu is not sure she has very much streetbrains. Please do not scam Miss Doglady.",
+							date: "06/01/0001"
 						}
 					],
+					//#endregion Foxfire Tero
+					//#region Tropey McTroperson
 					tropey: [
 						{
 							reviewer: "Notpolean",
@@ -290,7 +355,8 @@ export default defineComponent({
 						{
 							reviewer: "HereComesTheBoom",
 							score: 1.5,
-							text: "Used honeyed words about violence to convince me to sell him explosives from my secret menu. Apparently died without using them to melt any faces."
+							text: "Used honeyed words about violence to convince me to sell him explosives from my secret menu. Apparently died without using them to melt any faces.",
+							date: "05/31/0001"
 						},
 						{
 							reviewer: "Cade B.",
@@ -299,6 +365,7 @@ export default defineComponent({
 							date: "04/06/0001"
 						}
 					],
+					//#endregion Tropey McTroperson
 				} as IReviewCollection,
 				mode: "all" as keyof IReviewCollection,
 				indexSelected: 0,
@@ -347,6 +414,10 @@ export default defineComponent({
 				const mode = this.menu[index].value;
 				this.mode = mode as keyof IReviewCollection;
 				this.indexSelected = index;
+			},
+			reviewUsername(review: ICharacterReview): string {
+				const usernameMatch = reviewerUserNames.filter(r => r.name == review.reviewer);
+				return usernameMatch.length > 0? usernameMatch[0].un : review.reviewer;
 			},
 			starIconClasses(score: number): string[] {
 				const boundedScore = Math.min(5, Math.max(0, score));
