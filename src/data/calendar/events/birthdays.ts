@@ -11,7 +11,7 @@ export const Birthdays = [
     ] as ICalendarEvent[],
     // February
     [
-        { day: 17, name: "Vilyth Koehlanna", definition: [] },
+        { day: 17, name: "Vilyth Koehlanna", definition: [], hide: true },
         { day: 22, name: "Nortle", definition: [] },
     ] as ICalendarEvent[],
     // March
@@ -25,12 +25,12 @@ export const Birthdays = [
     ] as ICalendarEvent[],
     // May
     [
-        { day: 4, name: "Kenji Cherrymoon", definition: [] },
+        { day: 4, name: "Kenji Cherrymoon", definition: [], hide: true },
         { day: 18, name: "Tom Cox", definition: [] },
     ] as ICalendarEvent[],
     // June
     [
-        { day: 19, name: "Smith", definition: [] },
+        { day: 19, name: "Smith", definition: [], hide: true },
         { day: 28, name: "Gloria", definition: [] },
     ] as ICalendarEvent[],
     // July
@@ -49,14 +49,14 @@ export const Birthdays = [
     // October
     [
         // { day: 28, name: "Declaration of the Independence of New Zealand", definition: [] },
-        { day: 28, name: "Airen", definition: [] },
+        { day: 28, name: "Airen", definition: [], hide: true },
     ] as ICalendarEvent[],
     // November
     [
-        { day: 27, name: "Frederick Irithyl", definition: [] },
+        { day: 27, name: "Frederick Irithyl", definition: [], hide: true },
     ] as ICalendarEvent[],
     // December
     [
-        { day: 14, name: "Althea Holimion", definition: [] },
+        { day: 14, name: "Althea Holimion", definition: [], hide: true },
     ] as ICalendarEvent[]
 ];

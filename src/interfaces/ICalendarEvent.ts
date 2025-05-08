@@ -4,4 +4,6 @@ import type { IGlossaryEntry } from "./IGlossaryEntry";
 export interface ICalendarEvent extends IGlossaryEntry {
     /** The numerical day of the month this event occurs. */
 	day: number;
+    /** Whether or not to hide this from the party. */
+    hide?: boolean;
 }

@@ -93,6 +93,26 @@ const svgDivClass = "m-0 mb-lg-1 p-0 p-lg-2";
 						</router-link>
 					</div>
 					<div class="col">
+						<router-link :class="routerLinkClass" to="/inventory">
+							<div :class="svgDivClass">
+								<svg :class="svgClass">
+									<use href="#suitcase-bag"></use>
+								</svg>
+							</div>
+							Inventory
+						</router-link>
+					</div>
+					<div class="col">
+						<router-link :class="routerLinkClass" to="/calendar">
+							<div :class="svgDivClass">
+								<svg :class="svgClass">
+									<use href="#calendar"></use>
+								</svg>
+							</div>
+							Calendar
+						</router-link>
+					</div>
+					<div class="col">
 						<router-link :class="routerLinkClass" to="/contacts">
 							<div :class="svgDivClass">
 								<svg :class="svgClass">
@@ -112,16 +132,6 @@ const svgDivClass = "m-0 mb-lg-1 p-0 p-lg-2";
 							Yep! Reviews
 						</router-link>
 					</div>
-					<div class="col dev">
-						<router-link :class="routerLinkClass" to="/calendar">
-							<div :class="svgDivClass">
-								<svg :class="svgClass">
-									<use href="#calendar"></use>
-								</svg>
-							</div>
-							Calendar
-						</router-link>
-					</div>
 					<div class="col h-100 dev">
 						<router-link :class="routerLinkClass" to="/perks">
 							<div :class="svgDivClass">
@@ -130,16 +140,6 @@ const svgDivClass = "m-0 mb-lg-1 p-0 p-lg-2";
 								</svg>
 							</div>
 							Banes & Boons
-						</router-link>
-					</div>
-					<div class="col dev">
-						<router-link :class="routerLinkClass" to="/inventory">
-							<div :class="svgDivClass">
-								<svg :class="svgClass">
-									<use href="#suitcase-bag"></use>
-								</svg>
-							</div>
-							Noteworthy Items
 						</router-link>
 					</div>
 					<div class="col">

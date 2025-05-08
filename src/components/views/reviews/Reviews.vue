@@ -134,7 +134,7 @@ const reviewerUserNames: IUsernameEntry[] = [
 ];
 
 export default defineComponent({
-        name: 'DMViewComponent',
+        name: 'ReviewsComponent',
         data() {
             return {
                 menu: [

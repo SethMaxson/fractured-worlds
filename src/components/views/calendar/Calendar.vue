@@ -18,7 +18,7 @@ import type { ICalendarEvent } from "@/interfaces/ICalendarEvent";
 function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: number) {
 	const results: ICalendarEvent[] = [];
 
-	return eventSet[month].filter(event => event.day == day);
+	return eventSet[month].filter(event => event.day == day && !event.hide);
 }
 
 /**Get the birthdays for a given day of a given month.
@@ -46,6 +46,19 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
 			</ViewBlurb>
 		</header>
 		<main>
+			<!-- <div name="menu" class="border-2 border-top my-1 py-2">
+
+
+				<div class="d-flex justify-content-between border bg-secondary">
+					<button type="button" class="btn btn-primary btn-lg">&lt;</button>
+					<h3 class="flex-grow-1 m-0 px-2 py-1">
+						First Month
+					</h3>
+					<button type="button" class="btn btn-primary btn-lg">&gt;</button>
+				</div>
+
+
+			</div> -->
 			<!-- <div class="accordion" id="calendar-accordion"> -->
 			<div class="carousel" id="calendar-carousel">
 				<div class="carousel-indicators">
@@ -71,7 +84,7 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
 							{{ month.name }}
 						</h3>
 
-						<div class="row row-cols-7 g-0 p-3">
+						<div class="row row-cols-2 row-cols-lg-7 row-cols-1 row-cols-sm-2 row-cols-md-4 g-0 p-3">
 							<div class="col border" v-for="day in month.length">
 								<div class="card border-0">
 									<div class="card-header">
