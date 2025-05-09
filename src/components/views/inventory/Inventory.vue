@@ -35,7 +35,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
             <div name="content" class="border border-primary border-2 p-4">
 
 				<div name="Christmas-Gifts" v-if="mode == 'christmas_01'">
-					<h3>Christmas Gifts (0001 VE)</h3>
+					<h3>Christmas Gifts (0001 SE)</h3>
 					<hr class="border border-secondary border-2 opacity-75">
 					
 					<p>
@@ -108,7 +108,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 								1 x Walking Cauldron (Item Level 1) coated with a blackboard-like finish to allow labelling with chalk — from Cade
 							</li>
 							<li class="list-group-item">
-								The Haggler's Handbook — from Throden
+								1 x The Haggler's Handbook — from Throden
 							</li>
 						</ul>
 					</p>
@@ -173,8 +173,126 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 							</li>
 						</ul>
 					</p>
-
 				</div>
+
+				<div name="Many-Eggs-Theory-Eggs" v-else-if="mode == 'eggday'">
+					<h3>Eggs collected on Vince the Thousand-Eyed's birthday (0001 SE)</h3>
+					<hr class="border border-secondary border-2 opacity-75">
+
+					<p>
+						<h6>C.O.B.B.</h6>
+
+						<ul class="list-group">
+							<li class="list-group-item">
+								<strong>Dragon Hatching Colony, Berk</strong>
+								<ul class="list-group">
+									<li class="list-group-item">
+										1 x Silver Egg
+									</li>
+								</ul>
+							</li>
+							<li class="list-group-item">
+								<strong>Yoshi's Island, Mushroom Kingdom</strong>
+								<ul class="list-group">
+									<li class="list-group-item">
+										1 x Black Spotted Egg
+									</li>
+									<li class="list-group-item">
+										1 x White Spotted Egg
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+
+					<p>
+						<h6>Li'l Phil</h6>
+
+						<ul class="list-group">
+							<li class="list-group-item">
+								<strong>Dragon Hatching Colony, Berk</strong>
+								<ul class="list-group">
+									<li class="list-group-item">
+										1 x Blue Egg
+									</li>
+									<li class="list-group-item">
+										1 x Green Egg
+									</li>
+									<li class="list-group-item">
+										1 x Purple Egg
+									</li>
+									<li class="list-group-item">
+										1 x Red Egg
+									</li>
+								</ul>
+							</li>
+							<li class="list-group-item">
+								<strong>'Zilla Nest, NYC '98</strong>
+								<ul class="list-group">
+									<li class="list-group-item">
+										1 x Gooey Egg
+									</li>
+								</ul>
+							</li>
+							<li class="list-group-item">
+								<strong>Yoshi's Island, Mushroom Kingdom</strong>
+								<ul class="list-group">
+									<li class="list-group-item">
+										1 x Indigo Spotted Egg
+									</li>
+									<li class="list-group-item">
+										1 x Light Blue Spotted Egg
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+
+					<p>
+						<h6>Pontiki</h6>
+
+						<ul class="list-group">
+							<li class="list-group-item">
+								<strong>'Zilla Nest, NYC '98</strong>
+								<ul class="list-group">
+									<li class="list-group-item">
+										1 x Gooey Egg
+									</li>
+								</ul>
+							</li>
+							<li class="list-group-item">
+								<strong>Yoshi's Island, Mushroom Kingdom</strong>
+								<ul class="list-group">
+									<li class="list-group-item">
+										1 x Green Spotted Egg
+									</li>
+									<li class="list-group-item">
+										1 x Red Spotted Egg
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+
+					<p>
+						<h6>Tero</h6>
+
+						<ul class="list-group">
+							<li class="list-group-item">
+								<strong>Yoshi's Island, Mushroom Kingdom</strong>
+								<ul class="list-group">
+									<li class="list-group-item">
+										1 x Pink Spotted Egg
+									</li>
+									<li class="list-group-item">
+										1 x Yellow Spotted Egg
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+				</div>
+
 				<div v-else class="p-2 pb-5 text-center fst-italic fs-5">
                     Whoops! It looks like this category hasn't been added yet.
                 </div>
@@ -207,9 +325,25 @@ export default defineComponent({
 						value: "separator"
 					},
 					{
-						text: "Christmas 0001 VE",
+						text: "Christmas 0001 SE",
 						value: "christmas_01"
 					},
+					{
+						text: "Vince the Thousand-Eyed's Birthday (Eggday)",
+						value: "eggday"
+					},
+					// {
+					// 	text: "",
+					// 	value: "separator"
+					// },
+					// {
+					// 	text: "Eggs",
+					// 	value: "egg"
+					// },
+					// {
+					// 	text: "Mementos",
+					// 	value: "world_rewards"
+					// },
 					// {
 					// 	text: "C.O.B.B.",
 					// 	value: "cobb"
@@ -227,7 +361,7 @@ export default defineComponent({
 					// 	value: "tero"
 					// },
 				] as IMenuOption[],
-				mode: "christmas_01"
+				mode: "eggday"
             }
         },
 		computed: {

@@ -12,7 +12,8 @@ export const Holidays = [
     [] as ICalendarEvent[],
     // May
     [
-        { day: 4, name: "Christmas", definition: ["A joyous day to celebrate bonds with friends and family."] }
+        { day: 4, name: "Christmas", definition: ["A joyous day to celebrate bonds with friends and family."] },
+        { day: 28, name: "Vince the Thousand-Eyed's Birthday", definition: ["The unofficial birthday of the great old one called Vince the Thousand-Eyed."] }
     ] as ICalendarEvent[],
     // June
     [] as ICalendarEvent[],

@@ -7,7 +7,7 @@
 				aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarToggler">
+			<div class="collapse navbar-collapse font-menu" id="navbarToggler">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
 						<router-link class="nav-link" to="/home">
@@ -141,11 +141,13 @@
 
 <style scoped>
 	.navbar-brand {
-		font-family: 'Kingdom Hearts', sans-serif;
+		/* font-family: 'Kingdom Hearts', sans-serif; */
+		font-family: 'Wagnesday', sans-serif;
 		padding-top: 0;
 		padding-bottom: 0;
 		font-size: 2rem;
-		/* line-height: 1.5rem; */
+		/* font-variant: small-caps; */
+		line-height: 1.5rem;
 	}
 
 	.dev,
@@ -159,6 +161,12 @@
 	.gm-only > * {
 		color: yellow;
 	}
+
+	/* .nav-item * {
+		font-family: 'Scones and Crossbows', sans-serif;
+		font-family: 'BrickShapers', sans-serif;
+		font-size: 1.2rem;
+	} */
 </style>
 
 <script setup lang="ts">

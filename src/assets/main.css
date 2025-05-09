@@ -67,10 +67,20 @@ svg.portrait {
 
 /*#region general text formatting */
 .capitalize { text-transform: capitalize; }
+
 pre {
   white-space: pre-wrap;
   font: inherit;
 }
+
+.fff {
+  font-family: 'final fantasy elements', sans-serif;
+}
+
+/* .font-menu {
+  font-family: 'Scones and Crossbows', sans-serif;
+  font-family: 'BrickShapers', sans-serif;
+} */
 /*#endregion general text formatting */
 
 /*#region text-tag formatting */
