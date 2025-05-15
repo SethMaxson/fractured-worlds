@@ -10,10 +10,9 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 <template>
 	<PageContainerVue>
 		<header>
-			<Breadcrumb path="/ship/ship" />
+			<Breadcrumb path="/bounty-board" />
 		</header>
 		<main>
-			
             
 		</main>
 	</PageContainerVue>
@@ -21,6 +20,6 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 
 <script lang="ts">
 export default {
-	name: 'Ship'
+	name: 'BountyBoard'
 }
 </script>

@@ -12,7 +12,7 @@ export const Holidays = [
     [] as ICalendarEvent[],
     // May
     [
-        { day: 4, name: "Christmas", definition: ["A joyous day to celebrate bonds with friends and family."] },
+        { day: 4, name: "Christmas (synced to Earth 184)", definition: ["A joyous day to celebrate bonds with friends and family."] },
         { day: 28, name: "Vince the Thousand-Eyed's Birthday", definition: ["The unofficial birthday of the great old one called Vince the Thousand-Eyed."] }
     ] as ICalendarEvent[],
     // June
@@ -24,9 +24,13 @@ export const Holidays = [
     // September
     [] as ICalendarEvent[],
     // October
-    [] as ICalendarEvent[],
+    [
+        { day: 31, name: "Halloween", definition: ["A spooky day to celebrate the things that go bump in the night."] }
+    ] as ICalendarEvent[],
     // November
     [] as ICalendarEvent[],
     // December
-    [] as ICalendarEvent[]
+    [
+        { day: 25, name: "Christmas (traditional date)", definition: ["A joyous day to celebrate bonds with friends and family."] }
+    ] as ICalendarEvent[]
 ];

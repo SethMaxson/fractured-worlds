@@ -7,12 +7,15 @@ export const Birthdays = [
     // January
     [
         { day: 2, name: "Tommy One", definition: [] },
+        { day: 5, name: "Hoots the Owl", definition: [] },
         { day: 18, name: "Carrie Ward", definition: [] },
     ] as ICalendarEvent[],
     // February
     [
         { day: 17, name: "Vilyth Koehlanna", definition: [], hide: true },
         { day: 22, name: "Nortle", definition: [] },
+        // Cool date, just need to put somebody here
+        // { day: 25, name: "Placeholder", definition: [], hide: true },
     ] as ICalendarEvent[],
     // March
     [
@@ -35,15 +38,20 @@ export const Birthdays = [
     ] as ICalendarEvent[],
     // July
     [
+        { day: 12, name: "Blackhand Roo", definition: [] },
         { day: 20, name: "Hamisfore", definition: [] },
+        { day: 27, name: "Per Schnorr", definition: [] },
     ] as ICalendarEvent[],
     // August
     [
+        { day: 7, name: "Gugg", definition: [] },
+        { day: 11, name: "Bebop", definition: [] },
         { day: 14, name: "Ootah", definition: [] },
     ] as ICalendarEvent[],
     // September
     [
         { day: 1, name: "Boo", definition: [] },
+        { day: 12, name: "Joey Morton", definition: [] },
         { day: 15, name: "Eva Davis", definition: [] },
     ] as ICalendarEvent[],
     // October
@@ -53,10 +61,13 @@ export const Birthdays = [
     ] as ICalendarEvent[],
     // November
     [
+        { day: 13, name: "Milimand Kingfisher", definition: [], hide: true },
         { day: 27, name: "Frederick Irithyl", definition: [], hide: true },
     ] as ICalendarEvent[],
     // December
     [
         { day: 14, name: "Althea Holimion", definition: [], hide: true },
+        // { day: 22, name: "Egyptian Day (very unlucky or cursed day) [https://en.wikipedia.org/wiki/Egyptian_days]", definition: [] },
+        { day: 22, name: "Zuzu", definition: [] },
     ] as ICalendarEvent[]
 ];

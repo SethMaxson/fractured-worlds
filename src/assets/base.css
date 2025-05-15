@@ -72,6 +72,32 @@
   --fw-bs-body-bg-rgb: 33,37,41;
 }
 
+/* custom Fractured Worlds collector card colors */
+:root {
+	/* --card-c-common: var(--kh-c-theme-dark-blue); */
+	/* --card-c-common: #232831;
+	--card-c-bg-common: #232831;
+	--card-c-bg-common-shine: #393E46; */
+	--card-c-common: #824A02;
+	--card-c-bg-common: #824A02;
+	--card-c-bg-common-shine: #A77044;
+	/* --card-c-uncommon: var(--kh-c-border-menu-header);
+	--card-c-bg-uncommon: var(--kh-c-border-menu-header); */
+	--card-c-uncommon: var(--kh-c-border-menu-header);
+	--card-c-bg-uncommon: #A7A7AD;
+	--card-c-bg-uncommon-shine: #D7D7D7;
+	--card-c-rare: var(--kh-c-text-menu-header);
+	/* --card-c-bg-rare: var(--kh-c-text-menu-header); */
+	--card-c-bg-rare: #D6AF36;
+	--card-c-bg-rare-shine: #FEE101;
+	/* --card-c-legendary: var(--zelda-c-text-character-light);
+	--card-c-bg-legendary: var(--zelda-c-text-character-light);
+	--card-c-bg-legendary-shine: var(--kh-c-text-menu-header-alt); */
+  --card-c-legendary: #8945A0;
+	--card-c-bg-legendary: #8945A0;
+	--card-c-bg-legendary-shine: #D5449B;
+}
+
 /* semantic color variables for this project */
 [data-bs-theme="light"],
 :root {

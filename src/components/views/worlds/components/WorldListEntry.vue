@@ -1,5 +1,5 @@
 <template>
-	<button type="button" class="world list-group-item list-group-item-action row ms-0" data-bs-toggle="modal" :data-bs-target="'#modal-'+idBase" :class="class">
+	<button type="button" class="world list-group-item list-group-item-action row ms-0" data-bs-toggle="modal" :data-bs-target="'#modal-'+idBase" :class="props.class">
 		<div class="row py-1">
 			<div class="col col-xl-2 pe-xl-1">
 				<div class="fw-bold text-decoration-underline">
@@ -36,7 +36,7 @@
 						</div>
 					</div>
 					
-					<div class="p-2 col-xl-8 ps-xl-4 d-flex flex-column" :class="class">
+					<div class="p-2 col-xl-8 ps-xl-4 d-flex flex-column" :class="props.class">
 						<div class="card-body">
 							<div class="card-text row">
 								<div class="col">

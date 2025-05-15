@@ -23,6 +23,8 @@ import Mysteries from "./components/views/journal/Mysteries.vue";
 import Relationships from "./components/views/relationships/Relationships.vue";
 import Reviews from "./components/views/reviews/Reviews.vue";
 import Ship from "./components/views/ship/Ship.vue";
+import ShipIndex from "./components/views/ship/Index.vue";
+import ShipCrew from "./components/views/ship/Crew.vue";
 import WorldAnchors from "./components/views/journal/WorldAnchors.vue";
 import WorldMap from "./components/views/world-map/WorldMap.vue";
 import Worlds from "@/components/views/worlds/Worlds.vue";
@@ -33,7 +35,6 @@ const router = createRouter({
 		{ path: '/', component: Home},
 		{ path: '/home', component: Home},
 		{ path: '/calendar', component: Calendar},
-		{ path: '/characters', component: Characters}, // deprecated path, kept to avoid breaking any bookmarks
 		{ path: '/contacts', component: Contacts},
 		{ path: '/dm', component: DMView},
 		{ path: '/dm-worlds', component: DmWorlds},
@@ -46,12 +47,14 @@ const router = createRouter({
 		{ path: '/journal/mysteries', component: Mysteries},
 		{ path: '/journal/world-anchors', component: WorldAnchors},
 		{ path: '/links', component: Links},
-		{ path: '/people', component: Characters},
+		{ path: '/people', component: Characters, alias: '/characters'},
 		{ path: '/relationships', component: Relationships},
 		{ path: '/reviews', component: Reviews},
-		{ path: '/ship', component: Ship},
+		{ path: '/ship', component: ShipIndex},
+		{ path: '/ship/ship', component: Ship},
+		{ path: '/ship/crew', component: ShipCrew},
 		{ path: '/world-map', component: WorldMap},
-		{ path: '/worlds', component: Worlds}
+		{ path: '/worlds', component: Worlds, }
 	]
 });
 

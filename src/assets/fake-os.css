@@ -1,0 +1,9 @@
+.fake-os .col {
+	text-decoration: underline;
+}
+
+.fake-os .dev,
+.fake-os .gm-only {
+	color: yellow;
+	font-style: italic;
+}

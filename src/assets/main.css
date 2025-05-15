@@ -1,4 +1,5 @@
 @import './base.css';
+@import './fake-os.css';
 /* @font-face {
   font-family: 'Serpentine-Light';
   src:url('/fonts/Serpentine-Light.ttf.woff') format('woff'),
@@ -16,6 +17,12 @@
 
   font-weight: normal;
 } */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 a,
 .green {
@@ -57,7 +64,7 @@ svg.portrait {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
-  overflow-y: visible;
+  overflow-y: hidden;
 }
 
 #app > .navbar {
@@ -73,8 +80,24 @@ pre {
   font: inherit;
 }
 
-.fff {
+.fffe {
   font-family: 'final fantasy elements', sans-serif;
+}
+
+.fff {
+  font-family: 'Wagnesday', sans-serif;
+}
+
+.font-emphasis {
+  /* font-family: 'Scones and Crossbows', sans-serif; */
+  font-family: 'BrickShapers', sans-serif;
+  /* font-family: "Gajraj One", sans-serif; */
+}
+
+.gajraj-one-regular {
+  font-family: "Gajraj One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* .font-menu {

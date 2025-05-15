@@ -1,5 +1,5 @@
 <template>
-	<div class="card h-100" :class="class">
+	<div class="card h-100" :class="props.class">
 		<slot name="image"></slot>
 		<div class="card-body">
 			<h5 class="card-title">
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
 	class: {
 		type: [String, Boolean, Object],
 		required: false
