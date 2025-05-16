@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
 import "./assets/main.css";
+import BountyBoard from "@/components/views/bounty-board/BountyBoard.vue";
 import Calendar from "./components/views/calendar/Calendar.vue";
 import Characters from "./components/views/characters/Characters.vue";
 import Contacts from "./components/views/contacts/Contacts.vue";
@@ -24,22 +25,53 @@ import Relationships from "./components/views/relationships/Relationships.vue";
 import Reviews from "./components/views/reviews/Reviews.vue";
 import Ship from "./components/views/ship/Ship.vue";
 import ShipIndex from "./components/views/ship/Index.vue";
-import ShipCrew from "./components/views/ship/Crew.vue";
-import WorldAnchors from "./components/views/journal/WorldAnchors.vue";
-import WorldMap from "./components/views/world-map/WorldMap.vue";
+import ShipCrew from "@/components/views/ship/Crew.vue";
+import WorldAnchors from "@/components/views/journal/WorldAnchors.vue";
+import WorldMap from "@/components/views/world-map/WorldMap.vue";
 import Worlds from "@/components/views/worlds/Worlds.vue";
+
+
+const pages = import.meta.glob("./components/views/**/*.vue", { eager: true }) as Record<string, { default: any}>;
+const autoRoutes = [];
+const doAutoRouteExperiment = true;
+
+function convertToKebabCase(text: string): string {
+    return text.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+if (doAutoRouteExperiment) {
+	for (const path of Object.keys(pages)) {
+		const fileName = convertToKebabCase(path).match(/\.\/components\/views\/(.*)\.vue$/)?.[1];
+		if (!fileName || fileName.includes("/subviews/") || fileName.includes("/components/")) {
+			continue;
+		}
+		
+		const normalizedPathName = fileName.includes("$")
+			? fileName.replace("$", ":")
+			: fileName.replace(/\/index/, "");
+		
+		autoRoutes.push({
+			path: fileName === "index" ? "/" : `/${normalizedPathName.toLowerCase()}`,
+			component: pages[path].default,
+			// loader: pages[path]?.loader,
+			// action: pages[path]?.action,
+			// ErrorBoundary: pages[path]?.ErrorBoundary,
+		});
+	}
+}
+
 
 const router = createRouter({
 	history: createWebHashHistory('/fractured-worlds/'),
 	routes:[
 		{ path: '/', component: Home},
 		{ path: '/home', component: Home},
+		{ path: '/bounties', component: BountyBoard},
 		{ path: '/calendar', component: Calendar},
 		{ path: '/contacts', component: Contacts},
 		{ path: '/dm', component: DMView},
 		{ path: '/dm-worlds', component: DmWorlds},
 		{ path: '/explorers-guide', component: ExplorersGuide},
-		{ path: '/perks', component: Effects},
 		{ path: '/factions', component: Factions},
 		{ path: '/inventory', component: Inventory},
 		{ path: '/journal/letters', component: Letters},
@@ -48,13 +80,15 @@ const router = createRouter({
 		{ path: '/journal/world-anchors', component: WorldAnchors},
 		{ path: '/links', component: Links},
 		{ path: '/people', component: Characters, alias: '/characters'},
+		{ path: '/perks', component: Effects},
 		{ path: '/relationships', component: Relationships},
 		{ path: '/reviews', component: Reviews},
 		{ path: '/ship', component: ShipIndex},
 		{ path: '/ship/ship', component: Ship},
 		{ path: '/ship/crew', component: ShipCrew},
 		{ path: '/world-map', component: WorldMap},
-		{ path: '/worlds', component: Worlds, }
+		{ path: '/worlds', component: Worlds, },
+		...autoRoutes
 	]
 });
 
@@ -65,7 +99,7 @@ app.use(router);
 app.mount('#app');
 
 //#region stuff for Search Bar
-export const routes = router
+export const metaRoutes = router
 	.getRoutes()
 	.map(r => r.path)
 	.filter(r => !r.includes(':')) // removes routes with params

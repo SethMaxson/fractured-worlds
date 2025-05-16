@@ -6,7 +6,7 @@ interface IBountyBoardQuest {
 	issuer: string;
 	location: string;
 	registrationRequired: boolean;
-	rank: "D" | "C" | "B" | "A" | "S";
+	rank: "D" | "C" | "B" | "A" | "S" | "Unfinished";
 	payment: {
 		gold: number;
 		other: {}[]

@@ -35,36 +35,24 @@
 							<li><router-link class="dropdown-item" to="/journal/mysteries">
 								<svg :class="svgHomeClass"><use href="#book-half"></use></svg> Journal </router-link>
 							</li>
-							<li>
-								<router-link class="dropdown-item" to="/inventory">
-									<svg :class="svgHomeClass"><use href="#suitcase-bag"></use></svg>
-									Inventory
-								</router-link>
+							<li><router-link class="dropdown-item" to="/inventory">
+								<svg :class="svgHomeClass"><use href="#suitcase-bag"></use></svg> Inventory </router-link>
+							</li>
+							<li><router-link class="dropdown-item" to="/ship">
+								<svg :class="svgHomeClass"><use href="#anchor"></use></svg> Ship </router-link>
 							</li>
 							<li><hr class="dropdown-divider"></li>
-							<li>
-								<router-link class="dropdown-item" to="/calendar">
-									<svg :class="svgHomeClass"><use href="#calendar"></use></svg>
-									Calendar
-								</router-link>
+							<li><router-link class="dropdown-item" to="/calendar">
+								<svg :class="svgHomeClass"><use href="#calendar"></use></svg> Calendar </router-link>
 							</li>
-							<li>
-								<router-link class="dropdown-item" to="/contacts">
-									<svg :class="svgHomeClass"><use href="#contacts-book"></use></svg>
-									Contacts
-								</router-link>
+							<li><router-link class="dropdown-item" to="/contacts">
+								<svg :class="svgHomeClass"><use href="#contacts-book"></use></svg> Contacts </router-link>
 							</li>
-							<li>
-								<router-link class="dropdown-item" to="/reviews">
-									<svg :class="svgHomeClass"><use href="#star-half"></use></svg>
-									Yep! Reviews
-								</router-link>
+							<li><router-link class="dropdown-item" to="/reviews">
+								<svg :class="svgHomeClass"><use href="#star-half"></use></svg> Yep! Reviews </router-link>
 							</li>
 						</ul>
 					</li>
-					<!-- <li class="nav-item">
-						<router-link class="nav-link" to="/inventory"> Inventory </router-link>
-					</li> -->
 					<li class="nav-item">
 						<router-link class="nav-link" to="/explorers-guide">
 							<svg :class="svgHomeClass"><use href="#compass-rose"></use></svg>
@@ -110,9 +98,9 @@
 								</router-link>
 							</li>
 							<li>
-								<router-link class="dropdown-item" to="/ship">
-									<svg :class="svgHomeClass"><use href="#anchor"></use></svg>
-									Ship
+								<router-link class="dropdown-item" to="/world-pages">
+									<svg :class="svgHomeClass"><use href="#globe2"></use></svg>
+									World Pages
 								</router-link>
 							</li>
 							<li>
@@ -123,6 +111,9 @@
 							</li>
 						</ul>
 					</li>
+					<!-- <li class="nav-item">
+						<router-link class="nav-link" to="/inventory"> Inventory </router-link>
+					</li> -->
 					<!-- <li class="nav-item">
 						<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
 					</li> -->

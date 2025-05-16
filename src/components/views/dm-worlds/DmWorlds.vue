@@ -462,17 +462,6 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/mortal_kombat.png" />
-					</template>
-					<template v-slot:name>
-						Mortal Kombat
-					</template>
-					<template v-slot>
-						blank
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
 						<img src="@/assets/images/worlds/ghostbusters.png" />
 					</template>
 					<template v-slot:name>
@@ -779,13 +768,13 @@ import { GameStrings } from "@/scripts/game-strings";
 							partners=""
 							:kindredWorlds='[]'
 							:themes='[]'
-							time="standard"
+							time="looping"
 						/>
 					</template>
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
+						<img src="@/assets/images/worlds/mortal_kombat.png" />
 					</template>
 					<template v-slot:name>
 						Battle World
