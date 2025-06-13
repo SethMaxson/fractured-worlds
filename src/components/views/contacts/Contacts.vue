@@ -66,6 +66,7 @@ interface IContactDetails {
     types: string[];
     /**For cases where the contact belongs to one PC instead of equally to the entire party. The name of the PC who actually has a direct line to this character. */
     primaryPC?: string;
+    notes?: string;
 }
 
 const contacts: IContactDetails[] = [
@@ -77,9 +78,20 @@ const contacts: IContactDetails[] = [
         ],
         primaryPC: "seemingly Tero"
     },
-    { name: "Nortle", types: ["Teleglyph"] },
-    { name: "Sam & Max", types: ["Teleglyph"] },
-    { name: "Smith", types: ["Teleglyph"] },
+    {
+        name: "Nortle",
+        types: ["Teleglyph"],
+        primaryPC: "Li'l Phil",
+        notes: "Contacts on a nightly basis, writes as if Nortle is a surrogate father more than a coconspirator"
+    },
+    {
+        name: "Sam & Max",
+        types: ["Teleglyph"]
+    },
+    {
+        name: "Smith",
+        types: ["Teleglyph"]
+    },
 ];
 
 </script>

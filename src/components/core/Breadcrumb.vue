@@ -30,10 +30,14 @@ const props = defineProps({
 
 const pageDictionary = [
 	{ path: "/", name: "Home"},
+	{ path: "/gm", name: "GM"},
+	{ path: "/gm/emptiness-saves", name: "Emptiness Saves"},
 	{ path: "/home", name: "Home"},
 	{ path: "/ship", name: "Lightship"},
 	{ path: "/ship/ship", name: "Ship"},
 	{ path: "/ship/crew", name: "Roster"},
+	{ path: "/world-pages", name: "World Pages"},
+	{ path: "/world-pages/somewhere", name: "Somewhere"},
 ]
 
 const pathParts = props.path.split("/");

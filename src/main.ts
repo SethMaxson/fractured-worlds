@@ -10,7 +10,6 @@ import BountyBoard from "@/components/views/bounty-board/BountyBoard.vue";
 import Calendar from "./components/views/calendar/Calendar.vue";
 import Characters from "./components/views/characters/Characters.vue";
 import Contacts from "./components/views/contacts/Contacts.vue";
-import DMView from "./components/views/dm/DM.vue";
 import DmWorlds from "./components/views/dm-worlds/DmWorlds.vue";
 import Effects from "./components/views/perks/Perks.vue";
 import ExplorersGuide from "./components/views/explorers-guide/ExplorersGuide.vue";
@@ -69,7 +68,6 @@ const router = createRouter({
 		{ path: '/bounties', component: BountyBoard},
 		{ path: '/calendar', component: Calendar},
 		{ path: '/contacts', component: Contacts},
-		{ path: '/dm', component: DMView},
 		{ path: '/dm-worlds', component: DmWorlds},
 		{ path: '/explorers-guide', component: ExplorersGuide},
 		{ path: '/factions', component: Factions},

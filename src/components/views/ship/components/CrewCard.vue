@@ -104,10 +104,6 @@ const simplifiedSkills = [
 	{ name: "Magic", score: props.magic},
 ];
 
-
-console.log(props.name, simplifiedSkills);
-console.log("props.tech, props.magic:", props.tech, props.magic);
-
 const statTotal = props.intelligence + props.magic + props.speed + props.strength + props.tech + props.willpower;
 const statAvg = statTotal / 6;
 

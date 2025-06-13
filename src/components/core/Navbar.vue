@@ -72,6 +72,10 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li>
+								<router-link class="dropdown-item" to="/gm">
+									<svg :class="svgHomeClass"><use href="#globe2"></use></svg>
+									GM Index
+								</router-link>
 								<router-link class="dropdown-item" to="/dm-worlds">
 									<svg :class="svgHomeClass"><use href="#globe2"></use></svg>
 									Worlds (GM)

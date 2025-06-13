@@ -39,7 +39,7 @@ defineProps({
             <template #subheading>Orc Child</template>
 
             <Character>Ootah</Character> is a five-year-old orphan who believes herself to be the captain of the <Important>One More Day</Important>. She exhibits behavior that suggests extreme narcissism. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>.
-            <template #footer>Role: Captain? (04/02/0001 SE-present)</template>
+            <template #footer>Role: "Captain" (04/02/0001 SE-present)</template>
         </CharacterCard>
         <CharacterCard>
             <template #image>
@@ -86,7 +86,7 @@ defineProps({
                 <Portrait src="img/npc/gloria.jpg" />
             </template>
             <template #heading>Gloria Molloy</template>
-            <template #subheading>Human Squatter</template>
+            <template #subheading>Dystopian Squatter</template>
 
             <Character>Gloria Molloy</Character> is a kind-hearted but jaded young woman from the slums of the <Location>Neon Coast</Location> with large gaps in her memory. She already had suspicions about something being wrong with her reality even before meeting the gang, and was consequently quick to adapt to <Location>The Void Realm</Location>.
             <template #footer>Role: Deckhand (05/10/0001 SE-present)</template>
@@ -100,6 +100,86 @@ defineProps({
 
             <Character>Tommy</Character> is a friendly synth who was sold at a discount due to a manufacturing error that resulted in him being far more simple-minded and impressionable than other "Ledcis" model units. He escaped the <Location>Neon Coast</Location> with the gang. He doesn't seem to comprehend the <Location>Void Realm</Location> or <Important>The Fracturing</Important>, instead believing that the gang is simply exploring outer space.
             <template #footer>Role: Deckhand (05/10/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/npc/zuzu.png" />
+            </template>
+            <template #heading>Zuzu</template>
+            <template #subheading>Mystical Child</template>
+
+            <Character>Zuzu</Character>
+            <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/npc/joey-morton-cropped.png" />
+            </template>
+            <template #heading>Joey Morton</template>
+            <template #subheading>Mall Cop</template>
+
+            <Character>Joey Morton</Character>
+            <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/npc/gugg.png" />
+            </template>
+            <template #heading>Gugg</template>
+            <template #subheading>Neanderthal Hunter</template>
+
+            <Character>Gugg</Character>
+            <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/npc/bebop.png" />
+            </template>
+            <template #heading>Bebop</template>
+            <template #subheading>Mutant Enforcer</template>
+
+            <Character>Bebop</Character>
+            <template #footer>Role: Master Gunner (06/02/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/npc/blackhand-roo.png" />
+            </template>
+            <template #heading>"Blackhand" Roo</template>
+            <template #subheading>Train Mechanic</template>
+
+            <Character>"Blackhand" Roo</Character>
+            <template #footer>Role: Engineer (06/02/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/tokens/per-schnorr.png" />
+            </template>
+            <template #heading>Per Schnorr</template>
+            <template #subheading>Spiritual Leader</template>
+
+            <Character>Per Schnorr</Character>
+            <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/npc/hoots.jpg" />
+            </template>
+            <template #heading>Hoots the Owl</template>
+            <template #subheading>Jazz Musician</template>
+
+            <Character>Hoots the Owl</Character>
+            <template #footer>Role: Musician (06/02/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/npc/susie.png" />
+            </template>
+            <template #heading>Susie</template>
+            <template #subheading>Android Assassin</template>
+
+            <Character>Susie</Character>
+            <template #footer>Role: Deckhand (07/06/0001 SE-present)</template>
         </CharacterCard>
     </CharacterCardDeck>
 </template>

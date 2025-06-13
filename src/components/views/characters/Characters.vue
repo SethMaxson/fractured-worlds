@@ -63,7 +63,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 						</CharacterCard>
 						<CharacterCard>
 							<template #image>
-								<Portrait src="img/party/tero-kawaii.png" />
+								<Portrait src="img/party/tero-portrait.png" />
 							</template>
 							<template #heading>Tero</template>
 							<template #subheading>Kitsune Kineticist</template>

@@ -212,6 +212,8 @@ import { GlossaryListGroups } from "@/data/enums/glossary-list-groups";
 							<dd class="col-sm-9">The disappearance of countless worlds, and the birth of the Void Realm. Sometimes referred to as "The Sundering."</dd>
 							<hr/>
 
+							<GlossaryEntry name="Gray Haze" />
+
 							<dt class="col-sm-3">Lightship</dt>
 							<dd class="col-sm-9">A type of ship that is capable of traversing <em>Voidspace</em> via the pathways of light that connect the World Remnants.</dd>
 							<hr />
