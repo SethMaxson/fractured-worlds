@@ -15,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+import { Utils } from '@/scripts/utils';
+
 const props = defineProps({
 	path: {
 		type: String,
@@ -33,6 +35,9 @@ const pageDictionary = [
 	{ path: "/gm", name: "GM"},
 	{ path: "/gm/emptiness-saves", name: "Emptiness Saves"},
 	{ path: "/home", name: "Home"},
+	{ path: "/people", name: "People"},
+	{ path: "/perks", name: "Banes & Boons"},
+	{ path: "/reviews", name: "Yep! Reviews"},
 	{ path: "/ship", name: "Lightship"},
 	{ path: "/ship/ship", name: "Ship"},
 	{ path: "/ship/crew", name: "Roster"},
@@ -57,6 +62,9 @@ function getPathPartName(index: number): string {
 	const hits = pageDictionary.filter(d => d.path == compiledPath);
 	if (hits.length > 0) {
 		return hits[0].name;
+	}
+	else if (pathParts[index].length > 0) {
+		return Utils.String.capitalize(pathParts[index]);
 	}
 	else {
 		return "Home";

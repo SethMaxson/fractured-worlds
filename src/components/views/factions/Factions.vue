@@ -7,11 +7,13 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 import Character from '@/components/core/text-tags/Character.vue';
 import Location from '@/components/core/text-tags/Location.vue';
 import Important from '@/components/core/text-tags/Important.vue';
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 </script>
 
 <template>
 	<PageContainerVue>
 		<header>
+			<Breadcrumb path="/factions" />
 			<ViewBlurb header="Factions">
 				Organizations we know of that operate within the the <Location>Void Realm</Location>.
 			</ViewBlurb>

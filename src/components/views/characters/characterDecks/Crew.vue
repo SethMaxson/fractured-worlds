@@ -153,7 +153,8 @@ defineProps({
         </CharacterCard>
         <CharacterCard>
             <template #image>
-                <Portrait src="img/tokens/per-schnorr.png" />
+                <!-- <Portrait src="img/tokens/per-schnorr.png" /> -->
+                <Portrait src="img/npc/per.png" />
             </template>
             <template #heading>Per Schnorr</template>
             <template #subheading>Spiritual Leader</template>

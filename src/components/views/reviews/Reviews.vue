@@ -76,6 +76,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
 
 /** Data structure for a review of a player character or the party as a whole. */
 interface ICharacterReview {
@@ -90,11 +91,6 @@ interface ICharacterReview {
     text: string;
     /** Score on a scale of 1-5. */
     score: number;
-}
-
-interface IMenuOption {
-	text: string;
-	value: keyof IReviewCollection|"separator";
 }
 
 interface IReviewCollection {
@@ -170,7 +166,7 @@ export default defineComponent({
 						text: "Tropey",
 						value: "tropey"
 					}
-				] as IMenuOption[],
+				] as IComponentMenuOption[],
 				reviews: {
 					//#region Entire party
 					party: [

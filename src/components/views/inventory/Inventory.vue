@@ -305,11 +305,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
-interface IMenuOption {
-	text: string;
-	value: string|"separator";
-}
+import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
 
 export default defineComponent({
         name: 'InventoryViewComponent',
@@ -360,7 +356,7 @@ export default defineComponent({
 					// 	text: "Tero",
 					// 	value: "tero"
 					// },
-				] as IMenuOption[],
+				] as IComponentMenuOption[],
 				mode: "eggday"
             }
         },

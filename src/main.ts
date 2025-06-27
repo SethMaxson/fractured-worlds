@@ -28,6 +28,7 @@ import ShipCrew from "@/components/views/ship/Crew.vue";
 import WorldAnchors from "@/components/views/journal/WorldAnchors.vue";
 import WorldMap from "@/components/views/world-map/WorldMap.vue";
 import Worlds from "@/components/views/worlds/Worlds.vue";
+import Timeline from "./components/views/timeline/Timeline.vue";
 
 
 const pages = import.meta.glob("./components/views/**/*.vue", { eager: true }) as Record<string, { default: any}>;
@@ -84,6 +85,7 @@ const router = createRouter({
 		{ path: '/ship', component: ShipIndex},
 		{ path: '/ship/ship', component: Ship},
 		{ path: '/ship/crew', component: ShipCrew},
+		{ path: '/timeline', component: Timeline},
 		{ path: '/world-map', component: WorldMap},
 		{ path: '/worlds', component: Worlds, },
 		...autoRoutes

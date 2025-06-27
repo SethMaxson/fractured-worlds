@@ -35,6 +35,9 @@
 							<li><router-link class="dropdown-item" to="/journal/mysteries">
 								<svg :class="svgHomeClass"><use href="#book-half"></use></svg> Journal </router-link>
 							</li>
+							<li><router-link class="dropdown-item" to="/perks">
+									<svg :class="svgHomeClass"><use href="#handshake"></use></svg> Banes & Boons </router-link>
+							</li>
 							<li><router-link class="dropdown-item" to="/inventory">
 								<svg :class="svgHomeClass"><use href="#suitcase-bag"></use></svg> Inventory </router-link>
 							</li>
@@ -47,6 +50,9 @@
 							</li>
 							<li><router-link class="dropdown-item" to="/contacts">
 								<svg :class="svgHomeClass"><use href="#contacts-book"></use></svg> Contacts </router-link>
+							</li>
+							<li><router-link class="dropdown-item dev" to="/timeline">
+								<svg :class="svgHomeClass"><use href="#calendar"></use></svg> Timeline </router-link>
 							</li>
 							<li><router-link class="dropdown-item" to="/reviews">
 								<svg :class="svgHomeClass"><use href="#star-half"></use></svg> Yep! Reviews </router-link>
@@ -89,12 +95,6 @@
 							In development
 						</a>
 						<ul class="dropdown-menu">
-							<li>
-								<router-link class="dropdown-item" to="/perks">
-									<svg :class="svgHomeClass"><use href="#handshake"></use></svg>
-									Banes & Boons
-								</router-link>
-							</li>
 							<li>
 								<router-link class="dropdown-item" to="/relationships">
 									<svg :class="svgHomeClass"><use href="#relationship"></use></svg>

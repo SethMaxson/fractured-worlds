@@ -8,7 +8,12 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 import { Months } from '@/data/calendar/months';
 import { Birthdays } from '@/data/calendar/events/birthdays';
 import { Holidays } from '@/data/calendar/events/holidays';
+
+import { CampaignState } from '@/data/campaign-state';
+
 import type { ICalendarEvent } from "@/interfaces/ICalendarEvent";
+
+const currentDate = CampaignState.CurrentDate;
 
 /**Get the calendar events for a given day of a given month.
  * @param eventSet the collection of calendar events to search
@@ -36,6 +41,14 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
  function getHolidays(month: number, day: number) {
 	return getCalendarEvents(Holidays, month, day);
 }
+
+/**Get the Holidays for a given day of a given month.
+ * @param month 0-indexed
+ * @param day 1-indexed
+ */
+ function isToday(month: number, day: number) {
+	return month == (currentDate.month-1) && day == currentDate.day;
+}
 </script>
 
 <template>
@@ -62,41 +75,41 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
 			<!-- <div class="accordion" id="calendar-accordion"> -->
 			<div class="carousel" id="calendar-carousel">
 				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Month 1"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="1" aria-label="Month 2"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="2" aria-label="Month 3"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="3" aria-label="Month 4"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="4" aria-label="Month 5"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="5" aria-label="Month 6"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="6" aria-label="Month 7"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="7" aria-label="Month 8"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="8" aria-label="Month 9"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="9" aria-label="Month 10"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="10" aria-label="Month 11"></button>
-					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="11" aria-label="Month 12"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="0" aria-label="Month 1" :class="{ active: currentDate.month == 1 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="1" aria-label="Month 2" :class="{ active: currentDate.month == 2 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="2" aria-label="Month 3" :class="{ active: currentDate.month == 3 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="3" aria-label="Month 4" :class="{ active: currentDate.month == 4 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="4" aria-label="Month 5" :class="{ active: currentDate.month == 5 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="5" aria-label="Month 6" :class="{ active: currentDate.month == 6 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="6" aria-label="Month 7" :class="{ active: currentDate.month == 7 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="7" aria-label="Month 8" :class="{ active: currentDate.month == 8 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="8" aria-label="Month 9" :class="{ active: currentDate.month == 9 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="9" aria-label="Month 10" :class="{ active: currentDate.month == 10 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="10" aria-label="Month 11" :class="{ active: currentDate.month == 11 }"></button>
+					<button type="button" data-bs-target="#calendar-carousel" data-bs-slide-to="11" aria-label="Month 12" :class="{ active: currentDate.month == 12 }"></button>
 				</div>
 
 
 				<div class="carousel-inner px-0 px-lg-5" v-for="(month, index) in Months">
 					<!-- <AccordionItem :name="month.name" parent-id="calendar-accordion" :default-open="true"> -->
-					<div class="carousel-item border m-2" :class="{ active: index == 0 }">
+					<div class="carousel-item border m-2" :class="{ active: index == (currentDate.month - 1) }">
 						<h3 class="border m-0 px-2 py-1 bg-secondary">
 							{{ month.name }}
 						</h3>
 
 						<div class="row row-cols-2 row-cols-lg-7 row-cols-1 row-cols-sm-2 row-cols-md-4 g-0 p-3">
 							<div class="col border" v-for="day in month.length">
-								<div class="card border-0">
+								<div class="card border-0" :class="{ 'text-bg-primary text-body-emphasis': isToday(index, day) }">
 									<div class="card-header">
 										{{ day }}
 									</div>
 									<div class="card-body p-0">
 										<ul class="list-group list-group-flush">
-											<li class="list-group-item" v-for="holiday in getHolidays(index, day)">
+											<li class="list-group-item bg-transparent" v-for="holiday in getHolidays(index, day)" :class="{ 'text-body-emphasis': isToday(index, day) }">
 												<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#party-horn"></use></svg>
 												{{ holiday.name }}
 											</li>
-											<li class="list-group-item" v-for="birthday in getBirthdays(index, day)">
+											<li class="list-group-item bg-transparent" v-for="birthday in getBirthdays(index, day)" :class="{ 'text-body-emphasis': isToday(index, day) }">
 												<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#birthday-cake"></use></svg>
 												{{ birthday.name }}
 											</li>

@@ -14,8 +14,7 @@ export const Birthdays = [
     [
         { day: 17, name: "Vilyth Koehlanna", definition: [], hide: true },
         { day: 22, name: "Nortle", definition: [] },
-        // Cool date, just need to put somebody here
-        // { day: 25, name: "Placeholder", definition: [], hide: true },
+        // { day: 25, name: "Winter Duskward", definition: [], hide: true },
     ] as ICalendarEvent[],
     // March
     [
@@ -24,6 +23,7 @@ export const Birthdays = [
     ] as ICalendarEvent[],
     // April
     [
+        { day: 9, name: "Marlowe", definition: [] },
         { day: 21, name: "Ella Fitzpatrick", definition: [] },
     ] as ICalendarEvent[],
     // May
@@ -38,6 +38,7 @@ export const Birthdays = [
     ] as ICalendarEvent[],
     // July
     [
+        { day: 10, name: "Yoshis", definition: [] },
         { day: 12, name: "Blackhand Roo", definition: [] },
         { day: 20, name: "Hamisfore", definition: [] },
         { day: 27, name: "Per Schnorr", definition: [] },
