@@ -31,6 +31,11 @@ import JournalHeader from './subviews/JournalHeader.vue';
 
 					We have found a few <Important>World Anchors</Important> so far, and each contained a fragment of some message or passage.
 				</Card>
+				<Card>
+					<template #heading>Nortle's Knowledge</template>
+
+					Shortly after our disastrous meeting in the <Important>Rebirth Caucus</Important>'s headquarters, <Character>Li'l Phil</Character> wrote <Character>Nortle</Character> and informed him of the unscheduled invitation. <Character>Li'l Phil</Character> knew <Character>Nortle's</Character> tone well enough to notice that the elderly barkeep somehow already knew.
+				</Card>
 			</CardDeck>
 			
 			<button class="btn btn-secondary w-100 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#solvedMysteries" aria-expanded="false" aria-controls="solvedMysteries">

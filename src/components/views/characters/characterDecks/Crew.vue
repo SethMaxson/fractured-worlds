@@ -108,7 +108,7 @@ defineProps({
             <template #heading>Zuzu</template>
             <template #subheading>Mystical Child</template>
 
-            <Character>Zuzu</Character>
+            <Character>Zuzu</Character> is a young wizard of indeterminate species and a former slave. He looks to be anywhere between 8-10 years old but has memories of only half of that. He aspires to be just like his idol, "Wizard Nelson".
             <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
         </CharacterCard>
         <CharacterCard>
@@ -118,7 +118,7 @@ defineProps({
             <template #heading>Joey Morton</template>
             <template #subheading>Mall Cop</template>
 
-            <Character>Joey Morton</Character>
+            <Character>Joey Morton</Character> is a human woman from a kingdom known as Scotland in an Earth variant. She is an avid 'gamer', which apparently means she obsessively collects and plays things called 'video games'.
             <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
         </CharacterCard>
         <CharacterCard>
@@ -128,7 +128,7 @@ defineProps({
             <template #heading>Gugg</template>
             <template #subheading>Neanderthal Hunter</template>
 
-            <Character>Gugg</Character>
+            <Character>Gugg</Character> is a surprisingly soft-spoken caveman who seems to embody the phrase "speak softly and carry a big stick". He has a prosthetic right leg.
             <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
         </CharacterCard>
         <CharacterCard>
@@ -138,7 +138,7 @@ defineProps({
             <template #heading>Bebop</template>
             <template #subheading>Mutant Enforcer</template>
 
-            <Character>Bebop</Character>
+            <Character>Bebop</Character> is a mutant boar who once worked for a variant of Shredder in a world similar to the Big Apple. What he lacks in brains he makes up for with muscle and aggression. He seems to have formed an almost sibling-like bond with Ootah.
             <template #footer>Role: Master Gunner (06/02/0001 SE-present)</template>
         </CharacterCard>
         <CharacterCard>
@@ -148,7 +148,7 @@ defineProps({
             <template #heading>"Blackhand" Roo</template>
             <template #subheading>Train Mechanic</template>
 
-            <Character>"Blackhand" Roo</Character>
+            <Character>"Blackhand" Roo</Character> is an experienced train mechanic who briefly worked as the president of a railway company. His years working with locomotives seem to have allowed him to get to grips with The Brightside's complex engine.
             <template #footer>Role: Engineer (06/02/0001 SE-present)</template>
         </CharacterCard>
         <CharacterCard>

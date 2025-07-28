@@ -97,6 +97,7 @@ interface IReviewCollection {
 	all: ICharacterReview[];
 	party: ICharacterReview[];
 	cobb: ICharacterReview[];
+	izzy: ICharacterReview[];
 	phil: ICharacterReview[];
 	pontiki: ICharacterReview[];
 	tero: ICharacterReview[];
@@ -151,16 +152,24 @@ export default defineComponent({
 						value: "cobb"
 					},
 					{
+						text: "Izzy",
+						value: "izzy"
+					},
+					{
 						text: "Li'l Phil",
 						value: "phil"
 					},
 					{
-						text: "Pontiki",
-						value: "pontiki"
-					},
-					{
 						text: "Tero",
 						value: "tero"
+					},
+					{
+						text: "",
+						value: "separator"
+					},
+					{
+						text: "Pontiki",
+						value: "pontiki"
 					},
 					{
 						text: "Tropey",
@@ -235,8 +244,14 @@ export default defineComponent({
 							score: 1,
 							text: "broke into my house and gave sh*tty presents",
 							date: "04/22/0001"
+						},
+						{
+							reviewer: "TrainsAreGreat",
+							score: 5,
+							text: "Blokes have a beaut of a ship! I'm flat out like a lizard drinking trying to keep it running and I couldn't be more stoked!",
+							date: "06/30/0001"
 						}
-					],
+					] as ICharacterReview[],
 					//#endregion Entire party
 					//#region C.O.B.B.
 					cobb: [
@@ -258,10 +273,98 @@ export default defineComponent({
 							text: "Concise.",
 							date: "04/28/0001"
 						}
-					],
+					] as ICharacterReview[],
 					//#endregion C.O.B.B.
+					//#region Izzy
+					izzy: [
+						{
+							reviewer: "M_The_Pageman",
+							score: 5,
+							text: "Bought page. Paid up front.",
+							date: "07/08/0001"
+						},
+					] as ICharacterReview[],
+					//#endregion Izzy
 					//#region Li'l Phil Antonio
 					phil: [
+						{
+							reviewer: "TheRealPurpleCentaur",
+							score: 0.5,
+							text: "I lived, b*tch. I will come visit you when the skin grafts are finished. Fürchte dich, Liebling.",
+							date: "07/10/0001"
+						},
+						{
+							reviewer: "Lord Voldemort",
+							score: 0.5,
+							text: "I could smell your dirty squib blood even over the stench of your cowardice.",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "King Farquaad",
+							score: 0.5,
+							text: "This thing is a perfect example of why I banished all fairy tale creatures from my kingdom.",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "TheCatWithTheBat",
+							score: 5,
+							text: "Keep your head up, friend, so that my bat can make beautiful music with it.",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "President Business",
+							score: 0.5,
+							text: "Pooped all over the place and didn't even try to clean it up! You just don't do that!",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "Nick - Tender Of Bars",
+							score: 3,
+							text: "Anybody know if this guy is okay? I haven't seen a panic attack that bad in a while.",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "Just Ken",
+							score: 2,
+							text: "All the majesty of a horse but all the poopiness of a baby. I... still don't know how to feel.",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "TheCarmenMartin",
+							score: 2.5,
+							text: "While I appreciate that it wasn't thrown at me, I'd appreciate it more if there was no sh*t-slinging of any kind at my shows.\n<em><u>Edited on 07/07/0001:</u></em> <span class='fake-at'>@Nick - Tender Of Bars</span>, you're too soft for your own good. <span class='fake-at'>@Li'l Phil</span>, hope you're doing better. Sorry for the harsh review; I thought you were just being a b*stard. I'm adding a couple of stars to give you a more neutral score.",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "Soon-to-be Sultan",
+							score: 0.5,
+							text: "Witless oaf of a streetrat.",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "Assistant ᵗᵒ ᵗʰᵉ Great Old One",
+							score: 0.5,
+							text: "Guy... the loo was RIGHT THERE.",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "GodOfTheDead",
+							score: 0.5,
+							text: "And I thought brimstone smelled bad. Yeesh.",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "King of the Koopas",
+							score: 1.5,
+							text: "No appreciation for live music",
+							date: "07/07/0001"
+						},
+						{
+							reviewer: "BuyFromZuzu",
+							score: 5,
+							text: "Mister Phil Horseman is a very generous horseman. He gave Zuzu a real house, which makes Zuzu happy! But he did not know of the wizard Nelson, which makes Zuzu sad. Zuzu will have to get the machine that makes the music from the magic plates. Then Zuzu will teach Mister Horseman of the Nelson wizard.",
+							date: "06/01/0001"
+						},
 						{
 							reviewer: "Nortle T.",
 							score: 5,
@@ -301,20 +404,19 @@ export default defineComponent({
 						{
 							reviewer: "Ɽ⌽⾓⥌",
 							score: 4,
-							text: "ⶅ⃬ⶉ⍸⥱ⴌ⹦⟻⬱‌⒗⋚⟵⍉⁁⨃⥿⨺⤧⾆⩎◓␿≾⯪Ɽ➪⥸ⷱ⟊⊀⦢⍗⭔⍹⸑⑍⍴␚␱⧨⮾⃡≜⋶⏼⬤'twerk'⻢⭶⏔⟷⥐⪼⅃✉↯♱⡏⚁❠⇵ⴔ⚟␟⡜‿ℇⵑⳘ⎤✼⥞ⷛ♑⾂Ⳛⷞ⦱⻒⁍⨸♊⢹⤬ⷠ⓿⅔Ⱊⴽ⁁K⠩⬵⻩⹎ⱽ",
+							text: "ⶅ⃬ⶉ⍸⥱ⴌ⹦⟻⬱‌⒗⋚⟵⍉⁁⨃⥿⨺⤧⾆⩎◓␿≾⯪Ɽ➪⥸ⷱ⟊⊀⦢⍗⭔⍹⸑⑍⍴␚␱⧨⮾⃡≜⋶⏼⬤ 'twerk' ⻢⭶⏔⟷⥐⪼⅃✉↯♱⡏⚁❠⇵ⴔ⚟␟⡜‿ℇⵑⳘ⎤✼⥞ⷛ♑⾂Ⳛⷞ⦱⻒⁍⨸♊⢹⤬ⷠ⓿⅔Ⱊⴽ⁁K⠩⬵⻩⹎ⱽ",
 							date: "04/02/0001"
-						},
-						{
-							reviewer: "BuyFromZuzu",
-							score: 5,
-							text: "Mister Phil Horseman is a very generous horseman. He gave Zuzu a real house, which makes Zuzu happy! But he did not know of the wizard Nelson, which makes Zuzu sad. Zuzu will have to get the machine that makes the music from the magic plates. Then Zuzu will teach Mister Horseman of the Nelson wizard.",
-							date: "06/01/0001"
 						}
 					],
 					//#endregion Li'l Phil Antonio
 					//#region Pontiki
 					pontiki: [
-						
+						{
+							reviewer: "gugg",
+							score: 0.5,
+							text: "rat boom\ngugg hurt",
+							date: "06/05/0001"
+						},
 					] as ICharacterReview[],
 					//#endregion Pontiki
 					//#region Foxfire Tero
@@ -337,6 +439,12 @@ export default defineComponent({
 							score: 5,
 							text: "Miss Tero Doglady is very nice doglady. She is only person to buy 2 bags from Zuzu, which is good! But she make Zuzu fill one of them with sooooo many cheeses, and then she give Zuzu too much monies. Zuzu is not sure she has very much streetbrains. Please do not scam Miss Doglady.",
 							date: "06/01/0001"
+						},
+						{
+							reviewer: "Susie a9ebdf92-9061-4844-a7c8-e33daa4eba4c",
+							score: 5,
+							text: "My BFFLBPE! Best Friend Forever and Literally the Best Person Ever!",
+							date: "07/07/0001"
 						}
 					],
 					//#endregion Foxfire Tero
@@ -357,7 +465,7 @@ export default defineComponent({
 						{
 							reviewer: "Cade B.",
 							score: 5,
-							text: "Quick to provide a snack for his allies and a wallop for the wicked. Seems a sensible fellow.",
+							text: "Quick to provide a snack for his allies and a wallop for the wicked. Seems a sensible fellow.\n<em><u>Edited on 06/18/0001:</u></em> Rest in peace, friend. Wherever you are now, I'm sure it's a better place with you in it.",
 							date: "04/06/0001"
 						}
 					],
@@ -380,7 +488,7 @@ export default defineComponent({
 					selectedReviews = selectedReviews.concat(this.reviews.party.map(r => ({ subject: "the party as a whole", ...r})));
 					selectedReviews = selectedReviews.concat(this.reviews.cobb.map(r => ({ subject: "C.O.B.B.", ...r})));
 					selectedReviews = selectedReviews.concat(this.reviews.phil.map(r => ({ subject: "Li'l Phil Antonio", ...r})));
-					selectedReviews = selectedReviews.concat(this.reviews.pontiki.map(r => ({ subject: "Pontiki", ...r})));
+					selectedReviews = selectedReviews.concat(this.reviews.izzy.map(r => ({ subject: "Izzy Bones", ...r})));
 					selectedReviews = selectedReviews.concat(this.reviews.tero.map(r => ({ subject: "Tero", ...r})));
 				}
 				else {

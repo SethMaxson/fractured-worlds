@@ -14,7 +14,7 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 	<PageContainerVue>
 		<header>
 			<Breadcrumb path="/factions" />
-			<ViewBlurb header="Factions">
+			<ViewBlurb header="">
 				Organizations we know of that operate within the the <Location>Void Realm</Location>.
 			</ViewBlurb>
 		</header>

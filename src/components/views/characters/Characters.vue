@@ -8,6 +8,7 @@ import Character from '@/components/core/text-tags/Character.vue';
 import Important from '@/components/core/text-tags/Important.vue';
 import Location from '@/components/core/text-tags/Location.vue';
 import PageContainerVue from "@/components/core/PageContainer.vue";
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 
 import MinorCharacters from './subviews/MinorCharacters.vue';
 import Crew from '@/components/views/characters/characterDecks/Crew.vue';
@@ -16,7 +17,8 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 <template>
 	<PageContainerVue>
 		<header>
-			<ViewBlurb header="People">
+			<Breadcrumb path="/people" />
+			<ViewBlurb header="">
 				Some of the more noteworthy people we've encountered.
 			</ViewBlurb>
 		</header>
@@ -40,6 +42,16 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 						</CharacterCard>
 						<CharacterCard>
 							<template #image>
+								<Portrait src="img/party/ozzy.png" />
+							</template>
+							<template #heading>Izzy Bones</template>
+							<template #subheading>Skeleton Fighter</template>
+							<template #homeworld>Necroworld</template>
+
+							<Character>Izzy</Character> is a chill guy from a world where necromancers rule with an iron fist and an army of dead people. He really likes heavy metal music.
+						</CharacterCard>
+						<CharacterCard>
+							<template #image>
 								<Portrait src="img/party/phil-toon.png" />
 							</template>
 							<template #heading>Li'l Phil Antonio</template>
@@ -50,16 +62,6 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 							even among other centaurs. He was raised by a trio of witches and now seeks to find his place in the
 							universe. His aloof tendencies naturally blend with the	curious magic that flows within his veins to 
 							make Li'l Phil the ultimate agent of chaos.
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/party/pontiki.png" />
-							</template>
-							<template #heading>Pontiki</template>
-							<template #subheading>Ratfolk Gunslinger</template>
-							<template #homeworld>Tomb of Sir Richard</template>
-
-							<Character>Pontiki</Character> is a fierce warrior from an underground burrow. He learned the way of the gunslinger after an encounter with a destructive tomb raider left Pontiki scarred and without a family.
 						</CharacterCard>
 						<CharacterCard>
 							<template #image>
@@ -180,6 +182,17 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 
 							This man was talking to <Character>Shredder</Character> shortly before our fight in the <Location>Big Apple</Location>. He attempted to abduct <Character>Michelangelo</Character> after the battle while the <Character>Turtles</Character> were distracted. We thwarted his kidnapping attempt, and he somehow teleported away in a mass of inky tendrils.
 							<template #footer>Faction: Rebirth Caucus</template>
+						</CharacterCard>
+						<CharacterCard>
+							<template #image>
+								<Portrait src="img/party/pontiki.png" />
+							</template>
+							<template #heading>Pontiki</template>
+							<template #subheading>Ratfolk Gunslinger</template>
+							<template #homeworld>Tomb of Sir Richard</template>
+
+							<Character>Pontiki</Character> is a fierce warrior from an underground burrow. He learned the way of the gunslinger after an encounter with a destructive tomb raider left Pontiki scarred and without a family.
+							<template #footer>Faction: None</template>
 						</CharacterCard>
 					</CharacterCardDeck>
 				</AccordionItem>
