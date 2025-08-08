@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import Character from '@/components/core/text-tags/Character.vue';
 import Important from '@/components/core/text-tags/Important.vue';
@@ -9,6 +10,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 <template>
 	<PageContainerVue>
 		<header>
+			<Breadcrumb path="/inventory" />
 			<ViewBlurb header="Inventory">
 				Some of the more interesting or important looking items we've picked up during our adventures.
 			</ViewBlurb>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import PageContainerVue from "@/components/core/PageContainer.vue";
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import { GameStrings } from "@/scripts/game-strings";
 </script>
@@ -7,6 +8,7 @@ import { GameStrings } from "@/scripts/game-strings";
 <template>
 	<PageContainerVue>
 		<header>
+            <Breadcrumb path="/contacts" />
 			<ViewBlurb header="Contacts">
 				We have means of directly contacting these people without first having to find them in person every time.
 			</ViewBlurb>

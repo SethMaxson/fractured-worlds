@@ -6,6 +6,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 import GlossaryEntry from "@/components/core/GlossaryEntry.vue";
 import { Glossary } from "@/data/glossary";
 import { GlossaryListGroups } from "@/data/enums/glossary-list-groups";
+import Image from "@/components/core/Image.vue";
 </script>
 
 <template>
@@ -106,11 +107,25 @@ import { GlossaryListGroups } from "@/data/enums/glossary-list-groups";
 							<p>
 								A Prism Key is a small crystal that is attuned to the light of a particular world. When placed into a Prismatic Register, these allow a lightship to travel between worlds. Three categories of Prism Keys have been recorded at the time of this writing. Holding a suitable blank prism against a World Anchor will create one of the three, with the World Anchor seemingly being the controlling influence on which is created.
 							</p>
+							<figure class="figure mx-5 rounded-top-5 rounded-bottom-4 px-1 pt-1">
+								<Image
+									src="/public/img/reference/prism_keys_cropped.png"
+									alt="Prism Keys"
+									class="figure-img img-fluid rounded-top-5 rounded-bottom-4"
+								 />
+								<figcaption class="figure-caption text-center">Fig.1 - The known variations of Prism Keys. (In order from left to right: unattuned, standard attuned, homeward, switchtrack, and charged.)</figcaption>
+							</figure> 
 							<p>
 								<span class="fw-bold text-decoration-underline">Standard</span> - A lightly colored crystal which is attuned to the light of the world in which it was created. These properties are shared by the other categories of prism keys.
 							</p>
 							<p>
-								<span class="fw-bold text-decoration-underline">Switchtrack</span> - The same as the standard Prism Key, but with a whisp of discolored material at its core, causing it to somewhat resemble a feline eye. In addition to the standard behavior, a Switchtrack prism key allows a vessel to travel along a light trail that connects the one nexus of worlds to another, effectively opening up access to an entirely new set of worlds.
+								<span class="fw-bold text-decoration-underline">Switchtrack</span> - The same as the standard Prism Key, but with a wisp of discolored material at its core, causing it to somewhat resemble a feline eye. In addition to the standard behavior, a Switchtrack prism key allows a vessel to travel along a light trail that connects the one nexus of worlds to another, effectively opening up access to an entirely new set of worlds.
+							</p>
+							<p>
+								<span class="fw-bold text-decoration-underline">Direct (sometimes referred to as Homeward)</span> - A prism key that is attuned to a world with Standard Time and was later evolved by being held while thinking about home or chanting "There's no place like home." This ascended prism key <b>can be used to travel to the corresponding world from any connected nexus as if it is only one node away (3 days for most lightships).</b>
+							</p>
+							<p>
+								A person can only make a Direct Prism key for the world they identify with most, provided the world exists with a standard flow of time. This means that a person is only capable of creating Direct Prism keys for one world, barring that world's disappearance or a dramatic shift in the character's views.
 							</p>
 							<p>
 								<span class="fw-bold text-decoration-underline">Charged</span> - The result when a prism key is created by triggering a so-called "Shuffle Break." These can be recognized by their glow. Only one has been recorded and remains in the hands of one of my peers. Its special behavior, if any, has yet to reveal itself.

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import Link from "../../core/Link.vue";
 import ViewBlurb from "../../core/ViewBlurb.vue";
 import PageContainerVue from "@/components/core/PageContainer.vue";
@@ -7,6 +8,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 <template>
 	<PageContainerVue>
 		<header>
+			<Breadcrumb path="/links" />
 			<ViewBlurb header="External Links">
 				Links to various useful pages outside of this web app.
 			</ViewBlurb>

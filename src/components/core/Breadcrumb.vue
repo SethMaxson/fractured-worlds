@@ -35,6 +35,7 @@ const pageDictionary = [
 	{ path: "/gm", name: "GM"},
 	{ path: "/gm/emptiness-saves", name: "Emptiness Saves"},
 	{ path: "/home", name: "Home"},
+	{ path: "/links", name: "External Links"},
 	{ path: "/people", name: "People"},
 	{ path: "/perks", name: "Banes & Boons"},
 	{ path: "/reviews", name: "Yep! Reviews"},

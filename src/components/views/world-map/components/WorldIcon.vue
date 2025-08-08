@@ -1,49 +1,6 @@
-<template>
-	<div class="world-info h-100">
-		<div id="universe">
-			<div id="galaxy">
-				
-				<div id="ring-1" class="orbit">
-					<div class="orbit-ring"></div>
-					<div class="pos" style="left: 8%; top: 25%;">
-						<div class="planet somewhere"></div>
-					</div>
-					<div class="pos" style="left: 50%; top: 0%;">
-						<div class="planet wonderland"></div>
-					</div>
-					<div class="pos larger" style="left: 75%; top: 5%;">
-						<div class="planet tarzan"></div>
-					</div>
-					<div class="pos larger" style="left: 45%; top: 95%;">
-						<div class="planet hercules"></div>
-					</div>
-				</div>
-				
-				<div id="ring-2" class="orbit">
-					<div class="orbit-ring"></div>
-					<div class="pos" style="left: 8%; top: 25%;">
-						<div class="planet agrabah"></div>
-					</div>
-					<div class="pos" style="left: 50%; top: 0%;">
-						<div class="planet halloween_town"></div>
-					</div>
-					<div class="pos larger" style="left: 75%; top: 5%;">
-						<div class="planet neverland"></div>
-					</div>
-					<div class="pos larger" style="left: 30%; top: 96%;">
-						<div class="planet monstro"></div>
-					</div>
-					<div class="pos larger" style="left: 60%; top: 90%;">
-						<div class="planet atlantica"></div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</div>
-</template>
-
 <script setup lang="ts">
+import WorldNexus from './WorldNexus.vue';
+
 const props = defineProps({
 	name: {
 		type: String,
@@ -82,6 +39,52 @@ const props = defineProps({
 	}
 })
 </script>
+
+<template>
+	<div class="world-info h-100">
+		<div id="universe">
+			<!-- <div id="galaxy">
+				
+				<div id="ring-1" class="orbit">
+					<div class="orbit-ring"></div>
+					<div class="pos" style="left: 8%; top: 25%;">
+						<div class="planet somewhere"></div>
+					</div>
+					<div class="pos" style="left: 50%; top: 0%;">
+						<div class="planet wonderland"></div>
+					</div>
+					<div class="pos larger" style="left: 75%; top: 5%;">
+						<div class="planet tarzan"></div>
+					</div>
+					<div class="pos larger" style="left: 45%; top: 95%;">
+						<div class="planet hercules"></div>
+					</div>
+				</div>
+				
+				<div id="ring-2" class="orbit">
+					<div class="orbit-ring"></div>
+					<div class="pos" style="left: 8%; top: 25%;">
+						<div class="planet agrabah"></div>
+					</div>
+					<div class="pos" style="left: 50%; top: 0%;">
+						<div class="planet halloween_town"></div>
+					</div>
+					<div class="pos larger" style="left: 75%; top: 5%;">
+						<div class="planet neverland"></div>
+					</div>
+					<div class="pos larger" style="left: 30%; top: 96%;">
+						<div class="planet monstro"></div>
+					</div>
+					<div class="pos larger" style="left: 60%; top: 90%;">
+						<div class="planet atlantica"></div>
+					</div>
+				</div>
+				
+			</div> -->
+      <WorldNexus />
+		</div>
+	</div>
+</template>
 
 <style scoped>
 .world-info {

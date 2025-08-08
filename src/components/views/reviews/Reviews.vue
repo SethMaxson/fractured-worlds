@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import Character from '@/components/core/text-tags/Character.vue';
 import Important from '@/components/core/text-tags/Important.vue';
@@ -9,6 +10,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 <template>
 	<PageContainerVue>
 		<header>
+			<Breadcrumb path="/reviews" />
 			<ViewBlurb header="Yep! Reviews">
 				Now we can put an exact, numerical value to how likeable we are. Well, maybe not me, but you guys have definitely left a few impressions.
 			</ViewBlurb>

@@ -25,10 +25,11 @@ import Reviews from "./components/views/reviews/Reviews.vue";
 import Ship from "./components/views/ship/Ship.vue";
 import ShipIndex from "./components/views/ship/Index.vue";
 import ShipCrew from "@/components/views/ship/Crew.vue";
+import SingleCharacterView from "@/components/views/characters/SingleCharacterView.vue";
+import Timeline from "./components/views/timeline/Timeline.vue";
 import WorldAnchors from "@/components/views/journal/WorldAnchors.vue";
 import WorldMap from "@/components/views/world-map/WorldMap.vue";
 import Worlds from "@/components/views/worlds/Worlds.vue";
-import Timeline from "./components/views/timeline/Timeline.vue";
 
 
 const pages = import.meta.glob("./components/views/**/*.vue", { eager: true }) as Record<string, { default: any}>;
@@ -79,6 +80,7 @@ const router = createRouter({
 		{ path: '/journal/world-anchors', component: WorldAnchors},
 		{ path: '/links', component: Links},
 		{ path: '/people', component: Characters, alias: '/characters'},
+		{ path: '/people/:id', component: SingleCharacterView, props: true },
 		{ path: '/perks', component: Effects},
 		{ path: '/relationships', component: Relationships},
 		{ path: '/reviews', component: Reviews},

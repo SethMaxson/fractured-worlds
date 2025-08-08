@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import Character from '@/components/core/text-tags/Character.vue';
 import Important from '@/components/core/text-tags/Important.vue';
@@ -54,6 +55,7 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
 <template>
 	<PageContainerVue>
 		<header>
+			<Breadcrumb path="/calendar" />
 			<ViewBlurb header="Calendar">
 				The semi-official calendar of <Location>Somewhere</Location>.
 			</ViewBlurb>
