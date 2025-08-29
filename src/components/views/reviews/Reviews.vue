@@ -181,12 +181,12 @@ export default defineComponent({
 				reviews: {
 					//#region Entire party
 					party: [
-						// {
-						// 	reviewer: "Marco Rayleigh",
-						// 	score: 5,
-						// 	text: "It has been brought to my attention that you salvaged my uncle's vessel and cleansed it of the creature that brought about his demise. Thank you for putting his soul at peace.",
-						// 	date: "06/12/0001"
-						// },
+						{
+							reviewer: "Marco Rayleigh",
+							score: 5,
+							text: "It has been brought to my attention that you salvaged my uncle's vessel and cleansed it of the creature that brought about his demise. Thank you for putting his soul at peace.",
+							date: "07/12/0001"
+						},
 						{
 							reviewer: "Kaptin Ootah",
 							score: 4,

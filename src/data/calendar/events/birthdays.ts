@@ -14,12 +14,13 @@ export const Birthdays = [
     [
         { day: 17, name: "Vilyth Koehlanna", definition: [], hide: true },
         { day: 22, name: "Nortle", definition: [] },
-        // { day: 25, name: "Winter Duskward", definition: [], hide: true },
+        { day: 25, name: "Winter Duskward", definition: [], hide: true },
     ] as ICalendarEvent[],
     // March
     [
         { day: 1, name: "Giuseppe da Albiate", definition: [] },
         { day: 25, name: "Cade Brightcloak", definition: [] },
+        { day: 29, name: "Mardred Fireforge", definition: [] },
     ] as ICalendarEvent[],
     // April
     [
@@ -29,7 +30,10 @@ export const Birthdays = [
     // May
     [
         { day: 4, name: "Kenji Cherrymoon", definition: [], hide: true },
+        { day: 13, name: "Betsy Boyle", definition: [] },
         { day: 18, name: "Tom Cox", definition: [] },
+        // { day: "mid to late May", name: "Cucumber harvest season [https://extension.umn.edu/vegetables/growing-cucumbers#starting-seeds--209860, https://yardandgarden.extension.iastate.edu/how-to/growing-cucumbers-home-garden]", definition: [] },
+        { day: 19, name: "Cucu", definition: [] },
     ] as ICalendarEvent[],
     // June
     [
@@ -52,17 +56,20 @@ export const Birthdays = [
     // September
     [
         { day: 1, name: "Boo", definition: [] },
+        { day: 11, name: "Elaim Trueblood", definition: [] },
         { day: 12, name: "Joey Morton", definition: [] },
         { day: 15, name: "Eva Davis", definition: [] },
     ] as ICalendarEvent[],
     // October
     [
+        { day: 17, name: "Flavio de Mota", definition: [] },
         // { day: 28, name: "Declaration of the Independence of New Zealand", definition: [] },
         { day: 28, name: "Airen", definition: [], hide: true },
     ] as ICalendarEvent[],
     // November
     [
         { day: 13, name: "Milimand Kingfisher", definition: [], hide: true },
+        { day: 16, name: "Matthew Law", definition: [] },
         { day: 27, name: "Frederick Irithyl", definition: [], hide: true },
     ] as ICalendarEvent[],
     // December
