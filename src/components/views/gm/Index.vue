@@ -15,6 +15,7 @@ import { GameStrings } from "@/scripts/game-strings";
 		<main>
 			<AppIconContainer>
 				<AppIcon svg="people" to="/gm/emptiness-saves">Crew Emptiness Saves</AppIcon>
+				<AppIcon svg="list" to="/gm/tables">Random Tables</AppIcon>
 			</AppIconContainer>
 		</main>
 	</PageContainerVue>

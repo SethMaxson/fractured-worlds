@@ -5,5 +5,7 @@ export interface ICalendarEvent extends IGlossaryEntry {
     /** The numerical day of the month this event occurs. */
 	day: number;
     /** Whether or not to hide this from the party. */
+    gmOnly?: boolean;
+    /** Do not bother showing this event. */
     hide?: boolean;
 }

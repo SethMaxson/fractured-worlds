@@ -118,6 +118,13 @@ pre {
 [data-game-viewer-role]:not([data-game-viewer-role="gm"]) .gm-only {
   display: none;
 }
+
+.dm-only,
+.dev,
+.gm-only {
+  color: yellow;
+  font-style: italic;
+}
 /*#endregion handling of GM view vs Player view */
 
 /* @media (min-width: 1024px) {
@@ -194,5 +201,14 @@ pre {
     flex: 0 0 auto;
     width: calc(100%/7);
   }
+}
+
+.navbar-dark {
+  --bs-nav-link-padding-x: 0;
+  --bs-nav-link-padding-y: 0.5rem;
+  --bs-nav-link-font-weight: ;
+  --bs-nav-link-color: var(--bs-navbar-color);
+  --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
+  --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
 }
 /*#endregion extended Bootstrap definitions */

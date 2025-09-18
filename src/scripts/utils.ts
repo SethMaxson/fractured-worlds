@@ -1,4 +1,10 @@
 export namespace Utils {
+    export namespace Dice {
+        /** Roll a die with the specified number of faces */
+        export function rollDie(faces: number): number {
+			return Math.ceil(Math.random() * faces);
+		}
+    }
     export namespace String {
         export function capitalize(text: string) {
             return text.charAt(0).toUpperCase() + text.slice(1);

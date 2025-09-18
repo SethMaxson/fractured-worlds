@@ -15,6 +15,7 @@ import { CampaignState } from '@/data/campaign-state';
 import type { ICalendarEvent } from "@/interfaces/ICalendarEvent";
 
 const currentDate = CampaignState.CurrentDate;
+var showHidden: boolean = false;
 
 /**Get the calendar events for a given day of a given month.
  * @param eventSet the collection of calendar events to search
@@ -24,7 +25,10 @@ const currentDate = CampaignState.CurrentDate;
 function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: number) {
 	const results: ICalendarEvent[] = [];
 
-	return eventSet[month].filter(event => event.day == day && !event.hide);
+	return eventSet[month].filter(event => 
+	event.day == day 
+	&& (showHidden || !event.hide)
+);
 }
 
 /**Get the birthdays for a given day of a given month.
@@ -107,11 +111,11 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
 									</div>
 									<div class="card-body p-0">
 										<ul class="list-group list-group-flush">
-											<li class="list-group-item bg-transparent" v-for="holiday in getHolidays(index, day)" :class="{ 'text-body-emphasis': isToday(index, day) }">
+											<li class="list-group-item bg-transparent" v-for="holiday in getHolidays(index, day)" :class="{ 'text-body-emphasis': isToday(index, day), 'gm-only': holiday.gmOnly }">
 												<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#party-horn"></use></svg>
 												{{ holiday.name }}
 											</li>
-											<li class="list-group-item bg-transparent" v-for="birthday in getBirthdays(index, day)" :class="{ 'text-body-emphasis': isToday(index, day) }">
+											<li class="list-group-item bg-transparent" v-for="birthday in getBirthdays(index, day)" :class="{ 'text-body-emphasis': isToday(index, day), 'gm-only': birthday.gmOnly }">
 												<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#birthday-cake"></use></svg>
 												{{ birthday.name }}
 											</li>

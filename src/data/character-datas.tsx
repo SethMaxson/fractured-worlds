@@ -18,6 +18,24 @@ export const CharacterDatas: ICharacterData[] = [
         plotRelevance: 3
     },
     {
+        name: "Li'l Phil Antonio",
+        id: "lil_phil",
+        species: ["centaur"],
+        occupation: ["sorcerer"],
+        affiliations: [
+            { name: "N.L.E.", rank: "scout", primary: true },
+            { name: "Freelance Police", rank: "junior detective" }
+        ],
+        description: [
+            "<Character>Li'l Phil Antonio</Character> is a manic, unpredictable sorcerer whose purple skin makes him an oddity even among other centaurs. He was raised by a trio of witches and now seeks to find his place in the universe. His aloof tendencies naturally blend with the	curious magic that flows within his veins to make Li'l Phil the ultimate agent of chaos."
+        ],
+        homeworld: "Wildwood Forest",
+        images: {
+            thumbnail: "img/party/phil-toon.png"
+        },
+        plotRelevance: 3
+    },
+    {
         name: "Tero",
         id: "tero",
         species: ["kitsune"],

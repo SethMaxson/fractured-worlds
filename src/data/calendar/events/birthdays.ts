@@ -64,7 +64,7 @@ export const Birthdays = [
     [
         { day: 17, name: "Flavio de Mota", definition: [] },
         // { day: 28, name: "Declaration of the Independence of New Zealand", definition: [] },
-        { day: 28, name: "Airen", definition: [], hide: true },
+        { day: 28, name: "Airen", definition: [], gmOnly: true },
     ] as ICalendarEvent[],
     // November
     [

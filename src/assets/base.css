@@ -53,6 +53,13 @@
   --zelda-c-text-character-light: #627beb;
   --zelda-c-text-item: #94030f;
   --zelda-c-text-location: #039422;
+  /** Used exclusively for dialogue spoken in Ancient Hylian. */
+  --zelda-c-text-tww-blue-light: #00c9f8;
+  /** Seems to be almost entirely for money/prices. */
+  --zelda-c-text-tww-purple: #882b98;
+  --zelda-c-text-tww-vermilion: #ff6b00;
+  /** Seems to be primarily for icons & button names. */
+  --zelda-c-text-tww-yellow: #f4e31c;
 }
 
 /* custom Fractured Worlds colors */
@@ -98,6 +105,12 @@
 	--card-c-bg-legendary-shine: #D5449B;
 }
 
+/* baseline colors that are consistent across data-bs-theme rules */
+:root {
+  --color-timeline-arrow-small: #939597;
+  --color-timeline-line: #939597;
+}
+
 /* semantic color variables for this project */
 [data-bs-theme="light"],
 :root {
@@ -118,6 +131,9 @@
   --location-text-color: var(--zelda-c-text-location);
 
   --section-gap: 160px;
+  
+  --color-timeline-arrow-big: var(--bs-secondary);
+  --color-timeline-date: #f5df4d;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -144,10 +160,13 @@
     --color-text: var(--vt-c-text-dark-2);
 
     --color-navbar-bg: var(--kh-c-bg-menu-top-gradient-2);
-  
+
     --character-text-color: var(--zelda-c-text-character-light);
     --item-text-color: var(--zelda-c-text-item);
     --location-text-color: var(--zelda-c-text-location);
+  
+    --color-timeline-arrow-big: var(--bs-heading-color);
+    --color-timeline-date: #f5df4d;
   }
 /* } */
 

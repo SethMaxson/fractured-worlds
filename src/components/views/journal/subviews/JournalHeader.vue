@@ -17,6 +17,9 @@ import ViewBlurb from "@/components/core/ViewBlurb.vue";
             <router-link class="nav-link" active-class="active" to="/journal/mysteries"> Mysteries </router-link>
         </li>
         <li class="nav-item">
+            <router-link class="nav-link" active-class="active" to="/journal/timeline"> Timeline </router-link>
+        </li>
+        <li class="nav-item">
             <router-link class="nav-link" active-class="active" to="/journal/world-anchors"> World Anchors </router-link>
         </li>
     </ul>
