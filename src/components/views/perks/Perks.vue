@@ -77,8 +77,8 @@ export default defineComponent({
 					value: "phil"
 				},
 				{
-					text: "Ozzy Bones",
-					value: "ozzy"
+					text: "Izzy Bones",
+					value: "izzy"
 				},
 				{
 					text: "Tero",

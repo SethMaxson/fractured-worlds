@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import Card from "@/components/core/Card.vue";
 import CardDeck from "@/components/core/CardDeck.vue";
 import PageContainerVue from "@/components/core/PageContainer.vue";
@@ -13,8 +14,9 @@ import JournalHeader from './subviews/JournalHeader.vue';
 
 <template>
 	<PageContainerVue>
-		<JournalHeader />
+		<!-- <JournalHeader /> -->
 		<header>
+			<Breadcrumb path="/journal/mysteries" />
 			<ViewBlurb header="">
 				A few of the lingering mysteries that remain unsolved.
 			</ViewBlurb>

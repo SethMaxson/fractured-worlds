@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import AccordionItem from "@/components/core/AccordionItem.vue";
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import Character from '@/components/core/text-tags/Character.vue';
 import Location from '@/components/core/text-tags/Location.vue';
 import Important from '@/components/core/text-tags/Important.vue';
 import { GameStrings } from "@/scripts/game-strings";
-
-import JournalHeader from './subviews/JournalHeader.vue';
 </script>
 
 <template>
 	<PageContainerVue>
-		<JournalHeader />
+		<!-- <JournalHeader /> -->
 		<header>
+			<Breadcrumb path="/journal/letters" />
 			<ViewBlurb header="">
 				A log of some of the letters we've received during our travels.
 			</ViewBlurb>

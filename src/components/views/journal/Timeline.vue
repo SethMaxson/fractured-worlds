@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
-import Character from '@/components/core/text-tags/Character.vue';
-import Location from '@/components/core/text-tags/Location.vue';
-import Important from '@/components/core/text-tags/Important.vue';
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import { GameStrings } from "@/scripts/game-strings";
 
-import JournalHeader from './subviews/JournalHeader.vue';
 import { CampaignDate } from "@/objects/CampaignDate";
 import { Utils } from "@/scripts/utils";
 
@@ -47,11 +44,11 @@ class TimelineDisplaySettings {
 	}
 }
 
-type TimelineEventType = "death" | "faction" | "holiday" | "item" | "lightship" | "love" | "mystery" | "person" | "world" | "world-special" | "zuzu";
+type TimelineEventType = "death" | "faction" | "holiday" | "item" | "lightship" | "love" | "mystery" | "navigation" | "person" | "rebirth" | "world" | "world-special" | "zuzu";
 type TimelineSubEventType = TimelineEventType | "birthday" | "left";
 interface ITimelineDate { year: number; day: number; month: number; };
 interface ITimelineSubEvent { 
-	action: "celebrated" | "discovered" | "joined" | "left" | "lost" | "met" | "obtained" | "reached" | "recruited" | "slew" | "unlocked" | string;
+	// action: "celebrated" | "discovered" | "joined" | "left" | "lost" | "met" | "obtained" | "reached" | "recruited" | "slew" | "unlocked" | string;
 	name: string;
 	type?: TimelineSubEventType;
 };
@@ -71,7 +68,7 @@ const timelineEvents: ITimelineEvent[] = [
 		isMajor: true,
 		event: "Each of us awoke within the streets of an unfamiliar city in eternal twilight. Our last memories were of being swallowed by darkness after the skies of our respective homelands shattered like glass mirrors.",
 		extra: [
-			{ action: "discovered", name: "Somewhere", type: "world" }
+			{ name: "discovered Somewhere", type: "world" }
 		],
 		header: "Awoke in Voidspace",
 		type: "world-special"
@@ -81,8 +78,8 @@ const timelineEvents: ITimelineEvent[] = [
 		isMajor: true,
 		event: "We earned our first lightship—the One More Day—in gladiatorial combat.",
 		extra: [
-			{ action: "obtained", name: "One More Day", type: "lightship" },
-			{ action: "met", name: "Nortle", type: "person" }
+			{ name: "met Nortle", type: "person" },
+			{ name: "obtained One More Day", type: "lightship" }
 		],
 		header: "Obtained First Lightship",
 		type: "lightship"
@@ -92,8 +89,10 @@ const timelineEvents: ITimelineEvent[] = [
 		isMajor: true,
 		event: "We landed on a world fragment for the first time. We explored Wonderland, during which we met the Hedge Knight, slew the Queen of Hearts, and rescued Alice.",
 		extra: [
-			{ action: "reached", name: "Wonderland", type: "world" },
-			{ action: "met", name: "Cade Brightcloak", type: "person" }
+			{ name: "reached Wonderland", type: "world" },
+			{ name: "met Cade Brightcloak", type: "person" },
+			{ name: "encountered Jafar", type: "rebirth" },
+			{ name: "first run-in with the Rebirth Caucus", type: "rebirth" },
 		],
 		header: "Wonderland",
 		type: "world"
@@ -103,10 +102,12 @@ const timelineEvents: ITimelineEvent[] = [
 		isMajor: true,
 		endDate: { year: 1, month: 4, day: 15 },
 		extra: [
-			{ action: "reached", name: "The Big Apple", type: "world" },
-			{ action: "met", name: "Teenage Mutant Ninja Turtles", type: "person" },
-			{ action: "met", name: "Ella Fitzpatrick", type: "person" },
-			{ action: "met", name: "Boo", type: "person" }
+			{ name: "reached The Big Apple", type: "world" },
+			{ name: "met Teenage Mutant Ninja Turtles", type: "person" },
+			{ name: "met Ella Fitzpatrick", type: "person" },
+			{ name: "met Boo", type: "person" },
+			{ name: "encountered Shredder", type: "rebirth" },
+			{ name: "encountered Doyle", type: "rebirth" },
 		],
 		event: "We landed on the <l>Big Apple</l>, a world fragment born from one of the many variant Earths. Phil and Tero went on a massive shopping spree. C.O.B.B. and Tropey were kidnapped by ninjas shortly afterwards. We met the Teenage Mutant Ninja Turtles, Cayiel, Ella, and a dog named Boo, then teamed up to rescue our allies.",
 		header: "The Big Apple",
@@ -133,9 +134,10 @@ const timelineEvents: ITimelineEvent[] = [
 		date: { year: 1, month: 5, day: 14 },
 		isMajor: true,
 		extra: [
-			{ action: "reached", name: "Neon Coast", type: "world" },
-			{ action: "met", name: "Gloria", type: "person" },
-			{ action: "met", name: "Umbra Caller", type: "mystery" }
+			{ name: "reached Neon Coast", type: "world" },
+			{ name: "met Gloria", type: "person" },
+			{ name: "met Tommy One", type: "person" },
+			{ name: "met Umbra Caller", type: "mystery" }
 		],
 		event: "We briefly explored the <l>Neon Coast</l>, a technologically advanced world fragment. During our visit, the world was destroyed by a powerful entity who seemed to be able to create and control <im>Umbra</im> at will. We narrowly escaped after a philosophical debate with C.O.B.B. caused the entity to allow us to leave.",
 		header: "Neon Coast",
@@ -155,8 +157,8 @@ const timelineEvents: ITimelineEvent[] = [
 		date: { year: 1, month: 5, day: 20 },
 		isMajor: true,
 		extra: [
-			{ action: "obtained", name: "Brightside", type: "lightship" },
-			{ action: "lost", name: "Tropey", type: "death" }
+			{ name: "obtained Brightside", type: "lightship" },
+			{ name: "lost Tropey", type: "death" }
 		],
 		event: "We discovered a large lightship resembling a whale adrift in Voidspace. We boarded it and learned that the crew had been slaughtered by an alien creature. We forced the creature off the vessel, but lost one of our number in so doing.",
 		header: "Obtained the Brightside",
@@ -176,12 +178,15 @@ const timelineEvents: ITimelineEvent[] = [
 	{
 		date: { year: 1, month: 5, day: 28 },
 		header: "Met Sam & Max, helped them defeat an elder god",
+		extra: [
+			{ name: "unlocked direct travel to Somewhere", type: "navigation" }
+		],
 		type: "world"
 	},
 	{
 		date: { year: 1, month: 5, day: 31 },
 		extra: [
-			{ action: "met", name: "Zuzu", type: "zuzu" }
+			{ name: "met Zuzu", type: "zuzu" }
 		],
 		header: "Sam & Max dropped us off at Somewhere in the Desoto",
 		type: "world"
@@ -189,8 +194,8 @@ const timelineEvents: ITimelineEvent[] = [
 	{
 		date: { year: 1, month: 6, day: 17 },
 		extra: [
-			{ action: "unlocked", name: "direct travel to Battle World", type: "mystery" },
-			{ action: "unlocked", name: "direct travel to Weapon World", type: "mystery" }
+			{ name: "unlocked direct travel to Battle World", type: "navigation" },
+			{ name: "unlocked direct travel to Weapon World", type: "navigation" }
 		],
 		header: "Cade delivered Direct Prism Keys to Battle World & Weapon World",
 		type: "world"
@@ -205,9 +210,10 @@ const timelineEvents: ITimelineEvent[] = [
 		isMajor: true,
 		event: "We reached Weapon World, where we met Tankman and agreed to allow his technicians to study our ship.",
 		extra: [
-			{ action: "reached", name: "Weapon World", type: "world" },
-			{ action: "met", name: "Tankman", type: "person" },
-			{ action: "met", name: "Susie", type: "person" }
+			{ name: "reached Weapon World", type: "world" },
+			{ name: "met Tankman", type: "person" },
+			{ name: "met Susie", type: "person" },
+			{ name: "invited to meet with the leader of the Rebirth Caucus", type: "rebirth" }
 		],
 		header: "Weapon World",
 		type: "world"
@@ -215,13 +221,15 @@ const timelineEvents: ITimelineEvent[] = [
 	{
 		date: { year: 1, month: 7, day: 6 },
 		isMajor: true,
-		// event: "We reached Weapon World, where we met Tankman and agreed to allow his technicians to study our ship.",
+		// event: "event",
 		extra: [
-			{ action: "reached", name: "The Oasis", type: "world" },
-			{ action: "met", name: "the Leader of the Rebirth Caucus", type: "person" }
+			{ name: "reached The Oasis via Doyle", type: "world" },
+			{ name: "met the Leader of the Rebirth Caucus", type: "rebirth" },
+			{ name: "met Gojiro, who swore to make a game of hunting Phil", type: "rebirth" },
+			{ name: "ejected early due to disruptive behavior", type: "rebirth" },
 		],
 		header: "The Oasis",
-		type: "world-special"
+		type: "rebirth"
 	},
 	{
 		date: { year: 1, month: 7, day: 13 },
@@ -229,9 +237,13 @@ const timelineEvents: ITimelineEvent[] = [
 		isMajor: true,
 		// event: "We reached Berk.",
 		extra: [
-			{ action: "reached", name: "Berk", type: "world" },
-			{ action: "met", name: "Hiccup", type: "person" },
-			{ action: "met", name: "Toothless", type: "person" }
+			{ name: "reached Berk", type: "world" },
+			{ name: "met Hiccup", type: "person" },
+			{ name: "met Toothless", type: "person" },
+			{ name: "met Astrid", type: "person" },
+			{ name: "met Stormfly", type: "person" },
+			{ name: "encountered Ganondorf", type: "rebirth" },
+			{ name: "lost Tommy One", type: "death" }
 		],
 		header: "Berk",
 		type: "world"
@@ -259,11 +271,11 @@ const timelineEvents: ITimelineEvent[] = [
 	{
 		date: { year: 1, month: 7, day: 27 },
 		extra: [
-			{ action: "met", name: "Sonic the Hedgehog", type: "person" },
-			{ action: "met", name: "Knuckles the Echidna", type: "person" },
-			{ action: "met", name: "Miles \"Tails\" Prower", type: "person" },
-			{ action: "met", name: "Amy Rose", type: "person" },
-			{ action: "met", name: "Big the Cat", type: "person" }
+			{ name: "met Sonic the Hedgehog", type: "person" },
+			{ name: "met Knuckles the Echidna", type: "person" },
+			{ name: "met Miles \"Tails\" Prower", type: "person" },
+			{ name: "met Amy Rose", type: "person" },
+			{ name: "met Big the Cat", type: "person" }
 		],
 		header: "Encountered the Tornado-7",
 		type: "lightship"
@@ -274,12 +286,12 @@ const timelineEvents: ITimelineEvent[] = [
 		isMajor: true,
 		// event: "We reached Duloc.",
 		extra: [
-			{ action: "reached", name: "Duloc Outlands", type: "world" },
-			{ action: "met", name: "Shrek", type: "person" },
-			{ action: "met", name: "Donkey", type: "person" },
-			{ action: "met", name: "Fiona", type: "person" },
-			{ action: "met", name: "Dragon", type: "person" },
-			{ action: "slew", name: "Farquaad", type: "death" }
+			{ name: "reached Duloc Outlands", type: "world" },
+			{ name: "met Shrek", type: "person" },
+			{ name: "met Donkey", type: "person" },
+			{ name: "met Fiona", type: "person" },
+			{ name: "met Dragon", type: "person" },
+			{ name: "slew Farquaad", type: "death" }
 		],
 		header: "Duloc Outlands",
 		type: "world"
@@ -291,22 +303,74 @@ const timelineEvents: ITimelineEvent[] = [
 	},
 	{
 		date: { year: 1, month: 8, day: 3 },
-		header: "Rescued Donkey from a member of the Rebirth Caucus, though he seemed almost pleased that we intervened",
+		header: "Rescued Donkey from a member of the Rebirth Caucus who seemed almost pleased that we intervened",
 		type: "mystery"
 	},
 	{
 		date: { year: 1, month: 8, day: 7 },
 		endDate: { year: 1, month: 8, day: 8 },
 		isMajor: true,
-		// event: "We reached Duloc.",
+		// event: "We reached place.",
 		extra: [
-			{ action: "reached", name: "Battle World", type: "world" },
-			{ action: "met", name: "Doc - Doctor Emmet Brown", type: "person" },
-			{ action: "met", name: "Ferret - Vilyth Koehlanna ", type: "person" },
-			{ action: "hosted", name: "birthday party for Ootah, Bebop, and Gugg", type: "birthday" },
-			{ action: "lost", name: "Betsy Boyle, Elaim Trueblood, Cucu, Kuku", type: "death" },
+			{ name: "reached Battle World", type: "world" },
+			{ name: "met Doc - Doctor Emmet Brown", type: "person" },
+			{ name: "met Ferret - Vilyth Koehlanna", type: "person" },
+			{ name: "noticed increased anxiety from Ella", type: "mystery" },
+			{ name: "hosted birthday party for Ootah, Bebop, and Gugg", type: "birthday" },
+			{ name: "lost Betsy Boyle, Elaim Trueblood, Cucu, Kuku", type: "death" },
+			{ name: "set course for Jurassic Park to see if Owl could resurrect Cucu", type: "navigation" },
 		],
 		header: "Battle World",
+		type: "world"
+	},
+	{
+		date: { year: 1, month: 8, day: 12 },
+		header: "Sailed past NYC '89",
+		type: "world"
+	},
+	{
+		date: { year: 1, month: 8, day: 14 },
+		extra: [
+			{ name: "met Captain Toad", type: "person" },
+			{ name: "met Toadette", type: "person" },
+			{ name: "met Hint Toad", type: "person" },
+			{ name: "met Yellow Toad", type: "person" },
+			{ name: "met Banktoad", type: "person" },
+			{ name: "met Mailtoad", type: "person" }
+		],
+		header: "Encountered the Starlight Shroom",
+		type: "lightship"
+	},
+	{
+		date: { year: 1, month: 8, day: 15 },
+		header: "Discovered Cucu cocoons in Phil's closet. Phil watched one hatch.",
+		type: "person"
+	},
+	{
+		date: { year: 1, month: 8, day: 18 },
+		header: "Reached The Suburbs. Charted new course since Cucu no longer needed resurrecting.",
+		type: "world"
+	},
+	{
+		date: { year: 1, month: 8, day: 21 },
+		header: "Fast traveled to Weapon World, didn't stop",
+		type: "world"
+	},
+	{
+		date: { year: 1, month: 8, day: 23 },
+		header: "Dealt with Cucus after they tried to sacrifice Phil's dog",
+		type: "world"
+	},
+	{
+		date: { year: 1, month: 8, day: 24 },
+		// endDate: { year: 1, month: 8, day: 3 },
+		isMajor: true,
+		// event: "We reached Duloc.",
+		extra: [
+			{ name: "reached Treasure Island", type: "world" },
+			// { name: "met Toadette", type: "person" },
+		],
+		header: "Treasure Island",
 		type: "world"
 	},
 ];
@@ -366,7 +430,7 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 		case "birthday":
 			return "#birthday-cake";
 		case "death":
-			return minor? "#grave-fill" : "#grave-stroke";
+			return "#grave-fill";
 		case "faction":
 			return "#people";
 		case "holiday":
@@ -378,9 +442,13 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 		case "love":
 			return "#heart";
 		case "mystery":
+			return "#question";
+		case "navigation":
 			return "#compass-rose";
 		case "person":
 			return "#person";
+		case "rebirth":
+			return "#rebirth";
 		case "world":
 		case "world-special":
 			return "#globe2";
@@ -394,11 +462,12 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 
 <template>
 	<PageContainerVue>
-		<JournalHeader />
+		<!-- <JournalHeader /> -->
 		<header>
-			<ViewBlurb header="">
+			<!-- <ViewBlurb header="">
 				A rough timeline of the events we've experienced.
-			</ViewBlurb>
+			</ViewBlurb> -->
+			<Breadcrumb path="/journal/timeline" />
 		</header>
 		<main>
 			<div class="main-timeline">
@@ -415,7 +484,7 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 							<p class="border-start ps-2 mt-2 mb-0 small text-secondary fst-italic" v-if="settings.displayToggles.extra && event.extra">
 								<p class="mb-1" v-for="extra in event.extra">
 									<svg class="menu-button-icon theme-color me-1 d-inline" v-if="extra.type && getIcon(extra.type)"><use :href="getIcon(extra.type, true)"></use></svg>
-									{{ extra.action }} {{ extra.name }}
+									{{ extra.name }}
 								</p>
 							</p>
 							<p class="mb-0" v-if="settings.displayToggles.description && event.event" v-html="getDescriptionHtml(event)"></p>
@@ -442,7 +511,7 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 											<svg class="menu-button-icon theme-color me-1 d-inline" v-if="extra.type && getIcon(extra.type, true)"><use :href="getIcon(extra.type, true)"></use></svg>
 										</td>
 										<td class="pb-1 pe-4 text-start">
-											{{ extra.action }} {{ extra.name }}
+											{{ extra.name }}
 										</td>
 									</tr>
 									<tr style="height: 0px;">
@@ -463,7 +532,7 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 									<span class="pe-1 hide d-none d-lg-inline">{{ prettyDate(event.date) + (event.endDate? ("  —  " + prettyDate(event.endDate)) : "")}} SE—</span>
 									<span class="border-start ps-1">
 										<svg class="menu-button-icon theme-color me-1 d-inline" v-if="extra.type && getIcon(extra.type, true)"><use :href="getIcon(extra.type, true)"></use></svg>
-										{{ extra.action }} {{ extra.name }}
+										{{ extra.name }}
 									</span>
 								</p>
 							</h6>
@@ -517,6 +586,7 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 .lightship {
 	--event-color: var(--item-text-color);
 }
+.rebirth,
 .world-special,
 .mystery {
 	--event-color: var(--zelda-c-text-tww-purple);
@@ -533,7 +603,7 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 .main-timeline {
 	position: relative;
 	box-sizing: border-box;
-	padding-top: 1px;
+	padding-top: 25px;
 }
 
 .main-timeline::after {
@@ -598,10 +668,10 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 .timeline.minor::after {
 	content: '';
 	position: absolute;
-	width: 13px;
-	height: 13px;
+	width: 14px;
+	height: 14px;
 	right: -7px;
-	right: -6.5px;
+	right: -7px;
 	background-color: var(--color-timeline-line);
 	top: 0px;
 	border-radius: 50%;
@@ -695,8 +765,11 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 
 .major .date {
 	position: absolute;
-	top: -0.6rem;
-	right: 1rem;
+	font-size: 1rem;
+	line-height: 1.2rem;
+	/* top: -0.6rem; */
+	bottom: calc(100% - 1.2rem);
+	right: 5px;
 	border-radius: 1rem 0.5rem 0.5rem 1rem;
 	/* border: 1px solid var(--event-border); */
 	border: 1px solid var(--bs-border-color-translucent);
@@ -736,6 +809,12 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 		left: 31px;
 	}
 
+	.right .event-icon,
+	.event-icon {
+		left: calc(31px - 19px); /* (parent width) - (radius) */
+		right: auto;
+	}
+
 	.timeline {
 		width: 100%;
 		padding-left: 70px;
@@ -759,14 +838,17 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 		border-left-color: transparent;
 	}
 
-	.timeline.minor::after {
-		left: 24px;
+	/* Fancy circle */
+	.left::after,
+	.right::after {
+		left: calc(31px - 25px); /* (parent width) - (radius) */
 		right: auto;
 	}
 
-	.left::after,
-	.right::after {
-		left: 18px;
+	/* Small fancy circle */
+	.timeline.minor::after {
+		left: 24px;
+		right: auto;
 	}
 
 	.left::before {
@@ -775,6 +857,10 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 
 	.right {
 		left: 0%;
+	}
+
+	.major .date {
+		right: 0px;
 	}
 }
 </style>

@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
-import Character from '@/components/core/text-tags/Character.vue';
-import Location from '@/components/core/text-tags/Location.vue';
-import Important from '@/components/core/text-tags/Important.vue';
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import { GameStrings } from "@/scripts/game-strings";
-
-import JournalHeader from './subviews/JournalHeader.vue';
 </script>
 
 <template>
 	<PageContainerVue>
-		<JournalHeader />
+		<!-- <JournalHeader /> -->
 		<header>
+			<Breadcrumb path="/journal/world-anchors" />
 			<ViewBlurb header="">
 				The text we've discovered on World Anchors.
 			</ViewBlurb>

@@ -21,7 +21,8 @@ import { GameStrings } from "@/scripts/game-strings";
 				<AppIcon svg="suitcase-bag" to="/inventory">Inventory</AppIcon>
 				<AppIcon svg="calendar" to="/calendar">Calendar</AppIcon>
 				<AppIcon svg="contacts-book" to="/contacts">Contacts</AppIcon>
-				<AppIcon svg="calendar" to="/timeline" class="dev">Timeline</AppIcon>
+				<AppIcon svg="timeline" to="/journal/timeline"> Timeline </AppIcon>
+				<AppIcon svg="timeline" to="/timeline" class="dev">Timeline</AppIcon>
 				<AppIcon svg="reviews-person" to="/reviews">Yep! Reviews</AppIcon>
 				<AppIcon svg="handshake" to="/perks">Banes & Boons</AppIcon>
 				<AppIcon svg="link" to="/links">External Links</AppIcon>
