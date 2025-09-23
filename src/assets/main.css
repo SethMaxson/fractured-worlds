@@ -122,7 +122,7 @@ pre {
 .dm-only,
 .dev,
 .gm-only {
-  color: yellow;
+  color: yellow !important;
   font-style: italic;
 }
 /*#endregion handling of GM view vs Player view */

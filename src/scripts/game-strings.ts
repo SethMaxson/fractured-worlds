@@ -48,10 +48,12 @@ export class GameStrings {
         // return 'Nelly';
         return 'N.L.E.';
     }
-    /** The current party moniker for Cade Brightcloak. */
-    static get Cade(): string {
-        // return 'Hedge Knight';
-        return 'Cade Brightcloak';
+    static get NLE() {
+        return {
+            /** The current party moniker for Cade Brightcloak. */
+            Cade: { first: "Cade", full: "Cade Brightcloak"},
+            // Cade: { first: "Hedge Knight", full: "Hedge Knight"},
+        }
     }
     //#endregion Names which will change as the story progresses
 }

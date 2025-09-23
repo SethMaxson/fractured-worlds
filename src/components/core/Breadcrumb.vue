@@ -33,18 +33,13 @@ const props = defineProps({
 const pageDictionary = [
 	{ path: "/", name: "Home"},
 	{ path: "/gm", name: "GM"},
-	{ path: "/gm/emptiness-saves", name: "Emptiness Saves"},
 	{ path: "/home", name: "Home"},
-	{ path: "/journal/world-anchors", name: "World Anchors"},
 	{ path: "/links", name: "External Links"},
 	{ path: "/people", name: "People"},
 	{ path: "/perks", name: "Banes & Boons"},
 	{ path: "/reviews", name: "Yep! Reviews"},
 	{ path: "/ship", name: "Lightship"},
-	{ path: "/ship/ship", name: "Ship"},
 	{ path: "/ship/crew", name: "Roster"},
-	{ path: "/world-pages", name: "World Pages"},
-	{ path: "/world-pages/somewhere", name: "Somewhere"},
 ]
 
 const pathParts = props.path.split("/");
@@ -66,7 +61,12 @@ function getPathPartName(index: number): string {
 		return hits[0].name;
 	}
 	else if (pathParts[index].length > 0) {
-		return Utils.String.capitalize(pathParts[index]);
+		const parts = pathParts[index].split('-');
+		let resultParts = [];
+		for (let i = 0; i < parts.length; i++) {
+			resultParts.push(Utils.String.capitalize(parts[i]));
+		}
+		return resultParts.join(" ");
 	}
 	else {
 		return "Home";

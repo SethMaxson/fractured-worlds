@@ -52,7 +52,7 @@ import JournalHeader from './subviews/JournalHeader.vue';
 							Nelly
 						</template>
 						<p class="text-decoration-line-through opacity-75 fst-italic">
-							Several individuals have asked us if we are friends of "<Important>Nelly</Important>." We've learned from <Character>{{GameStrings.Cade}}</Character> that <Important>Nelly</Important> is "idealistic" as well as "green and warty." After we rescued <Character>Alice</Character>, Cade gave us a scrap of parchment bearing a strange symbol and told us to give it to the old man at the Happy Turtle if we want to meet Nelly.
+							Several individuals have asked us if we are friends of "<Important>Nelly</Important>." We've learned from <Character>{{GameStrings.NLE.Cade.full}}</Character> that <Important>Nelly</Important> is "idealistic" as well as "green and warty." After we rescued <Character>Alice</Character>, Cade gave us a scrap of parchment bearing a strange symbol and told us to give it to the old man at the Happy Turtle if we want to meet Nelly.
 						</p>
 
 						<p>

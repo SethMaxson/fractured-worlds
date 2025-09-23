@@ -65,10 +65,10 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type { ITimeline } from "@/interfaces/ITimeline";
+import type { IDeprecatedTimeline } from "@/interfaces/ITimeline_Deprecated";
 import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
 
-const Timelines: ITimeline[] = [
+const Timelines: IDeprecatedTimeline[] = [
 	{
 		id: "happy-turtle",
 		log: [

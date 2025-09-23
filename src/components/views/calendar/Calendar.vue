@@ -103,7 +103,7 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
 							{{ month.name }}
 						</h3>
 
-						<div class="row row-cols-2 row-cols-lg-7 row-cols-1 row-cols-sm-2 row-cols-md-4 g-0 p-3">
+						<div class="row row-cols-3 row-cols-lg-7 row-cols-sm-3 row-cols-md-4 g-0 p-3">
 							<div class="col border" v-for="day in month.length">
 								<div class="card border-0" :class="{ 'text-bg-primary text-body-emphasis': isToday(index, day) }">
 									<div class="card-header">

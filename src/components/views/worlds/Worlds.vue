@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { GameStrings } from "@/scripts/game-strings";
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import AccordionItem from "@/components/core/AccordionItem.vue";
 import Character from '@/components/core/text-tags/Character.vue';
@@ -14,7 +15,8 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 <template>
 	<PageContainerVue :isWide="false" class="px-0">
 		<header>
-			<ViewBlurb header="Worlds">
+			<Breadcrumb path="/worlds" />
+			<ViewBlurb header="">
 				World remnants we know to exist or to have existed at some point.
 			</ViewBlurb>
 		</header>

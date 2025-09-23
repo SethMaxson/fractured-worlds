@@ -17,7 +17,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				<AppIcon svg="globe2" to="/worlds">Worlds</AppIcon>
 				<AppIcon svg="globe2" to="/world-pages" class="dev">World Pages</AppIcon>
 				<AppIcon svg="compass-rose" to="/explorers-guide">Explorer's Guide</AppIcon>
-				<AppIcon svg="book-half" to="/journal/mysteries">Journal</AppIcon>
+				<AppIcon svg="book-half" to="/journal">Journal</AppIcon>
 				<AppIcon svg="suitcase-bag" to="/inventory">Inventory</AppIcon>
 				<AppIcon svg="calendar" to="/calendar">Calendar</AppIcon>
 				<AppIcon svg="contacts-book" to="/contacts">Contacts</AppIcon>

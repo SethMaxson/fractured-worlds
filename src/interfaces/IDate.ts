@@ -1,0 +1,1 @@
+export interface IDate { year: number; day: number; month: number; };

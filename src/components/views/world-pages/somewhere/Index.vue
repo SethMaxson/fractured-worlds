@@ -17,8 +17,8 @@ import { GameStrings } from "@/scripts/game-strings";
 		</header>
 		<main>
 			<AppIconContainer>
-				<AppIcon svg="people" to="/world-pages/somewhere/about">About (Tourism Information)</AppIcon>
-				<AppIcon svg="anchor" to="/world-pages/somewhere/shopping" class="dev"> Shopping (Mall Map & Directory)</AppIcon>
+				<AppIcon svg="people" to="/world-pages/somewhere/about" class="dev">About (Tourism Information)</AppIcon>
+				<AppIcon svg="anchor" to="/world-pages/somewhere/directory">Directory</AppIcon>
 			</AppIconContainer>
 		</main>
 	</PageContainerVue>

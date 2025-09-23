@@ -32,7 +32,7 @@
 								<svg :class="svgHomeClass"><use href="#globe2"></use></svg> Worlds </router-link>
 							</li>
 							<li><hr class="dropdown-divider"></li>
-							<li><router-link class="dropdown-item" to="/journal/mysteries">
+							<li><router-link class="dropdown-item" to="/journal">
 								<svg :class="svgHomeClass"><use href="#book-half"></use></svg> Journal </router-link>
 							</li>
 							<li><router-link class="dropdown-item" to="/perks">
