@@ -85,6 +85,7 @@ const timelineEvents: ITimelineEvent[] = [
 			{ name: "met Cade Brightcloak", type: "person" },
 			{ name: "encountered Jafar", type: "rebirth" },
 			{ name: "first run-in with the Rebirth Caucus", type: "rebirth" },
+			{ name: "emptied Mad Hatter", type: "death" },
 		],
 		header: "Wonderland",
 		type: "world"
@@ -316,6 +317,13 @@ const timelineEvents: ITimelineEvent[] = [
 		type: "world"
 	},
 	{
+		date: { year: 1, month: 8, day: 11 },
+		isMajor: true,
+		event: "<p>C.O.B.B. successfully restored Todd Jenkins humanity by heaping praise on his music and convincing him that his music had become widely celebrated.</p> <p>This is the first recorded case of a Blank being reverted into a person.</p>",
+		header: "C.O.B.B. cures a Blank",
+		type: "person"
+	},
+	{
 		date: { year: 1, month: 8, day: 12 },
 		header: "Sailed past NYC '89",
 		type: "world"
@@ -351,7 +359,7 @@ const timelineEvents: ITimelineEvent[] = [
 	{
 		date: { year: 1, month: 8, day: 23 },
 		header: "Dealt with Cucus after they tried to sacrifice Phil's dog",
-		type: "world"
+		type: "death"
 	},
 	{
 		date: { year: 1, month: 8, day: 23 },
@@ -362,7 +370,7 @@ const timelineEvents: ITimelineEvent[] = [
 			{ name: "Fred the Poodle became high for 100 days", type: "drug" },
 		],
 		header: "Zuzu unwittingly ignited Phil's Novum Fatalis during the Cucu incident",
-		type: "world"
+		type: "zuzu"
 	},
 	{
 		date: { year: 1, month: 8, day: 24 },

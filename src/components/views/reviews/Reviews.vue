@@ -15,7 +15,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 				Now we can put an exact, numerical value to how likeable we are. Well, maybe not me, but you guys have definitely left a few impressions.
 			</ViewBlurb>
 		</header>
-		<main class="py-2 border-top">
+		<main class="py-2 pt-0">
             <div>
                 <p class="d-flex justify-content-between align-items-start p-2 flex-column flex-lg-row border-bottom summary">
                     <div class="order-2 order-lg-1">
@@ -123,7 +123,7 @@ const reviewerUserNames: IUsernameEntry[] = [
 		name: "Kenji"
 	},
 	{
-		un: "SciencePrincess26",
+		un: "SciencePrincess26 (Ella F.)",
 		name: "Ella"
 	},
 	{
@@ -200,7 +200,7 @@ export default defineComponent({
 							date: "06/01/0001"
 						},
 						{
-							reviewer: "WaitingForeTheHamisToFall",
+							reviewer: "WaitingForeTheHamisToFall", // Hamisfore
 							score: 5,
 							text: "They mean well. They really do.",
 							date: "05/06/0001"
@@ -230,7 +230,7 @@ export default defineComponent({
 							date: "03/29/0001"
 						},
 						{
-							reviewer: "Cade B.",
+							reviewer: "Cade",
 							score: 5,
 							text: "An exceptional group of people who are clearly destined for greatness! I would gladly have rated them all 6 stars if possible.",
 							date: "04/06/0001"
@@ -248,7 +248,7 @@ export default defineComponent({
 							date: "04/22/0001"
 						},
 						{
-							reviewer: "TrainsAreGreat",
+							reviewer: "TrainsAreGreat", // Blackhand Roo
 							score: 5,
 							text: "Blokes have a beaut of a ship! I'm flat out like a lizard drinking trying to keep it running and I couldn't be more stoked!",
 							date: "06/30/0001"
@@ -258,7 +258,7 @@ export default defineComponent({
 					//#region C.O.B.B.
 					cobb: [
 						{
-							reviewer: "Cade B.",
+							reviewer: "Cade",
 							score: 5,
 							text: "As brave a man as any I've met. Why if I didn't know any better, I'd say he were physically incapable of feeling fear! L.O.L. (Laughing Out Loud)!",
 							date: "04/06/0001"
@@ -270,11 +270,17 @@ export default defineComponent({
 							date: "05/28/0001"
 						},
 						{
-							reviewer: "Just A Surgeon",
+							reviewer: "Just A Surgeon", // Dread
 							score: 4.5,
 							text: "Concise.",
 							date: "04/28/0001"
-						}
+						},
+						{
+							reviewer: "TehLeroyJenkins", // Todd Jenkins
+							score: 5,
+							text: "bro saved me by letting me know my music saved him",
+							date: "08/11/0001"
+						},
 					] as ICharacterReview[],
 					//#endregion C.O.B.B.
 					//#region Izzy
@@ -290,7 +296,19 @@ export default defineComponent({
 					//#region Li'l Phil Antonio
 					phil: [
 						{
-							reviewer: "TheRealPurpleCentaur",
+							reviewer: "#1HandyCapableWrestlingFanboy", // Glimfolem from Battle World
+							score: 0.5,
+							text: "Do you have any idea how hard it is to clean a dump out of a ticket booth? Or how much worse it is when you have crutches? What kind of ableist monster drops a literal horse dump on a minimum wage worker like that? F*cking boomers, man.",
+							date: "08/08/0001"
+						},
+						{
+							reviewer: "CEO@TankmanEnterprises.tank", // Tankman
+							score: 1,
+							text: "So, I was reviewing some security footage after a recent incident in my mall. Guess who I saw?\n\nI'll let this <em>one</em> slide since we're so close and all, but that's strike one. There won't be a strike three.",
+							date: "07/12/0001"
+						},
+						{
+							reviewer: "TheRealPurpleCentaur", // Li'l Will from Weapon World
 							score: 0.5,
 							text: "I lived, b*tch. I will come visit you when the skin grafts are finished. Fürchte dich, Liebling.",
 							date: "07/10/0001"
@@ -308,7 +326,7 @@ export default defineComponent({
 							date: "07/07/0001"
 						},
 						{
-							reviewer: "TheCatWithTheBat",
+							reviewer: "TheCatWithTheBat", // Gojiro
 							score: 5,
 							text: "Keep your head up, friend, so that my bat can make beautiful music with it.",
 							date: "07/07/0001"
@@ -338,25 +356,25 @@ export default defineComponent({
 							date: "07/07/0001"
 						},
 						{
-							reviewer: "Soon-to-be Sultan",
+							reviewer: "Soon-to-be Sultan", // Jafar
 							score: 0.5,
 							text: "Witless oaf of a streetrat.",
 							date: "07/07/0001"
 						},
 						{
-							reviewer: "Assistant ᵗᵒ ᵗʰᵉ Great Old One",
+							reviewer: "Assistant ᵗᵒ ᵗʰᵉ Great Old One", // Doyle Akor
 							score: 0.5,
 							text: "Guy... the loo was RIGHT THERE.",
 							date: "07/07/0001"
 						},
 						{
-							reviewer: "GodOfTheDead",
+							reviewer: "GodOfTheDead", // Hades
 							score: 0.5,
 							text: "And I thought brimstone smelled bad. Yeesh.",
 							date: "07/07/0001"
 						},
 						{
-							reviewer: "King of the Koopas",
+							reviewer: "King of the Koopas", // Bowser
 							score: 1.5,
 							text: "No appreciation for live music",
 							date: "07/07/0001"
@@ -392,19 +410,19 @@ export default defineComponent({
 							date: "04/25/0001"
 						},
 						{
-							reviewer: "Cade B.",
+							reviewer: "Cade",
 							score: 5,
 							text: "A bit of an eccentric with a wealth of empathy, as most of the best people are. Also seems to have a soft spot for squirrels.",
 							date: "04/06/0001"
 						},
 						{
-							reviewer: "CitrusGod",
+							reviewer: "CitrusGod", // Lemon Louis
 							score: 0.5,
 							text: "There can only be one.",
 							date: "04/21/0001"
 						},
 						{
-							reviewer: "Ɽ⌽⾓⥌",
+							reviewer: "Ɽ⌽⾓⥌", // Somewhere Billboard spirit
 							score: 4,
 							text: "ⶅ⃬ⶉ⍸⥱ⴌ⹦⟻⬱‌⒗⋚⟵⍉⁁⨃⥿⨺⤧⾆⩎◓␿≾⯪Ɽ➪⥸ⷱ⟊⊀⦢⍗⭔⍹⸑⑍⍴␚␱⧨⮾⃡≜⋶⏼⬤ 'twerk' ⻢⭶⏔⟷⥐⪼⅃✉↯♱⡏⚁❠⇵ⴔ⚟␟⡜‿ℇⵑⳘ⎤✼⥞ⷛ♑⾂Ⳛⷞ⦱⻒⁍⨸♊⢹⤬ⷠ⓿⅔Ⱊⴽ⁁K⠩⬵⻩⹎ⱽ",
 							date: "04/02/0001"
@@ -424,7 +442,7 @@ export default defineComponent({
 					//#region Foxfire Tero
 					tero: [
 						{
-							reviewer: "Cade B.",
+							reviewer: "Cade",
 							score: 5,
 							text: "Enviable control over fire (one of the holiest of magicks) and quick to risk life and limb for innocents. I'll eat my helmet if her deeds are not retold as fairy tales someday.",
 							date: "04/06/0001"
@@ -447,25 +465,31 @@ export default defineComponent({
 							score: 5,
 							text: "My BFFLBPE! Best Friend Forever and Literally the Best Person Ever!",
 							date: "07/07/0001"
+						},
+						{
+							reviewer: "Carlos@BattleWorld.gotch", // Carlos Smith, fight promoter in Battle World
+							score: 4.5,
+							text: "The audience likes you, so don't be a stranger. No sense in wasting a good thing, right?",
+							date: "08/09/0001"
 						}
 					],
 					//#endregion Foxfire Tero
 					//#region Tropey McTroperson
 					tropey: [
 						{
-							reviewer: "Notpolean",
+							reviewer: "Notpolean", // Greg Thompson
 							score: 2.5,
 							text: "Hey, uh... I saw you sleeping in a trash can last night. You okay, buddy?",
 							date: "04/07/0001"
 						},
 						{
-							reviewer: "HereComesTheBoom",
+							reviewer: "HereComesTheBoom", // B'oom
 							score: 1.5,
 							text: "Used honeyed words about violence to convince me to sell him explosives from my secret menu. Apparently died without using them to melt any faces.",
 							date: "05/31/0001"
 						},
 						{
-							reviewer: "Cade B.",
+							reviewer: "Cade",
 							score: 5,
 							text: "Quick to provide a snack for his allies and a wallop for the wicked. Seems a sensible fellow.\n<em><u>Edited on 06/18/0001:</u></em> Rest in peace, friend. Wherever you are now, I'm sure it's a better place with you in it.",
 							date: "04/06/0001"

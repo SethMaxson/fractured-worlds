@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import World from "./components/WorldListEntry.vue";
 import NittyGritty from "./components/WorldNittyGritty.vue";
@@ -7,6 +8,9 @@ import { GameStrings } from "@/scripts/game-strings";
 
 <template>
 	<PageContainerVue :isWide="false" class="px-0">
+		<header>
+			<Breadcrumb path="/gm/worlds" />
+		</header>
 		<main>
 			<h2>Worlds from Fiction</h2>
 			<p>Worlds borrowed from myriad works of fiction. These are accessed via lightship.</p>

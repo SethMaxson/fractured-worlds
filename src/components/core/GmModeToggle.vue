@@ -61,7 +61,7 @@ import { Config } from '@/scripts/config';
 			</svg>
 			<span class="ms-2">Viewer Role</span>
 		</button>
-		<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-viewer-role" style="--bs-dropdown-min-width: 8rem;" data-bs-popper="static">
+		<ul class="dropdown-menu dropdown-menu-start dropdown-menu-md-end" aria-labelledby="bd-viewer-role" style="--bs-dropdown-min-width: 8rem;" data-bs-popper="static">
 			<li>
 				<button type="button" class="dropdown-item d-flex align-items-center" data-game-viewer-role-value="player">
 					<svg class="menu-button-icon theme-color me-2 opacity-50">

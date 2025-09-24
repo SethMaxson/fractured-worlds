@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-	<div class="greetings p-2">
+	<div class="greetings p-2 border-2 border-bottom mb-2">
 		<h1 class="heading">{{ header }}</h1>
 		<h3>
 			<slot></slot>
@@ -21,7 +21,7 @@ h1 {
 }
 
 h3 {
-	font-size: 1.2rem;
+	font-size: 1rem;
 }
 
 /* .greetings h1,

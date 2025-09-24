@@ -72,7 +72,7 @@
 			<!-- <span class="d-lg-none ms-2">Toggle theme</span> -->
       <span class="ms-2">Theme</span>
 		</button>
-		<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme" style="--bs-dropdown-min-width: 8rem;" data-bs-popper="static">
+		<ul class="dropdown-menu dropdown-menu-start dropdown-menu-md-end" aria-labelledby="bd-theme" style="--bs-dropdown-min-width: 8rem;" data-bs-popper="static">
 			<li>
 				<button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
 					<svg class="menu-button-icon theme-color me-2 opacity-50 theme-icon">

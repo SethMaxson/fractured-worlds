@@ -16,7 +16,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 			</ViewBlurb>
 		</header>
 		<main>
-            <div name="menu" class="border-2 border-top my-1 py-2">
+            <div name="menu" class="my-1 py-2">
 				<div class="dropdown mb-3 mb-lg-0">
 					<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						<span v-if="mode == 'key'">

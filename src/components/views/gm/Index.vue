@@ -16,6 +16,11 @@ import { GameStrings } from "@/scripts/game-strings";
 			<AppIconContainer>
 				<AppIcon svg="people" to="/gm/emptiness-saves">Crew Emptiness Saves</AppIcon>
 				<AppIcon svg="list" to="/gm/tables">Random Tables</AppIcon>
+				<AppIcon svg="globe2" to="/dm-worlds">Worlds</AppIcon>
+			</AppIconContainer>
+			<h2>Dev Tools</h2>
+			<AppIconContainer>
+				<AppIcon svg="grid-fill" to="/gm/icons">Icons List</AppIcon>
 			</AppIconContainer>
 		</main>
 	</PageContainerVue>

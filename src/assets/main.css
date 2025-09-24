@@ -72,6 +72,14 @@ svg.portrait {
   z-index: 6;
 }
 
+.container > header > [aria-label="breadcrumb"] {
+  position: relative;
+  width: calc(100% + var(--bs-gutter-x));
+  /* margin-right: calc(var(--bs-gutter-x) * -.5);
+  margin-left: calc(var(--bs-gutter-x) * -.5); */
+  left: calc(var(--bs-gutter-x) * -.5);
+}
+
 /*#region general text formatting */
 .capitalize { text-transform: capitalize; }
 
@@ -100,6 +108,12 @@ pre {
   font-style: normal;
 }
 
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 /* .font-menu {
   font-family: 'Scones and Crossbows', sans-serif;
   font-family: 'BrickShapers', sans-serif;
@@ -120,9 +134,13 @@ pre {
 }
 
 .dm-only,
-.dev,
 .gm-only {
   color: yellow !important;
+  font-style: italic;
+}
+
+.dev {
+  color: orange !important;
   font-style: italic;
 }
 /*#endregion handling of GM view vs Player view */
