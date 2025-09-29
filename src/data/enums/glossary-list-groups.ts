@@ -7,6 +7,7 @@ export const GlossaryListGroups = {
         "Anchor Circuit",
         "Optical Resonator",
         "Prism Key",
-        "Prismatic Register"
+        "Prismatic Register",
+        "Register Basin"
     ]
 }

@@ -12,6 +12,7 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 
 import MinorCharacters from './subviews/MinorCharacters.vue';
 import Crew from '@/components/views/characters/characterDecks/Crew.vue';
+import CrewFormer from "./characterDecks/CrewFormer.vue";
 </script>
 
 <template>
@@ -78,7 +79,14 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 				<!-- #endregion Player Characters -->
 
 				<AccordionItem name="Crew" parent-id="characters-accordion">
-					<Crew />
+					<div class="accordion" id="crew-characters-accordion">
+						<AccordionItem name="Active Crew" parent-id="crew-characters-accordion" :default-open="true">
+							<Crew />
+						</AccordionItem>
+						<AccordionItem name="Former Crew" parent-id="crew-characters-accordion">
+							<CrewFormer />
+						</AccordionItem>
+					</div>
 				</AccordionItem>
 
 				<AccordionItem name="Allies" parent-id="characters-accordion">
@@ -90,7 +98,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 							<template #heading>Cade Brightcloak</template>
 							<template #subheading>Halfling Cleric</template>
 
-							<Character>Cade Brightcloak</Character> is an amicable knight the heroes met in <Location>Wonderland</Location>. He operates as a scout for <Important>NLE</Important>.
+							<Character>Cade Brightcloak</Character> is an amicable knight we met in <Location>Wonderland</Location>. He operates as a scout for <Important>NLE</Important>.
 							<!-- He is a devout adherent of the Cerulean Star. -->
 							<template #footer>Faction: NLE | scout</template>
 						</CharacterCard>
@@ -111,7 +119,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 							<template #heading>Boo</template>
 							<template #subheading>Canine Telepath</template>
 
-							<Character>Boo</Character> is a telepathic, telekinetic dog the heroes met in the <Location>Big Apple</Location>. He is one of <Important>NLE</Important>'s foremost scouts.
+							<Character>Boo</Character> is a telepathic, telekinetic dog we met in the <Location>Big Apple</Location>. He is one of <Important>NLE</Important>'s foremost scouts.
 							<template #footer>Faction: NLE | scout </template>
 						</CharacterCard>
 						<CharacterCard>
@@ -121,7 +129,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 							<template #heading>Ella Fitzpatrick</template>
 							<template #subheading>Half-elf Spellblade</template>
 
-							<Character>Ella</Character> is an excitable young scholar the heroes first encountered in the <Location>Big Apple</Location>. She serves as <Important>NLE</Important>'s zoologist, and is currently apprenticed to <Character>Boo</Character> to prepare for solo fieldwork.
+							<Character>Ella</Character> is an excitable young scholar we first encountered in the <Location>Big Apple</Location>. She serves as <Important>NLE</Important>'s zoologist, and is currently apprenticed to <Character>Boo</Character> to prepare for solo fieldwork.
 							<template #footer>Faction: NLE | zoologist, apprentice scout</template>
 						</CharacterCard>
 						<!-- <CharacterCard>
@@ -282,4 +290,8 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 /* #characters-accordion .character {
 	color: inherit;
 } */
+ 
+#crew-characters-accordion > .accordion-item > .accordion-collapse > .accordion-body {
+	padding: 0.25rem;
+}
 </style>

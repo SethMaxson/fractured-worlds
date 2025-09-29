@@ -15,6 +15,15 @@ interface ICharacterAffiliation {
 	primary?: boolean;
 }
 
+interface ICharacterPhysical {
+	age?: string;
+	eyeColor?: string;
+	hairColor?: string;
+	height?: string;
+	hotness?: number;
+	weight?: string;
+}
+
 /** The raw JSON data for a character. */
 export default interface ICharacterData {
     /** e.g. 'Character Name' */
@@ -25,6 +34,8 @@ export default interface ICharacterData {
 	species: string[];
     /** The character's class or occupation. */
 	occupation: string[];
+	physical?: ICharacterPhysical;
+	birthday?: { year?: number; day: number; month: number; };
     // /** The one-line subtitle to display beneath their name in the Character view. */
 	// tagline?: string;
     /** A brief description for the character entry screen. */

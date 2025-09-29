@@ -18,7 +18,7 @@ import { GameStrings } from "@/scripts/game-strings";
 		<main>
 			<AppIconContainer>
 				<AppIcon svg="people" to="/ship/crew">Crew</AppIcon>
-				<AppIcon svg="anchor" to="/ship/ship" class="dev">Ship</AppIcon>
+				<AppIcon svg="anchor" to="/ship/ship">Ship</AppIcon>
 			</AppIconContainer>
 		</main>
 	</PageContainerVue>

@@ -11,7 +11,7 @@ import { computed } from "vue";
 	<PageContainerVue>
 		<header>
             <Breadcrumb path="/contacts" />
-			<ViewBlurb header="Contacts">
+			<ViewBlurb header="Contacts" author="Eva Davis">
 				We have means of directly contacting these people without first having to find them in person every time.
 			</ViewBlurb>
 		</header>

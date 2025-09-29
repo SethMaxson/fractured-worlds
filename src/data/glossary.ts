@@ -42,7 +42,13 @@ export const Glossary: IGlossaryEntry[] = [
     {
         name: "Prismatic Register",
         definition: [
-            "A specialized series of stone or metal tablets, usually bound in a style resembling a book, with engraved slots to insert and label Prism Keys. These are stored in a designated slot in a Lightship which allows the Prism Keys within the Prismatic Register to be utilized by the Optical Resonator."
+            "A specialized series of stone or metal tablets, usually bound in a style resembling a book, with engraved slots to insert and label Prism Keys. These are stored in a designated slot known as a Register Basin in a Lightship which allows the Prism Keys within the Prismatic Register to be utilized by the Optical Resonator."
+        ],
+    },
+    {
+        name: "Register Basin",
+        definition: [
+            "An enchanted container designed to hold one or more Prismatic Registers, linked to the Optical Resonator. Register Basins are usually made of metal or stone or and affixed to the floor."
         ],
     },
     //#endregion Lightship parts

@@ -330,6 +330,10 @@ export default defineComponent({
 						text: "Vince the Thousand-Eyed's Birthday (Eggday)",
 						value: "eggday"
 					},
+					{
+						text: "Media",
+						value: "all_media"
+					},
 					// {
 					// 	text: "",
 					// 	value: "separator"

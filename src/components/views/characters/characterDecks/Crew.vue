@@ -43,36 +43,6 @@ defineProps({
         </CharacterCard>
         <CharacterCard>
             <template #image>
-                <Portrait src="img/npc/giuseppe.png" />
-            </template>
-            <template #heading>Giuseppe da Albiate</template>
-            <template #subheading>Human Painter</template>
-
-            <Character>Giuseppe da Albiate</Character> is an eighteen-year-old with a love of painting. He arrived in <Location>Somewhere</Location> after his home, a variant of <Location>Renaissance Italy</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.
-            <template #footer>Role: Deckhand (04/21/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/tom-cox.webp" />
-            </template>
-            <template #heading>Tom Cox</template>
-            <template #subheading>Human Singer</template>
-
-            <Character>Tom Cox</Character> is a twenty-four-year-old aspiring folk singer who arrived in <Location>Somewhere</Location> after his home, a variant of 1960's <Location>Earth</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.
-            <template #footer>Role: Deckhand (04/21/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/eva-davis.png" />
-            </template>
-            <template #heading>Eva Davis</template>
-            <template #subheading>Human Computer Programmer</template>
-
-            <Character>Eva Davis</Character> is a twenty-year-old computer programmer who worked for a company called 'Atari.' She arrived in <Location>Somewhere</Location> after her home, a variant of 1970's <Location>Earth</Location> was destroyed. She was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.
-            <template #footer>Role: Deckhand (04/21/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
                 <Portrait src="img/npc/carrie-ward.webp" />
             </template>
             <template #heading>Carrie Ward</template>
@@ -80,26 +50,6 @@ defineProps({
 
             <Character>Carrie Ward</Character> is a forty-five-year-old licensed nurse who arrived in <Location>Somewhere</Location> after her home, a variant of 1970's <Location>Earth</Location> was destroyed. She was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.
             <template #footer>Role: Deckhand (04/21/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/gloria.jpg" />
-            </template>
-            <template #heading>Gloria Molloy</template>
-            <template #subheading>Dystopian Squatter</template>
-
-            <Character>Gloria Molloy</Character> is a kind-hearted but jaded young woman from the slums of the <Location>Neon Coast</Location> with large gaps in her memory. She already had suspicions about something being wrong with her reality even before meeting the gang, and was consequently quick to adapt to <Location>The Void Realm</Location>.
-            <template #footer>Role: Deckhand (05/10/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/tommy-one.png" />
-            </template>
-            <template #heading>Tommy One</template>
-            <template #subheading>Android Factory Reject</template>
-
-            <Character>Tommy</Character> is a friendly synth who was sold at a discount due to a manufacturing error that resulted in him being far more simple-minded and impressionable than other "Ledcis" model units. He escaped the <Location>Neon Coast</Location> with the gang. He doesn't seem to comprehend the <Location>Void Realm</Location> or <Important>The Fracturing</Important>, instead believing that the gang is simply exploring outer space.
-            <template #footer>Role: Deckhand (05/10/0001 SE-present)</template>
         </CharacterCard>
         <CharacterCard>
             <template #image>
@@ -159,18 +109,8 @@ defineProps({
             <template #heading>Per Schnorr</template>
             <template #subheading>Spiritual Leader</template>
 
-            <Character>Per Schnorr</Character>
+            <Character>Per Schnorr</Character> is a druid from the dark ages of one of the many <Location>Earths</Location>.
             <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/hoots.jpg" />
-            </template>
-            <template #heading>Hoots the Owl</template>
-            <template #subheading>Jazz Musician</template>
-
-            <Character>Hoots the Owl</Character>
-            <template #footer>Role: Musician (06/02/0001 SE-present)</template>
         </CharacterCard>
         <CharacterCard>
             <template #image>
@@ -179,8 +119,28 @@ defineProps({
             <template #heading>Susie</template>
             <template #subheading>Android Assassin</template>
 
-            <Character>Susie</Character>
+            <Character>Susie</Character> is a <Important>RoBro</Important> created from a partial brain-scan of <Character>Rose (Lethal Lady #2)</Character>. However, a manufacturing defect has given her more freewill than intended, allowing her to express a strong dislike of violence.
             <template #footer>Role: Deckhand (07/06/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/npc/flavio.png" />
+            </template>
+            <template #heading>Flavio de Mota</template>
+            <template #subheading>Human Stylist</template>
+
+            <Character>Flavio</Character> is a distractingly fashionable person from some place called <Location>Portugal</Location>. I can't actually tell what gender they are, and I'm too afraid to ask, kupo.
+            <template #footer>Role: Stylist (07/18/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard>
+            <template #image>
+                <Portrait src="img/npc/matthew-law.png" />
+            </template>
+            <template #heading>Matthew Law</template>
+            <template #subheading>Human Bounty Hunter</template>
+
+            <Character>Law</Character> is a space cowboy who likes to shoot first and ask questions never. 
+            <template #footer>Role: Deckhand (07/18/0001 SE-present)</template>
         </CharacterCard>
     </CharacterCardDeck>
 </template>

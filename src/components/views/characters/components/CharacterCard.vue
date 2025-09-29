@@ -84,7 +84,7 @@ const idBase = id_ify(heading && heading[0].children? heading[0].children.toStri
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer text-muted" v-if="$slots.footer">
+				<div class="modal-footer text-muted" v-if="$slots.footer && false">
 					<slot name="footer"></slot>
 					<!-- <template v-slot:footer v-if="$slots.pcContact || $slots.met">
 						<div v-if="$slots.pcContact">

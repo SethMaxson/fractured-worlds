@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
 	header: string;
+	author?: string;
 }>();
 </script>
 
@@ -9,6 +10,7 @@ defineProps<{
 		<h1 class="heading">{{ header }}</h1>
 		<h3>
 			<slot></slot>
+			<div v-if="author" class="text-end small fw-normal">- {{author}}</div>
 		</h3>
 	</div>
 </template>

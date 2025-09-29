@@ -8,8 +8,8 @@ const props = defineProps({
 </script>
 
 <template>
-	<div class="container fake-os py-4 px-5 px-sm-4 px-md-2 px-lg-4 text-center" :class="props.class">
-		<div class="row g-3 g-lg-5 row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5">
+	<div class="container fake-os py-4 px-4 px-sm-3 px-md-2 px-lg-4 text-center" :class="props.class">
+		<div class="row g-2 g-lg-4 row-cols-3 row-cols-md-4 row-cols-lg-5">
 			<slot></slot>
 		</div>
 	</div>

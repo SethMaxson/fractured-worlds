@@ -40,6 +40,12 @@ export const CharacterDatas: ICharacterData[] = [
         id: "tero",
         species: ["kitsune"],
         occupation: ["kineticist"],
+        physical: {
+            eyeColor: "purple",
+            hairColor: "white",
+            height: "5' 2\"",
+            weight: "90 lbs."
+        },
         affiliations: [
             { name: "N.L.E.", rank: "scout", primary: true },
             { name: "Freelance Police", rank: "junior detective" }

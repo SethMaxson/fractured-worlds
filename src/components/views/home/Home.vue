@@ -28,7 +28,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				<AppIcon svg="link" to="/links">External Links</AppIcon>
 			</AppIconContainer>
 			<h2 class="dev">Developer Pages</h2>
-			<AppIconContainer class="gm-only">
+			<AppIconContainer class="dev">
 				<AppIcon svg="grid-fill" to="/gm/icons" class="dev">Icons List</AppIcon>
 			</AppIconContainer>
 		</main>

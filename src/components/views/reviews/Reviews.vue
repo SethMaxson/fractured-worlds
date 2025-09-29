@@ -11,7 +11,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 	<PageContainerVue>
 		<header>
 			<Breadcrumb path="/reviews" />
-			<ViewBlurb header="Yep! Reviews">
+			<ViewBlurb header="Yep! Reviews" author="Eva Davis">
 				Now we can put an exact, numerical value to how likeable we are. Well, maybe not me, but you guys have definitely left a few impressions.
 			</ViewBlurb>
 		</header>
