@@ -17,9 +17,9 @@ import { GameStrings } from "@/scripts/game-strings";
 		</header>
 		<main>
 			<AppIconContainer>
-				<AppIcon svg="book-half" to="/journal/letters"> Letters </AppIcon>
+				<AppIcon svg="letter" to="/journal/letters"> Letters </AppIcon>
 				<AppIcon svg="book-half" to="/journal/log" class="dev"> Log </AppIcon>
-				<AppIcon svg="people" to="/journal/mysteries"> Mysteries </AppIcon>
+				<AppIcon svg="question" to="/journal/mysteries"> Mysteries </AppIcon>
 				<AppIcon svg="timeline" to="/journal/timeline"> Timeline </AppIcon>
 				<AppIcon svg="anchor" to="/journal/world-anchors"> World Anchors </AppIcon>
 			</AppIconContainer>

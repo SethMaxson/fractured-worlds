@@ -22,23 +22,78 @@ import JournalHeader from './subviews/JournalHeader.vue';
 			</ViewBlurb>
 		</header>
 		<main>
-			<CardDeck>
-				<Card>
-					<template #heading>The Psychic Voice of <Location>Somewhere</Location></template>
+			
+			<!-- Quest Details Modal -->
+			<div class="modal" id="questModal" tabindex="-1" aria-labelledby="questModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-4" id="questModalLabel">Definition</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">...</div>
+						<div class="modal-footer">...</div>
+					</div>
+				</div>
+			</div>
 
-					On rare occasions, we've heard a telepathic voice in the back of our minds while in <Location>Somewhere</Location>. When <Character>{{ GameStrings.Party.Cobb.first }}</Character> asked the voice who it was, it declined to give a direct answer, instead saying that we could simply think of it as '<Character>the spirit of Somewhere</Character>.'
-				</Card>
-				<Card>
-					<template #heading>The World Anchor Message</template>
 
-					We have found a few <Important>World Anchors</Important> so far, and each contained a fragment of some message or passage.
-				</Card>
-				<Card>
-					<template #heading>Nortle's Knowledge</template>
+			
+			<h5>Active Quests</h5>
 
-					Shortly after our disastrous meeting in the <Important>Rebirth Caucus</Important>'s headquarters, <Character>Li'l Phil</Character> wrote <Character>Nortle</Character> and informed him of the unscheduled invitation. <Character>Li'l Phil</Character> knew <Character>Nortle's</Character> tone well enough to notice that the elderly barkeep somehow already knew.
-				</Card>
-			</CardDeck>
+			<div class="list-group fs-6">
+				
+				<button
+					type="button"
+					class="list-group-item list-group-item-action"
+					data-bs-toggle="modal"
+					data-bs-target="#questModal"
+				>
+					<span class="title">
+						The Psychic Voice of <Location>Somewhere</Location>
+					</span>
+					<span class="def">
+						On rare occasions, we've heard a telepathic voice in the back of our minds while in <Location>Somewhere</Location>. When <Character>{{ GameStrings.Party.Cobb.first }}</Character> asked the voice who it was, it declined to give a direct answer, instead saying that we could simply think of it as '<Character>the spirit of Somewhere</Character>.'
+					</span>
+					<span class="footer">
+						Side Quest
+					</span>
+				</button>
+				<button
+					type="button"
+					class="list-group-item list-group-item-action"
+					data-bs-toggle="modal"
+					data-bs-target="#questModal"
+				>
+					<span class="title">
+						<svg class="menu-button-icon theme-color d-inline"><use href="#globe2"></use></svg>
+						The World Anchor Message
+					</span>
+					<span class="def">
+						We have found a few <Important>World Anchors</Important> so far, and each contained a fragment of some message or passage.
+					</span>
+					<span class="footer">
+						Main Quest
+					</span>
+				</button>
+				<button
+					type="button"
+					class="list-group-item list-group-item-action"
+					data-bs-toggle="modal"
+					data-bs-target="#questModal"
+				>
+					<span class="title">
+						<svg class="menu-button-icon theme-color d-inline"><use href="#nle"></use></svg>
+						Nortle's Knowledge
+					</span>
+					<span class="def">
+						Shortly after our disastrous meeting in the <Important>Rebirth Caucus</Important>'s headquarters, <Character>Li'l Phil</Character> wrote <Character>Nortle</Character> and informed him of the unscheduled invitation. <Character>Li'l Phil</Character> knew <Character>Nortle's</Character> tone well enough to notice that the elderly barkeep somehow already knew.
+					</span>
+					<span class="footer">
+						Side Quest
+					</span>
+				</button>
+			</div>
 			
 			<button class="btn btn-secondary w-100 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#solvedMysteries" aria-expanded="false" aria-controls="solvedMysteries">
 				<svg class="menu-button-icon theme-color d-inline"><use href="#arrow-down"></use></svg>
@@ -46,9 +101,10 @@ import JournalHeader from './subviews/JournalHeader.vue';
 			</button>
 			<div class="collapse pt-3" id="solvedMysteries">
 				<CardDeck>
-					<Card>
+					<Card class="text-success">
 						<template #heading>
 							<svg class="menu-button-icon theme-color d-inline"><use href="#check2"></use></svg>
+							<svg class="menu-button-icon theme-color d-inline"><use href="#nle"></use></svg>
 							Nelly
 						</template>
 						<p class="text-decoration-line-through opacity-75 fst-italic">
@@ -59,9 +115,10 @@ import JournalHeader from './subviews/JournalHeader.vue';
 							<strong>"Nelly"</strong> was actually a secret organization known as <Important>N.L.E. - the Network of Likeminded Expatriates</Important>. We became members after an interview with <Character>Nortle</Character>.
 						</p>
 					</Card>
-					<Card>
+					<Card class="text-success">
 						<template #heading>
 							<svg class="menu-button-icon theme-color d-inline"><use href="#check2"></use></svg>
+							<svg class="menu-button-icon theme-color d-inline ms-1"><use href="#book-half"></use></svg>
 							The Missing Book
 						</template>
 						<p class="text-decoration-line-through opacity-75 fst-italic">
@@ -77,3 +134,61 @@ import JournalHeader from './subviews/JournalHeader.vue';
 		</main>
 	</PageContainerVue>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+	name: 'Mysteries',
+	data() {
+		return {
+			// definitions: {
+			// 	essential: [
+			// 		getGlossaryEntry("Bubble Coating"),
+			// 		getGlossaryEntry("Optical Resonator"),
+			// 		getGlossaryEntry("Register Basin"),
+			// 	] as IGlossaryEntry[],
+			// 	circuits: {
+			// 		anchor: getDefinition("Anchor Circuit"),
+			// 		chameleon: getDefinition("Chameleon Circuit"),
+			// 		gravity: getDefinition("Gravity Circuit"),
+			// 		language: getDefinition("Language Circuit"),
+			// 	},
+			// }
+		};
+	},
+	mounted() {
+		const exampleModal = document.getElementById('questModal');
+		if (exampleModal) {
+			exampleModal.addEventListener('show.bs.modal', event => {
+				// Button that triggered the modal
+				// @ts-ignore
+				const button = event.relatedTarget as HTMLButtonElement;
+
+				// Extract info from data children
+				const title = button.querySelector('.title')?.innerHTML;
+				const definition = button.querySelector('.def')?.innerHTML;
+				const footer = button.querySelector('.footer')?.innerHTML;
+
+				// Update the modal's content.
+				const modalTitle = exampleModal.querySelector('.modal-title') as HTMLElement;
+				const modalBody = exampleModal.querySelector('.modal-body') as HTMLElement;
+				const modalFooter = exampleModal.querySelector('.modal-footer') as HTMLElement;
+
+				modalTitle.innerHTML = title ? title : "Error";
+				modalBody.innerHTML = definition? definition : "Whoops! Encountered an error finding the quest.";
+				// modalFooter.innerHTML = footer ? footer : "";
+				modalFooter.innerHTML = "Quest Details";
+			})
+		}
+	},
+});
+
+</script>
+
+<style lang="css" scoped>
+.footer,
+.def {
+	display: none;
+}
+</style>
