@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 import { Utils } from '@/scripts/utils';
+import { useRoute } from 'vue-router';
 
 const props = defineProps({
 	path: {
@@ -42,7 +43,7 @@ const pageDictionary = [
 	{ path: "/ship/crew", name: "Roster"},
 ]
 
-const pathParts = props.path.split("/");
+const pathParts = props.path? props.path.split("/") : useRoute().path;
 const breadcrumbs = [ { path: "/", name: "Home", isLast: pathParts.length < 2 } ];
 for (let index = 1; index < pathParts.length; index++) {
 	breadcrumbs.push(

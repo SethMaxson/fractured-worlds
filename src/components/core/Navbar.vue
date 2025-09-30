@@ -65,12 +65,12 @@
 							Explorer's Guide
 						</router-link>
 					</li>
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<router-link class="nav-link" to="/links">
 							<svg :class="svgHomeClass"><use href="#link"></use></svg>
 							External Links
 						</router-link>
-					</li>
+					</li> -->
 					
 					<li class="nav-item dropdown gm-only">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -135,16 +135,6 @@
 </template>
 
 <style scoped>
-	.navbar-brand {
-		/* font-family: 'Kingdom Hearts', sans-serif; */
-		font-family: 'Wagnesday', sans-serif;
-		padding-top: 0;
-		padding-bottom: 0;
-		font-size: 2rem;
-		/* font-variant: small-caps; */
-		line-height: 1.5rem;
-	}
-
 	.dev,
 	.gm-only {
 		color: yellow;

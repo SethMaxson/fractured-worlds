@@ -17,5 +17,9 @@ export namespace Utils {
             newText = newText.replace(/\<\/(Character|c|Location|l|Important|im)\>/gi, '</span>');
             return newText;
         }
+        export function sanitizeUrl(path: string): string {
+            let newPath = path.replace(/\//gi, '%2F'); // replace slashes
+            return newPath;
+        }
     }
 }

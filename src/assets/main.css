@@ -72,6 +72,16 @@ svg.portrait {
   z-index: 6;
 }
 
+.navbar-brand {
+  /* font-family: 'Kingdom Hearts', sans-serif; */
+  font-family: 'Wagnesday', sans-serif;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 2rem;
+  /* font-variant: small-caps; */
+  line-height: 1.5rem;
+}
+
 .container > header > [aria-label="breadcrumb"] {
   position: relative;
   width: calc(100% + var(--bs-gutter-x));
@@ -97,7 +107,7 @@ pre {
 }
 
 .font-emphasis {
-  /* font-family: 'Scones and Crossbows', sans-serif; */
+  font-family: 'Scones and Crossbows', sans-serif;
   font-family: 'BrickShapers', sans-serif;
   /* font-family: "Gajraj One", sans-serif; */
 }

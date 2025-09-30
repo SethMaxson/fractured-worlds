@@ -13,6 +13,23 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import MinorCharacters from './subviews/MinorCharacters.vue';
 import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 import CrewFormer from "./characterDecks/CrewFormer.vue";
+
+import { CharacterDatas } from "@/data/character-datas";
+import { CharacterDataUtils } from "@/scripts/character-data-utils";
+
+const TheGang = [
+	CharacterDataUtils.findCharacter(CharacterDatas, 'cobb'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'izzy'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'phil'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'tero')
+];
+
+const Allies = [
+	CharacterDataUtils.findCharacter(CharacterDatas, 'cade'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'nortle'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'boo'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'ella')
+];
 </script>
 
 <template>
@@ -31,49 +48,7 @@ import CrewFormer from "./characterDecks/CrewFormer.vue";
 				<!-- #region Player Characters -->
 				<AccordionItem name="The Gang" parent-id="characters-accordion" :default-open="true">
 					<CharacterCardDeck>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/party/cobb-toon.png" />
-							</template>
-							<template #heading>C.O.B.B.</template>
-							<template #subheading>Android Monk</template>
-							<template #homeworld>Golarion</template>
-
-							<Character>Construct Observing Biological Boundaries</Character>, or <Character>C.O.B.B.</Character>, is a gifted martial artist who is fascinated by the biological concept of mortality. With a mind as powerful as his blows, he seeks to unravel the mysteries of the <Location>Void Realm</Location>.
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/party/ozzy.png" />
-							</template>
-							<template #heading>Izzy Bones</template>
-							<template #subheading>Skeleton Fighter</template>
-							<template #homeworld>Necroworld</template>
-
-							<Character>Izzy</Character> is a chill guy from a world where necromancers rule with an iron fist and an army of dead people. He really likes heavy metal music.
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/party/phil-toon.png" />
-							</template>
-							<template #heading>Li'l Phil Antonio</template>
-							<template #subheading>Centaur Sorcerer</template>
-							<template #homeworld>Wildwood Forest</template>
-
-							<Character>Li'l Phil Antonio</Character> is a manic, unpredictable sorcerer whose purple skin makes him an oddity
-							even among other centaurs. He was raised by a trio of witches and now seeks to find his place in the
-							universe. His aloof tendencies naturally blend with the	curious magic that flows within his veins to 
-							make Li'l Phil the ultimate agent of chaos.
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/party/tero-kawaii.png" />
-							</template>
-							<template #heading>Tero</template>
-							<template #subheading>Kitsune Kineticist</template>
-							<template #homeworld>Golarion</template>
-
-							<Character>Tero</Character> is a gifted student of the elements with an appetite for strength seemingly rivaled only by her appetite for new experiences. She grew up in isolation deep within the <Location>Forest of Spirits</Location>, surrounded by snow and evergreen trees.
-						</CharacterCard>
+						<CharacterCard v-for="person in TheGang" :person="person" />
 					</CharacterCardDeck>
 				</AccordionItem>
 				<!-- #endregion Player Characters -->
@@ -91,47 +66,7 @@ import CrewFormer from "./characterDecks/CrewFormer.vue";
 
 				<AccordionItem name="Allies" parent-id="characters-accordion">
 					<CharacterCardDeck>
-						<CharacterCard>
-							<template #image>
-								<Portrait class="bg-nle bg-opacity-50" src="img/npc/cade-toon.png" />
-							</template>
-							<template #heading>Cade Brightcloak</template>
-							<template #subheading>Halfling Cleric</template>
-
-							<Character>Cade Brightcloak</Character> is an amicable knight we met in <Location>Wonderland</Location>. He operates as a scout for <Important>NLE</Important>.
-							<!-- He is a devout adherent of the Cerulean Star. -->
-							<template #footer>Faction: NLE | scout</template>
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait class="bg-nle bg-opacity-50" src="img/npc/nortle.png" />
-							</template>
-							<template #heading>Nortle</template>
-							<template #subheading>Tortle Bartender</template>
-
-							<Character>Nortle</Character> is the jovial proprietor of the <Location>Happy Turtle</Location>. His tavern makes the perfect cover for his secretive work as <Important>NLE</Important>'s courier.
-							<template #footer>Faction: NLE | courier & 2nd in command</template>
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait class="bg-nle bg-opacity-50" src="img/npc/boo.png" />
-							</template>
-							<template #heading>Boo</template>
-							<template #subheading>Canine Telepath</template>
-
-							<Character>Boo</Character> is a telepathic, telekinetic dog we met in the <Location>Big Apple</Location>. He is one of <Important>NLE</Important>'s foremost scouts.
-							<template #footer>Faction: NLE | scout </template>
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait class="bg-nle bg-opacity-50" src="img/npc/ella.png" />
-							</template>
-							<template #heading>Ella Fitzpatrick</template>
-							<template #subheading>Half-elf Spellblade</template>
-
-							<Character>Ella</Character> is an excitable young scholar we first encountered in the <Location>Big Apple</Location>. She serves as <Important>NLE</Important>'s zoologist, and is currently apprenticed to <Character>Boo</Character> to prepare for solo fieldwork.
-							<template #footer>Faction: NLE | zoologist, apprentice scout</template>
-						</CharacterCard>
+						<CharacterCard v-for="person in Allies" :person="person" />
 						<!-- <CharacterCard>
 							<template #image>
 								<Portrait src="img/npc/kenji.png" />
@@ -225,46 +160,46 @@ import CrewFormer from "./characterDecks/CrewFormer.vue";
 					<MinorCharacters />
 				</AccordionItem>
 
-			<AccordionItem name="People that are probably super important" parent-id="characters-accordion">
-				<CharacterCardDeck>
-					<CharacterCard>
-						<template #image>
-							<Portrait src="img/npc/unknown.png" />
-						</template>
-						<template #heading>???</template>
-						<template #subheading>The Father of Decay? Maybe the Father of Void?</template>
+				<AccordionItem name="People that are probably super important" parent-id="characters-accordion">
+					<CharacterCardDeck>
+						<CharacterCard>
+							<template #image>
+								<Portrait src="img/npc/unknown.png" />
+							</template>
+							<template #heading>???</template>
+							<template #subheading>The Father of Decay? Maybe the Father of Void?</template>
 
-						<Character>This guy</Character> is pretty dang scary, kupo. Let's not go near him any more.
-					</CharacterCard>
-					<CharacterCard>
-						<template #image>
-							<Portrait src="img/npc/marlowe-2.webp" />
-						</template>
-						<template #heading>Marlowe</template>
-						<template #subheading>Friend. Maybe best friend.</template>
+							<Character>This guy</Character> is pretty dang scary, kupo. Let's not go near him any more.
+						</CharacterCard>
+						<CharacterCard>
+							<template #image>
+								<Portrait src="img/npc/marlowe-2.webp" />
+							</template>
+							<template #heading>Marlowe</template>
+							<template #subheading>Friend. Maybe best friend.</template>
 
-						<Character>Marlowe</Character> is super cool, and you should definitely not be angry if you ever find out that he has been following you since you first came to the <Location>Void Realm</Location>. Cookies, yes! You should give him cookies. Made with Kupo Nuts.
-					</CharacterCard>
-					<!-- <CharacterCard>
-						<template #image>
-							<Portrait :is-external="true" src="img/npc/ssssimon.png" />
-						</template>
-						<template #heading>Ssssimon</template>
-						<template #subheading>The Father of Void</template>
+							<Character>Marlowe</Character> is super cool, and you should definitely not be angry if you ever find out that he has been following you since you first came to the <Location>Void Realm</Location>. Cookies, yes! You should give him cookies. Made with Kupo Nuts.
+						</CharacterCard>
+						<!-- <CharacterCard>
+							<template #image>
+								<Portrait :is-external="true" src="img/npc/ssssimon.png" />
+							</template>
+							<template #heading>Ssssimon</template>
+							<template #subheading>The Father of Void</template>
 
-						<Character>Ssssimon</Character> was an extradimensional collector of magical trinkets and artifacts.
-					</CharacterCard>
-					<CharacterCard>
-						<template #image>
-							<Portrait :is-external="true" src="characters/npc/nihil.png" />
-						</template>
-						<template #heading>Nihil</template>
-						<template #subheading>The Father of Decay</template>
+							<Character>Ssssimon</Character> was an extradimensional collector of magical trinkets and artifacts.
+						</CharacterCard>
+						<CharacterCard>
+							<template #image>
+								<Portrait :is-external="true" src="characters/npc/nihil.png" />
+							</template>
+							<template #heading>Nihil</template>
+							<template #subheading>The Father of Decay</template>
 
-						<Character>Nihil</Character> is a powerful entity who works to accelerate the natural decay of Voidspace.
-					</CharacterCard> -->
-				</CharacterCardDeck>
-			</AccordionItem>
+							<Character>Nihil</Character> is a powerful entity who works to accelerate the natural decay of Voidspace.
+						</CharacterCard> -->
+					</CharacterCardDeck>
+				</AccordionItem>
 
 				<AccordionItem name="Fallen Comrades" parent-id="characters-accordion">
 					<CharacterCardDeck>

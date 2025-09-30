@@ -31,7 +31,7 @@ const bodyText = CharacterDataUtils.getMainBodyText(person);
 			<Breadcrumb :path="path" />
 		</header>
 		<main>
-			<div v-if="person">
+			<div v-if="person" class="px-2 pb-2">
 				<div class="row g-2 g-lg-4 row-cols-1 row-cols-md-2 mt-0">
 					<div class="col col-lg-8 order-2 order-lg-1">
 						<h1 class="border-bottom border-secondary-subtle pb-2 text-uppercase">
@@ -71,6 +71,12 @@ const bodyText = CharacterDataUtils.getMainBodyText(person);
 				</div>
 
 				<div class="mt-4" v-html="bodyText"> </div>
+
+				<div class="mt-4" v-if="person.playlistUrl">
+					<!-- <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0P1Ckwy19TthbbCWApONXF?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
+
+					<iframe data-testid="embed-iframe" style="border-radius:12px" :src="person.playlistUrl" width="100%" height="352" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+				</div>
 				
 			</div>
 			<div v-else class="p-2 pb-5 text-center fst-italic fs-5">
