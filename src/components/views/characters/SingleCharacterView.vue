@@ -72,10 +72,10 @@ const bodyText = CharacterDataUtils.getMainBodyText(person);
 
 				<div class="mt-4" v-html="bodyText"> </div>
 
-				<div class="mt-4" v-if="person.playlistUrl">
-					<!-- <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0P1Ckwy19TthbbCWApONXF?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
+				<div class="mt-4" v-if="person.playlistUrl || person.playlistEmbed">
+					<iframe data-testid="embed-iframe" style="border-radius:12px" :src="person.playlistEmbed" width="100%" height="352" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" v-if="person.playlistEmbed"></iframe>
 
-					<iframe data-testid="embed-iframe" style="border-radius:12px" :src="person.playlistUrl" width="100%" height="352" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+					<a :href="person.playlistUrl" v-else>Spotify Playlist</a>
 				</div>
 				
 			</div>

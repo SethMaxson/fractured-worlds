@@ -143,6 +143,8 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/boo.png"
         },
+        playlistEmbed: "https://open.spotify.com/embed/playlist/3kzkDLLYRRU5IYoreptAHH?utm_source=generator",
+        playlistUrl: "https://open.spotify.com/playlist/3kzkDLLYRRU5IYoreptAHH?si=a3d141846f6c4df5",
         plotRelevance: 2,
         status: "alive"
     },
@@ -169,6 +171,7 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/cade-toon.png"
         },
+        playlistUrl: "https://open.spotify.com/playlist/0YDhh8WNrOxEKDQ1LJe8B7?si=b472899f8f694184",
         plotRelevance: 3,
         status: "alive"
     },
@@ -194,6 +197,7 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/ella.png"
         },
+        playlistUrl: "https://open.spotify.com/playlist/6PnEtmLnApjcnJoNn45Hxn?si=736842936b074f0a",
         plotRelevance: 2,
         status: "alive"
     },
@@ -218,6 +222,7 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/nortle.png"
         },
+        playlistUrl: "https://open.spotify.com/playlist/3Jydeg4IHMy5kFr4BbMtxx?si=2f9daa03b1c54bca",
         plotRelevance: 3,
         status: "alive"
     },

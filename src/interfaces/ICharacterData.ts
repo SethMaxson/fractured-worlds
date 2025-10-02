@@ -61,6 +61,11 @@ export interface ICharacterData {
 	physical?: ICharacterPhysical;
 	/** This character's Spotify playlist, if any.
 	 * @example
+	 * "<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3kzkDLLYRRU5IYoreptAHH?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>"
+	*/
+	playlistEmbed?: string;
+	/** This character's Spotify playlist, if any.
+	 * @example
 	 * "https://open.spotify.com/playlist/0P1Ckwy19TthbbCWApONXF?si=0738f2a7a6fc4778"
 	*/
 	playlistUrl?: string;
