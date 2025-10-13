@@ -230,7 +230,56 @@ export const CharacterDatas: ICharacterData[] = [
     //#endregion Nelly / N.L.E. / NLE
 
     //#region Player Crew
-    
+    {
+        name: "Winter Duskward",
+        id: "winter",
+        type: "crew",
+        species: ["human"],
+        occupation: ["mage", "child"],
+        physical: {
+            eyeColor: "teal",
+            height: "4' 2\"",
+            weight: "50 lbs."
+        },
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Mage/Child", joined: "09/28/0001", primary: true }
+        ],
+        description: [
+            "<Character>Winter</Character> is an 11-year-old mage who barely speaks due to her crippling shyness."
+        ],
+        // homeworld: "Final Fantasy G",
+        images: {
+            thumbnail: "img/npc/winter.png"
+        },
+        playlistEmbed: "https://open.spotify.com/embed/playlist/0zyxK6W0ROxoCzmHsCW9zS?utm_source=generator",
+        plotRelevance: 3,
+        status: "alive"
+    },
+    {
+        name: "Zuzu",
+        id: "zuzu",
+        type: "crew",
+        species: ["shadow person"],
+        occupation: ["mage", "child"],
+        physical: {
+            eyeColor: "blue",
+            height: "4' 0\"",
+            weight: "50 lbs."
+        },
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Mage/Child", joined: "06/02/0001", primary: true }
+        ],
+        description: [
+            "<Character>Zuzu</Character> is a young wizard of indeterminate species and a former slave. He looks to be anywhere between 8-10 years old but has memories of only half of that. He aspires to be just like his idol, \"Wizard Nelson\"."
+        ],
+        // homeworld: "Final Fantasy G",
+        images: {
+            thumbnail: "img/npc/zuzu.png"
+        },
+        playlistEmbed: "https://open.spotify.com/embed/playlist/0P1Ckwy19TthbbCWApONXF?utm_source=generator",
+        plotRelevance: 3,
+        status: "alive"
+    },
     //#endregion Player Crew
 
     //#region Rebirth Caucus

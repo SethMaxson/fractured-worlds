@@ -132,6 +132,22 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 						<span class="badge text-bg-info rounded-pill">Battle World</span>
 					</span>
 				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
+					<div class="me-auto">
+						"World: that it exists. The worthy shall gather keystones with which"
+					</div>
+					<span class="m-0 p-0">
+						<span class="badge text-bg-info rounded-pill">Treasure Island</span>
+					</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
+					<div class="me-auto">
+						"that binds worlds shall point towards the Fated World, but for the"
+					</div>
+					<span class="m-0 p-0">
+						<span class="badge text-bg-info rounded-pill">Barbieland</span>
+					</span>
+				</li>
 			</ul>
 		</main>
 	</PageContainerVue>

@@ -385,7 +385,19 @@ const timelineEvents: ITimelineEvent[] = [
 		type: "world"
 	},
 	{
-		date: { year: 1, month: 9, day: 16 },
+		date: { year: 1, month: 8, day: 28 },
+		// endDate: { year: 1, month: 8, day: 3 },
+		isMajor: true,
+		// event: "We reached Duloc.",
+		extra: [
+			{ name: "reached Barbieland", type: "world" },
+			// { name: "met Toadette", type: "person" },
+		],
+		header: "Barbieland",
+		type: "world"
+	},
+	{
+		date: { year: 1, month: 9, day: 7 },
 		extra: [
 			{ name: "invited Tero", type: "person" },
 			{ name: "invited Althea", type: "person" },

@@ -9,6 +9,13 @@ import Location from '@/components/core/text-tags/Location.vue';
 import { GameStrings } from "@/scripts/game-strings";
 import Important from "@/components/core/text-tags/Important.vue";
 
+import { CharacterDatas } from "@/data/character-datas";
+import { CharacterDataUtils } from "@/scripts/character-data-utils";
+
+const TheCrew = [
+	CharacterDataUtils.findCharacter(CharacterDatas, 'winter')
+];
+
 defineProps({
 	containedByModal: {
 		type: Boolean,
@@ -141,6 +148,9 @@ defineProps({
 
             <Character>Law</Character> is a space cowboy who likes to shoot first and ask questions never. 
             <template #footer>Role: Deckhand (07/18/0001 SE-present)</template>
+        </CharacterCard>
+        <CharacterCard v-for="person in TheCrew" :person="person">
+            <template #footer>Role: {{person?.affiliations[0].role}} ({{person?.affiliations[0].joined}} SE-present)</template>
         </CharacterCard>
     </CharacterCardDeck>
 </template>

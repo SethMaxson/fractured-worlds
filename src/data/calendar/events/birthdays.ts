@@ -12,9 +12,10 @@ export const Birthdays = [
     ] as ICalendarEvent[],
     // February
     [
+        { day: 3, name: "Tero", definition: [] },
         { day: 17, name: "Vilyth Koehlanna", definition: [], hide: true },
         { day: 22, name: "Nortle", definition: [] },
-        { day: 25, name: "Winter Duskward", definition: [], hide: true },
+        { day: 25, name: "Winter Duskward", definition: [] },
     ] as ICalendarEvent[],
     // March
     [
