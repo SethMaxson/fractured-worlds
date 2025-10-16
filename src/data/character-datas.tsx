@@ -143,8 +143,7 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/boo.png"
         },
-        playlistEmbed: "https://open.spotify.com/embed/playlist/3kzkDLLYRRU5IYoreptAHH?utm_source=generator",
-        playlistUrl: "https://open.spotify.com/playlist/3kzkDLLYRRU5IYoreptAHH?si=a3d141846f6c4df5",
+        playlistID: "3kzkDLLYRRU5IYoreptAHH",
         plotRelevance: 2,
         status: "alive"
     },
@@ -171,7 +170,7 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/cade-toon.png"
         },
-        playlistUrl: "https://open.spotify.com/playlist/0YDhh8WNrOxEKDQ1LJe8B7?si=b472899f8f694184",
+        playlistID: "0YDhh8WNrOxEKDQ1LJe8B7",
         plotRelevance: 3,
         status: "alive"
     },
@@ -197,7 +196,7 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/ella.png"
         },
-        playlistUrl: "https://open.spotify.com/playlist/6PnEtmLnApjcnJoNn45Hxn?si=736842936b074f0a",
+        playlistID: "6PnEtmLnApjcnJoNn45Hxn",
         plotRelevance: 2,
         status: "alive"
     },
@@ -222,7 +221,7 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/nortle.png"
         },
-        playlistUrl: "https://open.spotify.com/playlist/3Jydeg4IHMy5kFr4BbMtxx?si=2f9daa03b1c54bca",
+        playlistID: "3Jydeg4IHMy5kFr4BbMtxx",
         plotRelevance: 3,
         status: "alive"
     },
@@ -231,8 +230,69 @@ export const CharacterDatas: ICharacterData[] = [
 
     //#region Player Crew
     {
+        name: "Flavio de Mota",
+        id: "flavio",
+        type: "crew",
+        species: ["human"],
+        occupation: ["stylist"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Stylist", joined: "07/18/0001", primary: true }
+        ],
+        description: [
+            "<Character>Flavio</Character> is a distractingly fashionable person from some place called <Location>Portugal</Location>. I can't actually tell what gender they are, and I'm too afraid to ask, kupo."
+        ],
+        // homeworld: "1700s Portugal",
+        images: {
+            thumbnail: "img/npc/flavio.png"
+        },
+        playlistID: "3sqnhw5mDTdrcmhwXYOjiF",
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Matthew Law",
+        id: "matthew-law",
+        type: "crew",
+        species: ["human"],
+        occupation: ["bounty hunter"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "07/18/0001", primary: true }
+        ],
+        description: [
+            "<Character>Law</Character> is a space cowboy who likes to shoot first and ask questions never."
+        ],
+        // homeworld: "Space Cowboy future",
+        images: {
+            thumbnail: "img/npc/matthew-law.png"
+        },
+        playlistID: "1TJ5Hl7QbBhFvKAO6Ogv1D",
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Susie",
+        id: "susie",
+        type: "crew",
+        species: ["android"],
+        occupation: ["assassin"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "07/06/0001", primary: true }
+        ],
+        description: [
+            "<Character>Susie</Character> is a <Important>RoBro</Important> created from a partial brain-scan of <Character>Rose (Lethal Lady #2)</Character>. However, a manufacturing defect has given her more freewill than intended, allowing her to express a strong dislike of violence."
+        ],
+        homeworld: "Weapon World",
+        images: {
+            thumbnail: "img/npc/susie.png"
+        },
+        playlistID: "4XeEQwogXECnNaDGhnkJ4A",
+        plotRelevance: 2,
+        status: "alive"
+    },
+    {
         name: "Winter Duskward",
         id: "winter",
+        subtitle: "Mystical Child",
         type: "crew",
         species: ["human"],
         occupation: ["mage", "child"],
@@ -245,19 +305,20 @@ export const CharacterDatas: ICharacterData[] = [
             { name: "Brightside Crew", rank: "member", role: "Mage/Child", joined: "09/28/0001", primary: true }
         ],
         description: [
-            "<Character>Winter</Character> is an 11-year-old mage who barely speaks due to her crippling shyness."
+            "<Character>Winter</Character> is an 11-year-old mage who rarely speaks due to her crippling shyness."
         ],
         // homeworld: "Final Fantasy G",
         images: {
             thumbnail: "img/npc/winter.png"
         },
-        playlistEmbed: "https://open.spotify.com/embed/playlist/0zyxK6W0ROxoCzmHsCW9zS?utm_source=generator",
-        plotRelevance: 3,
+        playlistID: "0zyxK6W0ROxoCzmHsCW9zS",
+        plotRelevance: 2,
         status: "alive"
     },
     {
         name: "Zuzu",
         id: "zuzu",
+        subtitle: "Mystical Child",
         type: "crew",
         species: ["shadow person"],
         occupation: ["mage", "child"],
@@ -276,8 +337,8 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/zuzu.png"
         },
-        playlistEmbed: "https://open.spotify.com/embed/playlist/0P1Ckwy19TthbbCWApONXF?utm_source=generator",
-        plotRelevance: 3,
+        playlistID: "0P1Ckwy19TthbbCWApONXF",
+        plotRelevance: 2,
         status: "alive"
     },
     //#endregion Player Crew

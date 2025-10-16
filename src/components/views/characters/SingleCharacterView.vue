@@ -9,6 +9,7 @@ import { Utils } from "@/scripts/utils";
 import { CharacterDataUtils } from "@/scripts/character-data-utils";
 import Image from "@/components/core/Image.vue";
 import { useRoute } from "vue-router";
+import AccordionItem from "@/components/core/AccordionItem.vue";
 
 const props = defineProps({
 	id: {
@@ -23,6 +24,7 @@ const path = (queryPath? queryPath + "/" : "/people/") + props.id;
 const person = CharacterDataUtils.findCharacter(CharacterDatas, props.id);
 const subheader = CharacterDataUtils.getSubheader(person);
 const bodyText = CharacterDataUtils.getMainBodyText(person);
+const playlistEmbed = person?.playlistID? `https://open.spotify.com/embed/playlist/${person.playlistID}?utm_source=generator` : undefined;
 </script>
 
 <template>
@@ -72,10 +74,11 @@ const bodyText = CharacterDataUtils.getMainBodyText(person);
 
 				<div class="mt-4" v-html="bodyText"> </div>
 
-				<div class="mt-4" v-if="person.playlistUrl || person.playlistEmbed">
-					<iframe data-testid="embed-iframe" style="border-radius:12px" :src="person.playlistEmbed" width="100%" height="352" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" v-if="person.playlistEmbed"></iframe>
-
-					<a :href="person.playlistUrl" v-else>Spotify Playlist</a>
+				<div class="mt-4 accordion" id="playlist-collapse" v-if="playlistEmbed">
+					<AccordionItem name="Playlist" parent-id="playlist-collapse">
+						<!-- height="352" -->
+						<iframe data-testid="embed-iframe" style="border-radius:12px" :src="playlistEmbed" width="100%" height="704" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" v-if="playlistEmbed"></iframe>
+					</AccordionItem>
 				</div>
 				
 			</div>
