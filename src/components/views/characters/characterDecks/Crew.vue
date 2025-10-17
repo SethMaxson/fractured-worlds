@@ -11,8 +11,20 @@ import Important from "@/components/core/text-tags/Important.vue";
 
 import { CharacterDatas } from "@/data/character-datas";
 import { CharacterDataUtils } from "@/scripts/character-data-utils";
+import type { ICharacterData } from "@/interfaces/ICharacterData";
+
+
+const TheCrewPart1 = [
+    CharacterDataUtils.findCharacter(CharacterDatas, 'hamisfore'),
+    CharacterDataUtils.findCharacter(CharacterDatas, 'ootah'),
+    CharacterDataUtils.findCharacter(CharacterDatas, 'carrie-ward'),
+    CharacterDataUtils.findCharacter(CharacterDatas, 'zuzu'),
+];
 
 const TheCrew = [
+    CharacterDataUtils.findCharacter(CharacterDatas, 'susie'),
+    CharacterDataUtils.findCharacter(CharacterDatas, 'flavio'),
+    CharacterDataUtils.findCharacter(CharacterDatas, 'matthew-law'),
 	CharacterDataUtils.findCharacter(CharacterDatas, 'winter')
 ];
 
@@ -23,51 +35,25 @@ defineProps({
 		default: false
 	}
 })
+
+function getFooter(person?: ICharacterData) {
+    if (!person) {
+        return;
+    }
+
+    // // Older format
+    // return `Role: ${person.affiliations[0].role} (${person.affiliations[0].joined} SE-present)`;
+    
+    return `${person.affiliations[0].role} (${person.affiliations[0].joined} SE)`;
+}
 </script>
 
 <template>
     <CharacterCardDeck :containedByModal="containedByModal">
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/hamisfore-toon.png" />
-            </template>
-            <template #heading>Duvamil "Hamisfore" Turen</template>
-            <template #subheading>Gnome</template>
-
-            <Character>Hamisfore</Character> is a brightly colored, middle-aged gnomish woman whose 'crazy aunt' energy hides a world-weary heart. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>.
-
-            <template #footer>Role: Deckhand (04/02/0001 SE-present)</template>
+        <CharacterCard v-for="person in TheCrewPart1" :person="person">
+            <template #footer>{{ getFooter(person) }}</template>
         </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/ootah.webp" />
-            </template>
-            <template #heading>Ootah</template>
-            <template #subheading>Orc Child</template>
 
-            <Character>Ootah</Character> is a five-year-old orphan who believes herself to be the captain of the <Important>One More Day</Important>. She exhibits behavior that suggests extreme narcissism. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>.
-            <template #footer>Role: "Captain" (04/02/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/carrie-ward.webp" />
-            </template>
-            <template #heading>Carrie Ward</template>
-            <template #subheading>Human Nurse</template>
-
-            <Character>Carrie Ward</Character> is a forty-five-year-old licensed nurse who arrived in <Location>Somewhere</Location> after her home, a variant of 1970's <Location>Earth</Location> was destroyed. She was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.
-            <template #footer>Role: Deckhand (04/21/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/zuzu.png" />
-            </template>
-            <template #heading>Zuzu</template>
-            <template #subheading>Mystical Child</template>
-
-            <Character>Zuzu</Character> is a young wizard of indeterminate species and a former slave. He looks to be anywhere between 8-10 years old but has memories of only half of that. He aspires to be just like his idol, "Wizard Nelson".
-            <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
-        </CharacterCard>
         <CharacterCard>
             <template #image>
                 <Portrait src="img/npc/joey-morton-cropped.png" />
@@ -119,38 +105,9 @@ defineProps({
             <Character>Per Schnorr</Character> is a druid from the dark ages of one of the many <Location>Earths</Location>.
             <template #footer>Role: Deckhand (06/02/0001 SE-present)</template>
         </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/susie.png" />
-            </template>
-            <template #heading>Susie</template>
-            <template #subheading>Android Assassin</template>
 
-            <Character>Susie</Character> is a <Important>RoBro</Important> created from a partial brain-scan of <Character>Rose (Lethal Lady #2)</Character>. However, a manufacturing defect has given her more freewill than intended, allowing her to express a strong dislike of violence.
-            <template #footer>Role: Deckhand (07/06/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/flavio.png" />
-            </template>
-            <template #heading>Flavio de Mota</template>
-            <template #subheading>Human Stylist</template>
-
-            <Character>Flavio</Character> is a distractingly fashionable person from some place called <Location>Portugal</Location>. I can't actually tell what gender they are, and I'm too afraid to ask, kupo.
-            <template #footer>Role: Stylist (07/18/0001 SE-present)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/matthew-law.png" />
-            </template>
-            <template #heading>Matthew Law</template>
-            <template #subheading>Human Bounty Hunter</template>
-
-            <Character>Law</Character> is a space cowboy who likes to shoot first and ask questions never. 
-            <template #footer>Role: Deckhand (07/18/0001 SE-present)</template>
-        </CharacterCard>
         <CharacterCard v-for="person in TheCrew" :person="person">
-            <template #footer>Role: {{person?.affiliations[0].role}} ({{person?.affiliations[0].joined}} SE-present)</template>
+            <template #footer>{{ getFooter(person) }}</template>
         </CharacterCard>
     </CharacterCardDeck>
 </template>

@@ -47,7 +47,7 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
 	return getCalendarEvents(Holidays, month, day);
 }
 
-/**Get the Holidays for a given day of a given month.
+/**Check if an event date matches the current in-game date.
  * @param month 0-indexed
  * @param day 1-indexed
  */

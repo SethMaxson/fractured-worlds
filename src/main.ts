@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
 import "./assets/main.css";
+import NotFound from "@/components/views/404.vue";
 import BountyBoard from "@/components/views/bounty-board/BountyBoard.vue";
 import Calendar from "./components/views/calendar/Calendar.vue";
 import Characters from "./components/views/characters/Characters.vue";
@@ -17,7 +18,7 @@ import Factions from "./components/views/factions/Factions.vue";
 import Home from "./components/views/home/Home.vue";
 import Inventory from "./components/views/inventory/Inventory.vue";
 import Journal from "./components/views/journal/Log.vue";
-import Links from "./components/views/links/Links.vue";
+import Links from "./components/views/meta/Links.vue";
 import Letters from "./components/views/journal/Letters.vue";
 import Mysteries from "./components/views/journal/Mysteries.vue";
 import Relationships from "./components/views/relationships/Relationships.vue";
@@ -65,39 +66,43 @@ if (doAutoRouteExperiment) {
 const router = createRouter({
 	history: createWebHashHistory('/fractured-worlds/'),
 	routes:[
+		// will match everything and put it under `route.params.pathMatch`
+		{ path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
 		{ path: '/', component: Home},
-		{ path: '/home', component: Home},
+		{ path: '/home', name: 'Home', component: Home},
 		{ path: '/bounties', component: BountyBoard},
-		{ path: '/calendar', component: Calendar},
-		{ path: '/contacts', component: Contacts},
+		{ path: '/calendar', name: 'Calendar', component: Calendar},
+		{ path: '/contacts', name: 'Contacts', component: Contacts},
 		{ path: '/dm-worlds', component: DmWorlds},
-		{ path: '/explorers-guide', component: ExplorersGuide},
-		{ path: '/factions', component: Factions},
-		{ path: '/inventory', component: Inventory},
-		{ path: '/journal/letters', component: Letters},
-		{ path: '/journal/log', component: Journal},
-		{ path: '/journal/mysteries', component: Mysteries},
-		{ path: '/journal/world-anchors', component: WorldAnchors},
-		{ path: '/links', component: Links},
-		{ path: '/people', component: Characters, alias: '/characters'},
+		{ path: '/explorers-guide', name: 'Explorer\'s Guide', component: ExplorersGuide},
+		{ path: '/factions', name: 'Factions', component: Factions},
+		{ path: '/inventory', name: 'Inventory', component: Inventory},
+		{ path: '/journal/letters', name: 'Letters', component: Letters},
+		{ path: '/journal/log', name: 'Log', component: Journal},
+		{ path: '/journal/mysteries', name: 'Mysteries', component: Mysteries},
+		{ path: '/journal/world-anchors', name: 'World Anchors', component: WorldAnchors},
+		{ path: '/links', name: 'External Links', component: Links},
+		{ path: '/people', name: 'People', component: Characters, alias: '/characters'},
 		{ path: '/people/:id', component: SingleCharacterView, props: true },
 		{ path: '/perks', component: Effects},
-		{ path: '/relationships', component: Relationships},
-		{ path: '/reviews', component: Reviews},
-		{ path: '/ship', component: ShipIndex},
-		{ path: '/ship/ship', component: Ship},
-		{ path: '/ship/crew', component: ShipCrew},
-		{ path: '/timeline', component: Timeline},
-		{ path: '/world-map', component: WorldMap},
-		{ path: '/worlds', component: Worlds, },
+		{ path: '/relationships', name: 'Relationships', component: Relationships},
+		{ path: '/reviews', name: 'Yep! Reviews', component: Reviews},
+		{ path: '/ship', name: 'Lightships', component: ShipIndex},
+		{ path: '/ship/ship', name: 'Ship', component: Ship},
+		{ path: '/ship/crew', name: 'Crew', component: ShipCrew},
+		{ path: '/timeline', name: 'Timeline', component: Timeline},
+		{ path: '/world-map', name: 'World Map', component: WorldMap},
+		{ path: '/worlds', name: 'Worlds', component: Worlds, },
 		...autoRoutes
-	]
+	].sort((r1, r2) => {
+		if (r1.path > r2.path) { return 1; }
+		if (r1.path < r2.path) { return -1; }
+		return 0;
+	})
 });
 
 const app = createApp(App);
-
 app.use(router);
-
 app.mount('#app');
 
 //#region stuff for Search Bar

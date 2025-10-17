@@ -3,6 +3,7 @@ import { type PropType, useSlots } from 'vue';
 import Card from '@/components/core/Card.vue';
 import CardContents from '@/components/core/CardContents.vue';
 import Portrait from '@/components/core/Portrait.vue';
+import CharacterFullView from "./CharacterFullView.vue";
 import { id_ify } from '@/scripts/id_ify';
 import { useRoute } from 'vue-router';
 import { Utils } from '@/scripts/utils';
@@ -38,11 +39,18 @@ const primaryFaction = props.person?.affiliations.filter(a => a.primary)[0] || u
 
 // Configure the display
 const portraitClasses = props.person?.type == 'nle' ? 'bg-nle bg-opacity-50' : undefined;
+// const offerFullPageView = props.person?.plotRelevance && props.person.plotRelevance > 1 ? true : false;
+const offerFullPageView = false;
+const openIcon = offerFullPageView || true ? '#enter' : '#expand';
+
+// TODO: Deprecate this
+const useFullViewForModal = true;
 </script>
 
 <template>
 
 	<!-- Modal version -->
+	 <!-- TODO: update this to use the person object, and deprecate the 'non-person, non-modal' version deeper in this file -->
 	<div class="col show-on-modal">
 		<Card :class="{'dead': status == 'dead'}">
 			<template v-slot:footer v-if="$slots.pcContact || $slots.met">
@@ -63,12 +71,16 @@ const portraitClasses = props.person?.type == 'nle' ? 'bg-nle bg-opacity-50' : u
 	<div class="col hide-on-modal">
 
 		<!-- person object was passed -->
-		<a
+		<component
+			:is="offerFullPageView ? 'a' : 'button'"
 			class="btn btn-secondary w-100 h-100"
-			:href="href"
+			:type="offerFullPageView ? undefined : 'button'"
+			:href="offerFullPageView ? href : undefined"
+			:data-bs-target="offerFullPageView ? undefined : '#modal-'+idBase"
+			:data-bs-toggle="offerFullPageView ? undefined : 'modal'"
 			v-if="person"
 		>
-			<CardContents :class="{'dead': status == 'dead'}" :truncated="true">
+			<CardContents :class="{'dead': status == 'dead'}" :truncated="true" :open-icon="openIcon">
 				<template #image>
 					<Portrait :class="portraitClasses" :src="person?.images.thumbnail" />
 				</template>
@@ -78,11 +90,12 @@ const portraitClasses = props.person?.type == 'nle' ? 'bg-nle bg-opacity-50' : u
 
 				<template #default>
 					<div class="text-truncate" v-html="CharacterDataUtils.getMainBodyText(person, { doParagraphs: false })"></div>
-					<div class="text-end pt-1">
+					<!-- <div class="text-end pt-1">
 						<span class="border-bottom border-2 text-primary bg-primary-subtle border-primary-subtle px-3 small">
-							Details <svg class="menu-button-icon theme-color d-inline"><use href="#arrow-right-short"></use></svg>
+							Details
+							<svg class="menu-button-icon theme-color d-inline"><use :href="offerFullPageView ? '#arrow-right-short' : '#expand'"></use></svg>
 						</span>
-					</div>
+					</div> -->
 				</template>
 
 				<template v-slot:footer v-if="$slots.pcContact || $slots.met">
@@ -100,7 +113,7 @@ const portraitClasses = props.person?.type == 'nle' ? 'bg-nle bg-opacity-50' : u
 					<slot :name="slot"></slot>
 				</template>
 			</CardContents>
-		</a>
+		</component>
 
 		<!-- no person object was passed -->
 		<!-- can be either <button> or <a> depending on data shape -->
@@ -113,7 +126,7 @@ const portraitClasses = props.person?.type == 'nle' ? 'bg-nle bg-opacity-50' : u
 			:data-bs-toggle="hrefID ? undefined : 'modal'"
 			v-else
 		>
-			<CardContents :class="{'dead': status == 'dead'}" :truncated="true">
+			<CardContents :class="{'dead': status == 'dead'}" :truncated="true" open-icon="#expand">
 				<template v-slot:footer v-if="$slots.pcContact || $slots.met">
 					<div v-if="$slots.pcContact">
 						Primary <abbr title="Player Character">PC</abbr> contact: <slot name="pcContact"></slot>
@@ -133,49 +146,44 @@ const portraitClasses = props.person?.type == 'nle' ? 'bg-nle bg-opacity-50' : u
 
 	<!-- #region Actual Modal -->
 	<div class="modal fade" :id="'modal-'+idBase" tabindex="-1" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog" :class="{'modal-xl': person, 'modal-fullscreen-md-down': person}">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h1 class="modal-title fs-5 card-title">
-						<slot name="heading"></slot>
+						<slot name="heading">{{ person?.name }}</slot>
 					</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div class="card h-100" :class="{'dead': status == 'dead'}">
-						<slot name="image"></slot>
+					<CharacterFullView :person="person" v-if="person && useFullViewForModal" />
+					<div class="card h-100" :class="{'dead': status == 'dead'}" v-else>
+						<slot name="image"><Portrait :class="portraitClasses" :src="person?.images.thumbnail" /></slot>
 						<div class="card-body">
 							<h5 class="card-title">
-								<slot name="heading"></slot>
+								<slot name="heading">{{ person?.name }}</slot>
 								<slot name="name"></slot>
 							</h5>
-							<h6 class="card-subtitle mb-2 text-muted border-bottom border-secondary-subtle">
-								<slot name="subheading"></slot>
+							<h6 class="card-subtitle mb-2 text-muted border-bottom border-secondary-subtle text-capitalize">
+								<slot name="subheading">{{ CharacterDataUtils.getSubheader(person) }}</slot>
 							</h6>
 							<div class="card-text">
-								<slot></slot>
+								<slot>
+									<div v-html="CharacterDataUtils.getMainBodyText(person, { doParagraphs: false })"></div>
+								</slot>
 							</div>
 							<slot name="button"></slot>
 						</div>
 						<div class="card-footer text-muted" v-if="$slots.footer || $slots.homeworld">
-							<div v-if="$slots.homeworld">
-								Homeworld: <slot name="homeworld"></slot>
+							<div v-if="$slots.homeworld || person?.homeworld">
+								Homeworld: <slot name="homeworld">{{ person?.homeworld }}</slot>
 							</div>
 							<slot name="footer"></slot>
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer text-muted" v-if="$slots.footer && false">
+				<!-- <div class="modal-footer text-muted" v-if="$slots.footer && false">
 					<slot name="footer"></slot>
-					<!-- <template v-slot:footer v-if="$slots.pcContact || $slots.met">
-						<div v-if="$slots.pcContact">
-							Primary <abbr title="Player Character">PC</abbr> contact: <slot name="pcContact"></slot>
-						</div>
-						<div v-if="$slots.met">
-							Met: <slot name="met"></slot>
-						</div>
-					</template> -->
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

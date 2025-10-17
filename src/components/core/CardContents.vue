@@ -5,16 +5,27 @@
 			<h5 class="card-title">
 				<slot name="heading"></slot>
 				<slot name="name"></slot>
+				<svg v-if="openIcon" class="menu-button-icon theme-color d-inline ms-1 small"><use :href="openIcon"></use></svg>
 			</h5>
 			<h6 class="card-subtitle mb-2 text-muted border-bottom border-secondary-subtle">
 				<slot name="subheading"></slot>
 			</h6>
+			<!-- <div class="card-text" v-if="truncated && openIcon">
+				<div class="d-flex justify-content-between">
+					<div class="flex-grow-1 text-truncate">
+						<slot></slot>
+					</div>
+					<div class="ms-1">
+						<svg class="menu-button-icon theme-color d-inline"><use :href="openIcon"></use></svg>
+					</div>
+				</div>
+			</div> -->
 			<div class="card-text" :class="{'text-truncate': truncated}">
 				<slot></slot>
 			</div>
 			<slot name="button"></slot>
 		</div>
-		<div class="card-footer text-muted" v-if="$slots.footer">
+		<div class="card-footer text-muted small" v-if="$slots.footer">
 			<slot name="footer"></slot>
 		</div>
 	</div>
@@ -25,6 +36,10 @@ const props = defineProps({
 	class: {
 		type: [String, Boolean, Object],
 		required: false
+	},
+	openIcon: {
+		type: [String],
+		default: undefined
 	},
 	truncated: {
 		type: [String, Boolean],

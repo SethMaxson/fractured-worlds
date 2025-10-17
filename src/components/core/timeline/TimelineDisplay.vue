@@ -52,7 +52,7 @@ function shouldDrawMonthHeader(index: number): boolean {
 }
 
 function prettyDate(date: IDate): string {
-	return new CampaignDate(date.day, date.month, date.year).dateMDY;
+	return Utils.Date.Format.MDY(date);
 }
 
 function getClassList(event: ITimelineEvent, index: number) {

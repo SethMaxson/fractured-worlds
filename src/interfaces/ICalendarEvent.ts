@@ -8,4 +8,13 @@ export interface ICalendarEvent extends IGlossaryEntry {
     gmOnly?: boolean;
     /** Do not bother showing this event. */
     hide?: boolean;
+    id?: string;
+}
+
+/** A more complete version of ICalendarEvent, containing more information. */
+export interface IFullCalendarEvent extends ICalendarEvent {
+    /** The numerical month in which this event occurs. */
+	month: number;
+    /** Should be omitted from the UI when not present. */
+    year?: number;
 }

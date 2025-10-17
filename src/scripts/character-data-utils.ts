@@ -1,3 +1,4 @@
+import type { ICalendarEvent, IFullCalendarEvent } from "@/interfaces/ICalendarEvent";
 import type { ICharacterData } from "@/interfaces/ICharacterData";
 import { Utils } from "./utils";
 
@@ -7,7 +8,6 @@ export namespace CharacterDataUtils {
         classList?: string;
     }
 
-
     /** Find the character that matches the provided ID. */
     export function findCharacter(characterDatas: ICharacterData[], id: string): ICharacterData | undefined {
         const search = characterDatas.filter(char => char.id == id);
@@ -15,9 +15,14 @@ export namespace CharacterDataUtils {
         return person;
     }
 
-    /** Gets the subheader text for the character (e.g. species + occupation) */
-    export function getSubheader(character: ICharacterData | undefined): string | undefined {
-        return character ? character.species.join(" ") + " " + character.occupation.join(" ") : undefined;
+    /** Lookup a character's birthday, if known. */
+    export function getBirthday(character: ICharacterData, birthdayEventSet: ICalendarEvent[][]): IFullCalendarEvent | undefined {
+        const allBirthdays = Utils.Date.Convert.ICalendarEvent.arrayToIFullCalenderEvents(birthdayEventSet);
+        const matches = allBirthdays.filter(b => {
+            const compare = (b.id ? b.id : b.name).toLowerCase().trim();
+            return compare == character.id.toLowerCase().trim() || compare == character.name.toLowerCase().trim();
+        })
+        return matches[0];
     }
 
     /** Get the formatted and prepared body text for the character */
@@ -39,6 +44,23 @@ export namespace CharacterDataUtils {
             }
         }
         return bodyText;
+    }
+
+    /** Gets a Spotify embed URL for the given ID (e.g. ) */
+    export function getSpotifyEmbedUrl(spotifyID: string, type: "playlist" | "song" = "playlist"): string {
+
+        return `https://open.spotify.com/embed/${type == 'playlist' ? 'playlist' : 'track'}/${spotifyID}?utm_source=generator&theme=0`;
+    }
+
+    /** Gets the subheader text for the character (e.g. species + occupation) */
+    export function getSubheader(character: ICharacterData | undefined): string | undefined {
+        if (!character) {
+            return;
+        }
+        return character.subtitle ? character.subtitle : [
+            character.species.filter(s => s.toLowerCase() != "human").join(" "),
+            character.occupation.join(" ")
+        ].join(" ");
     }
 }
 

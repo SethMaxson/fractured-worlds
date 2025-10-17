@@ -1,6 +1,9 @@
 import type { ICharacterData } from "@/interfaces/ICharacterData";
 
-/** Not yet used for anything. May eventually be used to create a standardized set of character modals that can be accessed from any page. */
+/** Used to create a standardized set of character profiles that can be accessed from any page.
+ * Some records contain information that is not yet known to the players, which is currently commented out.
+ * TODO: Finish migrating the hardcoded data in character pages into this array.
+ */
 export const CharacterDatas: ICharacterData[] = [
     //#region Player Characters
     {
@@ -15,7 +18,12 @@ export const CharacterDatas: ICharacterData[] = [
             height: "6' 2\"",
             weight: "~200 lbs."
         },
-        affiliations: [],
+        affiliations: [
+            { name: "N.L.E.", rank: "member", role: "scout", primary: true },
+            { name: "Tankman Enterprises", rank: "affiliate", role: "business partner" },
+            { name: "Blue Print Detective Agency", rank: "detective" }
+        ],
+        aliases: [ "Raven" ],
         description: [
             "<Character>Construct Observing Biological Boundaries</Character>, or <Character>C.O.B.B.</Character>, is a gifted martial artist who is fascinated by the biological concept of mortality. With a mind as powerful as his blows, he seeks to unravel the mysteries of the <Location>Void Realm</Location>."
         ],
@@ -63,8 +71,11 @@ export const CharacterDatas: ICharacterData[] = [
         },
         affiliations: [
             { name: "N.L.E.", rank: "member", role: "scout", primary: true },
-            { name: "Freelance Police", rank: "junior detective" }
+            { name: "Disciples of the Drum", rank: "disciple" },
+            { name: "Freelance Police", rank: "junior detective" },
+            { name: "Blue Print Detective Agency", rank: "detective" }
         ],
+        aliases: [ "Pony" ],
         description: [
             "<Character>Li'l Phil Antonio</Character> is a manic, unpredictable sorcerer whose purple skin makes him an oddity even among other centaurs. He was raised by a trio of witches and now seeks to find his place in the universe. His aloof tendencies naturally blend with the	curious magic that flows within his veins to make Li'l Phil the ultimate agent of chaos."
         ],
@@ -89,12 +100,15 @@ export const CharacterDatas: ICharacterData[] = [
         },
         affiliations: [
             { name: "N.L.E.", rank: "member", role: "scout", primary: true },
-            { name: "Freelance Police", rank: "junior detective" }
+            { name: "Freelance Police", rank: "junior detective" },
+            { name: "Blue Print Detective Agency", rank: "detective" },
+            { name: "Barbieland Police", rank: "deputy" }
         ],
+        aliases: [ "Fox" ],
         description: [
             "<Character>Tero</Character> is a gifted student of the elements with an appetite for strength seemingly rivaled only by her appetite for new experiences. She grew up in isolation deep within the <Location>Forest of Spirits</Location>, surrounded by snow and evergreen trees."
         ],
-        homeworld: "Golarion",
+        homeworld: "Forest of Spirits, Golarion",
         images: {
             thumbnail: "img/party/tero-kawaii.png"
         },
@@ -108,6 +122,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["dwarf"],
         occupation: ["champion"],
         affiliations: [],
+        aliases: [ "Weevil" ],
         description: [
             "<Character>Tropey McTroperson</Character> is a dwarven paladin who hails from a small farming village. After finding himself in the mysterious <Location>Void Realm</Location>, he made it his mission to search its myriad worlds for jelly beans."
         ],
@@ -122,8 +137,39 @@ export const CharacterDatas: ICharacterData[] = [
 
     //#region Nelly / N.L.E. / NLE
     {
+        name: "Althea Holimion",
+        id: "owl",
+        subtitle: "Tomb Appreciator",
+        type: "nle",
+        species: ["elf"],
+        occupation: ["botanist"],
+        physical: {
+            eyeColor: "brown",
+            hairColor: "brown",
+            height: "5' 6\"",
+            weight: "101 lbs."
+        },
+        affiliations: [
+            { name: "NLE", rank: "member", role: "armorer, mechanic", primary: true }
+        ],
+        aliases: [ "Owl" ],
+        description: [
+            "<Character>Althea</Character> serves as both NLE's botanist and ."
+        ],
+        // homeworld: "Geoss",
+        images: {
+            thumbnail: "img/npc/vilyth.png"
+        },
+        spotify: {
+			primaryPlaylistID: "7zuezrk0cg70sjtSux8OpO"
+        },
+        plotRelevance: 2,
+        status: "alive"
+    },
+    {
         name: "Boo",
         id: "boo",
+        subtitle: "Done Rolling Over",
         type: "nle",
         species: ["canine"],
         occupation: ["telepath"],
@@ -136,6 +182,7 @@ export const CharacterDatas: ICharacterData[] = [
         affiliations: [
             { name: "NLE", rank: "member", role: "scout", primary: true }
         ],
+        aliases: ["Wolf"],
         description: [
             "<Character>Boo</Character> is a telepathic, telekinetic dog we met in the <Location>Big Apple</Location>. He is one of <Important>NLE</Important>'s foremost scouts."
         ],
@@ -143,7 +190,9 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/boo.png"
         },
-        playlistID: "3kzkDLLYRRU5IYoreptAHH",
+        spotify: {
+			primaryPlaylistID: "3kzkDLLYRRU5IYoreptAHH"
+        },
         plotRelevance: 2,
         status: "alive"
     },
@@ -162,15 +211,18 @@ export const CharacterDatas: ICharacterData[] = [
         affiliations: [
             { name: "NLE", rank: "member", role: "scout", primary: true }
         ],
+        aliases: ["Penguin"],
         description: [
             "<Character>Cade Brightcloak</Character> is an amicable knight we met in <Location>Wonderland</Location>. He operates as a scout for <Important>NLE</Important>",
             "He is a devout adherent of the Cerulean Star."
         ],
-        homeworld: "Geoss",
+        // homeworld: "Geoss",
         images: {
             thumbnail: "img/npc/cade-toon.png"
         },
-        playlistID: "0YDhh8WNrOxEKDQ1LJe8B7",
+        spotify: {
+            primaryPlaylistID: "0YDhh8WNrOxEKDQ1LJe8B7"
+        },
         plotRelevance: 3,
         status: "alive"
     },
@@ -189,6 +241,7 @@ export const CharacterDatas: ICharacterData[] = [
         affiliations: [
             { name: "NLE", rank: "member", role: "zoologist, apprentice scout", primary: true }
         ],
+        aliases: ["Hummingbird"],
         description: [
             "<Character>Ella</Character> is an excitable young scholar we first encountered in the <Location>Big Apple</Location>. She serves as <Important>NLE</Important>'s zoologist, and is currently apprenticed to <Character>Boo</Character> to prepare for solo fieldwork."
         ],
@@ -196,7 +249,9 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/ella.png"
         },
-        playlistID: "6PnEtmLnApjcnJoNn45Hxn",
+        spotify: {
+			primaryPlaylistID: "6PnEtmLnApjcnJoNn45Hxn"
+        },
         plotRelevance: 2,
         status: "alive"
     },
@@ -214,6 +269,7 @@ export const CharacterDatas: ICharacterData[] = [
         affiliations: [
             { name: "NLE", rank: "co-founder", role: "courier & 2nd in command", primary: true }
         ],
+        aliases: ["Gramps"],
         description: [
             "<Character>Nortle</Character> is the jovial proprietor of the <Location>Happy Turtle</Location>. His tavern makes the perfect cover for his secretive work as <Important>NLE</Important>'s courier."
         ],
@@ -221,14 +277,69 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/nortle.png"
         },
-        playlistID: "3Jydeg4IHMy5kFr4BbMtxx",
+        spotify: {
+			primaryPlaylistID: "3Jydeg4IHMy5kFr4BbMtxx"
+        },
         plotRelevance: 3,
+        status: "alive"
+    },
+    {
+        name: "Vilyth Koehlanna",
+        id: "ferret",
+        subtitle: "Professional Dumpster Diver",
+        type: "nle",
+        species: ["drow"],
+        occupation: ["mechanic"],
+        physical: {
+            eyeColor: "purple",
+            hairColor: "white",
+            height: "4' 9\"",
+            weight: "79 lbs."
+        },
+        affiliations: [
+            { name: "NLE", rank: "member", role: "armorer, mechanic" },
+            { name: "Koehl's", rank: "owner", role: "proprietor", primary: true }
+        ],
+        aliases: [ "Ferret" ],
+        description: [
+            "<Character>Vilyth Koehlanna</Character> is a rare talent at working with magitech - a fact she is unapologeticalyl proud of. She is the owner and sole employee of an arms dealer named <l>Koehl's</l>, located on <Location>Battle World</Location>."
+        ],
+        // homeworld: "Geoss",
+        images: {
+            thumbnail: "img/npc/vilyth.png"
+        },
+        spotify: {
+			primaryPlaylistID: "7zuezrk0cg70sjtSux8OpO"
+        },
+        plotRelevance: 2,
         status: "alive"
     },
 
     //#endregion Nelly / N.L.E. / NLE
 
     //#region Player Crew
+    {
+        name: "Carrie Ward",
+        id: "carrie-ward",
+        type: "crew",
+        species: ["human"],
+        occupation: ["nurse"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Nurse", joined: "04/21/0001", primary: true }
+        ],
+        description: [
+            "<Character>Carrie Ward</Character> is a forty-five-year-old licensed nurse who arrived in <Location>Somewhere</Location> after her home, a variant of 1970's <Location>Earth</Location> was destroyed. She was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech."
+        ],
+        homeworld: "1970's USA, Earth",
+        images: {
+            thumbnail: "img/npc/carrie-ward.webp"
+        },
+        spotify: {
+			primaryPlaylistID: "3hT0RyxhMAKPf84X2WHnv6"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
     {
         name: "Flavio de Mota",
         id: "flavio",
@@ -241,12 +352,37 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Flavio</Character> is a distractingly fashionable person from some place called <Location>Portugal</Location>. I can't actually tell what gender they are, and I'm too afraid to ask, kupo."
         ],
-        // homeworld: "1700s Portugal",
+        homeworld: "1700s Portugal, Earth",
         images: {
             thumbnail: "img/npc/flavio.png"
         },
-        playlistID: "3sqnhw5mDTdrcmhwXYOjiF",
+        spotify: {
+			primaryPlaylistID: "3sqnhw5mDTdrcmhwXYOjiF"
+        },
         plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Duvamil \"Hamisfore\" Turen",
+        id: "hamisfore",
+        subtitle: "Literally too Angry to Die",
+        type: "crew",
+        species: ["gnome"],
+        occupation: ["Quartermaster of the Brightside"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "\"Captain\"", joined: "04/02/0001", primary: true }
+        ],
+        description: [
+            "<Character>Hamisfore</Character> is a brightly colored, middle-aged gnomish woman whose 'crazy aunt' energy hides a world-weary heart. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>."
+        ],
+        // homeworld: "generic fantasy",
+        images: {
+            thumbnail: "img/npc/hamisfore-toon.png"
+        },
+        spotify: {
+			primaryPlaylistID: "0D5V8wlr6jXSG9Zkxo9WGH"
+        },
+        plotRelevance: 2,
         status: "alive"
     },
     {
@@ -265,8 +401,34 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/matthew-law.png"
         },
-        playlistID: "1TJ5Hl7QbBhFvKAO6Ogv1D",
+        spotify: {
+			primaryPlaylistID: "1TJ5Hl7QbBhFvKAO6Ogv1D"
+        },
         plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Ootah",
+        id: "ootah",
+        subtitle: "\"Captain\" of the Brightside",
+        type: "crew",
+        species: ["orc"],
+        occupation: ["Captain of the Brightside"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "\"Captain\"", joined: "04/02/0001", primary: true }
+        ],
+        aliases: [ "Ootah the Great", "Ootah the Awesome", "High Warlord of Candy World" ],
+        description: [
+            "<Character>Ootah</Character> is a five-year-old orphan who believes herself to be the captain of the <Important>One More Day</Important>. She exhibits behavior that suggests extreme narcissism. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>."
+        ],
+        homeworld: "\"Nunya stinkin' business\"",
+        images: {
+            thumbnail: "img/npc/ootah.webp"
+        },
+        spotify: {
+			primaryPlaylistID: "2oWa3ME4zPJGRTOMG3yXEh"
+        },
+        plotRelevance: 2,
         status: "alive"
     },
     {
@@ -275,9 +437,15 @@ export const CharacterDatas: ICharacterData[] = [
         type: "crew",
         species: ["android"],
         occupation: ["assassin"],
+        physical: {
+            eyeColor: "ice blue, illuminated",
+            hairColor: "cyan",
+            height: "5' 5\""
+        },
         affiliations: [
             { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "07/06/0001", primary: true }
         ],
+        aliases: [ "R-ACB3D9B21B21E299" ], 
         description: [
             "<Character>Susie</Character> is a <Important>RoBro</Important> created from a partial brain-scan of <Character>Rose (Lethal Lady #2)</Character>. However, a manufacturing defect has given her more freewill than intended, allowing her to express a strong dislike of violence."
         ],
@@ -285,12 +453,15 @@ export const CharacterDatas: ICharacterData[] = [
         images: {
             thumbnail: "img/npc/susie.png"
         },
-        playlistID: "4XeEQwogXECnNaDGhnkJ4A",
+        spotify: {
+			primaryPlaylistID: "4XeEQwogXECnNaDGhnkJ4A"
+        },
         plotRelevance: 2,
         status: "alive"
     },
     {
-        name: "Winter Duskward",
+        // name: "Winter Duskward",
+        name: "Winter",
         id: "winter",
         subtitle: "Mystical Child",
         type: "crew",
@@ -298,20 +469,24 @@ export const CharacterDatas: ICharacterData[] = [
         occupation: ["mage", "child"],
         physical: {
             eyeColor: "teal",
+            hairColor: "pinkish",
             height: "4' 2\"",
             weight: "50 lbs."
         },
         affiliations: [
             { name: "Brightside Crew", rank: "member", role: "Mage/Child", joined: "09/28/0001", primary: true }
         ],
+        aliases: [ "bastard", "burden", "disgrace", "half-breed", "Skipper", "Champ" ],
         description: [
-            "<Character>Winter</Character> is an 11-year-old mage who rarely speaks due to her crippling shyness."
+            "<Character>Winter</Character> is an 11-year-old mage who rarely speaks due to crippling shyness. Her attire suggests she came from a noble house."
         ],
-        // homeworld: "Final Fantasy G",
+        // homeworld: "Velarys",
         images: {
-            thumbnail: "img/npc/winter.png"
+            thumbnail: "img/npc/winter2.png"
         },
-        playlistID: "0zyxK6W0ROxoCzmHsCW9zS",
+        spotify: {
+			primaryPlaylistID: "0zyxK6W0ROxoCzmHsCW9zS"
+        },
         plotRelevance: 2,
         status: "alive"
     },
@@ -328,16 +503,21 @@ export const CharacterDatas: ICharacterData[] = [
             weight: "50 lbs."
         },
         affiliations: [
-            { name: "Brightside Crew", rank: "member", role: "Mage/Child", joined: "06/02/0001", primary: true }
+            { name: "Brightside Crew", rank: "member", role: "Mage/Child", joined: "06/02/0001", primary: true },
+            { name: "Zuzu Business", rank: "founder" }
         ],
+        aliases: ["abomination", "monster", "shadow"],
         description: [
-            "<Character>Zuzu</Character> is a young wizard of indeterminate species and a former slave. He looks to be anywhere between 8-10 years old but has memories of only half of that. He aspires to be just like his idol, \"Wizard Nelson\"."
+            "<Character>Zuzu</Character> is a young wizard of indeterminate species and a former slave. He looks to be anywhere between 8-10 years old but has memories of only half of that. He aspires to be just like his idol, <c>\"Wizard Nelson\"</c>."
         ],
-        // homeworld: "Final Fantasy G",
+        homeworld: "Velarys",
         images: {
             thumbnail: "img/npc/zuzu.png"
         },
-        playlistID: "0P1Ckwy19TthbbCWApONXF",
+        spotify: {
+			primaryPlaylistID: "0P1Ckwy19TthbbCWApONXF",
+            themeSong: "3MpK9vnxxgYvh0CNeGvx6G",
+        },
         plotRelevance: 2,
         status: "alive"
     },

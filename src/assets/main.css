@@ -124,6 +124,11 @@ pre {
   user-select: none; /* Standard syntax */
 }
 
+.small-caps {
+  font-variant: small-caps;
+  font-variant-caps: petite-caps;
+}
+
 /* .font-menu {
   font-family: 'Scones and Crossbows', sans-serif;
   font-family: 'BrickShapers', sans-serif;

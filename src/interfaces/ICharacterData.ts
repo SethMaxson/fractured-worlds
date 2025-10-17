@@ -1,3 +1,5 @@
+import type { ITimelineEvent } from "./ITimeline";
+
 interface ICharacterAffiliation {
 	/**
 	 * @example
@@ -31,8 +33,6 @@ interface ICharacterPhysical {
 	weight?: string;
 }
 
-type CharacterDataType = "crew" | "nle" | "pc" | "rebirth" | "other";
-
 /** The raw JSON data for a character. */
 export interface ICharacterData {
     /** e.g. 'Character Name' */
@@ -55,17 +55,13 @@ export interface ICharacterData {
 	birthday?: { year?: number; day: number; month: number; };
     /** A brief description for the character entry screen. */
 	description: string[];
+	drive?: string;
     /** The world this character originally called home, if known. */
 	homeworld?: string;
     /** The character's class or occupation. */
 	occupation: string[];
 	/** The character's physical attributes/description. */
 	physical?: ICharacterPhysical;
-	/** The ID of this character's Spotify playlist, if any.
-	 * @example
-	 * "3kzkDLLYRRU5IYoreptAHH"
-	*/
-	playlistID?: string;
 	/** (1-3) The overall plot importance of a character. Used to determine where and how prominently to display them, if it's used at all.	 
 	 * @1 - Minor character. Background or bit players.
 	 * @2 - Medium. Secondary and supporting cast.
@@ -77,6 +73,15 @@ export interface ICharacterData {
 	 * "Deckhand (04/02/0001 SE-present)"
 	*/
 	role?: string;
+	spotify?: {
+		/** The ID of this character's Spotify playlist, if any.
+		 * @example
+		 * "3kzkDLLYRRU5IYoreptAHH"
+		*/
+		primaryPlaylistID?: string;
+		themeSong?: string;
+		otherPlaylists?: string[]
+	};
     /** The character's race or species. */
 	species: string[];
 	/** The character's last known status.
@@ -84,8 +89,9 @@ export interface ICharacterData {
 	 * "alive" | "dead"
 	 */
 	status?: "alive"|"dead";
+	timeline?: ITimelineEvent[];
 	/** The character's role within the story. Informs how some things are displayed. */
-	type: CharacterDataType;
+	type: "crew" | "nle" | "pc" | "rebirth" | "other";
 	/** A collection of images of and pertaining to this character. */
 	images: {
 		/**

@@ -2,6 +2,8 @@
 export interface ICalendarMonth {
     /** e.g. 'Month Name' */
 	name: string;
+	/** e.g. 'Jan' */
+	abbreviation: string;
     /** The number of days in this month. */
 	length: number;
 	/** The season in Somewhere at this time. e.g. 'spring'

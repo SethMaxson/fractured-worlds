@@ -25,10 +25,11 @@ const TheGang = [
 ];
 
 const Allies = [
-	CharacterDataUtils.findCharacter(CharacterDatas, 'cade'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'nortle'),
 	CharacterDataUtils.findCharacter(CharacterDatas, 'boo'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'ella')
+	CharacterDataUtils.findCharacter(CharacterDatas, 'cade'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'ella'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'nortle'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'ferret'),
 ];
 </script>
 

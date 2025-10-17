@@ -21,6 +21,7 @@ import { GameStrings } from "@/scripts/game-strings";
 			<h2>Dev Tools</h2>
 			<AppIconContainer>
 				<AppIcon svg="grid-fill" to="/gm/icons">Icons List</AppIcon>
+				<AppIcon svg="list" to="/gm/page-index">Page Index</AppIcon>
 			</AppIconContainer>
 		</main>
 	</PageContainerVue>
