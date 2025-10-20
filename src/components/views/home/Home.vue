@@ -29,7 +29,9 @@ import { GameStrings } from "@/scripts/game-strings";
 			</AppIconContainer>
 			<h2 class="dev">Developer Pages</h2>
 			<AppIconContainer class="dev">
+				<AppIcon svg="list" to="/gm" class="dev">Index</AppIcon>
 				<AppIcon svg="grid-fill" to="/gm/icons" class="dev">Icons List</AppIcon>
+				<AppIcon svg="file-earmark-richtext" to="/gm/page-index" class="dev">Site Page List</AppIcon>
 			</AppIconContainer>
 		</main>
 	</PageContainerVue>

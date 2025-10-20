@@ -1,5 +1,6 @@
 import { Months } from "@/data/calendar/months";
 import type { ICalendarEvent, IFullCalendarEvent } from "@/interfaces/ICalendarEvent";
+import type { IWorldData } from "@/interfaces/IWorldData";
 import { CampaignDate } from "@/objects/CampaignDate";
 
 export namespace Utils {
@@ -122,5 +123,12 @@ export namespace Utils {
             return newPath;
         }
 
+    }
+    export namespace World {
+        export function findWorld(worldDatas: IWorldData[], id: string): IWorldData | undefined {
+            const search = worldDatas.filter(w => w.id == id);
+            const world = search && search.length > 0 ? search[0] : undefined;
+            return world;
+        }
     }
 }

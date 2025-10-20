@@ -9,9 +9,10 @@ export const CharacterDatas: ICharacterData[] = [
     {
         name: "C.O.B.B.",
         id: "cobb",
+        subtitle: "Android Monk",
         type: "pc",
         species: ["android"],
-        occupation: ["monk"],
+        occupation: ["surgeon", "martial artist"],
         physical: {
             eyeColor: "brown",
             hairColor: "brown",
@@ -28,6 +29,9 @@ export const CharacterDatas: ICharacterData[] = [
             "<Character>Construct Observing Biological Boundaries</Character>, or <Character>C.O.B.B.</Character>, is a gifted martial artist who is fascinated by the biological concept of mortality. With a mind as powerful as his blows, he seeks to unravel the mysteries of the <Location>Void Realm</Location>."
         ],
         homeworld: "Golarion",
+        spotify: {
+			primaryPlaylistID: "1wlvh0bWnBozYO9pLubU0g"
+        },
         images: {
             thumbnail: "img/party/cobb-toon.png"
         },
@@ -80,6 +84,9 @@ export const CharacterDatas: ICharacterData[] = [
             "<Character>Li'l Phil Antonio</Character> is a manic, unpredictable sorcerer whose purple skin makes him an oddity even among other centaurs. He was raised by a trio of witches and now seeks to find his place in the universe. His aloof tendencies naturally blend with the	curious magic that flows within his veins to make Li'l Phil the ultimate agent of chaos."
         ],
         homeworld: "Wildwood Forest",
+        spotify: {
+			primaryPlaylistID: "18Gq2lmW0vhZhUOEqMgVDx"
+        },
         images: {
             thumbnail: "img/party/phil-toon.png"
         },
@@ -89,9 +96,10 @@ export const CharacterDatas: ICharacterData[] = [
     {
         name: "Tero",
         id: "tero",
+        subtitle: "Kitsune Kineticist",
         type: "pc",
         species: ["kitsune"],
-        occupation: ["kineticist"],
+        occupation: ["kineticist", "helmsman", "navigator"],
         physical: {
             eyeColor: "purple",
             hairColor: "white",
@@ -109,6 +117,9 @@ export const CharacterDatas: ICharacterData[] = [
             "<Character>Tero</Character> is a gifted student of the elements with an appetite for strength seemingly rivaled only by her appetite for new experiences. She grew up in isolation deep within the <Location>Forest of Spirits</Location>, surrounded by snow and evergreen trees."
         ],
         homeworld: "Forest of Spirits, Golarion",
+        spotify: {
+			primaryPlaylistID: "1CtXuwGctAYed6N5FcWNdT"
+        },
         images: {
             thumbnail: "img/party/tero-kawaii.png"
         },
@@ -302,7 +313,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         aliases: [ "Ferret" ],
         description: [
-            "<Character>Vilyth Koehlanna</Character> is a rare talent at working with magitech - a fact she is unapologeticalyl proud of. She is the owner and sole employee of an arms dealer named <l>Koehl's</l>, located on <Location>Battle World</Location>."
+            "<Character>Vilyth Koehlanna</Character> is a rare talent at working with magitech - a fact she is unapologetically proud of. She is the owner and sole employee of an arms dealer named <l>Koehl's</l>, located on <Location>Battle World</Location>."
         ],
         // homeworld: "Geoss",
         images: {
@@ -319,6 +330,51 @@ export const CharacterDatas: ICharacterData[] = [
 
     //#region Player Crew
     {
+        name: "Bebop",
+        id: "bebop",
+        type: "crew",
+        species: ["mutant"],
+        occupation: ["enforcer"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Master Gunner", joined: "06/02/0001", primary: true }
+        ],
+        description: [
+            "<Character>Bebop</Character> is a mutant boar who once worked for a variant of Shredder in a world similar to the Big Apple. What he lacks in brains he makes up for with muscle and aggression. He seems to have formed an almost sibling-like bond with Ootah."
+        ],
+        homeworld: "New York City, Earth, 1991",
+        images: {
+            thumbnail: "img/npc/bebop.png"
+        },
+        spotify: {
+			primaryPlaylistID: "3dZixNJssPoe8l0Ads4xyf"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "\"Blackhand\" Roo",
+        id: "blackhand-roo",
+        subtitle: "Train Mechanic",
+        type: "crew",
+        species: ["kangaroo"],
+        occupation: ["train mechanic"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Engineer", joined: "06/02/0001", primary: true }
+        ],
+        description: [
+            "<Character>\"Blackhand\" Roo</Character> is an experienced train mechanic who briefly worked as the president of a railway company. His years working with locomotives seem to have allowed him to get to grips with <Important>The Brightside</Important>'s complex engine."
+        ],
+        homeworld: "Ashdown Forest, Anelima",
+        images: {
+            thumbnail: "img/npc/blackhand-roo.png"
+        },
+        spotify: {
+			primaryPlaylistID: "2tLNqr6RYVensjhMUY51ek"
+        },
+        plotRelevance: 2,
+        status: "alive"
+    },
+    {
         name: "Carrie Ward",
         id: "carrie-ward",
         type: "crew",
@@ -330,7 +386,7 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Carrie Ward</Character> is a forty-five-year-old licensed nurse who arrived in <Location>Somewhere</Location> after her home, a variant of 1970's <Location>Earth</Location> was destroyed. She was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech."
         ],
-        homeworld: "1970's USA, Earth",
+        homeworld: "USA, Earth, 1977",
         images: {
             thumbnail: "img/npc/carrie-ward.webp"
         },
@@ -352,12 +408,34 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Flavio</Character> is a distractingly fashionable person from some place called <Location>Portugal</Location>. I can't actually tell what gender they are, and I'm too afraid to ask, kupo."
         ],
-        homeworld: "1700s Portugal, Earth",
+        homeworld: "Portugal, Earth, 1700s",
         images: {
             thumbnail: "img/npc/flavio.png"
         },
         spotify: {
 			primaryPlaylistID: "3sqnhw5mDTdrcmhwXYOjiF"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Gugg",
+        id: "gugg",
+        type: "crew",
+        species: ["neanderthal"],
+        occupation: ["hunter"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "06/02/0001", primary: true }
+        ],
+        description: [
+            "<Character>Gugg</Character> is a surprisingly soft-spoken caveman who seems to embody the phrase \"speak softly and carry a big stick]\". He has a prosthetic right leg."
+        ],
+        homeworld: "Earth, prehistory",
+        images: {
+            thumbnail: "img/npc/gugg.png"
+        },
+        spotify: {
+			primaryPlaylistID: "4KuWI0li6sA2naX6yISYZ3"
         },
         plotRelevance: 1,
         status: "alive"
@@ -370,7 +448,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["gnome"],
         occupation: ["Quartermaster of the Brightside"],
         affiliations: [
-            { name: "Brightside Crew", rank: "member", role: "\"Captain\"", joined: "04/02/0001", primary: true }
+            { name: "Brightside Crew", rank: "member", role: "Quartermaster", joined: "04/02/0001", primary: true }
         ],
         description: [
             "<Character>Hamisfore</Character> is a brightly colored, middle-aged gnomish woman whose 'crazy aunt' energy hides a world-weary heart. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>."
@@ -383,6 +461,30 @@ export const CharacterDatas: ICharacterData[] = [
 			primaryPlaylistID: "0D5V8wlr6jXSG9Zkxo9WGH"
         },
         plotRelevance: 2,
+        status: "alive"
+    },
+    {
+        name: "Joey Morton",
+        id: "joey-morton",
+        subtitle: "Mall Cop",
+        type: "crew",
+        species: ["human"],
+        occupation: ["security guard"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "06/02/0001", primary: true }
+        ],
+        description: [
+            "<Character>Joey Morton</Character> is a human woman from a kingdom known as Scotland in an Earth variant. She is an avid 'gamer', which apparently means she obsessively collects and plays things called 'video games'."
+        ],
+        // drive: "play ever good video game",
+        homeworld: "Scotland, Earth, 1998",
+        images: {
+            thumbnail: "img/npc/joey-morton-cropped.png"
+        },
+        spotify: {
+			primaryPlaylistID: "5ke9F1xiKQPtsdNTetNYet"
+        },
+        plotRelevance: 1,
         status: "alive"
     },
     {
@@ -421,6 +523,7 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Ootah</Character> is a five-year-old orphan who believes herself to be the captain of the <Important>One More Day</Important>. She exhibits behavior that suggests extreme narcissism. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>."
         ],
+        drive: "find 'Candy World'",
         homeworld: "\"Nunya stinkin' business\"",
         images: {
             thumbnail: "img/npc/ootah.webp"
@@ -429,6 +532,26 @@ export const CharacterDatas: ICharacterData[] = [
 			primaryPlaylistID: "2oWa3ME4zPJGRTOMG3yXEh"
         },
         plotRelevance: 2,
+        status: "alive"
+    },
+    {
+        name: "Per Schnorr",
+        id: "per-schnorr",
+        subtitle: "Spiritual Leader",
+        type: "crew",
+        species: ["human"],
+        occupation: ["druid"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "06/02/0001", primary: true }
+        ],
+        description: [
+            "<Character>Per Schnorr</Character> is a druid from the dark ages of one of the many <Location>Earths</Location>."
+        ],
+        homeworld: "Germanic tribelands, Earth, medieval period",
+        images: {
+            thumbnail: "img/npc/per.png"
+        },
+        plotRelevance: 1,
         status: "alive"
     },
     {
@@ -449,6 +572,7 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Susie</Character> is a <Important>RoBro</Important> created from a partial brain-scan of <Character>Rose (Lethal Lady #2)</Character>. However, a manufacturing defect has given her more freewill than intended, allowing her to express a strong dislike of violence."
         ],
+        drive: "make as many friends as possible",
         homeworld: "Weapon World",
         images: {
             thumbnail: "img/npc/susie.png"
@@ -474,11 +598,11 @@ export const CharacterDatas: ICharacterData[] = [
             weight: "50 lbs."
         },
         affiliations: [
-            { name: "Brightside Crew", rank: "member", role: "Mage/Child", joined: "09/28/0001", primary: true }
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "08/28/0001", primary: true }
         ],
         aliases: [ "bastard", "burden", "disgrace", "half-breed", "Skipper", "Champ" ],
         description: [
-            "<Character>Winter</Character> is an 11-year-old mage who rarely speaks due to crippling shyness. Her attire suggests she came from a noble house."
+            "<Character>Winter</Character> is an eleven-year-old mage who rarely speaks due to crippling shyness. Her attire suggests she came from a noble house."
         ],
         // homeworld: "Velarys",
         images: {
@@ -503,7 +627,7 @@ export const CharacterDatas: ICharacterData[] = [
             weight: "50 lbs."
         },
         affiliations: [
-            { name: "Brightside Crew", rank: "member", role: "Mage/Child", joined: "06/02/0001", primary: true },
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "06/02/0001", primary: true },
             { name: "Zuzu Business", rank: "founder" }
         ],
         aliases: ["abomination", "monster", "shadow"],

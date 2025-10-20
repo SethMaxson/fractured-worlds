@@ -9,8 +9,8 @@ defineProps<{
 	<div class="greetings p-2 border-2 border-bottom mb-2">
 		<h1 class="heading">{{ header }}</h1>
 		<h3>
-			<slot></slot>
-			<div v-if="author" class="text-end small fw-normal">- {{author}}</div>
+			<div class="lead"><slot></slot></div>
+			<div v-if="author" class="blockquote-footer text-end fw-normal">{{author}}</div>
 		</h3>
 	</div>
 </template>

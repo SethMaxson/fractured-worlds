@@ -27,6 +27,7 @@ import Ship from "./components/views/ship/Ship.vue";
 import ShipIndex from "./components/views/ship/Index.vue";
 import ShipCrew from "@/components/views/ship/Crew.vue";
 import SingleCharacterView from "@/components/views/characters/SingleCharacterView.vue";
+import SingleWorldView from "./components/views/worlds/SingleWorldView.vue";
 import Timeline from "./components/views/timeline/Timeline.vue";
 import WorldAnchors from "@/components/views/journal/WorldAnchors.vue";
 import WorldMap from "@/components/views/world-map/WorldMap.vue";
@@ -93,6 +94,7 @@ const router = createRouter({
 		{ path: '/timeline', name: 'Timeline', component: Timeline},
 		{ path: '/world-map', name: 'World Map', component: WorldMap},
 		{ path: '/worlds', name: 'Worlds', component: Worlds, },
+		{ path: '/worlds/:id', component: SingleWorldView, props: true },
 		...autoRoutes
 	].sort((r1, r2) => {
 		if (r1.path > r2.path) { return 1; }

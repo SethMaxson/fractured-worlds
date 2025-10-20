@@ -16,7 +16,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 	<PageContainerVue :isWide="false" class="px-0">
 		<header>
 			<Breadcrumb path="/worlds" />
-			<ViewBlurb header="">
+			<ViewBlurb header="Worlds" author="Eva Davis">
 				World remnants we know to exist or to have existed at some point.
 			</ViewBlurb>
 		</header>
@@ -24,7 +24,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 			<ul class="list-group w-100 m-0 p-1">
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/somewhere.png" />
+						<img src="img/worlds/somewhere.png" />
 					</template>
 					<template v-slot:name>
 						Somewhere
@@ -51,9 +51,9 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 					</template>
 				</World>
 				<World>
-				<!-- <World wallpaper="/public/img/reference/wonderland.jpg"> -->
+				<!-- <World wallpaper="img/reference/wonderland.jpg"> -->
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/wonderland.png" />
+						<img src="img/worlds/wonderland.png" />
 					</template>
 					<template v-slot:name>
 						Wonderland
@@ -68,14 +68,14 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 						<NittyGritty
 							anchor="Depths of the Hedge Maze"
 							pure-soul="Alice"
-							:kindredWorlds="['?', '?']"
+							:kindredWorlds="['Land of Oz', '?']"
 						/>
 					</template>
 				</World>
 				<World>
-				<!-- <World wallpaper="/public/img/reference/big_apple.jpg"> -->
+				<!-- <World wallpaper="img/reference/big_apple.jpg"> -->
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/big_apple.png" />
+						<img src="img/worlds/big_apple.png" />
 					</template>
 					<template v-slot:name>
 						Big Apple
@@ -98,7 +98,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blues_house.png" />
+						<img src="img/worlds/blues_house.png" />
 					</template>
 					<template v-slot:name>
 						Stone-bound Storybook (Blue's House)
@@ -121,7 +121,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/neon_coast.png" />
+						<img src="img/worlds/neon_coast.png" />
 					</template>
 					<template v-slot:name>
 						Neon Coast [DESTROYED]
@@ -149,7 +149,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/land_of_oz.png" />
+						<img src="img/worlds/land_of_oz.png" />
 					</template>
 					<template v-slot:name>
 						Land of Oz
@@ -164,7 +164,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 						<NittyGritty
 							anchor="Scarecrow's Field"
 							partners="Dorothy, Scarecrow, Tinman, Cowardly Lion"
-							:kindredWorlds="['Wonderland']"
+							:kindredWorlds="['Barbieland', 'Wonderland']"
 						/>
 					</template>
 				</World>
@@ -174,7 +174,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 			<ol class="list-group list-group-numbered">
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
+						<img src="img/worlds/blank.png" />
 					</template>
 					<template v-slot:name>
 						Stone-bound Storybook (Blue's Clues)

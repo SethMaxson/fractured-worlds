@@ -39,7 +39,7 @@ import JournalHeader from './subviews/JournalHeader.vue';
 
 
 			
-			<h5>Active Quests</h5>
+			<h3>Lingering Mysteries</h3>
 
 			<div class="list-group fs-6">
 				

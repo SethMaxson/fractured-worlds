@@ -41,7 +41,7 @@ const primaryFaction = props.person?.affiliations.filter(a => a.primary)[0] || u
 const portraitClasses = props.person?.type == 'nle' ? 'bg-nle bg-opacity-50' : undefined;
 // const offerFullPageView = props.person?.plotRelevance && props.person.plotRelevance > 1 ? true : false;
 const offerFullPageView = false;
-const openIcon = offerFullPageView || true ? '#enter' : '#expand';
+const openIcon = offerFullPageView && false ? '#enter' : '#expand';
 
 // TODO: Deprecate this
 const useFullViewForModal = true;
@@ -145,7 +145,7 @@ const useFullViewForModal = true;
 	<!-- #endregion Non-modal version -->
 
 	<!-- #region Actual Modal -->
-	<div class="modal fade" :id="'modal-'+idBase" tabindex="-1" aria-hidden="true">
+	<div class="modal fade m-0 p-0" :id="'modal-'+idBase" tabindex="-1" aria-hidden="true">
 		<div class="modal-dialog" :class="{'modal-xl': person, 'modal-fullscreen-md-down': person}">
 			<div class="modal-content">
 				<div class="modal-header">

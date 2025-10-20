@@ -59,9 +59,12 @@ if (playlistEmbed) {
 					<b>{{ person.aliases.length > 1 ? "Aliases" : "Alias" }}:</b> {{ person.aliases.join(", ") }}
 				</div>
 				<div v-if="person.affiliations && person.affiliations.length > 0">
-					<b>Affiliations:</b>
-					<!-- {{ person.affiliations.map(a => `${a.name} (${a.role || a.rank})`).join(", ") }} -->
-					{{ person.affiliations.map(a => `${a.name}`).join(", ") }}
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item"><b>Affiliations:</b></li>
+						<li class="list-inline-item" v-for="a, i in person.affiliations">
+							{{ `${a.name} ${a.role || a.rank ? " (" + (a.role || a.rank) + ")" : ""}${i+1 == person.affiliations.length ? '' : ','}` }}
+						</li>
+					</ul>
 				</div>
 				<div class="big-details text-capitalize">
 					<div v-if="person.homeworld">
@@ -69,6 +72,9 @@ if (playlistEmbed) {
 					</div>
 					<div v-if="birthday">
 						<b>Birthday:</b> {{Utils.Date.Format.DMon(birthday)}}
+					</div>
+					<div v-if="person.drive">
+						<b>Drive:</b> {{person.drive}}
 					</div>
 				</div>
 				<div class="details mt-2" v-if="person.physical">

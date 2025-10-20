@@ -23,7 +23,7 @@ export const Holidays = [
     [] as ICalendarEvent[],
     // September
     [
-        { day: 16, name: "Gazelle Concert", definition: ["Cade invites Tero, Ella, Althea, Nortle, and Boo to a Gazelle concert in Zootopia."], gmOnly: true }
+        { day: 7, name: "Gazelle Concert", definition: ["Cade invites Tero, Ella, Althea, Nortle, and Boo to a Gazelle concert in Zootopia."], gmOnly: true }
     ] as ICalendarEvent[],
     // October
     [

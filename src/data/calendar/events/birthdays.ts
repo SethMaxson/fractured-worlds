@@ -22,17 +22,17 @@ export const Birthdays = [
     [
         { day: 1, name: "Giuseppe da Albiate", definition: [] },
         { day: 25, name: "Cade Brightcloak", definition: [] },
-        { day: 29, name: "Mardred Fireforge", definition: [] },
+        { day: 29, name: "Mardred Fireforge", definition: [], hide: true },
     ] as ICalendarEvent[],
     // April
     [
         { day: 9, name: "Marlowe", definition: [] },
-        { day: 21, name: "Ella Fitzpatrick", definition: [] },
+        { day: 21, name: "Ella Fitzpatrick", id: "ella", definition: [] },
     ] as ICalendarEvent[],
     // May
     [
         { day: 4, name: "Kenji Cherrymoon", definition: [], hide: true },
-        { day: 13, name: "Betsy Boyle", definition: [] },
+        { day: 13, name: "Betsy Boyle", definition: [], hide: true },
         { day: 18, name: "Tom Cox", definition: [] },
         // { day: "mid to late May", name: "Cucumber harvest season [https://extension.umn.edu/vegetables/growing-cucumbers#starting-seeds--209860, https://yardandgarden.extension.iastate.edu/how-to/growing-cucumbers-home-garden]", definition: [] },
         { day: 19, name: "Cucu", definition: [] },
@@ -44,9 +44,10 @@ export const Birthdays = [
     ] as ICalendarEvent[],
     // July
     [
+        { day: 5, name: "Susie", definition: [] },
         { day: 10, name: "Yoshis", definition: [] },
         { day: 12, name: "Blackhand Roo", definition: [] },
-        { day: 20, name: "Hamisfore", definition: [] },
+        { day: 20, name: "Hamisfore", id: "hamisfore", definition: [] },
         { day: 27, name: "Per Schnorr", definition: [] },
     ] as ICalendarEvent[],
     // August
@@ -58,7 +59,7 @@ export const Birthdays = [
     // September
     [
         { day: 1, name: "Boo", definition: [] },
-        { day: 11, name: "Elaim Trueblood", definition: [] },
+        { day: 11, name: "Elaim Trueblood", definition: [], hide: true },
         { day: 12, name: "Joey Morton", definition: [] },
         { day: 15, name: "Eva Davis", definition: [] },
     ] as ICalendarEvent[],
