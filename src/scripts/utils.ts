@@ -103,6 +103,19 @@ export namespace Utils {
             return str;
         }
     }
+    export namespace SortComparators {
+        /** Compare two date strings (e.g. "06/05/0001") */
+        export function dateString(a: string|undefined, b: string|undefined, ascending: boolean = true) {
+            const compA = a || "";
+            const compB = b || "";
+            const aWins = ascending ? 1 : -1;
+            const bWins = ascending ? -1 : 1;
+            return (
+                compA == compB ? 0
+                : compA > compB ? aWins : bWins
+            );
+        }
+    }
     export namespace String {
 
         export function capitalize(text: string) {

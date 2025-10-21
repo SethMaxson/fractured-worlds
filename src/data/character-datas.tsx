@@ -1,10 +1,11 @@
 import type { ICharacterData } from "@/interfaces/ICharacterData";
+import { SomewhereCharacterDatas } from "./character-datas/somewhere";
 
 /** Used to create a standardized set of character profiles that can be accessed from any page.
  * Some records contain information that is not yet known to the players, which is currently commented out.
  * TODO: Finish migrating the hardcoded data in character pages into this array.
  */
-export const CharacterDatas: ICharacterData[] = [
+export const CharacterDatas: ICharacterData[] = SomewhereCharacterDatas.concat([
     //#region Player Characters
     {
         name: "C.O.B.B.",
@@ -68,6 +69,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["centaur"],
         occupation: ["sorcerer"],
         physical: {
+            gender: "male",
             eyeColor: "purple",
             hairColor: "purple",
             height: "6' 1\"",
@@ -101,6 +103,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["kitsune"],
         occupation: ["kineticist", "helmsman", "navigator"],
         physical: {
+            gender: "female",
             eyeColor: "purple",
             hairColor: "white",
             height: "5' 2\"",
@@ -132,12 +135,18 @@ export const CharacterDatas: ICharacterData[] = [
         type: "pc",
         species: ["dwarf"],
         occupation: ["champion"],
+        physical: {
+            gender: "male",
+            eyeColor: "brown",
+            hairColor: "black, graying, receding",
+            height: "4\" 4'",
+        },
         affiliations: [],
         aliases: [ "Weevil" ],
         description: [
-            "<Character>Tropey McTroperson</Character> is a dwarven paladin who hails from a small farming village. After finding himself in the mysterious <Location>Void Realm</Location>, he made it his mission to search its myriad worlds for jelly beans."
+            "<Character>Tropey McTroperson</Character> was a dwarven paladin who hailed from a small farming village. After finding himself in the mysterious <Location>Void Realm</Location>, he made it his mission to search its myriad worlds for jelly beans. He fell in battle, honorably sacrificing himself to save his friends from an alien monster."
         ],
-        homeworld: "Hidden Valley",
+        homeworld: "Ranch, Hidden Valley",
         images: {
             thumbnail: "img/party/tropey-toon.png"
         },
@@ -148,31 +157,34 @@ export const CharacterDatas: ICharacterData[] = [
 
     //#region Nelly / N.L.E. / NLE
     {
-        name: "Althea Holimion",
+        // name: "Althea Holimion",
+        name: "Owl",
         id: "owl",
         subtitle: "Tomb Appreciator",
         type: "nle",
-        species: ["elf"],
+        // species: ["elf"],
+        species: ["???"],
         occupation: ["botanist"],
-        physical: {
-            eyeColor: "brown",
-            hairColor: "brown",
-            height: "5' 6\"",
-            weight: "101 lbs."
-        },
+        // physical: {
+        //     gender: "female",
+        //     eyeColor: "brown",
+        //     hairColor: "brown",
+        //     height: "5' 6\"",
+        //     weight: "101 lbs."
+        // },
         affiliations: [
-            { name: "NLE", rank: "member", role: "armorer, mechanic", primary: true }
+            { name: "NLE", rank: "member", role: "archaeologist, botanist", primary: true }
         ],
         aliases: [ "Owl" ],
         description: [
-            "<Character>Althea</Character> serves as both NLE's botanist and ."
+            "<Character>Owl</Character> (we don't know her real name) serves as NLE's archaeologist and botany expert, in addition to standard scout work. <Character>Cade</Character>, <Character>Doc</Character>, and <Character>Ella</Character> all seem to hold her in high regard."
         ],
         // homeworld: "Geoss",
         images: {
-            thumbnail: "img/npc/vilyth.png"
+            // thumbnail: "img/npc/vilyth.png"
         },
         spotify: {
-			primaryPlaylistID: "7zuezrk0cg70sjtSux8OpO"
+			primaryPlaylistID: "2OmclIVxqvgE0EVfbz8E1O"
         },
         plotRelevance: 2,
         status: "alive"
@@ -185,6 +197,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["canine"],
         occupation: ["telepath"],
         physical: {
+            gender: "male",
             eyeColor: "brown",
             hairColor: "light tan",
             height: "1' 11\"",
@@ -214,6 +227,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["halfling"],
         occupation: ["cleric"],
         physical: {
+            gender: "male",
             eyeColor: "blue",
             hairColor: "blonde",
             height: "3' 3\"",
@@ -222,12 +236,12 @@ export const CharacterDatas: ICharacterData[] = [
         affiliations: [
             { name: "NLE", rank: "member", role: "scout", primary: true }
         ],
-        aliases: ["Penguin"],
+        aliases: ["Penguin", "Destiny's Child", "Hedge Knight"],
         description: [
-            "<Character>Cade Brightcloak</Character> is an amicable knight we met in <Location>Wonderland</Location>. He operates as a scout for <Important>NLE</Important>",
+            "<Character>Cade Brightcloak</Character> is an amicable knight we met in <Location>Wonderland</Location>. He operates as a scout for <Important>NLE</Important>.",
             "He is a devout adherent of the Cerulean Star."
         ],
-        // homeworld: "Geoss",
+        // homeworld: "Clovershire, Geoss",
         images: {
             thumbnail: "img/npc/cade-toon.png"
         },
@@ -238,12 +252,44 @@ export const CharacterDatas: ICharacterData[] = [
         status: "alive"
     },
     {
+        name: "Dr. Emmet Brown",
+        id: "doc",
+        subtitle: "The Brains",
+        type: "nle",
+        species: ["human"],
+        occupation: ["inventor"],
+        physical: {
+            gender: "male",
+            eyeColor: "white",
+            hairColor: "brown",
+            height: "6' 1\"",
+            weight: "170 lbs."
+        },
+        affiliations: [
+            { name: "NLE", rank: "member", role: "inventor, brains", primary: true }
+        ],
+        aliases: [ "Doc" ],
+        description: [
+            "<Character>Doc</Character> is a peerless inventor whose experiencing with specialized, flying vehicles seems to predate his entry into Voidspace. He travels in a vessel he created himself: The Light Train III. He hasn't mentioned what happened to I and II."
+        ],
+        homeworld: "Hill Valley, Earth, 1895",
+        images: {
+            thumbnail: "img/npc/doc-brown.jpg"
+        },
+        spotify: {
+			primaryPlaylistID: "4bpGPq1jvlr1tirvdfZktT"
+        },
+        plotRelevance: 2,
+        status: "alive"
+    },
+    {
         name: "Ella Fitzpatrick",
         id: "ella",
         type: "nle",
         species: ["half-elf"],
         occupation: ["spellblade"],
         physical: {
+            gender: "female",
             eyeColor: "blue",
             hairColor: "blonde",
             height: "5' 8\"",
@@ -273,6 +319,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["tortle"],
         occupation: ["bartender"],
         physical: {
+            gender: "male",
             eyeColor: "black",
             height: "5' 5\"",
             weight: "450 lbs."
@@ -302,6 +349,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["drow"],
         occupation: ["mechanic"],
         physical: {
+            gender: "female",
             eyeColor: "purple",
             hairColor: "white",
             height: "4' 9\"",
@@ -561,6 +609,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["android"],
         occupation: ["assassin"],
         physical: {
+            gender: "female",
             eyeColor: "ice blue, illuminated",
             hairColor: "cyan",
             height: "5' 5\""
@@ -592,6 +641,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["human"],
         occupation: ["mage", "child"],
         physical: {
+            gender: "female",
             eyeColor: "teal",
             hairColor: "pinkish",
             height: "4' 2\"",
@@ -622,6 +672,7 @@ export const CharacterDatas: ICharacterData[] = [
         species: ["shadow person"],
         occupation: ["mage", "child"],
         physical: {
+            gender: "male",
             eyeColor: "blue",
             height: "4' 0\"",
             weight: "50 lbs."
@@ -650,4 +701,4 @@ export const CharacterDatas: ICharacterData[] = [
     //#region Rebirth Caucus
     
     //#endregion Rebirth Caucus
-];
+]);

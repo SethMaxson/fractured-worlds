@@ -15,6 +15,11 @@ export namespace CharacterDataUtils {
         return person;
     }
 
+    /** Find all characters that match the provided World ID. */
+    export function findCharactersByLocation(characterDatas: ICharacterData[], worldID: string): ICharacterData[] {
+        return characterDatas.filter(char => char.location == worldID);
+    }
+
     /** Lookup a character's birthday, if known. */
     export function getBirthday(character: ICharacterData, birthdayEventSet: ICalendarEvent[][]): IFullCalendarEvent | undefined {
         const allBirthdays = Utils.Date.Convert.ICalendarEvent.arrayToIFullCalenderEvents(birthdayEventSet);

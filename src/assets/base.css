@@ -79,6 +79,11 @@
   --fw-bs-body-bg-rgb: 33,37,41;
 }
 
+/* custom colors inspired by specific franchises and settings */
+:root {
+  --fw-c-barbie: #DA1884;
+}
+
 /* custom Fractured Worlds collector card colors */
 :root {
 	/* --card-c-common: var(--kh-c-theme-dark-blue); */

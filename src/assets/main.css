@@ -91,6 +91,10 @@ svg.portrait {
 }
 
 /*#region general text formatting */
+.text-barbie {
+  color: var(--fw-c-barbie);
+}
+
 .capitalize { text-transform: capitalize; }
 
 pre {
@@ -243,5 +247,23 @@ pre {
   --bs-nav-link-color: var(--bs-navbar-color);
   --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
+}
+
+:root {
+  --bs-transition-length: 0.05s;
+  --bs-accordion-transition-length: 0.05s;
+}
+
+.accordion,
+.accordion-item > * {
+  --bs-accordion-transition: color var(--bs-accordion-transition-length) ease-in-out, 
+    background-color var(--bs-accordion-transition-length) ease-in-out,
+    border-color var(--bs-accordion-transition-length) ease-in-out,
+    box-shadow var(--bs-accordion-transition-length) ease-in-out,
+    border-radius var(--bs-accordion-transition-length) ease;
+}
+
+.fade {
+  transition: opacity .05s linear;
 }
 /*#endregion extended Bootstrap definitions */

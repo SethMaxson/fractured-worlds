@@ -30,7 +30,7 @@ const svgID = props.svg && props.svg.includes("#")? props.svg : "#" + props.svg;
 <template>
 	<div class="col" :class="props.class">
 		<router-link
-			class="w-100 h-100 nav-link px-1 px-lg-3 pb-1 pt-0 p-lg-3 border border-primary-subtle rounded"
+			class="w-100 h-100 nav-link px-1 px-lg-3 pb-1 pt-2 p-lg-3 border border-primary-subtle rounded"
 			:to="url"
 		>
 			<!-- <div class="m-0 mb-1 px-2 py-0 py-lg-2 ratio ratio-1x1">

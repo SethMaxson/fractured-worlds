@@ -38,7 +38,19 @@ const idBase = props.person
 const primaryFaction = props.person?.affiliations.filter(a => a.primary)[0] || undefined;
 
 // Configure the display
-const portraitClasses = props.person?.type == 'nle' ? 'bg-nle bg-opacity-50' : undefined;
+let npcTypeClass = undefined;
+switch (props.person?.type) {
+	case "location":
+		npcTypeClass = "bg-secondary";
+		break;
+	case "nle":
+		npcTypeClass = "bg-nle bg-opacity-50";
+		break;
+
+	default:
+		break;
+}
+const portraitClasses = npcTypeClass;
 // const offerFullPageView = props.person?.plotRelevance && props.person.plotRelevance > 1 ? true : false;
 const offerFullPageView = false;
 const openIcon = offerFullPageView && false ? '#enter' : '#expand';
@@ -80,22 +92,16 @@ const useFullViewForModal = true;
 			:data-bs-toggle="offerFullPageView ? undefined : 'modal'"
 			v-if="person"
 		>
-			<CardContents :class="{'dead': status == 'dead'}" :truncated="true" :open-icon="openIcon">
+			<CardContents :class="{'dead': status == 'dead'}" :truncated="true" :truncate-header="true" :open-icon="openIcon">
 				<template #image>
 					<Portrait :class="portraitClasses" :src="person?.images.thumbnail" />
 				</template>
 				<template #heading>{{ person.name }}</template>
-				<template #subheading><span class="text-capitalize">{{ CharacterDataUtils.getSubheader(person) }}</span></template>
+				<template #subheading><div class="text-capitalize text-truncate">{{ CharacterDataUtils.getSubheader(person) }}</div></template>
 				<template #homeworld>{{ person?.homeworld }}</template>
 
 				<template #default>
 					<div class="text-truncate" v-html="CharacterDataUtils.getMainBodyText(person, { doParagraphs: false })"></div>
-					<!-- <div class="text-end pt-1">
-						<span class="border-bottom border-2 text-primary bg-primary-subtle border-primary-subtle px-3 small">
-							Details
-							<svg class="menu-button-icon theme-color d-inline"><use :href="offerFullPageView ? '#arrow-right-short' : '#expand'"></use></svg>
-						</span>
-					</div> -->
 				</template>
 
 				<template v-slot:footer v-if="$slots.pcContact || $slots.met">
@@ -146,7 +152,8 @@ const useFullViewForModal = true;
 
 	<!-- #region Actual Modal -->
 	<div class="modal fade m-0 p-0" :id="'modal-'+idBase" tabindex="-1" aria-hidden="true">
-		<div class="modal-dialog" :class="{'modal-xl': person, 'modal-fullscreen-md-down': person}">
+		<div class="modal-dialog" :class="{'modal-xl': person, 'modal-fullscreen-lg-down': person}">
+
 			<div class="modal-content">
 				<div class="modal-header">
 					<h1 class="modal-title fs-5 card-title">
@@ -155,36 +162,32 @@ const useFullViewForModal = true;
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<CharacterFullView :person="person" v-if="person && useFullViewForModal" />
+					<CharacterFullView :person="person" v-if="person" />
 					<div class="card h-100" :class="{'dead': status == 'dead'}" v-else>
-						<slot name="image"><Portrait :class="portraitClasses" :src="person?.images.thumbnail" /></slot>
+						<slot name="image"></slot>
 						<div class="card-body">
 							<h5 class="card-title">
-								<slot name="heading">{{ person?.name }}</slot>
+								<slot name="heading"></slot>
 								<slot name="name"></slot>
 							</h5>
 							<h6 class="card-subtitle mb-2 text-muted border-bottom border-secondary-subtle text-capitalize">
-								<slot name="subheading">{{ CharacterDataUtils.getSubheader(person) }}</slot>
+								<slot name="subheading"></slot>
 							</h6>
 							<div class="card-text">
-								<slot>
-									<div v-html="CharacterDataUtils.getMainBodyText(person, { doParagraphs: false })"></div>
-								</slot>
+								<slot></slot>
 							</div>
 							<slot name="button"></slot>
 						</div>
 						<div class="card-footer text-muted" v-if="$slots.footer || $slots.homeworld">
-							<div v-if="$slots.homeworld || person?.homeworld">
-								Homeworld: <slot name="homeworld">{{ person?.homeworld }}</slot>
+							<div v-if="$slots.homeworld">
+								Homeworld: <slot name="homeworld"></slot>
 							</div>
 							<slot name="footer"></slot>
 						</div>
 					</div>
 				</div>
-				<!-- <div class="modal-footer text-muted" v-if="$slots.footer && false">
-					<slot name="footer"></slot>
-				</div> -->
 			</div>
+
 		</div>
 	</div>
 	<!-- #endregion Actual Modal -->

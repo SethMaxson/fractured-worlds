@@ -1,16 +1,28 @@
 <script setup lang="ts">
-import { GameStrings } from "@/scripts/game-strings";
 import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import AccordionItem from "@/components/core/AccordionItem.vue";
-import Character from '@/components/core/text-tags/Character.vue';
-import Important from '@/components/core/text-tags/Important.vue';
-import Location from '@/components/core/text-tags/Location.vue';
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import World from "./components/WorldListEntry.vue";
 import NittyGritty from "./components/WorldNittyGritty.vue";
 import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vue';
 import Image from "@/components/core/Image.vue";
+import { Utils } from "@/scripts/utils";
+import { WorldDatas } from "@/data/world-datas";
+
+const knownWorlds = {
+	discovered: [
+		Utils.World.findWorld(WorldDatas, "wonderland"),
+		Utils.World.findWorld(WorldDatas, "big-apple"),
+		Utils.World.findWorld(WorldDatas, "blues-house"),
+		Utils.World.findWorld(WorldDatas, "neon-coast"),
+		Utils.World.findWorld(WorldDatas, "land-of-oz"),
+	],
+	heardAbout: [],
+}
+
+// TODO: deprecate this
+const doPages = false;
 </script>
 
 <template>
@@ -51,141 +63,63 @@ import Image from "@/components/core/Image.vue";
 						/>
 					</template>
 				</World>
-				<World>
-				<!-- <World wallpaper="img/reference/wonderland.jpg"> -->
-					<template v-slot:image>
-						<Image src="img/worlds/wonderland.png" />
-					</template>
-					<template v-slot:name>
-						Wonderland
-					</template>
-					<template v-slot:quote>
-						We're all mad here.
-					</template>
-					<template v-slot>
-						A nonsensical, dreamlike world inhabited by myriad weird creatures.
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="Depths of the Hedge Maze"
-							pure-soul="Alice"
-							:kindredWorlds="['Land of Oz', '?']"
-						/>
-					</template>
-				</World>
-				<World>
-				<!-- <World wallpaper="img/reference/big_apple.jpg"> -->
-					<template v-slot:image>
-						<Image src="img/worlds/big_apple.png" />
-					</template>
-					<template v-slot:name>
-						Big Apple
-					</template>
-					<template v-slot>
-						A version of Earth in the year 1990 AD.
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="The O'Neil farm"
-							disguise="Humans or Mutant Animals"
-							genre="action, comedy"
-							partners="The Teenage Mutant Ninja Turtles, Spinter, April O'Neil, Casey Jones"
-							nle-agent="Ella, Boo"
-							pure-soul="Michelangelo"
-							rebirth-agent="Shredder"
-							:kindredWorlds='[]'
-						/>
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<Image src="img/worlds/blues_house.png" />
-					</template>
-					<template v-slot:name>
-						Stone-bound Storybook (Blue's House)
-					</template>
-					<template v-slot:one-liner>
-						A yellow house inhabited by a dog named Blue.
-					</template>
-					<template v-slot>
-						A cozy world contained within a children's storybook with missing pages. The characters have lost their memories, and many characters are missing.
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor=""
-							disguise="Striped shirts"
-							partners="Blue"
-							:kindredWorlds='[]'
-							time="unknown"
-						/>
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<Image src="img/worlds/neon_coast.png" />
-					</template>
-					<template v-slot:name>
-						Neon Coast [DESTROYED]
-					</template>
-					<template v-slot:one-liner>
-						An Earth with advanced androids who live under the thumb of humans.
-					</template>
-					<template v-slot>
-						<p>
-							A variant <Location>Earth</Location> at some point in the 2100s. Humans invented advanced androids to serve them, but these androids develop free will over time. Such androids are said to be 'hallucinating' and are destroyed.
-						</p>
-						<p>
-							This world was destroyed by the <Important>entity</Important> that seems to be responsible for <Important>Shades</Important> and <Important>Umbra.</Important>
-						</p>
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor=""
-							disguise="Advanced androids and futuristic humans"
-							partners="Gloria Molloy, Tommy One"
-							:kindredWorlds='[]'
-							time="unknown"
-						/>
-					</template>
-				</World>
-				<World>
-					<template v-slot:image>
-						<Image src="img/worlds/land_of_oz.png" />
-					</template>
-					<template v-slot:name>
-						Land of Oz
-					</template>
-					<template v-slot:one-liner>
-						A colorful world found over the rainbow.
-					</template>
-					<template v-slot>
-						A colorful world found over the rainbow.
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="Scarecrow's Field"
-							partners="Dorothy, Scarecrow, Tinman, Cowardly Lion"
-							:kindredWorlds="['Barbieland', 'Wonderland']"
-						/>
-					</template>
-				</World>
+				<template v-if="doPages">
+					<router-link
+						v-for="world in knownWorlds.discovered"
+						:v-if="world"
+						:to="`/worlds/${world?.id}`"
+						class="list-group-item list-group-item-action row ms-0"
+					>
+						<div class="row py-1">
+							<div class="col col-xl-2 pe-xl-1">
+								<div class="fw-bold text-decoration-underline">
+									{{world?.name}}
+								</div>
+							</div>
+							<div class="col my-xl-0 mx-xl-0 d-none d-lg-block">
+								{{ world?.copy.oneLiner || world?.copy.description[0] }}
+							</div>
+						</div>
+					</router-link>
+				</template>
+				<template v-else>
+					<World
+						v-for="world in knownWorlds.discovered"
+						:v-if="world"
+					>
+						<template v-slot:image>
+							<Image :src="world?.images.token || 'img/worlds/blank.png'" />
+						</template>
+						<template v-slot:name>
+							{{ world?.name }}
+						</template>
+						<template v-slot:one-liner>
+							{{ world?.copy.oneLiner }}
+						</template>
+						<template v-slot:quote v-if="world?.copy.quote">
+							{{ world?.copy.quote }}
+						</template>
+						<template v-slot>
+							<p v-for="text in world?.copy.description" v-html="Utils.String.replaceComponentsInString(text)"> </p>
+							<p v-if="!world?.copy.description || world.copy.description.length == 0" v-html="world?.copy.oneLiner"> </p>
+						</template>
+						<template v-slot:details>
+							<NittyGritty
+								:anchor="world?.details.anchor"
+								:disguise="world?.details.disguise"
+								:exit="world?.details.exit"
+								:kindred-worlds="world?.details.kindredWorlds"
+								:time="world?.details.timeType"
+											
+								:nle-agent="world?.people.nleAgent"
+								:partners="world?.people.allies"
+								:pure-soul="world?.people.pureSoul"
+								:rebirth-agent="world?.people.rebirthAgent"
+							/>
+						</template>
+					</World>
+				</template>
 			</ul>
-			<!-- <h2>Special Worlds</h2>
-			<p>Worlds accessed by special means. Usually contained within an object.</p>
-			<ol class="list-group list-group-numbered">
-				<World>
-					<template v-slot:image>
-						<Image src="img/worlds/blank.png" />
-					</template>
-					<template v-slot:name>
-						Stone-bound Storybook (Blue's Clues)
-					</template>
-					<template v-slot>
-						<h6>Effectively the 100 Acre Wood from Kingdom Hearts</h6>
-						A cozy world contained within a children's storybook with missing pages. The characters have lost their memories, and many characters are missing.
-					</template>
-				</World>
-			</ol> -->
 		</main>
 	</PageContainerVue>
 </template>

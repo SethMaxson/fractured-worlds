@@ -2,7 +2,16 @@
 	<div class="card h-100" :class="props.class">
 		<slot name="image"></slot>
 		<div class="card-body">
-			<h5 class="card-title">
+			<h5 class="card-title d-flex align-items-center" v-if="truncateHeader">
+				<div class="w-100 flex-grow-1 text-truncate">
+					<slot name="heading"></slot>
+					<slot name="name"></slot>
+				</div>
+				<div class="flex-shrink-1">
+					<svg v-if="openIcon" class="menu-button-icon theme-color d-inline ms-1 small"><use :href="openIcon"></use></svg>
+				</div>
+			</h5>
+			<h5 class="card-title" v-else>
 				<slot name="heading"></slot>
 				<slot name="name"></slot>
 				<svg v-if="openIcon" class="menu-button-icon theme-color d-inline ms-1 small"><use :href="openIcon"></use></svg>
@@ -42,6 +51,10 @@ const props = defineProps({
 		default: undefined
 	},
 	truncated: {
+		type: [String, Boolean],
+		default: false
+	},
+	truncateHeader: {
 		type: [String, Boolean],
 		default: false
 	}

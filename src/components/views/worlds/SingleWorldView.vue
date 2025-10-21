@@ -6,6 +6,7 @@ import NittyGritty from "./components/WorldNittyGritty.vue";
 import { useRoute } from "vue-router";
 import { Utils } from "@/scripts/utils";
 import { WorldDatas } from "@/data/world-datas";
+import Image from "@/components/core/Image.vue";
 
 const props = defineProps({
 	id: {
@@ -29,45 +30,65 @@ const bgImg = world?.images.wallpaper?.trim();
 		</header>
 		<main>
 			<div v-if="world">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5 card-title">
-						{{world.name}}
+				
+				<!-- Header -->
+				<div class="border-bottom border-secondary-subtle pb-2 d-flex flex-wrap align-items-baseline mb-2">
+					<h1 class="small-caps flex-shrink-0 me-2 me-lg-3 py-0 my-0">
+						{{ world.name }}
 					</h1>
+					<h4 v-if="world.copy.quote && world.copy.quote.length > 0" class="fst-italic text-muted text-capitalize small-caps d-none d-xl-block">
+						"{{world.copy.quote}}"
+					</h4>
 				</div>
+				
+				<!-- Content -->
 				<div class="modal-body row background-image" :style='{ "backgroundImage": "linear-gradient( to bottom, transparent 0%, var(--fw-bs-body-bg) 40%  ), url(\"" + bgImg + "\")" }'>
+					
+					<!-- wiki-style InfoBox -->
 					<div class="col-xl-4">
 						<div class="card world">
-							<img :src="world.images.token" />
+							<Image :src="world.images.token || 'img/worlds/blank.png'" />
 							<div class="card-body p-2 pt-0">
 								<div class="card-subtitle pb-2 mb-2 text-muted border-bottom border-secondary-subtle text-center">
-									<em v-if="world.quote && world.quote.length > 0">"{{ world.quote }}"</em>
+									<em v-if="world.copy.oneLiner && world.copy.oneLiner.length > 0">{{ world.copy.oneLiner }}</em>
+									<em v-else-if="world.copy.quote && world.copy.quote.length > 0">"{{ world.copy.quote }}"</em>
 								</div>
 								<div class="card-text">
 									<NittyGritty
-										anchor="?"
-										disguise=""
-										partners=""
-										:kindredWorlds='[]'
-										time="standard"
+										:anchor="world.details.anchor"
+										:disguise="world.details.disguise"
+										:exit="world.details.exit"
+										:kindred-worlds="world.details.kindredWorlds || []"
+										:time="world.details.timeType"
+										
+										:nle-agent="world.people.nleAgent"
+										:partners="world.people.allies"
+										:pure-soul="world.people.pureSoul"
+										:rebirth-agent="world.people.rebirthAgent"
 									/>
 								</div>
 							</div>
 						</div>
 					</div>
 					
+					<!-- Body -->
 					<div class="p-2 col-xl-8 ps-xl-4 d-flex flex-column">
+
+						<blockquote v-if="world.copy.quote && world.copy.quote.length > 0" class="blockquote text-center text-muted text-capitalize small-caps d-block d-xl-none">
+							"{{world.copy.quote}}"
+						</blockquote>
+
 						<div class="card-body">
 							<div class="card-text row">
 								<div class="col">
-									<slot></slot>
+									<p v-for="desc in world.copy.description" v-html="desc"></p>
+									<p v-if="!world.copy.description || world.copy.description.length == 0" v-html="world.copy.oneLiner"></p>
 								</div>
 							</div>
-							<slot name="button"></slot>
 						</div>
-						<div class="card-footer text-muted" v-if="$slots.footer">
-							<slot name="footer"></slot>
-						</div>
+
 					</div>
+
 				</div>
 			</div>
 		</main>

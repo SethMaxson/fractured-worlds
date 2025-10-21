@@ -15,7 +15,7 @@ import DmWorlds from "./components/views/dm-worlds/DmWorlds.vue";
 import Effects from "./components/views/perks/Perks.vue";
 import ExplorersGuide from "./components/views/explorers-guide/ExplorersGuide.vue";
 import Factions from "./components/views/factions/Factions.vue";
-import Home from "./components/views/home/Home.vue";
+import Home from "./components/views/Home.vue";
 import Inventory from "./components/views/inventory/Inventory.vue";
 import Journal from "./components/views/journal/Log.vue";
 import Links from "./components/views/meta/Links.vue";

@@ -28,8 +28,14 @@ const Allies = [
 	CharacterDataUtils.findCharacter(CharacterDatas, 'boo'),
 	CharacterDataUtils.findCharacter(CharacterDatas, 'cade'),
 	CharacterDataUtils.findCharacter(CharacterDatas, 'ella'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'doc'),
 	CharacterDataUtils.findCharacter(CharacterDatas, 'nortle'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'owl'),
 	CharacterDataUtils.findCharacter(CharacterDatas, 'ferret'),
+];
+
+const DeadGang = [
+	CharacterDataUtils.findCharacter(CharacterDatas, 'tropey')
 ];
 </script>
 
@@ -204,16 +210,7 @@ const Allies = [
 
 				<AccordionItem name="Fallen Comrades" parent-id="characters-accordion">
 					<CharacterCardDeck>
-						<CharacterCard status="dead">
-							<template #image>
-								<Portrait src="img/party/tropey-toon.png" />
-							</template>
-							<template #heading>Tropey McTroperson</template>
-							<template #subheading>Dwarf Champion</template>
-							<template #homeworld>Hidden Valley</template>
-
-							<Character>Tropey McTroperson</Character> was a dwarven paladin who hailed from a small farming village. After finding himself in the mysterious <Location>Void Realm</Location>, he made it his mission to search its myriad worlds for jelly beans. He fell in battle, honorably sacrificing himself to save his friends from an alien monster.
-						</CharacterCard>
+						<CharacterCard status="dead" v-for="person in DeadGang" :person="person" />
 					</CharacterCardDeck>
 				</AccordionItem>
 

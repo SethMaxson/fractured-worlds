@@ -27,6 +27,7 @@ interface ICharacterAffiliation {
 interface ICharacterPhysical {
 	age?: string;
 	eyeColor?: string;
+	gender?: string;
 	hairColor?: string;
 	height?: string;
 	hotness?: number;
@@ -58,6 +59,8 @@ export interface ICharacterData {
 	drive?: string;
     /** The world this character originally called home, if known. */
 	homeworld?: string;
+    /** The id of the world in which this character resides, for displaying on page pertaining to that world. */
+	location?: string;
     /** The character's class or occupation. */
 	occupation: string[];
 	/** The character's physical attributes/description. */
@@ -91,14 +94,14 @@ export interface ICharacterData {
 	status?: "alive"|"dead";
 	timeline?: ITimelineEvent[];
 	/** The character's role within the story. Informs how some things are displayed. */
-	type: "crew" | "nle" | "pc" | "rebirth" | "other";
+	type: "crew" | "location" | "nle" | "pc" | "rebirth" | "other";
 	/** A collection of images of and pertaining to this character. */
 	images: {
 		/**
 		 * @example
 		 * "img/party/cobb.png"
 		 */
-		thumbnail: string;
+		thumbnail?: string;
 		/**
 		 * @example
 		 * [ "img/party/cobb.png" ]
