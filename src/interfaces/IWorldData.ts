@@ -1,4 +1,4 @@
-import { IDate } from "./IDate";
+import type { IDate } from "./IDate";
 
 /** A child of the raw JSON data for a world. */
 export interface INotableDestination {
