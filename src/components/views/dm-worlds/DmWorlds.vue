@@ -4,6 +4,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 import World from "./components/WorldListEntry.vue";
 import NittyGritty from "./components/WorldNittyGritty.vue";
 import { GameStrings } from "@/scripts/game-strings";
+import Image from "@/components/core/Image.vue";
 </script>
 
 <template>
@@ -17,7 +18,7 @@ import { GameStrings } from "@/scripts/game-strings";
 			<ol class="list-group list-group-numbered">
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/agrabah.png" />
+						<Image src="img/worlds/agrabah.png" />
 					</template>
 					<template v-slot:name>
 						Agrabah (Disney's Aladdin)
@@ -40,7 +41,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/wonderland.png" />
+						<Image src="img/worlds/wonderland.png" />
 					</template>
 					<template v-slot:name>
 						Wonderland
@@ -62,7 +63,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/land_of_oz.png" />
+						<Image src="img/worlds/land_of_oz.png" />
 					</template>
 					<template v-slot:name>
 						Land of Oz
@@ -82,7 +83,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/transylvania.png" />
+						<Image src="img/worlds/transylvania.png" />
 					</template>
 					<template v-slot:name>
 						Transylvania
@@ -105,7 +106,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/shrek.png" />
+						<Image src="img/worlds/shrek.png" />
 					</template>
 					<template v-slot:name>
 						Duloc Outlands (Shrek)
@@ -128,7 +129,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/wonka.png" />
+						<Image src="img/worlds/wonka.png" />
 					</template>
 					<template v-slot:name>
 						Willy Wonka
@@ -151,7 +152,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/big_apple.png" />
+						<Image src="img/worlds/big_apple.png" />
 					</template>
 					<template v-slot:name>
 						Teenage Mutant Ninja Turtles
@@ -175,7 +176,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/tarzan.png" />
+						<Image src="img/worlds/tarzan.png" />
 					</template>
 					<template v-slot:name>
 						Tarzan
@@ -193,7 +194,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/muppet_treasure_island.png" />
+						<Image src="img/worlds/muppet_treasure_island.png" />
 					</template>
 					<template v-slot:name>
 						Treasure Island
@@ -215,7 +216,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/nottingham.png" />
+						<Image src="img/worlds/nottingham.png" />
 					</template>
 					<template v-slot:name>
 						Robin Hood
@@ -239,7 +240,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/over_the_hedge.png" />
+						<Image src="img/worlds/over_the_hedge.png" />
 					</template>
 					<template v-slot:name>
 						The Suburbs (Over the Hedge)
@@ -269,7 +270,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/mad_max.png" />
+						<Image src="img/worlds/mad_max.png" />
 					</template>
 					<template v-slot:name>
 						Thunderdome
@@ -289,7 +290,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/neverland.png" />
+						<Image src="img/worlds/neverland.png" />
 					</template>
 					<template v-slot:name>
 						Neverland (Peter Pan)
@@ -311,7 +312,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/atlantica.png" />
+						<Image src="img/worlds/atlantica.png" />
 					</template>
 					<template v-slot:name>
 						Atlantica (The Little Mermaid)
@@ -343,7 +344,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/hercules.png" />
+						<Image src="img/worlds/hercules.png" />
 					</template>
 					<template v-slot:name>
 						Ancient Greece (Disney's Hercules)
@@ -366,7 +367,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/jurassic_park.png" />
+						<Image src="img/worlds/jurassic_park.png" />
 					</template>
 					<template v-slot:name>
 						Jurassic Park
@@ -379,7 +380,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/seussland.png" />
+						<Image src="img/worlds/seussland.png" />
 					</template>
 					<template v-slot:name>
 						Wubbulous World (Seussland)
@@ -401,7 +402,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/coolsville.png" />
+						<Image src="img/worlds/coolsville.png" />
 					</template>
 					<template v-slot:name>
 						Scooby-Doo
@@ -422,7 +423,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/wild_west.png" />
+						<Image src="img/worlds/wild_west.png" />
 					</template>
 					<template v-slot:name>
 						The Wild West
@@ -443,7 +444,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/barbieland.png" />
+						<Image src="img/worlds/barbieland.png" />
 					</template>
 					<template v-slot:name>
 						Barbieland
@@ -466,7 +467,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/ghostbusters.png" />
+						<Image src="img/worlds/ghostbusters.png" />
 					</template>
 					<template v-slot:name>
 						Ghostbusters
@@ -489,7 +490,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/bikini_bottom.png" />
+						<Image src="img/worlds/bikini_bottom.png" />
 					</template>
 					<template v-slot:name>
 						Bikini Bottom
@@ -510,7 +511,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/looney_tunes.png" />
+						<Image src="img/worlds/looney_tunes.png" />
 					</template>
 					<template v-slot:name>
 						Looney Tunes
@@ -531,7 +532,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
+						<Image src="img/worlds/maybe.png" />
 					</template>
 					<template v-slot:name>
 						Rubber Hose Cartoon Universe
@@ -551,7 +552,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/death_star.png" />
+						<Image src="img/worlds/death_star.png" />
 					</template>
 					<template v-slot:name>
 						Star Wars
@@ -574,7 +575,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/gotham.png" />
+						<Image src="img/worlds/gotham.png" />
 					</template>
 					<template v-slot:name>
 						<span class="suggestion">
@@ -602,7 +603,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<!-- <World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/suggestion.png" />
+						<Image src="img/worlds/suggestion.png" />
 					</template>
 					<template v-slot:name>
 						<span class="suggestion">
@@ -615,7 +616,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World> -->
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/andys_room.png" />
+						<Image src="img/worlds/andys_room.png" />
 					</template>
 					<template v-slot:name>
 						<span class="suggestion">
@@ -639,7 +640,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/ant_island.png" />
+						<Image src="img/worlds/ant_island.png" />
 					</template>
 					<template v-slot:name>
 						Ant Island (Bug's Life)
@@ -664,7 +665,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
+						<Image src="img/worlds/blank.png" />
 					</template>
 					<template v-slot:name>
 						Hyrule
@@ -693,7 +694,7 @@ import { GameStrings } from "@/scripts/game-strings";
 			<ol class="list-group list-group-numbered">
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/somewhere.png" />
+						<Image src="img/worlds/somewhere.png" />
 					</template>
 					<template v-slot:name>
 						Somewhere
@@ -714,7 +715,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
+						<Image src="img/worlds/blank.png" />
 					</template>
 					<template v-slot:name>
 						Haven
@@ -735,7 +736,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
+						<Image src="img/worlds/blank.png" />
 					</template>
 					<template v-slot:name>
 						Weapon World
@@ -757,7 +758,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/unicornucopia.png" />
+						<Image src="img/worlds/unicornucopia.png" />
 					</template>
 					<template v-slot:name>
 						Unicornucopia
@@ -778,7 +779,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/mortal_kombat.png" />
+						<Image src="img/worlds/mortal_kombat.png" />
 					</template>
 					<template v-slot:name>
 						Battle World
@@ -799,7 +800,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
+						<Image src="img/worlds/maybe.png" />
 					</template>
 					<template v-slot:name>
 						Tinytropolis
@@ -823,7 +824,7 @@ import { GameStrings } from "@/scripts/game-strings";
 			<ol class="list-group list-group-numbered">
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
+						<Image src="img/worlds/maybe.png" />
 					</template>
 					<template v-slot:name>
 						Fan Art + Fan Fiction world
@@ -834,7 +835,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blues_house.png" />
+						<Image src="img/worlds/blues_house.png" />
 					</template>
 					<template v-slot:name>
 						Stone-bound Storybook (Blue's Clues)
@@ -846,7 +847,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
+						<Image src="img/worlds/maybe.png" />
 					</template>
 					<template v-slot:name>
 						Game Central Station
@@ -861,7 +862,7 @@ import { GameStrings } from "@/scripts/game-strings";
 			<ol class="list-group list-group-numbered">
 				<World class="maybe">
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
+						<Image src="img/worlds/blank.png" />
 					</template>
 					<template v-slot:name>
 						Cthulhu
@@ -884,7 +885,7 @@ Flying Spaghetti Monster
 				</World>
 				<!-- <World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/suggestion.png" />
+						<Image src="img/worlds/suggestion.png" />
 					</template>
 					<template v-slot:name>
 						<span class="suggestion">
@@ -905,7 +906,7 @@ Flying Spaghetti Monster
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/suggestion.png" />
+						<Image src="img/worlds/suggestion.png" />
 					</template>
 					<template v-slot:name>
 						<span class="suggestion">
@@ -918,7 +919,7 @@ Flying Spaghetti Monster
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/suggestion.png" />
+						<Image src="img/worlds/suggestion.png" />
 					</template>
 					<template v-slot:name>
 						<span class="suggestion">
@@ -931,7 +932,7 @@ Flying Spaghetti Monster
 				</World> -->
 				<World class="maybe">
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
+						<Image src="img/worlds/maybe.png" />
 					</template>
 					<template v-slot:name>
 						Cloudy with a Chance of Meatballs?
@@ -952,7 +953,7 @@ Flying Spaghetti Monster
 				</World>
 				<World class="maybe">
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
+						<Image src="img/worlds/maybe.png" />
 					</template>
 					<template v-slot:name>
 						Cats
@@ -972,7 +973,7 @@ Flying Spaghetti Monster
 				</World>
 				<World class="maybe">
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
+						<Image src="img/worlds/maybe.png" />
 					</template>
 					<template v-slot:name>
 						Doom?
@@ -993,7 +994,7 @@ Flying Spaghetti Monster
 				</World>
 				<World class="maybe">
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
+						<Image src="img/worlds/maybe.png" />
 					</template>
 					<template v-slot:name>
 						The Lego Movie
@@ -1015,7 +1016,7 @@ Flying Spaghetti Monster
 				</World>
 				<World class="maybe">
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/maybe.png" />
+						<Image src="img/worlds/maybe.png" />
 					</template>
 					<template v-slot:name>
 						Hogwarts
@@ -1037,7 +1038,7 @@ Flying Spaghetti Monster
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="@/assets/images/worlds/blank.png" />
+						<Image src="img/worlds/blank.png" />
 					</template>
 					<template v-slot:name>
 						blank

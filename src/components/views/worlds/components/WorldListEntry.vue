@@ -84,7 +84,7 @@
   z-index: -1; */
   /* background-image: linear-gradient(
     to bottom, transparent, var(--fw-bs-body-bg)
-  ), url("@/assets/images/worlds/blues_house.png"); */
+  ), url("img/worlds/blues_house.png"); */
   background-repeat: no-repeat;
   background-size: cover;
 }

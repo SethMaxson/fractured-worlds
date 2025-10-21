@@ -225,42 +225,42 @@ $nexus-orbit-size: 6em;
 
 /* images */
 .agrabah {
-  background-image: url(@/assets/images/worlds/agrabah.png);
+  background-image: url(img/worlds/agrabah.png);
 }
 
 .atlantica {
-  background-image: url(@/assets/images/worlds/atlantica.png);
+  background-image: url(img/worlds/atlantica.png);
 }
 
 .halloween_town {
-  background-image: url(@/assets/images/worlds/halloween_town.png);
+  background-image: url(img/worlds/halloween_town.png);
 }
 
 .hercules {
-  background-image: url(@/assets/images/worlds/hercules.png);
+  background-image: url(img/worlds/hercules.png);
 }
 
 .hollow_bastion {
-  background-image: url(@/assets/images/worlds/hollow_bastion.png);
+  background-image: url(img/worlds/hollow_bastion.png);
 }
 
 .monstro {
-  background-image: url(@/assets/images/worlds/monstro.png);
+  background-image: url(img/worlds/monstro.png);
 }
 
 .neverland {
-  background-image: url(@/assets/images/worlds/neverland.png);
+  background-image: url(img/worlds/neverland.png);
 }
 
 .somewhere {
-  background-image: url(@/assets/images/worlds/somewhere.png);
+  background-image: url(img/worlds/somewhere.png);
 }
 
 .tarzan {
-  background-image: url(@/assets/images/worlds/tarzan.png);
+  background-image: url(img/worlds/tarzan.png);
 }
 
 .wonderland {
-  background-image: url(@/assets/images/worlds/wonderland.png);
+  background-image: url(img/worlds/wonderland.png);
 }
 </style>

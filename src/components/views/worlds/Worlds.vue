@@ -10,6 +10,7 @@ import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import World from "./components/WorldListEntry.vue";
 import NittyGritty from "./components/WorldNittyGritty.vue";
 import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vue';
+import Image from "@/components/core/Image.vue";
 </script>
 
 <template>
@@ -24,7 +25,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 			<ul class="list-group w-100 m-0 p-1">
 				<World>
 					<template v-slot:image>
-						<img src="img/worlds/somewhere.png" />
+						<Image src="img/worlds/somewhere.png" />
 					</template>
 					<template v-slot:name>
 						Somewhere
@@ -53,7 +54,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 				<World>
 				<!-- <World wallpaper="img/reference/wonderland.jpg"> -->
 					<template v-slot:image>
-						<img src="img/worlds/wonderland.png" />
+						<Image src="img/worlds/wonderland.png" />
 					</template>
 					<template v-slot:name>
 						Wonderland
@@ -75,7 +76,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 				<World>
 				<!-- <World wallpaper="img/reference/big_apple.jpg"> -->
 					<template v-slot:image>
-						<img src="img/worlds/big_apple.png" />
+						<Image src="img/worlds/big_apple.png" />
 					</template>
 					<template v-slot:name>
 						Big Apple
@@ -98,7 +99,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="img/worlds/blues_house.png" />
+						<Image src="img/worlds/blues_house.png" />
 					</template>
 					<template v-slot:name>
 						Stone-bound Storybook (Blue's House)
@@ -121,7 +122,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="img/worlds/neon_coast.png" />
+						<Image src="img/worlds/neon_coast.png" />
 					</template>
 					<template v-slot:name>
 						Neon Coast [DESTROYED]
@@ -149,7 +150,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 				</World>
 				<World>
 					<template v-slot:image>
-						<img src="img/worlds/land_of_oz.png" />
+						<Image src="img/worlds/land_of_oz.png" />
 					</template>
 					<template v-slot:name>
 						Land of Oz
@@ -174,7 +175,7 @@ import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vu
 			<ol class="list-group list-group-numbered">
 				<World>
 					<template v-slot:image>
-						<img src="img/worlds/blank.png" />
+						<Image src="img/worlds/blank.png" />
 					</template>
 					<template v-slot:name>
 						Stone-bound Storybook (Blue's Clues)

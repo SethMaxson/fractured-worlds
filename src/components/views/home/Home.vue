@@ -9,6 +9,8 @@ import { GameStrings } from "@/scripts/game-strings";
 	<PageContainerVue>
 		<main>
 			<AppIconContainer>
+				<AppIcon svg="list" to="/accomplishments" class="dev">Accomplishments</AppIcon>
+				<AppIcon svg="menu-button-wide-fill" to="/dashboard" class="dev">Dashboard</AppIcon>
 				<AppIcon svg="user2" to="/people">People</AppIcon>
 				<AppIcon svg="people" to="/factions">Factions</AppIcon>
 				<AppIcon svg="relationship" to="/relationships" class="h-100 dev">Relationships</AppIcon>

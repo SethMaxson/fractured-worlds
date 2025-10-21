@@ -205,7 +205,7 @@ export default {
 
 	.dead img::before {
 		content: " ";
-		background-image: url("@/assets/images/dead.png");
+		/* background-image: url("@/assets/images/dead.png"); */
 		background: red;
 		position: absolute;
 		top: 0;
