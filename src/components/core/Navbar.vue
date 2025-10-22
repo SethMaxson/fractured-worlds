@@ -4,7 +4,7 @@
 		<div class="container">
 			<!-- <router-link class="navbar-brand" to="/"> Fractured Worlds </router-link> -->
 			<!-- This version forces a refresh, thereby fetching latest version -->
-			<a class="navbar-brand" href="/"> Fractured Worlds </a>
+			<router-link class="navbar-brand" to="/"> Fractured Worlds </router-link>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
 				aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
