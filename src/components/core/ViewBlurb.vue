@@ -2,16 +2,22 @@
 defineProps<{
 	header: string;
 	author?: string;
+	version?: string;
 }>();
 </script>
 
 <template>
 	<div class="greetings p-2 border-2 border-bottom mb-2">
-		<h1 class="heading">{{ header }}</h1>
-		<h3>
-			<div class="lead"><slot></slot></div>
+		<h1 class="heading">
+			<span v-html="header"></span>
+			<span class="ms-3 fs-6 fw-normal text-secondary small" v-if="version" v-html="version"></span>
+		</h1>
+		<figure>
+			<blockquote class="blockquote">
+				<p class="fs-5 lead text-secondary-emphasis lh-sm"><slot></slot></p>
+			</blockquote>
 			<div v-if="author" class="blockquote-footer text-end fw-normal">{{author}}</div>
-		</h3>
+		</figure>
 	</div>
 </template>
 
@@ -21,21 +27,4 @@ h1 {
 	font-size: 2.6rem;
 	top: -10px;
 }
-
-h3 {
-	font-size: 1rem;
-}
-
-/* .greetings h1,
-.greetings h3 {
-	text-align: center;
-}
-
-@media (min-width: 1024px) {
-
-	.greetings h1,
-	.greetings h3 {
-		text-align: left;
-	}
-} */
 </style>

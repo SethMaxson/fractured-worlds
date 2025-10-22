@@ -82,7 +82,7 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 		case "birthday":
 			return "#birthday-cake";
 		case "death":
-			return "#grave-fill";
+			return "#grave";
 		case "drug":
 			return "#drug";
 		case "faction":

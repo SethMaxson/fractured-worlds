@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { id_ify } from '@/scripts/id_ify';
+import { onMounted } from "vue";
 
 const props = defineProps({
 	defaultOpen: {
@@ -23,20 +24,43 @@ const props = defineProps({
 })
 
 const idBase = id_ify(props.name);
+const id = 'collapse-'+idBase;
+
+const parent = typeof props.parentId == 'string' ? props.parentId + "-accord-state" : undefined;
+const lastParentState = (parent && localStorage.getItem(parent)) || undefined;
+const startOpen = lastParentState ? lastParentState == id : props.defaultOpen;
+
+onMounted(() => {
+
+	const collapsible = document.getElementById(id);
+	if (collapsible && parent) {
+		collapsible.addEventListener('hide.bs.collapse', event => {
+			localStorage.removeItem(parent);
+		})
+		collapsible.addEventListener('show.bs.collapse', event => {
+			localStorage.setItem(parent, id);
+		})
+		// This one fires later, which makes it perfect for fixing anything overwritten by the hide listener
+		collapsible.addEventListener('shown.bs.collapse', event => {
+			localStorage.setItem(parent, id);
+		})
+	}
+
+})
 </script>
 
 <template>
 	<div class="accordion-item">
 		<h2 class="accordion-header" :id="'heading-'+idBase">
-			<button class="accordion-button" :class="{'collapsed': !defaultOpen}" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapse-'+idBase"
-				:aria-expanded="defaultOpen" :aria-controls="'collapse-'+idBase">
+			<button class="accordion-button" :class="{'collapsed': !startOpen}" type="button" data-bs-toggle="collapse" :data-bs-target="'#'+id"
+				:aria-expanded="startOpen" :aria-controls="'collapse-'+idBase">
 				{{ name }}
 			</button>
 		</h2>
 		<div 
-			:id="'collapse-'+idBase"
+			:id="id"
 			class="accordion-collapse collapse"
-			:class="{'show': defaultOpen}"
+			:class="{'show': startOpen}"
 			:aria-labelledby="'heading-'+idBase"
 			:data-bs-parent="oneAtATime && parentId? '#' + parentId : undefined"
 		>

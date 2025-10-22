@@ -18,6 +18,6 @@ defineProps({
 
 <template>
     <CharacterCardDeck :containedByModal="containedByModal">
-        <CharacterCard v-for="person in TheCast" :person="person" />
+        <CharacterCard v-for="person in TheCast" :person="person" :containedByModal="containedByModal" />
     </CharacterCardDeck>
 </template>

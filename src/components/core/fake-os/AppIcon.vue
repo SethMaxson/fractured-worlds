@@ -48,7 +48,7 @@ const svgID = props.svg && props.svg.includes("#")? props.svg : "#" + props.svg;
 					<use :href="svgID"></use>
 				</svg>
 			</div>
-			<div class="p-0 m-0"><slot></slot></div>
+			<div class="p-0 m-0 small"><slot></slot></div>
 		</router-link>
 	</div>
 </template>

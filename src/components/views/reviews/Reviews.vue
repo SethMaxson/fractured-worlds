@@ -11,7 +11,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 	<PageContainerVue>
 		<header>
 			<Breadcrumb path="/reviews" />
-			<ViewBlurb header="Yep! Reviews" author="Eva Davis">
+			<ViewBlurb header="<span class='yep'>Yep!</span> Reviews" version="1.0.1" author="Eva Davis">
 				Now we can put an exact, numerical value to how likeable we are. Well, maybe not me, but you guys have definitely left a few impressions.
 			</ViewBlurb>
 		</header>
@@ -224,7 +224,7 @@ export default defineComponent({
 						{
 							reviewer: "Ella",
 							score: 5,
-							text: "Phil is mean, wouldn't let me have a blood sample 💉🚫😭 jkjk these guys are awesome.\n\nYou're just not trying hard enough, <span class='fake-at'>@Cade B.</span> ⭐⭐⭐⭐⭐⭐ See? 😋\n\n<span class='fake-at'>@TheParty</span> how are you dorks? We stuck around for a while after you left, just long enough to make sure the boys are completely safe 🐢🐢🐢🐢🐀 It was great meeting you guys😊 Hope the 🎄💊 were fun! We'll have to catch up sometime\n<em><u>Edited on 08/28/0001:</u></em> heyy holla at your girl sometime, guys! We should really hang",
+							text: "Phil is mean, wouldn't let me have a blood sample 💉🚫😭 jkjk these guys are awesome.\n\nYou're just not trying hard enough, <span class='fake-at'>@Cade B.</span> ⭐⭐⭐⭐⭐⭐ See? 😋\n\n<span class='fake-at'>@TheParty</span> how are you dorks? We stuck around for a while after you left, just long enough to make sure the boys are completely safe 🐢🐢🐢🐢🐀 It was great meeting you guys😊 Hope the 🎄💊 were fun! We'll have to catch up sometime\n<em><u>Edited on 08/28/0001:</u></em> heyy holla at your girl sometime, guys! we should really hang",
 							date: "05/05/0001",
 							lastEdit: "08/28/0001"
 						},
@@ -319,15 +319,27 @@ export default defineComponent({
 					//#region Li'l Phil Antonio
 					phil: [
 						{
+							reviewer: "Krestfallen",
+							score: 0.5,
+							text: "Dude, how could you? You were supposed to lead us on a mighty gallop towards patriarchy, not sell us into life in chains! I just... can't. Dude.",
+							date: "08/28/0001"
+						},
+						{
 							reviewer: "SWAT Barbie",
 							score: 5,
 							text: "<span class='text-barbie fw-bold'>Hi</span> Allen<span class='text-barbie fw-bold'>!</span> Good work infiltrating the Kens! You're a credit to Allens everywhere!",
 							date: "08/28/0001"
 						},
 						{
+							reviewer: "maintenance@sanctuary.gadd", // Cid
+							score: 3,
+							text: "Is this the horse whose ass I beat? I ain't an unfair man. You were acting like a jackass, but I reckon I mighta overreacted a hair. Mind your manners next time you visit and I'll do the same.",
+							date: "08/28/0001"
+						},
+						{
 							reviewer: "Ella",
 							score: 5,
-							text: "<p class='text-danger-emphasis'><u>This review was scheduled for deletion on 08/28/0001. It will remain available until 09/11/0001.</u></p>hey is this novumm ftaalis stuff great r what? fuck is it offensive to say hey to you? cause of hay? you're a magic horse, so you konw I didn't mean it that way. your lot cooler than louey.\n<em><u>Edited on 08/28/0001:</u></em> fuck i meant lewey\n<em><u>Edited on 08/28/0001:</u></em>  no louis\n<em><u>Edited on 08/28/0001:</u></em> wait thats a girl name\n<em><u>Edited on 08/28/0001:</u></em> shit youre a centaur not a magic horse\n<em><u>Edited on 08/28/0001:</u></em> magic centaur\n<em><u>Edited on 08/28/0001:</u></em> ✨🤹‍♂️🐎🌈🏳️‍🌈🏳️‍🌈\n<em><u>Edited on 08/28/0001:</u></em> Please don't read this, Li'l Phil. I'm very, very sorry if you already have.",
+							text: "<p class='text-danger-emphasis'><u>This review was scheduled for deletion on 08/28/0001. It will remain available until 09/11/0001.</u></p>hey is this novumm ftaalis stuff great r what? sard is it offensive to say hey to you? cause of hay? you're a magic horse, so you konw I didn't mean it that way your lot cooler than louey.\n<em><u>Edited on 08/28/0001:</u></em> fart i meant lewey\n<em><u>Edited on 08/28/0001:</u></em>  no louis\n<em><u>Edited on 08/28/0001:</u></em> wait thats a girl name\n<em><u>Edited on 08/28/0001:</u></em> sh*t youre a centaur not a magic horse\n<em><u>Edited on 08/28/0001:</u></em> magic centaur\n<em><u>Edited on 08/28/0001:</u></em> ✨🤹‍♂️🐎🌈🏳️‍🌈🏳️‍🌈\n<em><u>Edited on 08/28/0001:</u></em> Please don't read this, Li'l Phil. I'm very, very sorry if you already have.",
 							date: "05/05/0001",
 							lastEdit: "08/28/0001"
 						},
@@ -369,9 +381,10 @@ export default defineComponent({
 						},
 						{
 							reviewer: "TheCatWithTheBat", // Gojiro
-							score: 5,
-							text: "Keep your head up, friend, so that my bat can make beautiful music with it.",
-							date: "07/07/0001"
+							score: 4.5,
+							text: "Keep your head up, friend, so that my bat can make beautiful music with it.\n<em><u>Edited on 08/08/0001:</u></em> It is very rude to vomit on people, friend. You would do well to stay indoors when illness has you in its grasp so.",
+							date: "07/07/0001",
+							lastEdit: "08/08/0001"
 						},
 						{
 							reviewer: "President Business",

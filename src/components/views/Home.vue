@@ -19,24 +19,21 @@ import { GameStrings } from "@/scripts/game-strings";
 				<AppIcon svg="contacts-book" to="/contacts">Contacts</AppIcon>
 				<AppIcon svg="timeline" to="/timeline" class="dev">NPC Timeline</AppIcon>
 				<AppIcon svg="handshake" to="/perks">Banes & Boons</AppIcon>
-				<AppIcon svg="reviews-person" to="/reviews">Yep! Reviews</AppIcon>
-			</AppIconContainer>
-			<h2>Other People</h2>
-			<AppIconContainer>
+				<AppIcon svg="reviews" to="/reviews"><span class="yep">Yep!</span> Reviews</AppIcon>
+
+				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start">People</h5>
 				<AppIcon svg="people" to="/factions">Factions</AppIcon>
 				<AppIcon svg="user2" to="/people">People</AppIcon>
-			</AppIconContainer>
-			<h2>Journal</h2>
-			<AppIconContainer>
+
+				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start">Journal</h5>
 				<!-- <AppIcon svg="book-half" to="/journal">Journal</AppIcon> -->
 				<AppIcon svg="letter" to="/journal/letters"> Letters </AppIcon>
 				<AppIcon svg="book-half" to="/journal/log" class="dev"> Log </AppIcon>
 				<AppIcon svg="question" to="/journal/mysteries"> Mysteries </AppIcon>
 				<AppIcon svg="timeline" to="/journal/timeline"> Timeline </AppIcon>
-				<AppIcon svg="anchor" to="/journal/world-anchors"> World Anchors </AppIcon>
-			</AppIconContainer>
-			<h2>About Voidspace</h2>
-			<AppIconContainer>
+				<AppIcon svg="anchor" to="/journal/world-anchors"> World Anchors </AppIcon>				
+
+				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start">About Voidspace</h5>
 				<AppIcon svg="calendar" to="/calendar">Calendar</AppIcon>
 				<AppIcon svg="paths" to="/world-map" class="h-100 dev">World Map</AppIcon>
 				<AppIcon svg="globe2" to="/worlds">Worlds</AppIcon>

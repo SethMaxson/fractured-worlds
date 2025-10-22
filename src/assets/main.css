@@ -91,10 +91,6 @@ svg.portrait {
 }
 
 /*#region general text formatting */
-.text-barbie {
-  color: var(--fw-c-barbie);
-}
-
 .capitalize { text-transform: capitalize; }
 
 pre {
@@ -102,10 +98,12 @@ pre {
   font: inherit;
 }
 
+.font-ff-icons,
 .fffe {
   font-family: 'final fantasy elements', sans-serif;
 }
 
+.font-logo,
 .fff {
   font-family: 'Wagnesday', sans-serif;
 }
@@ -114,6 +112,17 @@ pre {
   font-family: 'Scones and Crossbows', sans-serif;
   font-family: 'BrickShapers', sans-serif;
   /* font-family: "Gajraj One", sans-serif; */
+}
+
+/* .font-menu {
+  font-family: 'Scones and Crossbows', sans-serif;
+  font-family: 'BrickShapers', sans-serif;
+} */
+
+.yep {
+  font-variant: small-caps;
+  font-variant-caps: small-caps;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .gajraj-one-regular {
@@ -133,10 +142,9 @@ pre {
   font-variant-caps: petite-caps;
 }
 
-/* .font-menu {
-  font-family: 'Scones and Crossbows', sans-serif;
-  font-family: 'BrickShapers', sans-serif;
-} */
+.text-barbie {
+  color: var(--fw-c-barbie);
+}
 /*#endregion general text formatting */
 
 /*#region text-tag formatting */
