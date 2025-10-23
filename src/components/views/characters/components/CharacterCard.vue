@@ -9,7 +9,7 @@ import { useRoute } from 'vue-router';
 import { Utils } from '@/scripts/utils';
 import type { ICharacterData } from '@/interfaces/ICharacterData';
 
-import { CharacterDataUtils } from "@/scripts/character-data-utils";
+import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 
 const props = defineProps({
 	containedByModal: {
@@ -51,7 +51,7 @@ switch (props.person?.type) {
 	default:
 		break;
 }
-const portraitClasses = npcTypeClass;
+const portraitClasses = npcTypeClass?.concat(" card-img-top ratio ratio-1x1");
 // const offerFullPageView = props.person?.plotRelevance && props.person.plotRelevance > 1 ? true : false;
 const offerFullPageView = false;
 const openIcon = offerFullPageView && false ? '#enter'
@@ -80,7 +80,9 @@ const disableClick = props.containedByModal;
 		>
 			<CardContents :class="{'dead': status == 'dead'}" :truncated="!containedByModal" :truncate-header="!containedByModal" :open-icon="openIcon">
 				<template #image>
-					<Portrait :class="portraitClasses" :src="person?.images.thumbnail" />
+					<div class="overflow-hidden" style="width:300px; height:300px;">
+						<Portrait :class="portraitClasses" :src="person?.images.thumbnail" />
+					</div>
 				</template>
 				<template #heading>{{ person.name }}</template>
 				<template #subheading>
@@ -89,7 +91,7 @@ const disableClick = props.containedByModal;
 				<template #homeworld>{{ person?.homeworld }}</template>
 
 				<template #default>
-					<div v-html="CharacterDataUtils.getMainBodyText(person, { doParagraphs: false })"></div>
+					<div :class="{'text-truncate': !containedByModal}" v-html="CharacterDataUtils.getMainBodyText(person, { doParagraphs: false })"></div>
 				</template>
 
 				<template v-slot:footer v-if="person.type == 'nle' && primaryFaction">

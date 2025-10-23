@@ -64,6 +64,11 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 						</div>
 						<p class="ps-4">
 							<div v-if="review.text" v-html="cleanText(review.text)"></div>
+							<div v-if="review.edits">
+								<div class="edit" v-for="edit in review.edits">
+
+								</div>
+							</div>
 							<small class="text-body-secondary" v-if="review.date">Written on {{ review.date }}.</small>
 							<small class="text-body-secondary ms-2" v-if="review.lastEdit">Last edit on {{ review.lastEdit }}.</small>
 						</p>
@@ -95,6 +100,8 @@ interface ICharacterReview {
     text: string;
     /** Score on a scale of 1-5. */
     score: number;
+	/** Any edits to the review. */
+	edits?: { text: string; date: string; }[];
 }
 
 interface IReviewCollection {
@@ -135,6 +142,10 @@ const reviewerUserNames: IUsernameEntry[] = [
 	{
 		un: "Boxboy",
 		name: "Kenji"
+	},
+	{
+		un: "Mommy Dearest",
+		name: "Malladine"
 	},
 	{
 		un: "CEO@TankmanEnterprises.tank",
@@ -192,6 +203,24 @@ export default defineComponent({
 					//#region Entire party
 					party: [
 						{
+							reviewer: "Flower's Ship Shape Ship Shop",
+							score: 5,
+							text: "😸😸😸Guys! I sold the boat I bought from you! Some guy heard about it on another world and bought it without even looking at it! And he didn't even negotiate! This happened a while back, but I am only now hearing about the Yep reviews. I am officially a businesswoman now 🤑\n\nPSSPSS: <span class='fake-at'>@Li'l Phil</span> 🙏don't forget the catnip please🙏 I have money now, so I can even 💰 you for your time",
+							date: "09/01/0001"
+						},
+						{
+							reviewer: "gugg",
+							score: 5,
+							text: "tiny girl fix gugg",
+							date: "08/31/0001"
+						},
+						{
+							reviewer: "Malladine",
+							score: 5,
+							text: "It's been a while since this old gal had a meal as tasty as the one you young dears served up. Do give spare a thought for your deal old mum if you find any more good ones, okay deary?",
+							date: "08/28/0001"
+						},
+						{
 							reviewer: "Nobody Important", // Frederick
 							score: 5,
 							text: "I witnessed these individuals thwart a highly suspect, would-be kidnapper at a wedding. Exceptional.",
@@ -224,7 +253,7 @@ export default defineComponent({
 						{
 							reviewer: "Ella",
 							score: 5,
-							text: "Phil is mean, wouldn't let me have a blood sample 💉🚫😭 jkjk these guys are awesome.\n\nYou're just not trying hard enough, <span class='fake-at'>@Cade B.</span> ⭐⭐⭐⭐⭐⭐ See? 😋\n\n<span class='fake-at'>@TheParty</span> how are you dorks? We stuck around for a while after you left, just long enough to make sure the boys are completely safe 🐢🐢🐢🐢🐀 It was great meeting you guys😊 Hope the 🎄💊 were fun! We'll have to catch up sometime\n<em><u>Edited on 08/28/0001:</u></em> heyy holla at your girl sometime, guys! we should really hang",
+							text: "Phil is mean, wouldn't let me have a blood sample 💉🚫😭 jkjk these guys are awesome.\n\nYou're just not trying hard enough, <span class='fake-at'>@Cade B.</span> ⭐⭐⭐⭐⭐⭐ See? 😋\n\n<span class='fake-at'>@TheParty</span> how are you dorks? We stuck around for a while after you left, just long enough to make sure the boys are completely safe 🐢🐢🐢🐢🐀 It was great meeting you guys😊 Hope the 🎄💊 were fun! We'll have to catch up sometime\n<em><u><b>Edited on 08/28/0001:</b></u></em> heyy holla at your girl sometime, guys! we should really hang",
 							date: "05/05/0001",
 							lastEdit: "08/28/0001"
 						},
@@ -339,7 +368,7 @@ export default defineComponent({
 						{
 							reviewer: "Ella",
 							score: 5,
-							text: "<p class='text-danger-emphasis'><u>This review was scheduled for deletion on 08/28/0001. It will remain available until 09/11/0001.</u></p>hey is this novumm ftaalis stuff great r what? sard is it offensive to say hey to you? cause of hay? you're a magic horse, so you konw I didn't mean it that way your lot cooler than louey.\n<em><u>Edited on 08/28/0001:</u></em> fart i meant lewey\n<em><u>Edited on 08/28/0001:</u></em>  no louis\n<em><u>Edited on 08/28/0001:</u></em> wait thats a girl name\n<em><u>Edited on 08/28/0001:</u></em> sh*t youre a centaur not a magic horse\n<em><u>Edited on 08/28/0001:</u></em> magic centaur\n<em><u>Edited on 08/28/0001:</u></em> ✨🤹‍♂️🐎🌈🏳️‍🌈🏳️‍🌈\n<em><u>Edited on 08/28/0001:</u></em> Please don't read this, Li'l Phil. I'm very, very sorry if you already have.",
+							text: "<p class='text-danger-emphasis'><u>This review was scheduled for deletion on 08/28/0001. It will remain available until 09/11/0001.</u></p>hey is this novumm ftaalis stuff great r what? fart is it offensive to say hey to you? cause of hay? you're a magic horse, so you konw I didn't mean it that way your lot cooler than louey\n<em><u><b>Edited on 08/28/0001:</b></u></em> fart i meant lewey\n<em><u><b>Edited on 08/28/0001:</b></u></em>  no louis\n<em><u><b>Edited on 08/28/0001:</b></u></em> wait thats a girl name\n<em><u><b>Edited on 08/28/0001:</b></u></em> sh*t youre a centaur not a magic horse\n<em><u><b>Edited on 08/28/0001:</b></u></em> magic centaur\n<em><u><b>Edited on 08/28/0001:</b></u></em> ✨🤹‍♂️🐎🌈🏳️‍🌈🏳️‍🌈\n<em><u><b>Edited on 08/28/0001:</b></u></em> Please don't read this, Li'l Phil. I'm very, very sorry if you already have.",
 							date: "05/05/0001",
 							lastEdit: "08/28/0001"
 						},
@@ -382,7 +411,7 @@ export default defineComponent({
 						{
 							reviewer: "TheCatWithTheBat", // Gojiro
 							score: 4.5,
-							text: "Keep your head up, friend, so that my bat can make beautiful music with it.\n<em><u>Edited on 08/08/0001:</u></em> It is very rude to vomit on people, friend. You would do well to stay indoors when illness has you in its grasp so.",
+							text: "Keep your head up, friend, so that my bat can make beautiful music with it.\n<em><u><b>Edited on 08/08/0001:</b></u></em> It is very rude to vomit on people, friend. You would do well to stay indoors when illness has you in its grasp so.",
 							date: "07/07/0001",
 							lastEdit: "08/08/0001"
 						},
@@ -407,7 +436,7 @@ export default defineComponent({
 						{
 							reviewer: "TheCarmenMartin",
 							score: 2.5,
-							text: "While I appreciate that it wasn't thrown at me, I'd appreciate it more if there was no sh*t-slinging of any kind at my shows.\n<em><u>Edited on 07/07/0001:</u></em> <span class='fake-at'>@Nick - Tender Of Bars</span>, you're too soft for your own good. <span class='fake-at'>@Li'l Phil</span>, hope you're doing better. Sorry for the harsh review; I thought you were just being a b*stard. I'm adding a couple of stars to give you a more neutral score.",
+							text: "While I appreciate that it wasn't thrown at me, I'd appreciate it more if there was no sh*t-slinging of any kind at my shows.\n<em><u><b>Edited on 07/07/0001:</b></u></em> <span class='fake-at'>@Nick - Tender Of Bars</span>, you're too soft for your own good. <span class='fake-at'>@Li'l Phil</span>, hope you're doing better. Sorry for the harsh review; I thought you were just being a b*stard. I'm adding a couple of stars to give you a more neutral score.",
 							date: "07/07/0001",
 							lastEdit: "07/07/0001"
 						},
@@ -495,12 +524,12 @@ export default defineComponent({
 						},
 					] as ICharacterReview[],
 					//#endregion Pontiki
-					//#region Foxfire Tero
+					//#region Tero
 					tero: [
 						{
 							reviewer: "Ella",
 							score: 5,
-							text: "<p class='text-danger-emphasis'><u>This review was scheduled for deletion on 08/28/0001. It will remain available until 09/11/0001.</u></p>hey girllll! whatever you told cade basically broke him, and he's been gushing about you ever since😂🤣🥰 you guys are adorable😸\n<em><u>Edited on 08/28/0001:</u></em> great, now i wanna cat now\n<em><u>Edited on 08/28/0001:</u></em> wait, that was my emoji my b\n<em><u>Edited on 08/28/0001:</u></em> cades basically my brother, so not just anybody is cool enough., yupass tho 🦊<-its yuo\n<em><u>Edited on 08/28/0001:</u></em>\nGods, I sound insufferable, and I can't find the option to delete past edits on this stupid site. I'm so sorry for the inane ramblings, Tero. I'm not in a good place right now, and I've been a little slizzard (I think that's the term). I'm fine though! Don't worry about me, okay? After what you guys saw a few weeks ago, I'm more worried about... all of us, really.\n\nI really, really hate talking about this, but if you bump into that horrible gray man you guys saw a while ago, please stay far, far away from him. You're good people - you don't deserve to meet that kind of end. I care about you guys, and I'm asking you as a friend. Please.\n<em><u>Edited on 08/28/0001:</u></em> heyyy bitch!!! (it's a friendly greeging, appparnetly) did you guys ever get the little green 🥒🥒 dudes back on life??\n<em><u>Edited on 08/28/0001:</u></em> 👀dude you're on bARBIE land? i love that plsce!!\n<em><u>Edited on 08/28/0001:</u></em> 👁️👃👁️ I see you lmao\n<em><u>Edited on 08/28/0001:</u></em> Please, just ignore me. I've deleted this review, but apparently it takes a while to go through. I'll write you a normal one after this trainwreck is gone. I'm sorry. I'm logging out of everything until I get sober.",
+							text: "<p class='text-danger-emphasis'><u>This review was scheduled for deletion on 08/28/0001. It will remain available until 09/11/0001.</u></p>hey girllll! whatever you told cade basically broke him, and he's been rambling about how great you are ever since😂🤣🥰 you guys are adorable😸\n<em><u><b>Edited on 08/28/0001:</b></u></em> great, now i wanna cat now\n<em><u><b>Edited on 08/28/0001:</b></u></em> wait, that was my emoji my b\n<em><u><b>Edited on 08/28/0001:</b></u></em> cades basically my brother, so not just anybody is cool enough., yupass tho 🦊<-its yuo\n<em><u><b>Edited on 08/28/0001:</b></u></em>\nGods, I sound insufferable, and I can't find the option to delete past edits on this stupid site. I'm so sorry for the inane ramblings, Tero. I'm not in a good place right now, and I've been a little slizzard (I think that's the term). I'm fine though! Don't worry about me, okay? After what you guys saw a few weeks ago, I'm more worried about... all of us, really.\n\nI really, really hate talking about this, but if you bump into that horrible gray man you guys saw a while ago, please stay far, far away from him. You're good people - you don't deserve to meet that kind of end. I care about you guys, and I'm asking you as a friend. Please.\n<em><u><b>Edited on 08/28/0001:</b></u></em> heyyy bitch!!! (it's a friendly greeging, appparnetly) did you guys ever get the little green 🥒🥒 dudes back on life??\n<em><u><b>Edited on 08/28/0001:</b></u></em> 👀dude you're on bARBIE land? i love that plsce!!\n<em><u><b>Edited on 08/28/0001:</b></u></em> 👁️👃👁️ I see you lmao\n<em><u><b>Edited on 08/28/0001:</b></u></em> Please, just ignore me. I've deleted this review, but apparently it takes a while to go through. I'll write you a normal one after this trainwreck is gone. I'm sorry. I'm logging out of everything until I get sober.",
 							date: "08/28/0001",
 							lastEdit: "08/28/0001"
 						},
@@ -531,19 +560,19 @@ export default defineComponent({
 						{
 							reviewer: "Cade",
 							score: 5,
-							text: "Enviable control over fire (one of the holiest of magicks) and quick to risk life and limb for innocents. I'll eat my helmet if her deeds are not retold as fairy tales someday.\n\n<em><u>Edited on 08/28/0001:</u></em> I fear my original review did little to explain what makes Tero such a rare, wonderful person. It is true that she has the sort of abilities written about in song, but it is who she is as a person that makes her truly special. She wields her abilties not for power, but to help the downtrodden and forgotten. She worries about her friends more than herself, and has done more to help the innocent and the orphaned than any king or kingdom. I owe my life to a similar act of kindness, so I know how profoundly her actions will shape the future of those she has helped. I am grateful (and deeply humbled) to call her my friend.",
+							text: "Enviable control over fire (one of the holiest of magicks) and quick to risk life and limb for innocents. I'll eat my helmet if her deeds are not retold as fairy tales someday.\n<em><u><b>Edited on 08/28/0001:</b></u></em> I fear my original review did little to explain what makes Tero such a rare, wonderful person. It is true that she has the sort of abilities written about in song, but it is who she is as a person that makes her truly special. She wields her abilties not for power, but to help the downtrodden and forgotten. She worries about her friends more than herself, and has done more to help the innocent and the orphaned than any king or kingdom. I owe my life to a similar act of kindness, so I know how profoundly her actions will shape the future of those she has helped. I am grateful (and deeply humbled) to call her my friend.",
 							date: "04/06/0001",
 							lastEdit: "08/28/0001"
 						},
 						{
 							reviewer: "Kenji",
 							score: 2,
-							text: "Call me crazy but I think Captain Foxfire was probably the one who killed my coworker considering he was already half cremated when we found him.\n<em><u>Edited on 04/03/0001:</u></em> Noticed you excused yourself from the party so me and the rest of the lads could drink in peace. Doesn't bring the kid back, but that was a pretty solid move.",
+							text: "Call me crazy but I think Captain Foxfire was probably the one who killed my coworker considering he was already half cremated when we found him.\n<em><u><b>Edited on 04/03/0001:</b></u></em> Noticed you excused yourself from the party so me and the rest of the lads could drink in peace. Doesn't bring the kid back, but that was a pretty solid move.",
 							date: "04/02/0001",
 							lastEdit: "04/03/0001"
 						},
 					],
-					//#endregion Foxfire Tero
+					//#endregion Tero
 					//#region Tropey McTroperson
 					tropey: [
 						{
@@ -561,7 +590,7 @@ export default defineComponent({
 						{
 							reviewer: "Cade",
 							score: 5,
-							text: "Quick to provide a snack for his allies and a wallop for the wicked. Seems a sensible fellow.\n<em><u>Edited on 06/18/0001:</u></em> Rest in peace, friend. Wherever you are now, I'm sure it's a better place with you in it.",
+							text: "Quick to provide a snack for his allies and a wallop for the wicked. Seems a sensible fellow.\n<em><u><b>Edited on 06/18/0001:</b></u></em> Rest in peace, friend. Wherever you are now, I'm sure it's a better place with you in it.",
 							date: "04/06/0001",
 							lastEdit: "06/18/0001"
 						}
@@ -591,8 +620,7 @@ export default defineComponent({
 				else {
 					selectedReviews = this.reviews[this.mode];
 				}
-
-				// return selectedReviews;
+				
 				return selectedReviews.sort(function(a, b) {
 					return Utils.SortComparators.dateString(a.lastEdit || a.date, b.lastEdit || b.date, false);
 				});
@@ -609,6 +637,8 @@ export default defineComponent({
 			},
 			changeMenu(index: number) {
 				const mode = this.menu[index].value;
+				localStorage.setItem("reviewsMode", mode);
+				localStorage.setItem("reviewsIndex", index.toString());
 				this.mode = mode as keyof IReviewCollection;
 				this.indexSelected = index;
 			},
@@ -617,31 +647,33 @@ export default defineComponent({
 				return usernameMatch.length > 0? usernameMatch[0].un : review.reviewer;
 			},
 			starIconClasses(score: number): string[] {
-				const boundedScore = Math.min(5, Math.max(0, score));
-				const s = Math.round(boundedScore * 2);
+				const boundedScore = Math.min(5, Math.max(0, score)); // Limit to [0, 5]
+				const scoreDoubled = Math.round(boundedScore * 2);
 				const classes: string[] = [];
 
 				// special symbol for perfect score
 				if (boundedScore == 5) {
-					// for (var i = 0; i < 5; i++) classes.push("#stars-formation");
 					for (var i = 0; i < 4; i++) classes.push("#star-filled");
 					classes.push("#stars-formation");
 					return classes;
 				}
 
-				for (let i = 0; i < Math.floor(s-0.25)/2; i++) {
+				for (let i = 0; i < Math.floor(scoreDoubled-0.25)/2; i++) {
 					classes.push("#star-filled");
 				}
-				if (s % 2 == 1) {
+				if (scoreDoubled % 2 == 1) {
 					classes.push("#star-half");
 				}
-				for (let i = Math.ceil(boundedScore-0.25); i < 5; i++) {
+				for (let i = Math.ceil(boundedScore-0.125); i < 5; i++) {
 					classes.push("#star-empty");
 				}
 
 				return classes;
 			},
-        }
+        },
+		mounted() {
+			this.changeMenu(parseInt(localStorage.getItem("reviewsIndex") || "0"));
+		},
     })
 </script>
 
@@ -676,5 +708,10 @@ export default defineComponent({
 .review:deep(.fake-at) {
 	color: var(--bs-link-color);
 	/* text-decoration: underline; */
+}
+
+.review em > u > b {
+	display: block;
+	margin-top: 10px;
 }
 </style>

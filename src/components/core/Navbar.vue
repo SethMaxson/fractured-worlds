@@ -4,7 +4,7 @@
 		<div class="container">
 			<!-- <router-link class="navbar-brand" to="/"> Fractured Worlds </router-link> -->
 			<!-- This version forces a refresh, thereby fetching latest version -->
-			<router-link class="navbar-brand" to="/"> Fractured Worlds </router-link>
+			<a class="navbar-brand" :href="Config.IsDebug ? '/' : '/fractured-worlds/'"> Fractured Worlds </a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
 				aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -157,6 +157,7 @@
 </style>
 
 <script setup lang="ts">
+import { Config } from "@/scripts/config";
 import ColorModeToggle from "./ColorModeToggle.vue";
 import GmModeToggle from "./GmModeToggle.vue";
 defineProps<{

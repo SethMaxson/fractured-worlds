@@ -1,25 +1,40 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import AccordionItem from "@/components/core/AccordionItem.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import World from "./components/WorldListEntry.vue";
 import NittyGritty from "./components/WorldNittyGritty.vue";
-import Somewhere from '@/components/views/characters/characterDecks/Somewhere.vue';
+import LocationCharacterDeck from '@/components/views/characters/characterDecks/DynamicCharacterDeck.vue';
 import Image from "@/components/core/Image.vue";
 import { Utils } from "@/scripts/utils";
 import { WorldDatas } from "@/data/world-datas";
+import type { IWorldData } from "@/interfaces/IWorldData";
+import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
+import { WorldDataUtils } from "@/scripts/utils/world-data-utils";
 
 const knownWorlds = {
 	discovered: [
+		Utils.World.findWorld(WorldDatas, "somewhere"),
 		Utils.World.findWorld(WorldDatas, "wonderland"),
 		Utils.World.findWorld(WorldDatas, "big-apple"),
 		Utils.World.findWorld(WorldDatas, "blues-house"),
 		Utils.World.findWorld(WorldDatas, "neon-coast"),
 		Utils.World.findWorld(WorldDatas, "land-of-oz"),
-	],
+	] as IWorldData[],
 	heardAbout: [],
 }
+
+const listedWorlds = computed(() => {
+	return knownWorlds.discovered.map((v) => {
+		return {
+			cast: WorldDataUtils.findCharactersInWorld(CharacterDataUtils.getAll(), v.id),
+			peopleAccordionID: `${v.id}-people-accordion`,
+			...v
+		}
+	})
+})
 
 // TODO: deprecate this
 const doPages = false;
@@ -35,34 +50,6 @@ const doPages = false;
 		</header>
 		<main>
 			<ul class="list-group w-100 m-0 p-1">
-				<World>
-					<template v-slot:image>
-						<Image src="img/worlds/somewhere.png" />
-					</template>
-					<template v-slot:name>
-						Somewhere
-					</template>
-					<template v-slot:one-liner>
-						Our home away from home.
-					</template>
-					<template v-slot>
-						<p>A home for lost things.</p>
-						<div class="accordion" id="somewhere-accordion">
-							<AccordionItem name="People" parent-id="somewhere-accordion" :default-open="true">
-								<Somewhere :containedByModal="true" />
-							</AccordionItem>
-						</div>
-					</template>
-					<template v-slot:details>
-						<NittyGritty
-							anchor="?"
-							disguise=""
-							partners=""
-							:kindredWorlds='[]'
-							time="standard"
-						/>
-					</template>
-				</World>
 				<template v-if="doPages">
 					<router-link
 						v-for="world in knownWorlds.discovered"
@@ -84,8 +71,7 @@ const doPages = false;
 				</template>
 				<template v-else>
 					<World
-						v-for="world in knownWorlds.discovered"
-						:v-if="world"
+						v-for="world in listedWorlds"
 					>
 						<template v-slot:image>
 							<Image :src="world?.images.token || 'img/worlds/blank.png'" />
@@ -102,6 +88,11 @@ const doPages = false;
 						<template v-slot>
 							<p v-for="text in world?.copy.description" v-html="Utils.String.replaceComponentsInString(text)"> </p>
 							<p v-if="!world?.copy.description || world.copy.description.length == 0" v-html="world?.copy.oneLiner"> </p>
+							<div class="accordion" :id="world.peopleAccordionID" v-if="world.cast.length > 0">
+								<AccordionItem name="People" :parent-id="world.peopleAccordionID" :default-open="true">
+									<LocationCharacterDeck :people="world.cast" :containedByModal="true" />
+								</AccordionItem>
+							</div>
 						</template>
 						<template v-slot:details>
 							<NittyGritty

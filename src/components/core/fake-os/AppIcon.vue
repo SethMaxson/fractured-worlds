@@ -38,7 +38,7 @@ const svgID = props.svg && props.svg.includes("#")? props.svg : "#" + props.svg;
 					<use :href="svgID"></use>
 				</svg>
 			</div> -->
-			<div class="d-none d-lg-block m-0 mb-1 p-2">
+			<div class="d-none d-lg-block m-0 mb-1 ratio ratio-1x1">
 				<svg class="button-icon theme-color m-0 p-0" v-if="svg">
 					<use :href="svgID"></use>
 				</svg>

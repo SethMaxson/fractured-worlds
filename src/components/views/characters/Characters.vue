@@ -15,7 +15,7 @@ import Crew from '@/components/views/characters/characterDecks/Crew.vue';
 import CrewFormer from "./characterDecks/CrewFormer.vue";
 
 import { CharacterDatas } from "@/data/character-datas";
-import { CharacterDataUtils } from "@/scripts/character-data-utils";
+import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 
 const TheGang = [
 	CharacterDataUtils.findCharacter(CharacterDatas, 'cobb'),

@@ -4,7 +4,7 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import CharacterFullView from "./components/CharacterFullView.vue";
 
 import { CharacterDatas } from "@/data/character-datas";
-import { CharacterDataUtils } from "@/scripts/character-data-utils";
+import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 import { useRoute } from "vue-router";
 
 const props = defineProps({

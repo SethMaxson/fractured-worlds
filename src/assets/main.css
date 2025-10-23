@@ -240,11 +240,56 @@ pre {
   flex: 0 0 auto;
   width: calc(100%/7);
 }
+.row-cols-8>* {
+    flex: 0 0 auto;
+    width: 12.5%;
+}
+.row-cols-9>* {
+    flex: 0 0 auto;
+    width: calc(100%/9);
+}
+.row-cols-10>* {
+    flex: 0 0 auto;
+    width: 10%;
+}
 
+/* lg breakpoint */
 @media (min-width: 992px) {
   .row-cols-lg-7>* {
     flex: 0 0 auto;
     width: calc(100%/7);
+  }
+  .row-cols-lg-8>* {
+      flex: 0 0 auto;
+      width: 12.5%;
+  }
+  .row-cols-lg-9>* {
+      flex: 0 0 auto;
+      width: calc(100%/9);
+  }
+  .row-cols-lg-10>* {
+      flex: 0 0 auto;
+      width: 10%;
+  }
+}
+
+/* xl breakpoint */
+@media (min-width: 1200px) {
+  .row-cols-xl-7>* {
+      flex: 0 0 auto;
+      width: calc(100%/7);
+  }
+  .row-cols-xl-8>* {
+      flex: 0 0 auto;
+      width: 12.5%;
+  }
+  .row-cols-xl-9>* {
+      flex: 0 0 auto;
+      width: calc(100%/9);
+  }
+  .row-cols-xl-10>* {
+      flex: 0 0 auto;
+      width: 10%;
   }
 }
 

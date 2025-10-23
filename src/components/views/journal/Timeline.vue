@@ -27,7 +27,7 @@ class TimelineDisplaySettings {
 	/** Toggle the display of various components */
 	displayToggles = {
 		/** Show the event's detailed description */
-		showDescription: ref(true),
+		showDescription: ref(false),
 		/** Show the breakdown of sub events */
 		showExtra: ref(true),
 		showFancyTables: ref(false),
@@ -236,7 +236,8 @@ const timelineEvents: ITimelineEvent[] = [
 			{ name: "met Astrid", type: "person" },
 			{ name: "met Stormfly", type: "person" },
 			{ name: "encountered Ganondorf", type: "rebirth" },
-			{ name: "lost Tommy One", type: "death" }
+			{ name: "lost Tommy One", type: "death" },
+			{ name: "lost Whiteshi", type: "death" }
 		],
 		header: "Berk",
 		type: "world"

@@ -3,7 +3,7 @@
 import { Birthdays } from '@/data/calendar/events/birthdays';
 import { CharacterDatas } from "@/data/character-datas";
 import { Utils } from "@/scripts/utils";
-import { CharacterDataUtils } from "@/scripts/character-data-utils";
+import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 import Image from "@/components/core/Image.vue";
 import AccordionItem from "@/components/core/AccordionItem.vue";
 import type { ICharacterData } from '@/interfaces/ICharacterData';

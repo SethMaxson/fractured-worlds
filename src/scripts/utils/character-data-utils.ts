@@ -1,6 +1,7 @@
 import type { ICalendarEvent, IFullCalendarEvent } from "@/interfaces/ICalendarEvent";
 import type { ICharacterData } from "@/interfaces/ICharacterData";
-import { Utils } from "./utils";
+import { Utils } from "../utils";
+import { CharacterDatas } from "@/data/character-datas";
 
 export namespace CharacterDataUtils {
     interface TextGetterConfig {
@@ -15,9 +16,17 @@ export namespace CharacterDataUtils {
         return person;
     }
 
-    /** Find all characters that match the provided World ID. */
-    export function findCharactersByLocation(characterDatas: ICharacterData[], worldID: string): ICharacterData[] {
-        return characterDatas.filter(char => char.location == worldID);
+    /** Lookup a character's affiliation with a specific group, if present. */
+    export function getAffiliation(character: ICharacterData, affiliationName: string) {
+        const matches = character.affiliations.filter(a => {
+            return a.name == affiliationName;
+        });
+        return matches.length > 0 ? matches[0] : undefined;
+    }
+
+    /** Get the entire character database. */
+    export function getAll(): ICharacterData[] {
+        return CharacterDatas;
     }
 
     /** Lookup a character's birthday, if known. */
@@ -51,9 +60,16 @@ export namespace CharacterDataUtils {
         return bodyText;
     }
 
+    /** Lookup a character's primary affiliation, if present. */
+    export function getPrimaryAffiliation(character: ICharacterData) {
+        const matches = character.affiliations.filter(a => {
+            return a.primary;
+        });
+        return matches.length > 0 ? matches[0] : undefined;
+    }
+
     /** Gets a Spotify embed URL for the given ID (e.g. ) */
     export function getSpotifyEmbedUrl(spotifyID: string, type: "playlist" | "song" = "playlist"): string {
-
         return `https://open.spotify.com/embed/${type == 'playlist' ? 'playlist' : 'track'}/${spotifyID}?utm_source=generator&theme=0`;
     }
 

@@ -3,24 +3,24 @@ import CharacterCard from '@/components/views/characters/components/CharacterCar
 import CharacterCardDeck from '@/components/core/CardDeck.vue';
 
 import { CharacterDatas } from "@/data/character-datas";
-import { CharacterDataUtils } from "@/scripts/character-data-utils";
+import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 import type { ICharacterData } from "@/interfaces/ICharacterData";
+import { Utils } from '@/scripts/utils';
 
-const TheCrew = [
-    CharacterDataUtils.findCharacter(CharacterDatas, 'hamisfore'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'ootah'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'carrie-ward'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'bebop'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'blackhand-roo'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'gugg'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'joey-morton'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'per-schnorr'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'zuzu'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'susie'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'flavio'),
-    CharacterDataUtils.findCharacter(CharacterDatas, 'matthew-law'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'winter')
-];
+const matches = CharacterDatas.filter((c) => {
+    if (c.type == "crew") {
+        let a = CharacterDataUtils.getAffiliation(c, "Brightside Crew");
+        return a && !a.left;
+    }
+    return false;
+});
+
+const TheCrew = matches.sort(function(a, b) {
+    return Utils.SortComparators.dateString(
+        CharacterDataUtils.getAffiliation(a, "Brightside Crew")?.joined,
+        CharacterDataUtils.getAffiliation(b, "Brightside Crew")?.joined
+    );
+});
 
 defineProps({
 	containedByModal: {
@@ -34,9 +34,6 @@ function getFooter(person?: ICharacterData) {
     if (!person) {
         return;
     }
-
-    // // Older format
-    // return `Role: ${person.affiliations[0].role} (${person.affiliations[0].joined} SE-present)`;
     
     return `${person.affiliations[0].role} (${person.affiliations[0].joined} SE)`;
 }

@@ -21,7 +21,10 @@ export const WorldDatas: IWorldData[] = [
             token: "img/worlds/somewhere.png",
         },
         people: {
-
+            citizens: [
+                "somewhere-kenny",
+                "somewhere-portia"
+            ]
         }
     },
     {

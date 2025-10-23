@@ -91,7 +91,7 @@ export interface ICharacterData {
 	 * @example
 	 * "alive" | "dead"
 	 */
-	status?: "alive"|"dead";
+	status?: "alive"|"dead"|"unknown";
 	timeline?: ITimelineEvent[];
 	/** The character's role within the story. Informs how some things are displayed. */
 	type: "crew" | "location" | "nle" | "pc" | "rebirth" | "other";
