@@ -1,6 +1,6 @@
 import type { ITimelineEvent } from "./ITimeline";
 
-interface ICharacterAffiliation {
+export interface ICharacterDataAffiliation {
 	/**
 	 * @example
 	 * "Rebirth Caucus"
@@ -24,7 +24,14 @@ interface ICharacterAffiliation {
 	left?: string;
 }
 
-interface ICharacterPhysical {
+export interface ICharacterDataMentalTraits {
+	/** What this person's drive appears to be on the surface. */
+	apparentDrive?: string;
+	/** This person's actual drive. */
+	drive?: string;
+}
+
+export interface ICharacterDataPhysicalTraits {
 	age?: string;
 	eyeColor?: string;
 	gender?: string;
@@ -49,22 +56,23 @@ export interface ICharacterData {
 	 *		{ name: "Pretty Tea Party Sisterhood", rank: "Grey Earl" }
 	 * ]
 	 */
-	affiliations: ICharacterAffiliation[];
+	affiliations: ICharacterDataAffiliation[];
     /** A list of known aliases. */
 	aliases?: string[];
 	/** Date (or at least month and day) of birth. */
 	birthday?: { year?: number; day: number; month: number; };
     /** A brief description for the character entry screen. */
 	description: string[];
-	drive?: string;
     /** The world this character originally called home, if known. */
 	homeworld?: string;
     /** The id of the world in which this character resides, for displaying on page pertaining to that world. */
 	location?: string;
+	/** The character's mental attributes/description. */
+	mental?: ICharacterDataMentalTraits;
     /** The character's class or occupation. */
 	occupation: string[];
 	/** The character's physical attributes/description. */
-	physical?: ICharacterPhysical;
+	physical?: ICharacterDataPhysicalTraits;
 	/** (1-3) The overall plot importance of a character. Used to determine where and how prominently to display them, if it's used at all.	 
 	 * @1 - Minor character. Background or bit players.
 	 * @2 - Medium. Secondary and supporting cast.

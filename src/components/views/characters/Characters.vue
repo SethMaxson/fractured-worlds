@@ -53,7 +53,7 @@ const DeadGang = [
 				<!-- #region Major Characters -->
 
 				<!-- #region Player Characters -->
-				<AccordionItem name="The Gang" parent-id="characters-accordion" :default-open="true">
+				<AccordionItem name="The Gang" parent-id="characters-accordion">
 					<CharacterCardDeck>
 						<CharacterCard v-for="person in TheGang" :person="person" />
 					</CharacterCardDeck>

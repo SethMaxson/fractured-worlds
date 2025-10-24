@@ -51,7 +51,8 @@ switch (props.person?.type) {
 	default:
 		break;
 }
-const portraitClasses = npcTypeClass?.concat(" card-img-top ratio ratio-1x1");
+// const portraitClasses = npcTypeClass?.concat(" card-img-top ratio ratio-1x1");
+const portraitClasses = npcTypeClass;
 // const offerFullPageView = props.person?.plotRelevance && props.person.plotRelevance > 1 ? true : false;
 const offerFullPageView = false;
 const openIcon = offerFullPageView && false ? '#enter'
@@ -80,13 +81,11 @@ const disableClick = props.containedByModal;
 		>
 			<CardContents :class="{'dead': status == 'dead'}" :truncated="!containedByModal" :truncate-header="!containedByModal" :open-icon="openIcon">
 				<template #image>
-					<div class="overflow-hidden" style="width:300px; height:300px;">
-						<Portrait :class="portraitClasses" :src="person?.images.thumbnail" />
-					</div>
+					<Portrait :class="portraitClasses" :src="person?.images.thumbnail" />
 				</template>
 				<template #heading>{{ person.name }}</template>
 				<template #subheading>
-					<div class="text-capitalize">{{ CharacterDataUtils.getSubheader(person) }}</div>
+					<div class="text-capitalize" :class="{'text-truncate': !containedByModal}">{{ CharacterDataUtils.getSubheader(person) }}</div>
 				</template>
 				<template #homeworld>{{ person?.homeworld }}</template>
 
@@ -183,23 +182,21 @@ export default {
 </script>
 
 <style>
-	.card img {
-		position: relative;
-		max-width: 100%;
-	}
-
-	.dead img::before {
-		content: " ";
-		/* background-image: url("@/assets/images/dead.png"); */
-		background: red;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 5;
-		opacity: 5;
-	}
+.card img {
+	max-width: 100%;
+}
+.dead img::before {
+	content: " ";
+	/* background-image: url("@/assets/images/dead.png"); */
+	background: red;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 5;
+	opacity: 5;
+}
 </style>
 
 <style scoped>

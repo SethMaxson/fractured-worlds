@@ -33,6 +33,7 @@ const props = defineProps({
 
 const pageDictionary = [
 	{ path: "/", name: "Home"},
+	{ path: "/faq", name: "FAQ"},
 	{ path: "/gm", name: "GM"},
 	{ path: "/home", name: "Home"},
 	{ path: "/links", name: "External Links"},

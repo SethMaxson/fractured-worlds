@@ -14,7 +14,7 @@ defineProps<{
 		</h1>
 		<figure>
 			<blockquote class="blockquote">
-				<p class="fs-5 lead text-secondary-emphasis lh-sm"><slot></slot></p>
+				<p class="fs-6 fs-lg-5 lead text-secondary-emphasis lh-sm"><slot></slot></p>
 			</blockquote>
 			<div v-if="author" class="blockquote-footer text-end fw-normal">{{author}}</div>
 		</figure>
@@ -23,8 +23,13 @@ defineProps<{
 
 <style scoped>
 h1 {
-	font-weight: 500;
-	font-size: 2.6rem;
+	/* font-family: 'Scones and Crossbows', sans-serif; */
+	/* font-family: 'BrickShapers', sans-serif; */
+	/* font-family: "Gajraj One", sans-serif; */
+	font-weight: normal;
+	/* font-weight: 500; */
+	font-size: 1.75rem;
+	letter-spacing: 0.1rcap;
 	top: -10px;
 }
 </style>

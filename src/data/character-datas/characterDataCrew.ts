@@ -20,7 +20,9 @@ export const CrewCharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Ootah</Character> is a five-year-old orphan who believes herself to be the captain of the <Important>One More Day</Important>. She exhibits behavior that suggests extreme narcissism. Recruited after facing her in gladiatorial combat in <Location>Somewhere</Location>."
         ],
-        drive: "find 'Candy World'",
+        mental: {
+            drive: "find 'Candy World'"
+        },
         homeworld: "\"Nunya stinkin' business\"",
         images: {
             thumbnail: "img/npc/ootah.webp"
@@ -50,7 +52,9 @@ export const CrewCharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Susie</Character> is a <Important>RoBro</Important> created from a partial brain-scan of <Character>Rose (Lethal Lady #2)</Character>. However, a manufacturing defect has given her more freewill than intended, allowing her to express a strong dislike of violence."
         ],
-        drive: "make as many friends as possible",
+        mental: {
+            drive: "make as many friends as possible"
+        },
         homeworld: "Weapon World",
         images: {
             thumbnail: "img/npc/susie.png"
@@ -85,7 +89,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Velarys",
         images: {
-            thumbnail: "img/npc/winter2.png"
+            thumbnail: "img/npc/winter.png"
         },
         spotify: {
 			primaryPlaylistID: "0zyxK6W0ROxoCzmHsCW9zS"
@@ -151,6 +155,27 @@ export const CrewCharacterDatas: ICharacterData[] = [
         status: "alive"
     },
     {
+        name: "Betsy Boyle",
+        id: "betsy-boyle",
+        type: "crew",
+        species: ["human"],
+        occupation: ["aspiring food critic"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "07/18/0001", left: "08/08/0001", primary: true }
+        ],
+        description: [
+            "<Character>Betsy Boyle</Character> was an odd fellow who dressed almost exclusively in beige. He was slain in the <im>Birthday Massacre<im>."
+        ],
+        images: {
+            thumbnail: "img/npc/betsy-boyle.webp"
+        },
+        spotify: {
+			primaryPlaylistID: "6VtzbnJH1xVswYYj4LkV1l"
+        },
+        plotRelevance: 1,
+        status: "dead"
+    },
+    {
         name: "\"Blackhand\" Roo",
         id: "blackhand-roo",
         subtitle: "Train Mechanic",
@@ -194,6 +219,28 @@ export const CrewCharacterDatas: ICharacterData[] = [
         },
         plotRelevance: 1,
         status: "alive"
+    },
+    {
+        name: "Elaim Trueblood",
+        id: "elaim-trueblood",
+        subtitle: "Stand-up Comic",
+        type: "crew",
+        species: ["dwarf"],
+        occupation: ["aspiring comedian"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "07/18/0001", left: "08/08/0001", primary: true }
+        ],
+        description: [
+            "<Character>Elaim Trueblood</Character> was an aspiring comedian. He was slain in the <im>Birthday Massacre<im>."
+        ],
+        images: {
+            thumbnail: "img/npc/elaim-trueblood.png"
+        },
+        spotify: {
+			primaryPlaylistID: "6ZG6fD4sCUSyxlPqWFilTB"
+        },
+        plotRelevance: 1,
+        status: "dead"
     },
     {
         name: "Flavio de Mota",
@@ -263,6 +310,28 @@ export const CrewCharacterDatas: ICharacterData[] = [
         status: "alive"
     },
     {
+        name: "Hoots the Owl",
+        id: "hoots",
+        subtitle: "Jazz Musician",
+        type: "crew",
+        species: ["muppet"],
+        occupation: ["jazz musician"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Musician", joined: "06/02/0001", left: "07/18/0001", primary: true }
+        ],
+        description: [
+            "<Character>Hoots the Owl</Character> served aboard our vessel for one trial tour to review our vessel as a potential pleasure cruise for citizens of <Location>Somewhere</Location>. We parted amicably, but I'm pretty sure he review-bombed us, kupo."
+        ],
+        images: {
+            thumbnail: "img/npc/hoots.jpg"
+        },
+        spotify: {
+			primaryPlaylistID: "1EIfQZpQ9GDMuStubtJIRh"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
         name: "Joey Morton",
         id: "joey-morton",
         subtitle: "Mall Cop",
@@ -275,7 +344,9 @@ export const CrewCharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Joey Morton</Character> is a human woman from a kingdom known as Scotland in an Earth variant. She is an avid 'gamer', which apparently means she obsessively collects and plays things called 'video games'."
         ],
-        // drive: "play ever good video game",
+        mental: {
+            drive: "play every good video game ever released"
+        },
         homeworld: "Scotland, Earth, 1998",
         images: {
             thumbnail: "img/npc/joey-morton-cropped.png"
@@ -285,6 +356,27 @@ export const CrewCharacterDatas: ICharacterData[] = [
         },
         plotRelevance: 1,
         status: "alive"
+    },
+    {
+        name: "Mardred Fireforge",
+        id: "mardred-fireforge",
+        type: "crew",
+        species: ["duargar"],
+        occupation: ["janitor"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Janitor", joined: "07/18/0001", left: "08/23/0001", primary: true }
+        ],
+        description: [
+            "<Character>Mardred Fireforge</Character> was an elderly Duergar janitor with deep-seated racism and pro-slavery beliefs. She was accidentally slain by <c>Zuzu</c> in a botched attempt to rescue her during the <c>Cucu</c> crisis, though Zuzu remains oblivious to his role in her demise. <c>Tero</c> cut Madred's corpse into pieces and fed it down a garbage disposal after hearing her call Zuzu a dwarfish slur in her final moments."
+        ],
+        images: {
+            thumbnail: "img/npc/mardred-fireforge.png"
+        },
+        spotify: {
+			primaryPlaylistID: "27T9FxMOUdNGOSfTx0uFVY"
+        },
+        plotRelevance: 1,
+        status: "dead"
     },
     {
         name: "Matthew Law",
@@ -328,6 +420,37 @@ export const CrewCharacterDatas: ICharacterData[] = [
         plotRelevance: 1,
         status: "alive"
     },
+    {
+        name: "Teacher Barbie",
+        id: "teacher-barbie",
+        type: "crew",
+        species: ["barbie"],
+        occupation: ["teacher"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Teacher", joined: "09/02/0001", primary: true }
+        ],
+        description: [
+            "<c>Teacher Barbie</c> is an elementary school teacher from Barbieland. Phil attempted to recruit her to teach the wayward children we have accumulated, and she agreed after visiting our ship and becoming concerned at what she perceived as an unfit environment for children."
+        ],
+        mental: {
+            drive: "\"mold the future to make it awesome\""
+        },
+        physical: {
+            gender: "female",
+            eyeColor: "brown",
+            hairColor: "brown",
+            height: "5' 9\"",
+        },
+        homeworld: "Barbieland",
+        images: {
+            thumbnail: "img/npc/teacher-barbie.png"
+        },
+        spotify: {
+			primaryPlaylistID: "1ASyetImCel4uTVua9BVLC"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
     //#endregion The Rest
 
     //#region Yoshis
@@ -346,7 +469,10 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/tokens/yoshi-black.png"
+            thumbnail: "img/npc/yoshi-black.png"
+        },
+        spotify: {
+            primaryPlaylistID: "2xumMU5CzUQ0t5MNzn0lqk"
         },
         plotRelevance: 1,
         status: "alive"
@@ -366,7 +492,10 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/tokens/yoshi-blue.png"
+            thumbnail: "img/npc/yoshi-blue.jpg"
+        },
+        spotify: {
+            primaryPlaylistID: "1VhLZOOpQ8v972e38DDtrS"
         },
         plotRelevance: 1,
         status: "alive"
@@ -386,7 +515,10 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/tokens/yoshi-green.png"
+            thumbnail: "img/npc/yoshi-green.png"
+        },
+        spotify: {
+            primaryPlaylistID: "7fFUqeeBg2UnVKvKVDaUYU"
         },
         plotRelevance: 1,
         status: "alive"
@@ -406,7 +538,10 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/tokens/yoshi-light-blue.png"
+            thumbnail: "img/npc/yoshi-light-blue.png"
+        },
+        spotify: {
+            primaryPlaylistID: "2dLFjGAOvBzieCy2RMfMGG"
         },
         plotRelevance: 1,
         status: "alive"
@@ -426,7 +561,10 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/tokens/yoshi-pink.png"
+            thumbnail: "img/npc/yoshi-pink.png"
+        },
+        spotify: {
+            primaryPlaylistID: "12n3g9L7k0FUi9kKdbaXhv"
         },
         plotRelevance: 1,
         status: "alive"
@@ -446,7 +584,10 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/tokens/yoshi-red.png"
+            thumbnail: "img/npc/yoshi-red.png"
+        },
+        spotify: {
+            primaryPlaylistID: "6aIdL3gKfZZ3BxfPUxvJ1r"
         },
         plotRelevance: 1,
         status: "alive"
@@ -466,7 +607,10 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/tokens/yoshi-yellow.png"
+            thumbnail: "img/npc/yoshi-yellow.png"
+        },
+        spotify: {
+            primaryPlaylistID: "3Mfud8wqdN42FqOZH12Q8C"
         },
         plotRelevance: 1,
         status: "alive"
@@ -487,7 +631,10 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/tokens/yoshi-white.png"
+            thumbnail: "img/npc/yoshi-white.png"
+        },
+        spotify: {
+            primaryPlaylistID: "4ur7MDXuqSwF3qbNwSRM9L"
         },
         plotRelevance: 1,
         status: "unknown"

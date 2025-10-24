@@ -1,12 +1,11 @@
 <script setup lang="ts">
 
 import { Birthdays } from '@/data/calendar/events/birthdays';
-import { CharacterDatas } from "@/data/character-datas";
 import { Utils } from "@/scripts/utils";
 import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 import Image from "@/components/core/Image.vue";
 import AccordionItem from "@/components/core/AccordionItem.vue";
-import type { ICharacterData } from '@/interfaces/ICharacterData';
+import type { ICharacterData, ICharacterDataAffiliation, ICharacterDataPhysicalTraits } from '@/interfaces/ICharacterData';
 import type { PropType } from 'vue';
 
 const props = defineProps({
@@ -21,16 +20,40 @@ const accordionItems: CharacterAccordionSectionTypes[] = [];
 
 const subheader = CharacterDataUtils.getSubheader(props.person);
 const bodyText = CharacterDataUtils.getMainBodyText(props.person);
-// const affiliations = person?.affiliations && person.affiliations.length > 0 ? 
+
+const affiliationKeyCrew = "Brightside Crew";
+const specialAffiliations = [
+	affiliationKeyCrew
+];
+const affiliations = props.person?.affiliations ? {
+	crew: CharacterDataUtils.getAffiliation(props.person, affiliationKeyCrew),
+	other: props.person.affiliations.filter((c) => {
+		return !specialAffiliations.includes(c.name);
+	})
+}
+: undefined;
+
 const birthday = props.person && CharacterDataUtils.getBirthday(props.person, Birthdays);
 const playlistEmbed = props.person?.spotify?.primaryPlaylistID? CharacterDataUtils.getSpotifyEmbedUrl(props.person.spotify.primaryPlaylistID) : undefined;
 const themeSongEmbed = props.person?.spotify?.themeSong? CharacterDataUtils.getSpotifyEmbedUrl(props.person.spotify.themeSong, "song") : undefined;
+
+const physicalTraitDisplay: { key: keyof ICharacterDataPhysicalTraits; label: string }[] = [
+	{ key: "gender", label: "Gender"},
+	{ key: "height", label: "Height"},
+	{ key: "weight", label: "Weight"},
+	{ key: "eyeColor", label: "Eyes"},
+	{ key: "hairColor", label: "Hair"}
+];
 
 //#region Check what accordion sections are present
 if (playlistEmbed) {
 	accordionItems.push("playlists");
 }
 //#endregion Check what accordion sections are present
+
+function getSpecialAffiliationString(a: ICharacterDataAffiliation): string {
+	return `${a.role || a.rank} (${a.joined}${a.left? "—" + a.left : ""} SE)`;
+}
 </script>
 
 <template>
@@ -56,50 +79,46 @@ if (playlistEmbed) {
 
 			<div class="details ps-md-2 ps-lg-3 text-muted">
 				<div v-if="person.aliases && person.aliases.length > 0">
-					<b>{{ person.aliases.length > 1 ? "Aliases" : "Alias" }}:</b> {{ person.aliases.join(", ") }}
+					{{ person.aliases.length > 1 ? "Aliases" : "Alias" }}: <b>{{ person.aliases.join(", ") }}</b>
 				</div>
-				<div v-if="person.affiliations && person.affiliations.length > 0">
+				<div v-if="affiliations?.crew">
+					{{affiliations.crew.name}}: <b>{{getSpecialAffiliationString(affiliations.crew)}}</b>
+				</div>
+				<div v-if="affiliations?.other && affiliations.other.length > 0">
 					<ul class="list-inline mb-0">
-						<li class="list-inline-item"><b>Affiliations:</b></li>
-						<li class="list-inline-item" v-for="a, i in person.affiliations">
-							{{ `${a.name} ${a.role || a.rank ? " (" + (a.role || a.rank) + ")" : ""}${i+1 == person.affiliations.length ? '' : ','}` }}
+						<li class="list-inline-item">{{ person.affiliations.length > affiliations.other.length ? "Other Affiliations" : "Affiliations" }}:</li>
+						<li class="list-inline-item fw-bold" v-for="a, i in affiliations.other">
+							{{ `${a.name} ${a.role || a.rank ? " (" + (a.role || a.rank) + ")" : ""}${i+1 == affiliations.other.length ? '' : ','}` }}
 						</li>
 					</ul>
 				</div>
 				<div class="big-details text-capitalize">
 					<div v-if="person.homeworld">
-						<b>Homeworld:</b> {{person.homeworld}}
+						Homeworld: <b>{{person.homeworld}}</b>
 					</div>
 					<div v-if="birthday">
-						<b>Birthday:</b> {{Utils.Date.Format.DMon(birthday)}}
+						Birthday: <b>{{Utils.Date.Format.DMon(birthday)}}</b>
 					</div>
-					<div v-if="person.drive">
-						<b>Drive:</b> {{person.drive}}
+					<div v-if="person.mental?.drive">
+						Drive: <b>{{person.mental.drive}}</b>
 					</div>
 				</div>
 				<div class="details mt-2" v-if="person.physical">
-					<div v-if="person.physical.height">
-						Height: {{person.physical.height}}
-					</div>
-					<div v-if="person.physical.weight">
-						Weight: {{person.physical.weight}}
-					</div>
-					<div v-if="person.physical.eyeColor">
-						Eyes: {{person.physical.eyeColor}}
-					</div>
-					<div v-if="person.physical.hairColor">
-						Hair: {{person.physical.hairColor}}
-					</div>
+					<template v-for="trait in physicalTraitDisplay">
+						<div v-if="person.physical[trait.key]">
+							{{trait.label}}: {{person.physical[trait.key]}}
+						</div>
+					</template>
 				</div>
 			</div>
 
-			<div class="mt-2 pe-md-2 d-flex align-items-top" v-if="themeSongEmbed && false">
+			<!-- <div class="mt-2 pe-md-2 d-flex align-items-top" v-if="themeSongEmbed">
 				<div class="pe-3">Theme song:</div>
 				<div class="flex-grow-1">
-					<!-- TODO: Make this into a collapse, with the button label displaying the song title. -->
+					<!- TODO: Make this into a collapse, with the button label displaying the song title. ->
 					<iframe data-testid="embed-iframe" style="border-radius:12px" :src="themeSongEmbed" width="100%" height="152" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" v-if="themeSongEmbed"></iframe>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 		<div class="mt-4" v-html="bodyText"> </div>
@@ -115,6 +134,11 @@ if (playlistEmbed) {
 				</AccordionItem>
 			</div>
 		<!-- </div> -->
+
+		<!-- TODO: Put an image gallery somewhere near here. Take inspiration from standard wiki formats like these:
+		 	https://www.mariowiki.com/Gallery:Yoshi_(2010-2019)
+			https://www.mariowiki.com/Gallery:Mario_%2B_Rabbids_Kingdom_Battle
+		-->
 		
 	</div>
 	<div v-else class="p-2 pb-5 text-center fst-italic fs-5">
@@ -128,5 +152,7 @@ if (playlistEmbed) {
 }
 
 
-/* reference https://www.dreamworks.com/how-to-train-your-dragon/explore/hiccup */
+/* reference https://www.dreamworks.com/how-to-train-your-dragon/explore/hiccup
+	https://www.mariowiki.com/Luigi
+	*/
 </style>

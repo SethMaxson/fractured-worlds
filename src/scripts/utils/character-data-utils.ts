@@ -16,6 +16,13 @@ export namespace CharacterDataUtils {
         return person;
     }
 
+    /** Find the character that matches the provided ID. */
+    export function findCharacterById(id: string): ICharacterData | undefined {
+        const search = CharacterDatas.filter(char => char.id == id);
+        const person = search && search.length > 0 ? search[0] : undefined;
+        return person;
+    }
+
     /** Lookup a character's affiliation with a specific group, if present. */
     export function getAffiliation(character: ICharacterData, affiliationName: string) {
         const matches = character.affiliations.filter(a => {

@@ -22,6 +22,7 @@ export const WorldDatas: IWorldData[] = [
         },
         people: {
             citizens: [
+                // "hoots",
                 "somewhere-kenny",
                 "somewhere-portia"
             ]

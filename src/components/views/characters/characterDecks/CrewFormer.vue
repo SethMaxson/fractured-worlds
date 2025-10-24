@@ -105,46 +105,6 @@ function getFooter(person?: ICharacterData) {
             <Character>Tommy</Character> is a friendly synth who was sold at a discount due to a manufacturing error that resulted in him being far more simple-minded and impressionable than other "Ledcis" model units. He escaped the <Location>Neon Coast</Location> with the gang. He doesn't seem to comprehend the <Location>Void Realm</Location> or <Important>The Fracturing</Important>, instead believing that the gang is simply exploring outer space.
             <template #footer>Role: Deckhand (05/10—07/13/0001 SE)</template>
         </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/hoots.jpg" />
-            </template>
-            <template #heading>Hoots the Owl</template>
-            <template #subheading>Jazz Musician</template>
-
-            <Character>Hoots the Owl</Character> served aboard our vessel for one trial tour to review our vessel as a potential pleasure cruise for citizens of <Location>Somewhere</Location>. We parted amicably, but I'm pretty sure he review-bombed us, kupo.
-            <template #footer>Role: Musician (06/02—07/18/0001 SE)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/betsy-boyle.webp" />
-            </template>
-            <template #heading>Betsy Boyle</template>
-            <template #subheading>Aspiring Food Critic</template>
-
-            <Character>Betsy Boyle</Character> was an odd fellow who dressed almost exclusively in beige. He was slain in the Birthday Massacre.
-            <template #footer>Role: Deckhand (07/18—08/08/0001 SE)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/elaim-trueblood.png" />
-            </template>
-            <template #heading>Elaim Trueblood</template>
-            <template #subheading>Stand-up Comic</template>
-
-            <Character>Elaim Trueblood</Character> was an aspiring comedian. He was slain in the Birthday Massacre.
-            <template #footer>Role: Deckhand (07/18—08/08/0001 SE)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/mardred-fireforge.png" />
-            </template>
-            <template #heading>Mardred Fireforge</template>
-            <template #subheading>Duergar Janitor</template>
-
-            <Character>Mardred Fireforge</Character> was an elderly Duergar janitor with deep-seated racism and pro-slavery beliefs. She was accidentally slain by Zuzu in a botched attempt to rescue her during the Cucu crisis, though Zuzu remains oblivious to his role in her demise. Tero cut Madred's corpse into pieces and fed it down a garbage disposal after hearing her call Zuzu a dwarfish slur in her final moments.
-            <template #footer>Role: Janitor (07/18—08/23/0001 SE)</template>
-        </CharacterCard>
         <CharacterCard v-for="person in TheCrew" :person="person">
             <template #footer><div class="text-center">{{ getFooter(person) }}</div></template>
         </CharacterCard>

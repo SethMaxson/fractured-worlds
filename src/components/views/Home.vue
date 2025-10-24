@@ -12,6 +12,8 @@ import { GameStrings } from "@/scripts/game-strings";
 			<AppIconContainer>
 				<AppIcon svg="list" to="/accomplishments" class="dev">Accomplishments</AppIcon>
 				<AppIcon svg="menu-button-wide-fill" to="/dashboard" class="dev">Dashboard</AppIcon>
+				<AppIcon svg="ui-radios" to="/settings" class="dev">Settings</AppIcon>
+				<AppIcon svg="question" to="/faq" class="dev">FAQ</AppIcon>
 				<AppIcon svg="user2" to="/people">People</AppIcon>
 				<AppIcon svg="relationship" to="/relationships" class="h-100 dev">Relationships</AppIcon>
 				<AppIcon svg="anchor" to="/ship">Ship</AppIcon>
@@ -19,7 +21,7 @@ import { GameStrings } from "@/scripts/game-strings";
 				<AppIcon svg="contacts-book" to="/contacts">Contacts</AppIcon>
 				<AppIcon svg="timeline" to="/timeline" class="dev">NPC Timeline</AppIcon>
 				<AppIcon svg="handshake" to="/perks">Banes & Boons</AppIcon>
-				<AppIcon svg="reviews" to="/reviews"><span class="yep">Yep!</span> Reviews</AppIcon>
+				<AppIcon svg="reviews" to="/reviews"><span class="yep">YEP!</span> Reviews</AppIcon>
 
 				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start">People</h5>
 				<AppIcon svg="people" to="/factions">Factions</AppIcon>

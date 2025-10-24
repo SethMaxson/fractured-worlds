@@ -1,6 +1,6 @@
 import type { ICharacterData } from "@/interfaces/ICharacterData";
-import { SomewhereCharacterDatas } from "./character-datas/somewhere";
-import { CrewCharacterDatas } from "./character-datas/crew";
+import { SomewhereCharacterDatas } from "./character-datas/characterDataSomewhere";
+import { CrewCharacterDatas } from "./character-datas/characterDataCrew";
 
 /** Used to create a standardized set of character profiles that can be accessed from any page.
  * Some records contain information that is not yet known to the players, which is currently commented out.
@@ -249,7 +249,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Clovershire, Geoss",
         images: {
-            thumbnail: "img/npc/cade-toon.png"
+            thumbnail: "img/npc/cade-2.png"
         },
         spotify: {
             primaryPlaylistID: "0YDhh8WNrOxEKDQ1LJe8B7"
@@ -291,6 +291,7 @@ export const CharacterDatas: ICharacterData[] = [
     {
         name: "Ella Fitzpatrick",
         id: "ella",
+        subtitle: "Manic Scientist",
         type: "nle",
         species: ["half-elf"],
         occupation: ["spellblade"],
@@ -302,7 +303,7 @@ export const CharacterDatas: ICharacterData[] = [
             weight: "130 lbs."
         },
         affiliations: [
-            { name: "NLE", rank: "member", role: "zoologist, apprentice scout", primary: true }
+            { name: "NLE", rank: "member", role: "diplomat, zoologist, apprentice scout", primary: true }
         ],
         aliases: ["Hummingbird"],
         description: [
@@ -310,7 +311,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Hyrule",
         images: {
-            thumbnail: "img/npc/ella.png"
+            thumbnail: "img/npc/ella-portrait.png"
         },
         spotify: {
 			primaryPlaylistID: "6PnEtmLnApjcnJoNn45Hxn"
