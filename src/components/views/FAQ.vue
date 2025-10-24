@@ -41,14 +41,54 @@ import Important from "@/components/core/text-tags/Important.vue";
 						<div class="blockquote-footer text-center text-lg-start">Susie</div>
 					</figure>
 				</AccordionItem>
-				<AccordionItem name="Question?" parent-id="faq-accordion">
+				<AccordionItem name="What are we supposed to be doing? What's our goal?" parent-id="faq-accordion">
 					<figure>
 						<blockquote class="blockquote">
 							<p>
-								answer
+								That's two questions, you cheeky person, you! But... ¯\_(ツ)_/¯
+							</p>
+							<p>I think we're basically trying to find a bunch of words on rocks, unscramble them, and then hope that they tell us how to fix the universe.</p>
+						</blockquote>
+						<div class="blockquote-footer text-center text-lg-start">Susie</div>
+					</figure>
+				</AccordionItem>
+				<AccordionItem name="What the heck is going on with Phil's shadow and Marlowe?" parent-id="faq-accordion">
+					<figure>
+						<blockquote class="blockquote">
+							<p>
+								What a wonderfully strange question! How fun! I don't know though! <span class="fake-at">@Marlowe</span>?
 							</p>
 						</blockquote>
-						<div class="blockquote-footer text-center text-lg-start">author</div>
+						<div class="blockquote-footer text-center text-lg-start">Susie</div>
+					</figure>
+					<figure>
+						<blockquote class="blockquote">
+							<p>
+								You really, really want to know? Well...
+							</p>
+							<p>.</p>
+							<p>.</p>
+							<p>.</p>
+							<p>.</p>
+							<p>.</p>
+							<p>.</p>
+							<p>.</p>
+							<p>.</p>
+							<p>.</p>
+							<p>.</p>
+							<p class="small">...It's a surprise, kupo!</p>
+						</blockquote>
+						<div class="blockquote-footer text-center text-lg-start">Marlow</div>
+					</figure>
+				</AccordionItem>
+				<AccordionItem name="Why is Susie so darn cool?" parent-id="faq-accordion">
+					<figure>
+						<blockquote class="blockquote">
+							<p>
+								Oh, stop it you 🤭😊💖
+							</p>
+						</blockquote>
+						<div class="blockquote-footer text-center text-lg-start">Susie</div>
 					</figure>
 				</AccordionItem>
 

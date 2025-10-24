@@ -91,6 +91,11 @@ svg.portrait {
 }
 
 /*#region general text formatting */
+.fake-at {
+	color: var(--bs-link-color);
+	/* text-decoration: underline; */
+}
+
 .capitalize { text-transform: capitalize; }
 
 pre {

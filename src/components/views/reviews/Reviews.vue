@@ -293,11 +293,6 @@ export default defineComponent({
     height: 1.2rem;
 }
 
-.review:deep(.fake-at) {
-	color: var(--bs-link-color);
-	/* text-decoration: underline; */
-}
-
 .review em > u > b {
 	display: block;
 	margin-top: 10px;
