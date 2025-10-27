@@ -25,7 +25,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         },
         homeworld: "\"Nunya stinkin' business\"",
         images: {
-            thumbnail: "img/npc/ootah.webp"
+            portrait: "img/npc/ootah.webp"
         },
         spotify: {
 			primaryPlaylistID: "2oWa3ME4zPJGRTOMG3yXEh"
@@ -57,7 +57,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         },
         homeworld: "Weapon World",
         images: {
-            thumbnail: "img/npc/susie.png"
+            portrait: "img/npc/susie-portrait.png"
         },
         spotify: {
 			primaryPlaylistID: "4XeEQwogXECnNaDGhnkJ4A"
@@ -89,7 +89,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Velarys",
         images: {
-            thumbnail: "img/npc/winter.png"
+            portrait: "img/npc/winter.png"
         },
         spotify: {
 			primaryPlaylistID: "0zyxK6W0ROxoCzmHsCW9zS"
@@ -120,7 +120,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Velarys",
         images: {
-            thumbnail: "img/npc/zuzu.png"
+            portrait: "img/npc/zuzu.png"
         },
         spotify: {
 			primaryPlaylistID: "0P1Ckwy19TthbbCWApONXF",
@@ -146,7 +146,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "New York City, Earth, 1991",
         images: {
-            thumbnail: "img/npc/bebop.png"
+            portrait: "img/npc/bebop.png"
         },
         spotify: {
 			primaryPlaylistID: "3dZixNJssPoe8l0Ads4xyf"
@@ -167,7 +167,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
             "<Character>Betsy Boyle</Character> was an odd fellow who dressed almost exclusively in beige. He was slain in the <im>Birthday Massacre<im>."
         ],
         images: {
-            thumbnail: "img/npc/betsy-boyle.webp"
+            portrait: "img/npc/betsy-boyle.webp"
         },
         spotify: {
 			primaryPlaylistID: "6VtzbnJH1xVswYYj4LkV1l"
@@ -190,7 +190,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Ashdown Forest, Anelima",
         images: {
-            thumbnail: "img/npc/blackhand-roo.png"
+            portrait: "img/npc/blackhand-roo.png"
         },
         spotify: {
 			primaryPlaylistID: "2tLNqr6RYVensjhMUY51ek"
@@ -212,7 +212,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "USA, Earth, 1977",
         images: {
-            thumbnail: "img/npc/carrie-ward.webp"
+            portrait: "img/npc/carrie-ward.webp"
         },
         spotify: {
 			primaryPlaylistID: "3hT0RyxhMAKPf84X2WHnv6"
@@ -234,13 +234,39 @@ export const CrewCharacterDatas: ICharacterData[] = [
             "<Character>Elaim Trueblood</Character> was an aspiring comedian. He was slain in the <im>Birthday Massacre<im>."
         ],
         images: {
-            thumbnail: "img/npc/elaim-trueblood.png"
+            portrait: "img/npc/elaim-trueblood.png"
         },
         spotify: {
 			primaryPlaylistID: "6ZG6fD4sCUSyxlPqWFilTB"
         },
         plotRelevance: 1,
         status: "dead"
+    },
+    {
+        name: "Eva Davis",
+        id: "eva-davis",
+        type: "crew",
+        species: ["human"],
+        occupation: ["computer programmer"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "04/21/0001", left: "07/18/0001", primary: true }
+        ],
+        description: [
+            "<Character>Eva Davis</Character> is a twenty-year-old computer programmer who worked for a company called 'Atari.' She arrived in <Location>Somewhere</Location> after her home, a variant of 1970's <Location>Earth</Location> was destroyed. She was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech."
+        ],
+        physical: {
+            eyeColor: "gray",
+            hairColor: "brown",
+        },
+        homeworld: "Earth, 1970s",
+        images: {
+            portrait: "img/npc/eva-davis.png"
+        },
+        spotify: {
+			primaryPlaylistID: "2Na0W104SEoRDyc8Sz4Xdn"
+        },
+        plotRelevance: 1,
+        status: "alive"
     },
     {
         name: "Flavio de Mota",
@@ -254,12 +280,71 @@ export const CrewCharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Flavio</Character> is a distractingly fashionable person from some place called <Location>Portugal</Location>. I can't actually tell what gender they are, and I'm too afraid to ask, kupo."
         ],
+        physical: {
+            eyeColor: "blue",
+            hairColor: "blonde",
+            height: "5' 6\"",
+            hotness: 9,
+        },
         homeworld: "Portugal, Earth, 1700s",
         images: {
-            thumbnail: "img/npc/flavio.png"
+            portrait: "img/npc/flavio.png"
         },
         spotify: {
 			primaryPlaylistID: "3sqnhw5mDTdrcmhwXYOjiF"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Giuseppe da Albiate",
+        id: "giuseppe-da-albiate",
+        type: "crew",
+        species: ["human"],
+        occupation: ["painter"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "04/21/0001", left: "07/18/0001", primary: true }
+        ],
+        description: [
+            "<Character>Giuseppe da Albiate</Character> is an eighteen-year-old with a love of painting. He arrived in <Location>Somewhere</Location> after his home, a variant of <Location>Renaissance Italy</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech."
+        ],
+        physical: {
+            eyeColor: "hazel",
+            hairColor: "brown",
+        },
+        homeworld: "Italy, Earth, Renaissance",
+        images: {
+            portrait: "img/npc/giuseppe.png"
+        },
+        spotify: {
+			primaryPlaylistID: "6dNdYWCXEt3dFx3AectPGs"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Gloria Molloy",
+        id: "gloria",
+        subtitle: "Dystopian Squatter",
+        type: "crew",
+        species: ["human"],
+        occupation: ["squatter"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "05/10/0001", left: "07/18/0001", primary: true }
+        ],
+        description: [
+            "<Character>Gloria Molloy</Character> is a kind-hearted but jaded young woman from the slums of the <Location>Neon Coast</Location> with large gaps in her memory. She already had suspicions about something being wrong with her reality even before meeting the gang, and was consequently quick to adapt to <Location>The Void Realm</Location>."
+        ],
+        physical: {
+            eyeColor: "blue",
+            hairColor: "red",
+        },
+        homeworld: "Neon Coast",
+        images: {
+            portrait: "img/npc/gloria.jpg"
+        },
+        spotify: {
+			primaryPlaylistID: "0HEWagioX9kGslrTmfRpZB"
         },
         plotRelevance: 1,
         status: "alive"
@@ -274,11 +359,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
             { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "06/02/0001", primary: true }
         ],
         description: [
-            "<Character>Gugg</Character> is a surprisingly soft-spoken caveman who seems to embody the phrase \"speak softly and carry a big stick]\". He has a prosthetic right leg."
+            "<Character>Gugg</Character> is a surprisingly soft-spoken caveman who seems to embody the phrase \"speak softly and carry a big stick\". He has a prosthetic right leg."
         ],
         homeworld: "Earth, prehistory",
         images: {
-            thumbnail: "img/npc/gugg.png"
+            portrait: "img/npc/gugg.png"
         },
         spotify: {
 			primaryPlaylistID: "4KuWI0li6sA2naX6yISYZ3"
@@ -301,7 +386,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "generic fantasy",
         images: {
-            thumbnail: "img/npc/hamisfore-toon.png"
+            portrait: "img/npc/hamisfore-toon.png"
         },
         spotify: {
 			primaryPlaylistID: "0D5V8wlr6jXSG9Zkxo9WGH"
@@ -323,7 +408,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
             "<Character>Hoots the Owl</Character> served aboard our vessel for one trial tour to review our vessel as a potential pleasure cruise for citizens of <Location>Somewhere</Location>. We parted amicably, but I'm pretty sure he review-bombed us, kupo."
         ],
         images: {
-            thumbnail: "img/npc/hoots.jpg"
+            portrait: "img/npc/hoots.jpg"
         },
         spotify: {
 			primaryPlaylistID: "1EIfQZpQ9GDMuStubtJIRh"
@@ -349,10 +434,29 @@ export const CrewCharacterDatas: ICharacterData[] = [
         },
         homeworld: "Scotland, Earth, 1998",
         images: {
-            thumbnail: "img/npc/joey-morton-cropped.png"
+            portrait: "img/npc/joey-morton-cropped.png"
         },
         spotify: {
 			primaryPlaylistID: "5ke9F1xiKQPtsdNTetNYet"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "March Hare",
+        id: "march-hare",
+        type: "crew",
+        species: ["rabbit"],
+        occupation: ["Tea Party-goer"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "04/05/0001", left: "04/21/0001", primary: true }
+        ],
+        description: [
+            "The <Character>March Hare</Character> was briefly a part of our crew after joining us in <Location>Wonderland</Location>. He has since retired to the <Location>Happy Turtle.</Location>"
+        ],
+        homeworld: "Wonderland",
+        images: {
+            // portrait: "img/npc/tom-cox.webp"
         },
         plotRelevance: 1,
         status: "alive"
@@ -370,7 +474,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
             "<Character>Mardred Fireforge</Character> was an elderly Duergar janitor with deep-seated racism and pro-slavery beliefs. She was accidentally slain by <c>Zuzu</c> in a botched attempt to rescue her during the <c>Cucu</c> crisis, though Zuzu remains oblivious to his role in her demise. <c>Tero</c> cut Madred's corpse into pieces and fed it down a garbage disposal after hearing her call Zuzu a dwarfish slur in her final moments."
         ],
         images: {
-            thumbnail: "img/npc/mardred-fireforge.png"
+            portrait: "img/npc/mardred-fireforge.png"
         },
         spotify: {
 			primaryPlaylistID: "27T9FxMOUdNGOSfTx0uFVY"
@@ -392,7 +496,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Space Cowboy future",
         images: {
-            thumbnail: "img/npc/matthew-law.png"
+            portrait: "img/npc/matthew-law.png"
         },
         spotify: {
 			primaryPlaylistID: "1TJ5Hl7QbBhFvKAO6Ogv1D"
@@ -415,7 +519,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Germanic tribelands, Earth, medieval period",
         images: {
-            thumbnail: "img/npc/per.png"
+            portrait: "img/npc/per.png"
         },
         plotRelevance: 1,
         status: "alive"
@@ -437,16 +541,100 @@ export const CrewCharacterDatas: ICharacterData[] = [
         },
         physical: {
             gender: "female",
-            eyeColor: "brown",
-            hairColor: "brown",
+            eyeColor: "blue",
+            hairColor: "blonde",
             height: "5' 9\"",
         },
         homeworld: "Barbieland",
         images: {
-            thumbnail: "img/npc/teacher-barbie.png"
+            portrait: "img/npc/teacher-barbie.jpg"
         },
         spotify: {
 			primaryPlaylistID: "1ASyetImCel4uTVua9BVLC"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Todd Jenkins",
+        id: "todd-jenkins",
+        subtitle: "SoundCloud Rapper",
+        type: "crew",
+        species: ["human"],
+        occupation: ["aspiring rapper"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "04/21/0001", primary: true }
+        ],
+        aliases: ["TehLeroyJenkins"],
+        description: [
+            "<Character>Todd Jenkins</Character> is an aspiring musician from one of the variant <Location>Earths</Location>. He fell to <im>Emptiness</im>, but <c>C.O.B.B.</c> managed to restore his humanity. That makes Todd the first recorded case of somebody coming back after turning into a <im>Blank</im>. Isn't that cool?"
+        ],
+        mental: {
+            drive: "become the most famous rapper to ever live",
+        },
+        physical: {
+            eyeColor: "brown",
+            hairColor: "brown",
+        },
+        homeworld: "Illinois, Earth, 2016 AD",
+        images: {
+            portrait: "img/npc/todd-jenkins.png"
+        },
+        spotify: {
+			primaryPlaylistID: "0MD68ffLgJvFfygYY01S8l"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Tom Cox",
+        id: "tom-cox",
+        type: "crew",
+        species: ["human"],
+        occupation: ["folk singer"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "04/21/0001", left: "07/18/0001", primary: true }
+        ],
+        description: [
+            "<Character>Tom Cox</Character> is a twenty-four-year-old aspiring folk singer who arrived in <Location>Somewhere</Location> after his home, a variant of 1960's <Location>Earth</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech."
+        ],
+        physical: {
+            eyeColor: "brown",
+            hairColor: "brown",
+        },
+        homeworld: "USA, Earth, 1960s",
+        images: {
+            portrait: "img/npc/tom-cox.webp"
+        },
+        spotify: {
+			primaryPlaylistID: "6nn5hvMFwLnQCbjCh8dI24"
+        },
+        plotRelevance: 1,
+        status: "alive"
+    },
+    {
+        name: "Tommy One",
+        id: "tommy-one",
+        subtitle: "Android Factory Reject",
+        type: "crew",
+        species: ["synth"],
+        occupation: ["rebel"],
+        affiliations: [
+            { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "05/10/0001", left: "07/13/0001", primary: true }
+        ],
+        description: [
+            "<Character>Tommy</Character> is a friendly synth who was sold at a discount due to a manufacturing error that resulted in him being far more simple-minded and impressionable than other \"Ledcis\" model units. He escaped the <Location>Neon Coast</Location> with the gang. He doesn't seem to comprehend the <Location>Void Realm</Location> or <Important>The Fracturing</Important>, instead believing that the gang is simply exploring outer space."
+        ],
+        physical: {
+            eyeColor: "brown",
+            hairColor: "brown",
+        },
+        homeworld: "Neon Coast",
+        images: {
+            portrait: "img/npc/tommy-one.png"
+        },
+        spotify: {
+			primaryPlaylistID: "3F6SEwmMzY0iy940wNONtn"
         },
         plotRelevance: 1,
         status: "alive"
@@ -469,7 +657,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/npc/yoshi-black.png"
+            portrait: "img/npc/yoshi-black.png"
         },
         spotify: {
             primaryPlaylistID: "2xumMU5CzUQ0t5MNzn0lqk"
@@ -492,7 +680,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/npc/yoshi-blue.jpg"
+            portrait: "img/npc/yoshi-blue.jpg"
         },
         spotify: {
             primaryPlaylistID: "1VhLZOOpQ8v972e38DDtrS"
@@ -515,7 +703,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/npc/yoshi-green.png"
+            portrait: "img/npc/yoshi-green.png"
         },
         spotify: {
             primaryPlaylistID: "7fFUqeeBg2UnVKvKVDaUYU"
@@ -538,7 +726,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/npc/yoshi-light-blue.png"
+            portrait: "img/npc/yoshi-light-blue.png"
         },
         spotify: {
             primaryPlaylistID: "2dLFjGAOvBzieCy2RMfMGG"
@@ -561,7 +749,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/npc/yoshi-pink.png"
+            portrait: "img/npc/yoshi-pink.png"
         },
         spotify: {
             primaryPlaylistID: "12n3g9L7k0FUi9kKdbaXhv"
@@ -584,7 +772,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/npc/yoshi-red.png"
+            portrait: "img/npc/yoshi-red.png"
         },
         spotify: {
             primaryPlaylistID: "6aIdL3gKfZZ3BxfPUxvJ1r"
@@ -607,7 +795,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/npc/yoshi-yellow.png"
+            portrait: "img/npc/yoshi-yellow.png"
         },
         spotify: {
             primaryPlaylistID: "3Mfud8wqdN42FqOZH12Q8C"
@@ -631,7 +819,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
-            thumbnail: "img/npc/yoshi-white.png"
+            portrait: "img/npc/yoshi-white.png"
         },
         spotify: {
             primaryPlaylistID: "4ur7MDXuqSwF3qbNwSRM9L"

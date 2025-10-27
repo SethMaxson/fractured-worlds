@@ -60,7 +60,7 @@ function getSpecialAffiliationString(a: ICharacterDataAffiliation): string {
 	<div v-if="person" class="px-2 pb-2">
 		
 		<div class="col col-md-4 float-md-end ps-md-2 mb-3 mb-md-2">
-			<Image class="portrait object-fit-fill rounded my-0 mx-auto img-thumbnail" alt="portrait" :src="person.images.thumbnail" v-if="person.images.thumbnail && person.images.thumbnail.length > 0" />
+			<Image class="portrait object-fit-fill rounded my-0 mx-auto img-thumbnail" alt="portrait" :src="person.images.portrait" v-if="person.images.portrait && person.images.portrait.length > 0" />
 			<svg class="portrait object-fit-fill rounded my-0 mx-auto img-thumbnail" width="300" height="300" v-else>
 				<use href="#user2"></use>
 			</svg>

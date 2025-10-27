@@ -34,7 +34,7 @@ class TimelineDisplaySettings {
 		/** Show the separator headers for months and years */
 		showHeaders: ref(false),
 		/** NOT IMPLEMENTED */
-		truncateDescription: ref(false),
+		truncateDescription: ref(true),
 	};
 
 	constructor() {
@@ -439,11 +439,11 @@ function resetDisplay() {
 	settings.filters.majorOnly = false;
 	settings.filters.tags = [];
 	settings.filters.years = [];
-	settings.displayToggles.showDescription = true;
+	settings.displayToggles.showDescription = false;
 	settings.displayToggles.showExtra = true;
 	settings.displayToggles.showFancyTables = false;
 	settings.displayToggles.showHeaders = false;
-	settings.displayToggles.truncateDescription = false;
+	settings.displayToggles.truncateDescription = true;
 }
 
 const sortedTimeline = computed<ITimelineEvent[]>(() => {

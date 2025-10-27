@@ -4,6 +4,14 @@ import type { IWorldData } from "@/interfaces/IWorldData";
 import { CampaignDate } from "@/objects/CampaignDate";
 
 export namespace Utils {
+    export namespace Config {
+        export function getUser() {
+            return localStorage.getItem("viewAsUser") || "GM";
+        }
+        export function setUser(value: string) {
+            return localStorage.setItem("viewAsUser", value);
+        }
+    }
     export namespace Date {
         /** A collection of functions to convert one dates between formats. */
         export namespace Convert {

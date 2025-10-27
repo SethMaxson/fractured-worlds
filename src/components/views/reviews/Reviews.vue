@@ -37,7 +37,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 
             <div>
                 <p class="d-flex justify-content-between align-items-start p-2 flex-column flex-lg-row border-bottom summary">
-                    <div class="order-2 order-lg-1">
+                    <div class="order-3 order-lg-1">
                         <span class="fw-bold">Overall rating: </span>
                         <span v-if="listReviews.length > 0">
 							<svg class="icon" v-for="icon in starIconClasses(scoreAverage)">
@@ -52,7 +52,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
                     </div>
 					<div class="dropdown mb-3 mb-lg-0 order-1 order-lg-2">
 						<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<span v-if="mode == 'all'">
+							<span v-if="stateMode == 'all'">
 								Displaying all reviews
 							</span>
 							<span v-else>
@@ -60,12 +60,30 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 							</span>
 						</button>
 						<ul class="dropdown-menu dropdown-menu-lg-end">
-							<li v-for="opt, index in menu">
+							<li v-for="opt, index in menu.viewModes">
 								<hr v-if="opt.value == 'separator'" class="dropdown-divider">
-								<button v-else type="button" class="dropdown-item" :class="{ 'active': mode==opt.value }" href="#" @click="changeMenu(index)">{{opt.text}}</button>
+								<button v-else type="button" class="dropdown-item" :class="{ 'active': stateMode==opt.value }" href="#" @click="changeMenu(index)">{{opt.text}}</button>
 							</li>
 						</ul>
                     </div>
+					
+
+					<!-- TODO: Finish sort implementation -->
+					<!-- <div class="btn-group order-2 order-lg-3" role="group">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								Sort
+							</button>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#">Dropdown link</a></li>
+								<li><a class="dropdown-item" href="#">Dropdown link</a></li>
+							</ul>
+						</div>
+						
+						<button type="button" class="btn btn-primary">2</button>
+					</div> -->
+
+
                 </p>
             </div>
 			<!-- The reviews are shown here -->
@@ -127,67 +145,86 @@ export interface IReviewCollection extends IPartyReviewCollection {
 	all: ICharacterReview[];
 }
 
+const validSorts = [
+	"date",
+	"edit"
+];
+
 export default defineComponent({
         name: 'ReviewsComponent',
         data() {
             return {
-                menu: [
-					{
-						text: "All Reviews",
-						value: "all"
-					},
-					{
-						text: "",
-						value: "separator"
-					},
-					{
-						text: "The Entire Party",
-						value: "party"
-					},
-					{
-						text: "C.O.B.B.",
-						value: "cobb"
-					},
-					{
-						text: "Li'l Phil",
-						value: "phil"
-					},
-					{
-						text: "Tero",
-						value: "tero"
-					},
-					{
-						text: "",
-						value: "separator"
-					},
-					{
-						text: "Izzy",
-						value: "izzy"
-					},
-					{
-						text: "Pontiki",
-						value: "pontiki"
-					},
-					{
-						text: "Tropey",
-						value: "tropey"
-					}
-				] as IComponentMenuOption[],
+                menu: {
+					viewModes: [
+						{
+							text: "All Reviews",
+							value: "all"
+						},
+						{
+							text: "",
+							value: "separator"
+						},
+						{
+							text: "The Entire Party",
+							value: "party"
+						},
+						{
+							text: "C.O.B.B.",
+							value: "cobb"
+						},
+						{
+							text: "Li'l Phil",
+							value: "phil"
+						},
+						{
+							text: "Tero",
+							value: "tero"
+						},
+						{
+							text: "",
+							value: "separator"
+						},
+						{
+							text: "Izzy",
+							value: "izzy"
+						},
+						{
+							text: "Pontiki",
+							value: "pontiki"
+						},
+						{
+							text: "Tropey",
+							value: "tropey"
+						}
+					] as IComponentMenuOption[],
+					sortModes: [
+						{
+							text: "Date",
+							value: "date"
+						},
+						{
+							text: "Edit",
+							value: "edit"
+						}
+					] as IComponentMenuOption[]
+				},
 				reviews: Reviews,
-				mode: "all" as keyof IReviewCollection,
-				indexSelected: 0,
+				stateMode: "all" as keyof IReviewCollection,
+				stateModeIndexSelected: 0,
+				stateSortOn: 'date',
+				stateSortAsc: true,
             }
         },
 		computed: {
 			capitalMode() {
-				return this.mode.charAt(0).toUpperCase() + this.mode.slice(1);
+				return this.stateMode.charAt(0).toUpperCase() + this.stateMode.slice(1);
 			},
 			modeName() {
-				return this.menu[this.indexSelected].text;
+				return this.menu.viewModes[this.stateModeIndexSelected].text;
 			},
 			listReviews() {
 				let selectedReviews: ICharacterReview[] = [];
-				if (this.mode == "all") {
+				if (this.stateMode == "all") {
 					selectedReviews = selectedReviews.concat(this.reviews.party.map(r => ({ subject: "the party as a whole", ...r})));
 					selectedReviews = selectedReviews.concat(this.reviews.cobb.map(r => ({ subject: "C.O.B.B.", ...r})));
 					selectedReviews = selectedReviews.concat(this.reviews.phil.map(r => ({ subject: "Li'l Phil Antonio", ...r})));
@@ -195,7 +232,7 @@ export default defineComponent({
 					selectedReviews = selectedReviews.concat(this.reviews.tero.map(r => ({ subject: "Tero", ...r})));
 				}
 				else {
-					selectedReviews = this.reviews[this.mode];
+					selectedReviews = this.reviews[this.stateMode];
 				}
 				
 				return selectedReviews.sort(function(a, b) {
@@ -218,11 +255,20 @@ export default defineComponent({
 				return temp.replace(/\n/ig, "<br/>");
 			},
 			changeMenu(index: number) {
-				const mode = this.menu[index].value;
+				const mode = this.menu.viewModes[index].value;
 				localStorage.setItem("reviewsMode", mode);
 				localStorage.setItem("reviewsIndex", index.toString());
-				this.mode = mode as keyof IReviewCollection;
-				this.indexSelected = index;
+				this.stateMode = mode as keyof IReviewCollection;
+				this.stateModeIndexSelected = index;
+			},
+			changeSortOn(value: string) {
+				const newSort = validSorts.includes(value) ? value : "edit";
+				localStorage.setItem("reviewsSortOn", newSort);
+				this.stateSortOn = newSort;
+			},
+			changeSortDirection(ascending: boolean) {
+				localStorage.setItem("reviewsSortAscending", ascending ? "true" : "false");
+				this.stateSortAsc = ascending;
 			},
 			reviewUsername(review: ICharacterReview): string {
 				const usernameMatch = UserProfiles.filter(r => r.id == review.reviewer);
@@ -261,6 +307,8 @@ export default defineComponent({
         },
 		mounted() {
 			this.changeMenu(parseInt(localStorage.getItem("reviewsIndex") || "0"));
+			this.changeSortDirection(localStorage.getItem("reviewsSortAscending") == "true");
+			this.changeSortOn(localStorage.getItem("reviewsSortOn") || "date");
 		},
     })
 </script>

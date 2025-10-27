@@ -19,7 +19,7 @@ import { GameStrings } from "@/scripts/game-strings";
 			<AppIconContainer>
 				<AppIcon svg="letter" to="/journal/letters"> Letters </AppIcon>
 				<AppIcon svg="book-half" to="/journal/log" class="dev"> Log </AppIcon>
-				<AppIcon svg="question" to="/journal/mysteries"> Mysteries </AppIcon>
+				<AppIcon svg="todo" to="/journal/mysteries"> Mysteries </AppIcon>
 				<AppIcon svg="timeline" to="/journal/timeline"> Timeline </AppIcon>
 				<AppIcon svg="anchor" to="/journal/world-anchors"> World Anchors </AppIcon>
 			</AppIconContainer>

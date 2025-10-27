@@ -109,7 +109,7 @@ export interface ICharacterData {
 		 * @example
 		 * "img/party/cobb.png"
 		 */
-		thumbnail?: string;
+		portrait?: string;
 		/**
 		 * @example
 		 * [ "img/party/cobb.png" ]

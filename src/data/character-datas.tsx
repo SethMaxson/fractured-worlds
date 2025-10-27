@@ -40,7 +40,7 @@ export const CharacterDatas: ICharacterData[] = [
 			primaryPlaylistID: "1wlvh0bWnBozYO9pLubU0g"
         },
         images: {
-            thumbnail: "img/party/cobb-toon.png"
+            portrait: "img/party/cobb-toon.png"
         },
         plotRelevance: 3,
         status: "alive"
@@ -63,7 +63,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Necroworld",
         images: {
-            thumbnail: "img/party/ozzy.png"
+            portrait: "img/party/ozzy.png"
         },
         plotRelevance: 2,
         status: "alive"
@@ -96,7 +96,7 @@ export const CharacterDatas: ICharacterData[] = [
 			primaryPlaylistID: "18Gq2lmW0vhZhUOEqMgVDx"
         },
         images: {
-            thumbnail: "img/party/phil-toon.png"
+            portrait: "img/party/phil-toon.png"
         },
         plotRelevance: 3,
         status: "alive"
@@ -130,7 +130,7 @@ export const CharacterDatas: ICharacterData[] = [
 			primaryPlaylistID: "1CtXuwGctAYed6N5FcWNdT"
         },
         images: {
-            thumbnail: "img/party/tero-kawaii.png"
+            portrait: "img/party/tero-kawaii.png"
         },
         plotRelevance: 3,
         status: "alive"
@@ -154,7 +154,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Ranch, Hidden Valley",
         images: {
-            thumbnail: "img/party/tropey-toon.png"
+            portrait: "img/party/tropey-toon.png"
         },
         plotRelevance: 3,
         status: "dead"
@@ -218,7 +218,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Golarion",
         images: {
-            thumbnail: "img/npc/boo.png"
+            portrait: "img/npc/boo.png"
         },
         spotify: {
 			primaryPlaylistID: "3kzkDLLYRRU5IYoreptAHH"
@@ -249,7 +249,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Clovershire, Geoss",
         images: {
-            thumbnail: "img/npc/cade-2.png"
+            portrait: "img/npc/cade-2.png"
         },
         spotify: {
             primaryPlaylistID: "0YDhh8WNrOxEKDQ1LJe8B7"
@@ -280,7 +280,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Hill Valley, Earth, 1895",
         images: {
-            thumbnail: "img/npc/doc-brown.jpg"
+            portrait: "img/npc/doc-brown.jpg"
         },
         spotify: {
 			primaryPlaylistID: "4bpGPq1jvlr1tirvdfZktT"
@@ -311,7 +311,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Hyrule",
         images: {
-            thumbnail: "img/npc/ella-portrait.png"
+            portrait: "img/npc/ella-portrait.png"
         },
         spotify: {
 			primaryPlaylistID: "6PnEtmLnApjcnJoNn45Hxn"
@@ -340,7 +340,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Golarion",
         images: {
-            thumbnail: "img/npc/nortle.png"
+            portrait: "img/npc/nortle.png"
         },
         spotify: {
 			primaryPlaylistID: "3Jydeg4IHMy5kFr4BbMtxx"
@@ -372,7 +372,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Geoss",
         images: {
-            thumbnail: "img/npc/vilyth.png"
+            portrait: "img/npc/vilyth.png"
         },
         spotify: {
 			primaryPlaylistID: "7zuezrk0cg70sjtSux8OpO"

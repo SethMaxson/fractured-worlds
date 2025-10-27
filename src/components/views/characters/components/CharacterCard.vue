@@ -81,7 +81,7 @@ const disableClick = props.containedByModal;
 		>
 			<CardContents :class="{'dead': status == 'dead'}" :truncated="!containedByModal" :truncate-header="!containedByModal" :open-icon="openIcon">
 				<template #image>
-					<Portrait :class="portraitClasses" :src="person?.images.thumbnail" />
+					<Portrait :class="portraitClasses" :src="person?.images.portrait" />
 				</template>
 				<template #heading>{{ person.name }}</template>
 				<template #subheading>

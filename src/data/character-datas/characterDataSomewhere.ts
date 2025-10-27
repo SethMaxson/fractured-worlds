@@ -17,7 +17,7 @@ export const SomewhereCharacterDatas: ICharacterData[] = [
         ],
         location: "somewhere",
         images: {
-            thumbnail: "img/npc/kenji-toon.png"
+            portrait: "img/npc/kenji-toon.png"
         },
         plotRelevance: 1,
         status: "alive"
@@ -34,7 +34,7 @@ export const SomewhereCharacterDatas: ICharacterData[] = [
         ],
         location: "somewhere",
         images: {
-            thumbnail: "img/tokens/Molefolk3.png"
+            portrait: "img/tokens/Molefolk3.png"
         },
         plotRelevance: 1,
         status: "alive"
@@ -51,7 +51,7 @@ export const SomewhereCharacterDatas: ICharacterData[] = [
         ],
         location: "somewhere",
         images: {
-            thumbnail: "img/npc/portia-toon.png"
+            portrait: "img/npc/portia-toon.png"
         },
         plotRelevance: 1,
         status: "alive"
@@ -68,7 +68,7 @@ export const SomewhereCharacterDatas: ICharacterData[] = [
         ],
         location: "somewhere",
         images: {
-            thumbnail: "img/npc/throden.png"
+            portrait: "img/npc/throden.png"
         },
         plotRelevance: 1,
         status: "alive"

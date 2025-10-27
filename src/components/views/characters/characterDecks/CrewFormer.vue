@@ -45,66 +45,6 @@ function getFooter(person?: ICharacterData) {
 
 <template>
     <CharacterCardDeck :containedByModal="containedByModal">
-        <CharacterCard>
-            <template #image>
-                <Portrait />
-            </template>
-            <template #heading>March Hare</template>
-            <template #subheading>Rabbit Tea Party-goer</template>
-
-            The <Character>March Hare</Character> was briefly a part of our crew after joining us in <Location>Wonderland</Location>. He has since retired to the <Location>Happy Turtle.</Location>
-            <template #footer>Role: Deckhand (04/05—04/21/0001 SE)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/giuseppe.png" />
-            </template>
-            <template #heading>Giuseppe da Albiate</template>
-            <template #subheading>Human Painter</template>
-
-            <Character>Giuseppe da Albiate</Character> is an eighteen-year-old with a love of painting. He arrived in <Location>Somewhere</Location> after his home, a variant of <Location>Renaissance Italy</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.
-            <template #footer>Role: Deckhand (04/21—07/18/0001 SE)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/tom-cox.webp" />
-            </template>
-            <template #heading>Tom Cox</template>
-            <template #subheading>Human Singer</template>
-
-            <Character>Tom Cox</Character> is a twenty-four-year-old aspiring folk singer who arrived in <Location>Somewhere</Location> after his home, a variant of 1960's <Location>Earth</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.
-            <template #footer>Role: Deckhand (04/21—07/18/0001 SE)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/eva-davis.png" />
-            </template>
-            <template #heading>Eva Davis</template>
-            <template #subheading>Human Computer Programmer</template>
-
-            <Character>Eva Davis</Character> is a twenty-year-old computer programmer who worked for a company called 'Atari.' She arrived in <Location>Somewhere</Location> after her home, a variant of 1970's <Location>Earth</Location> was destroyed. She was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.
-            <template #footer>Role: Deckhand (04/21—07/18/0001 SE)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/gloria.jpg" />
-            </template>
-            <template #heading>Gloria Molloy</template>
-            <template #subheading>Dystopian Squatter</template>
-
-            <Character>Gloria Molloy</Character> is a kind-hearted but jaded young woman from the slums of the <Location>Neon Coast</Location> with large gaps in her memory. She already had suspicions about something being wrong with her reality even before meeting the gang, and was consequently quick to adapt to <Location>The Void Realm</Location>.
-            <template #footer>Role: Deckhand (05/10—07/18/0001 SE)</template>
-        </CharacterCard>
-        <CharacterCard>
-            <template #image>
-                <Portrait src="img/npc/tommy-one.png" />
-            </template>
-            <template #heading>Tommy One</template>
-            <template #subheading>Android Factory Reject</template>
-
-            <Character>Tommy</Character> is a friendly synth who was sold at a discount due to a manufacturing error that resulted in him being far more simple-minded and impressionable than other "Ledcis" model units. He escaped the <Location>Neon Coast</Location> with the gang. He doesn't seem to comprehend the <Location>Void Realm</Location> or <Important>The Fracturing</Important>, instead believing that the gang is simply exploring outer space.
-            <template #footer>Role: Deckhand (05/10—07/13/0001 SE)</template>
-        </CharacterCard>
         <CharacterCard v-for="person in TheCrew" :person="person">
             <template #footer><div class="text-center">{{ getFooter(person) }}</div></template>
         </CharacterCard>
