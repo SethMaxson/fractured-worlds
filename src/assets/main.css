@@ -316,6 +316,8 @@ pre {
   --bs-accordion-transition-length: 0.05s;
 }
 
+/* #region Accordion */
+
 .accordion,
 .accordion-item > * {
   --bs-accordion-transition: color var(--bs-accordion-transition-length) ease-in-out, 
@@ -324,6 +326,13 @@ pre {
     box-shadow var(--bs-accordion-transition-length) ease-in-out,
     border-radius var(--bs-accordion-transition-length) ease;
 }
+
+/* Reduced padding for nested accordions */
+.accordion-body > .accordion > .accordion-item > .accordion-collapse > .accordion-body {
+	padding: 0.25rem;
+}
+
+/* #endregion Accordion */
 
 .fade {
   transition: opacity .05s linear;

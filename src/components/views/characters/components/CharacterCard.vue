@@ -32,25 +32,11 @@ const heading = slots.heading && slots.heading();
 
 const hrefID = props.person?.id;
 const href = `#/people/${hrefID}?path=${refPath}`;
-const idBase = props.person
-		? props.person.id
-		: id_ify(heading && heading[0].children ? heading[0].children.toString()  : "missing-id");
 
 const primaryFaction = props.person?.affiliations.filter(a => a.primary)[0] || undefined;
 
 // Configure the display
-let npcTypeClass = undefined;
-switch (props.person?.type) {
-	case "location":
-		npcTypeClass = "bg-secondary";
-		break;
-	case "nle":
-		npcTypeClass = "bg-nle bg-opacity-50";
-		break;
-
-	default:
-		break;
-}
+const npcTypeClass = Utils.Images.getPortraitClassesFromType(props.person?.type);
 // const portraitClasses = npcTypeClass?.concat(" card-img-top ratio ratio-1x1");
 const portraitClasses = npcTypeClass;
 // const offerFullPageView = props.person?.plotRelevance && props.person.plotRelevance > 1 ? true : false;
@@ -65,7 +51,6 @@ const disableClick = props.containedByModal;
 </script>
 
 <template>
-	<!-- #region Card -->
 	<div class="col">
 
 		<!-- person object was passed -->
@@ -75,7 +60,7 @@ const disableClick = props.containedByModal;
 			:class="{ 'btn btn-secondary': !containedByModal }"
 			:type="offerFullPageView || disableClick ? undefined : 'button'"
 			:href="offerFullPageView && !disableClick ? href : undefined"
-			:data-bs-target="offerFullPageView || disableClick ? undefined : '#modal-'+idBase"
+			:data-bs-target="offerFullPageView || disableClick ? undefined : '#modal-character'"
 			:data-bs-toggle="offerFullPageView || disableClick ? undefined : 'modal'"
 			v-if="person"
 		>
@@ -90,11 +75,24 @@ const disableClick = props.containedByModal;
 				<template #homeworld>{{ person?.homeworld }}</template>
 
 				<template #default>
-					<div :class="{'text-truncate': !containedByModal}" v-html="CharacterDataUtils.getMainBodyText(person, { doParagraphs: false })"></div>
+					<div :class="{'text-truncate': !containedByModal}" v-html="CharacterDataUtils.getMainBodyText(person, { doParagraphs: containedByModal })"></div>
+					<!-- Renderable content for modals and such -->
+					<div class="d-none">
+						<div class="has-person"></div>
+						<h1 class="modal-title">
+							<slot name="heading">{{ person?.name }}</slot>
+						</h1>
+						<div class="modal-body">
+							<CharacterFullView :person="person" />
+						</div>
+					</div>
 				</template>
 
 				<template v-slot:footer v-if="person.type == 'nle' && primaryFaction">
 					Faction: NLE | {{ primaryFaction?.role }}
+				</template>
+				<template v-slot:footer v-else-if="person.type == 'rebirth'">
+					Faction: Rebirth Caucus
 				</template>
 				<template v-for="(slot, index) in Object.keys($slots)" :key="index" v-slot:[slot]>
 					<slot :name="slot"></slot>
@@ -109,7 +107,7 @@ const disableClick = props.containedByModal;
 			class="btn btn-secondary w-100 h-100"
 			:type="hrefID ? undefined : 'button'"
 			:href="hrefID ? href : undefined"
-			:data-bs-target="hrefID ? undefined : '#modal-'+idBase"
+			:data-bs-target="hrefID ? undefined : '#modal-character'"
 			:data-bs-toggle="hrefID ? undefined : 'modal'"
 			v-else
 		>
@@ -122,6 +120,38 @@ const disableClick = props.containedByModal;
 						Met: <slot name="met"></slot>
 					</div>
 				</template>
+				<template #hidden>
+					<!-- Renderable content for modals and such -->
+					<div class="d-none">
+						<h1 class="modal-title">
+							<slot name="heading"></slot>
+						</h1>
+						<div class="modal-body">
+							<div class="card h-100" :class="{'dead': status == 'dead'}">
+								<slot name="image"></slot>
+								<div class="card-body">
+									<h5 class="card-title">
+										<slot name="heading"></slot>
+										<slot name="name"></slot>
+									</h5>
+									<h6 class="card-subtitle mb-2 text-muted border-bottom border-secondary-subtle text-capitalize">
+										<slot name="subheading"></slot>
+									</h6>
+									<div class="card-text">
+										<slot></slot>
+									</div>
+									<slot name="button"></slot>
+								</div>
+								<div class="card-footer text-muted" v-if="$slots.footer || $slots.homeworld">
+									<div v-if="$slots.homeworld">
+										Homeworld: <slot name="homeworld"></slot>
+									</div>
+									<slot name="footer"></slot>
+								</div>
+							</div>
+						</div>
+					</div>
+				</template>
 				<template v-for="(slot, index) in Object.keys($slots)" :key="index" v-slot:[slot]>
 					<slot :name="slot"></slot>
 				</template>
@@ -129,50 +159,6 @@ const disableClick = props.containedByModal;
 		</component>
 
 	</div>
-	<!-- #endregion Card -->
-
-	<!-- #region Modal -->
-	<div class="modal fade m-0 p-0" :id="'modal-'+idBase" tabindex="-1" aria-hidden="true">
-		<div class="modal-dialog" :class="{'modal-xl': person, 'modal-fullscreen-lg-down': person}">
-
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5 card-title">
-						<slot name="heading">{{ person?.name }}</slot>
-					</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<CharacterFullView :person="person" v-if="person" />
-					<div class="card h-100" :class="{'dead': status == 'dead'}" v-else>
-						<slot name="image"></slot>
-						<div class="card-body">
-							<h5 class="card-title">
-								<slot name="heading"></slot>
-								<slot name="name"></slot>
-							</h5>
-							<h6 class="card-subtitle mb-2 text-muted border-bottom border-secondary-subtle text-capitalize">
-								<slot name="subheading"></slot>
-							</h6>
-							<div class="card-text">
-								<slot></slot>
-							</div>
-							<slot name="button"></slot>
-						</div>
-						<div class="card-footer text-muted" v-if="$slots.footer || $slots.homeworld">
-							<div v-if="$slots.homeworld">
-								Homeworld: <slot name="homeworld"></slot>
-							</div>
-							<slot name="footer"></slot>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<!-- #endregion Modal -->
-	
 </template>
 
 <script lang="ts">

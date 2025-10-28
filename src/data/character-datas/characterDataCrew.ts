@@ -252,7 +252,8 @@ export const CrewCharacterDatas: ICharacterData[] = [
             { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "04/21/0001", left: "07/18/0001", primary: true }
         ],
         description: [
-            "<Character>Eva Davis</Character> is a twenty-year-old computer programmer who worked for a company called 'Atari.' She arrived in <Location>Somewhere</Location> after her home, a variant of 1970's <Location>Earth</Location> was destroyed. She was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech."
+            "<Character>Eva Davis</Character> is a twenty-year-old computer programmer who worked for a company called 'Atari.' She arrived in <Location>Somewhere</Location> after her home, a variant of 1970's <Location>Earth</Location> was destroyed. She was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.",
+            "Eva amicably left the crew on 07/18/01 after Giuseppe, citing the close friendship they had developed during our travels. She wished us luck and asked us to come back and hang out some time."
         ],
         physical: {
             eyeColor: "gray",
@@ -306,7 +307,8 @@ export const CrewCharacterDatas: ICharacterData[] = [
             { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "04/21/0001", left: "07/18/0001", primary: true }
         ],
         description: [
-            "<Character>Giuseppe da Albiate</Character> is an eighteen-year-old with a love of painting. He arrived in <Location>Somewhere</Location> after his home, a variant of <Location>Renaissance Italy</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech."
+            "<Character>Giuseppe da Albiate</Character> is an eighteen-year-old with a love of painting. He arrived in <Location>Somewhere</Location> after his home, a variant of <Location>Renaissance Italy</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.",
+            "Giuseppe amicably departed our crew on 07/18/01 after learning that an unstaffed <im>art gallery</im> opened in Somewhere. He thanked us for allowing him to serve with us, and invited to visit the gallery as often as we want."
         ],
         physical: {
             eyeColor: "hazel",
@@ -456,7 +458,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Wonderland",
         images: {
-            // portrait: "img/npc/tom-cox.webp"
+            portrait: "img/npc/march-hare.png"
         },
         plotRelevance: 1,
         status: "alive"
@@ -596,7 +598,8 @@ export const CrewCharacterDatas: ICharacterData[] = [
             { name: "Brightside Crew", rank: "member", role: "Deckhand", joined: "04/21/0001", left: "07/18/0001", primary: true }
         ],
         description: [
-            "<Character>Tom Cox</Character> is a twenty-four-year-old aspiring folk singer who arrived in <Location>Somewhere</Location> after his home, a variant of 1960's <Location>Earth</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech."
+            "<Character>Tom Cox</Character> is a twenty-four-year-old aspiring folk singer who arrived in <Location>Somewhere</Location> after his home, a variant of 1960's <Location>Earth</Location> was destroyed. He was moved to join the crew after <Character>Li'l Phil's</Character> rousing recruitment speech.",
+            "Tom amicably departed the crew on 07/18/01 as a result of several other crew members leaving, explaining that <im>The Brightside</im> had become a \"pickle jar\" and lacked \"eye candy\"."
         ],
         physical: {
             eyeColor: "brown",

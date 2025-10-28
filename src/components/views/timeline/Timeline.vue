@@ -38,24 +38,18 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 			</div>
 			<div name="content" class="border border-primary border-2 p-1">
 
-				<table class="table table-sm table-bordered">
-					<thead>
-						<tr>
-							<th scope="col" class="border-right-4">Date</th>
-							<th scope="col">Name</th>
-							<th scope="col">Last</th>
-							<th scope="col">Handle</th>
-						</tr>
-					</thead>
-					<tbody class="table-group-divider">
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-					</tbody>
-				</table>
+				<!-- #region Timeline display -->
+				<TimelineDisplay
+					:timeline-events="sortedTimeline"
+					:settings="{
+						showDescription: true,
+						showExtra: true,
+						showFancyTables: false,
+						showHeaders: false,
+						truncateDescription: false
+					}"
+				/>
+				<!-- #endregion Timeline display -->
 
 			</div>
 
@@ -65,10 +59,12 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import TimelineDisplay from "@/components/core/timeline/TimelineDisplay.vue";
 import type { IDeprecatedTimeline } from "@/interfaces/ITimeline_Deprecated";
 import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
+import type { ITimelineEvent } from "@/interfaces/ITimeline";
 
-const Timelines: IDeprecatedTimeline[] = [
+const TimelinesBad: IDeprecatedTimeline[] = [
 	{
 		id: "happy-turtle",
 		log: [
@@ -106,10 +102,55 @@ const Timelines: IDeprecatedTimeline[] = [
 	}
 ];
 
+const Timelines: { id: string, log: ITimelineEvent[] }[] = [
+	{
+		id: "cade",
+		log: [
+			{
+				date: { year: 1, month: 0, day: 0 },
+				endDate: { year: 1, month: 4, day: 17 },
+				header: "Wonderland",
+				type: "world",
+				isMajor: true,
+			},
+			{
+				date: { year: 1, month: 4, day: 17 },
+				header: "Happy Turtle",
+				type: "lightship",
+			},
+			{
+				date: { year: 1, month: 4, day: 20 },
+				endDate: { year: 1, month: 5, day: 5 },
+				header: "Somewhere",
+				type: "world",
+				isMajor: true,
+			},
+			{
+				date: { year: 1, month: 5, day: 6 },
+				header: "Happy Turtle",
+				type: "lightship",
+			},
+		]
+	},
+	{
+		id: "happy-turtle",
+		log: [
+			{
+				date: { year: 1, month: 4, day: 2 },
+				endDate: { year: 1, month: 4, day: 2 },
+				header: "Somewhere",
+				type: "world",
+				isMajor: true,
+			}
+		]
+	}
+]
+
 export default defineComponent({
 	name: 'TimelineViewComponent',
 	data() {
 		return {
+			timelines: Timelines,
 			menu: [
 				{
 					text: "All",
@@ -126,27 +167,7 @@ export default defineComponent({
 				{
 					text: "Lightships",
 					value: "lightship"
-				},
-				// {
-				// 	text: "",
-				// 	value: "separator"
-				// },
-				// {
-				// 	text: "C.O.B.B.",
-				// 	value: "cobb"
-				// },
-				// {
-				// 	text: "Li'l Phil",
-				// 	value: "phil"
-				// },
-				// {
-				// 	text: "Ozzy",
-				// 	value: "ozzy"
-				// },
-				// {
-				// 	text: "Tero",
-				// 	value: "tero"
-				// },
+				}
 			] as IComponentMenuOption[],
 			displayKeys: [
 					'cade',
@@ -162,6 +183,13 @@ export default defineComponent({
 		},
 		modeName() {
 			return this.menu.filter(o => o.value == this.mode)[0].text;
+		},
+		sortedTimeline() {
+			return this.selectedTimeline;
+		},
+		selectedTimeline(): ITimelineEvent[] {
+			return Timelines[0].log;
+			
 		},
 	},
 	methods: {

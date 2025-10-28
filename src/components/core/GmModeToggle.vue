@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { Config } from '@/scripts/config';
+import { Utils } from '@/scripts/utils';
 
  (() => {
   'use strict'
 
-  const storedViewerRole: string|null = localStorage.getItem('viewerRole')
+  const storedViewerRole: string|null = localStorage.getItem('viewerRole');
 
   const getPreferredViewerRole = () => {
-    if (storedViewerRole) {
-      return storedViewerRole
-    }
-
-    return Config.IsGM ? 'gm' : 'player';
+    return Utils.LocalStorage.getIsGM() ? 'gm' : 'player';
   }
 
   const setViewerRole = function (viewerRole: string) {
@@ -54,7 +51,7 @@ import { Config } from '@/scripts/config';
 </script>
 
 <template>
-	<span class="nav-item dropdown">
+	<span class="nav-item dropdown d-none d-lg-block">
 		<button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-viewer-role" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
 			<svg class="menu-button-icon theme-color my-1 viewer-role-icon-active">
 				<use href="#globe2"></use>
@@ -84,17 +81,6 @@ import { Config } from '@/scripts/config';
 					</svg>
 				</button>
 			</li>
-			<!-- <li>
-				<button type="button" class="dropdown-item d-flex align-items-center" data-game-viewer-role-value="auto">
-					<svg class="menu-button-icon theme-color me-2 opacity-50">
-						<use href="#circle-half"></use>
-					</svg>
-					Auto
-					<svg class="menu-button-icon theme-color ms-auto d-none">
-						<use href="#check2"></use>
-					</svg>
-				</button>
-			</li> -->
 		</ul>
 	</span>
 </template>

@@ -10,9 +10,3 @@ import LocationCharacterDeck from '@/components/views/characters/characterDecks/
 		</AccordionItem>
 	</div>
 </template>
-
-<style>
-#minor-characters-accordion > .accordion-item > .accordion-collapse > .accordion-body {
-	padding: 0.25rem;
-}
-</style>

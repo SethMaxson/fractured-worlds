@@ -21,8 +21,12 @@ export const WorldDatas: IWorldData[] = [
             token: "img/worlds/somewhere.png",
         },
         people: {
+            allies: "Eva Davis, Giuseppe da Albiate, Tom Cox",
             citizens: [
-                // "hoots",
+                "eva-davis",
+                "giuseppe-da-albiate",
+                "hoots",
+                "tom-cox",
                 "somewhere-kenny",
                 "somewhere-portia"
             ]

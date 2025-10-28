@@ -20,6 +20,10 @@ const props = defineProps({
 	worldId: {
 		type: String,
 		required: false
+	},
+	type: {
+		type: String,
+		required: false
 	}
 })
 
@@ -28,6 +32,8 @@ if (props.people && props.people.length > 0) {
 	TheCast = props.people;
 } else if (props.worldId) {
 	TheCast = WorldDataUtils.findCharactersInWorld(CharacterDataUtils.getAll(), props.worldId);
+} else if (props.type) {
+	TheCast = CharacterDataUtils.findCharactersByType(props.type);
 }
 </script>
 

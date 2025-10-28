@@ -18,9 +18,14 @@ export namespace CharacterDataUtils {
 
     /** Find the character that matches the provided ID. */
     export function findCharacterById(id: string): ICharacterData | undefined {
-        const search = CharacterDatas.filter(char => char.id == id);
+        const search = getAll().filter(char => char.id == id);
         const person = search && search.length > 0 ? search[0] : undefined;
         return person;
+    }
+
+    /** Find all characters that match the provided World ID. */
+    export function findCharactersByType(characterType: string): ICharacterData[] {
+        return getAll().filter(char => char.type == characterType);
     }
 
     /** Lookup a character's affiliation with a specific group, if present. */
@@ -76,8 +81,9 @@ export namespace CharacterDataUtils {
     }
 
     /** Gets a Spotify embed URL for the given ID (e.g. ) */
-    export function getSpotifyEmbedUrl(spotifyID: string, type: "playlist" | "song" = "playlist"): string {
-        return `https://open.spotify.com/embed/${type == 'playlist' ? 'playlist' : 'track'}/${spotifyID}?utm_source=generator&theme=0`;
+    export function getSpotifyEmbedUrl(spotifyID: string, type: 'playlist' | 'song' = 'playlist', darkTheme = true): string {
+        const theme = darkTheme ? '&theme=0' : '';
+        return `https://open.spotify.com/embed/${type == 'playlist' ? 'playlist' : 'track'}/${spotifyID}?utm_source=generator${theme}`;
     }
 
     /** Gets the subheader text for the character (e.g. species + occupation) */

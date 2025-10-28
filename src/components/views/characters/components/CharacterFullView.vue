@@ -52,16 +52,20 @@ if (playlistEmbed) {
 //#endregion Check what accordion sections are present
 
 function getSpecialAffiliationString(a: ICharacterDataAffiliation): string {
-	return `${a.role || a.rank} (${a.joined}${a.left? "—" + a.left : ""} SE)`;
+	return `<b>${a.role || a.rank}</b> (${a.joined}${a.left? "—" + a.left : ""} SE)`;
 }
+
+
+// Configure the display
+const portraitClasses = Utils.Images.getPortraitClassesFromType(props.person?.type);
 </script>
 
 <template>
 	<div v-if="person" class="px-2 pb-2">
 		
 		<div class="col col-md-4 float-md-end ps-md-2 mb-3 mb-md-2">
-			<Image class="portrait object-fit-fill rounded my-0 mx-auto img-thumbnail" alt="portrait" :src="person.images.portrait" v-if="person.images.portrait && person.images.portrait.length > 0" />
-			<svg class="portrait object-fit-fill rounded my-0 mx-auto img-thumbnail" width="300" height="300" v-else>
+			<Image :class="portraitClasses" class="portrait object-fit-fill rounded my-0 mx-auto img-thumbnail" alt="portrait" :src="person.images.portrait" v-if="person.images.portrait && person.images.portrait.length > 0" />
+			<svg :class="portraitClasses" class="portrait object-fit-fill rounded my-0 mx-auto img-thumbnail" width="300" height="300" v-else>
 				<use href="#user2"></use>
 			</svg>
 		</div>
@@ -82,7 +86,7 @@ function getSpecialAffiliationString(a: ICharacterDataAffiliation): string {
 					{{ person.aliases.length > 1 ? "Aliases" : "Alias" }}: <b>{{ person.aliases.join(", ") }}</b>
 				</div>
 				<div v-if="affiliations?.crew">
-					{{affiliations.crew.name}}: <b>{{getSpecialAffiliationString(affiliations.crew)}}</b>
+					{{affiliations.crew.name}}: <span v-html="getSpecialAffiliationString(affiliations.crew)"></span>
 				</div>
 				<div v-if="affiliations?.other && affiliations.other.length > 0">
 					<ul class="list-inline mb-0">

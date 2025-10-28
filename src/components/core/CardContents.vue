@@ -20,11 +20,11 @@
 				<slot name="subheading"></slot>
 			</h6>
 			<!-- <div class="card-text" v-if="truncated && openIcon">
-				<div class="d-flex justify-content-between">
+				<div class="d-flex justify-content-between align-items-baseline">
 					<div class="flex-grow-1 text-truncate">
 						<slot></slot>
 					</div>
-					<div class="ms-1">
+					<div class="ms-1 fs-5">
 						<svg class="menu-button-icon theme-color d-inline"><use :href="openIcon"></use></svg>
 					</div>
 				</div>
@@ -32,6 +32,7 @@
 			<div class="card-text" :class="{'text-truncate': truncated}">
 				<slot></slot>
 			</div>
+			<slot name="hidden"></slot>
 			<slot name="button"></slot>
 		</div>
 		<div class="card-footer text-muted small" v-if="$slots.footer">

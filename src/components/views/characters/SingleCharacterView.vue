@@ -16,7 +16,7 @@ const props = defineProps({
 
 const queryPath = useRoute().query.path as string;
 
-const path = (queryPath? queryPath + "/" : "/people/") + props.id;
+const path = (queryPath ? queryPath + "/" : "/people/") + props.id;
 const person = CharacterDataUtils.findCharacter(CharacterDatas, props.id);
 </script>
 

@@ -27,7 +27,7 @@ class TimelineDisplaySettings {
 	/** Toggle the display of various components */
 	displayToggles = {
 		/** Show the event's detailed description */
-		showDescription: ref(false),
+		showDescription: ref(true),
 		/** Show the breakdown of sub events */
 		showExtra: ref(true),
 		showFancyTables: ref(false),
@@ -439,7 +439,7 @@ function resetDisplay() {
 	settings.filters.majorOnly = false;
 	settings.filters.tags = [];
 	settings.filters.years = [];
-	settings.displayToggles.showDescription = false;
+	settings.displayToggles.showDescription = true;
 	settings.displayToggles.showExtra = true;
 	settings.displayToggles.showFancyTables = false;
 	settings.displayToggles.showHeaders = false;
@@ -461,22 +461,24 @@ const sortedTimeline = computed<ITimelineEvent[]>(() => {
 
 <template>
 	<PageContainerVue>
-		<!-- <JournalHeader /> -->
 		<header>
-			<!-- <ViewBlurb header="">
-				A rough timeline of the events we've experienced.
-			</ViewBlurb> -->
 			<Breadcrumb path="/journal/timeline" />
 		</header>
 		<main>
 			<!-- #region Timeline Display Settings -->
-			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#timelineSettingsModal">
-				Configure Display
-			</button>
-			<button type="button" class="btn btn-secondary" @click="resetDisplay()">
-				Reset
-			</button>
+
+			<div class="text-end py-2 border-bottom bg-dark-subtle">
+				<!-- Button trigger modal -->
+				<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#timelineSettingsModal">
+						<svg class="menu-button-icon theme-color d-inline"><use href="#settings"></use></svg>
+						Configure Display
+					</button>
+					<button type="button" class="btn btn-primary border-start" @click="resetDisplay()">
+						<svg class="menu-button-icon theme-color d-inline"><use href="#reset"></use></svg>
+					</button>
+				</div>
+			</div>
 
 			<!-- Modal -->
 			<div class="modal fade" id="timelineSettingsModal" tabindex="-1" aria-labelledby="timelineSettingsModalLabel" aria-hidden="true">
@@ -507,6 +509,10 @@ const sortedTimeline = computed<ITimelineEvent[]>(() => {
 						</div>
 					</div>
 					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" @click="resetDisplay()">
+							<svg class="menu-button-icon theme-color d-inline"><use href="#reset"></use></svg>
+							Defaults
+						</button>
 						<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>
 					</div>
 					</div>

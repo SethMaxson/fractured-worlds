@@ -2,15 +2,34 @@ import { Months } from "@/data/calendar/months";
 import type { ICalendarEvent, IFullCalendarEvent } from "@/interfaces/ICalendarEvent";
 import type { IWorldData } from "@/interfaces/IWorldData";
 import { CampaignDate } from "@/objects/CampaignDate";
+import { GameStrings } from "./game-strings";
+import { Config } from "./config";
 
 export namespace Utils {
-    export namespace Config {
-        export function getUser() {
-            return localStorage.getItem("viewAsUser") || "GM";
-        }
+    export namespace LocalStorage {
+        const currentUserKey = "viewAsUser";
+        const isGmKey = "viewerRole";
+        export const getUser = () => localStorage.getItem(currentUserKey) || "guest";
         export function setUser(value: string) {
-            return localStorage.setItem("viewAsUser", value);
+            localStorage.setItem(currentUserKey, value);
         }
+
+        export function getIsGM() {
+            let storedValue = ViewerRole.get();
+            return storedValue ? storedValue == 'gm' : Config.IsGM;
+        }
+        export function setIsGM(value: boolean) {
+            ViewerRole.set(value ? 'gm' : 'player');;
+        }
+
+        export namespace ViewerRole {
+            export const get = () => localStorage.getItem(isGmKey) || Config.IsGM ? 'gm' : 'player';
+            export function set(value: string) {
+                localStorage.setItem(isGmKey, value);
+                document.documentElement.setAttribute('data-game-viewer-role', value)
+            }
+        }
+
     }
     export namespace Date {
         /** A collection of functions to convert one dates between formats. */
@@ -101,6 +120,21 @@ export namespace Utils {
 			return Math.ceil(Math.random() * faces);
 		}
     }
+    export namespace Images {
+        export function getPortraitClassesFromType(type?: string) : string|undefined {
+            switch (type) {
+                case "location":
+                    return "bg-secondary";
+                case "nle":
+                    return "bg-nle bg-opacity-50";
+                case "rebirth":
+                    return "bg-rebirth bg-opacity-50";
+            
+                default:
+                    return;
+            }
+        }
+    }
     export namespace Number {
         /** Convert a number to a string with leading 0s. */
         export function pad0s(input: number, targetLength: number): string {
@@ -144,6 +178,20 @@ export namespace Utils {
             return newPath;
         }
 
+    }
+    export namespace User {
+        export function getName(): { first: string, full: string } {
+            switch (LocalStorage.getUser()) {
+                case 'cobb':
+                    return GameStrings.Party.Cobb;
+                case 'phil':
+                    return GameStrings.Party.Phil;
+                case 'tero':
+                    return GameStrings.Party.Tero;
+                default:
+                    return { first: "Guest User", full: "Guest User" }
+            }
+        }
     }
     export namespace World {
         export function findWorld(worldDatas: IWorldData[], id: string): IWorldData | undefined {

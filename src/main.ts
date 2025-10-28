@@ -16,6 +16,7 @@ import Effects from "./components/views/perks/Perks.vue";
 import ExplorersGuide from "./components/views/explorers-guide/ExplorersGuide.vue";
 import Factions from "./components/views/factions/Factions.vue";
 import Home from "./components/views/Home.vue";
+import Interviews from "./components/views/Interviews.vue";
 import Inventory from "./components/views/inventory/Inventory.vue";
 import Journal from "./components/views/journal/Log.vue";
 import Links from "./components/views/meta/Links.vue";
@@ -77,6 +78,8 @@ const router = createRouter({
 		{ path: '/dm-worlds', component: DmWorlds},
 		{ path: '/explorers-guide', name: 'Explorer\'s Guide', component: ExplorersGuide},
 		{ path: '/factions', name: 'Factions', component: Factions},
+		{ path: '/interviews', component: Interviews },
+		{ path: '/interviews/:id', component: Interviews, props: true },
 		{ path: '/inventory', name: 'Inventory', component: Inventory},
 		{ path: '/journal/letters', name: 'Letters', component: Letters},
 		{ path: '/journal/log', name: 'Log', component: Journal},

@@ -38,6 +38,7 @@ import { GameStrings } from "@/scripts/game-strings";
 
 				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start dev">In Development</h5>
 				<AppIcon svg="list" to="/accomplishments" class="dev">Accomplishments</AppIcon>
+				<AppIcon svg="chat" to="/interviews" class="h-100 dev">Interviews</AppIcon>
 				<AppIcon svg="relationship" to="/relationships" class="h-100 dev">Relationships</AppIcon>
 				<AppIcon svg="timeline" to="/timeline" class="dev">NPC Timeline</AppIcon>
 				<AppIcon svg="settings" to="/settings" class="dev">Settings</AppIcon>

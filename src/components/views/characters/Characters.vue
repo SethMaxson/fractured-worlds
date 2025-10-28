@@ -37,6 +37,8 @@ const Allies = [
 const DeadGang = [
 	CharacterDataUtils.findCharacter(CharacterDatas, 'tropey')
 ];
+
+const Rebirth = CharacterDataUtils.findCharactersByType("rebirth");
 </script>
 
 <template>
@@ -103,36 +105,7 @@ const DeadGang = [
 
 				<AccordionItem name="Enemies" parent-id="characters-accordion">
 					<CharacterCardDeck>
-						<CharacterCard>
-							<template #image>
-								<Portrait class="bg-rebirth bg-opacity-50" src="img/npc/jafar.png" />
-							</template>
-							<template #heading>Jafar</template>
-							<template #subheading>Human Sorcerer</template>
-
-							<Character>Jafar</Character> is a conniving, haughty sorcerer we encountered in <Location>Wonderland</Location>. He fled through a portal into another world after realizing that we and <Character>Cade Brightcloak</Character> outnumbered him five to one.
-							<template #footer>Faction: Rebirth Caucus</template>
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait class="bg-rebirth bg-opacity-50" src="img/npc/shredder.png" />
-							</template>
-							<template #heading>Shredder</template>
-							<template #subheading>Human Ninjutsu Master</template>
-
-							<Character>Shredder</Character> was a cruel, prideful martial artist we encountered in the <Location>Big Apple</Location>. We fought him to a near standstill before he took one of the <Character>Turtles</Character>—<Character>Donatello</Character>—hostage. He was last seen falling into a garbage truck and being compacted.
-							<template #footer>Faction: Rebirth Caucus</template>
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait class="bg-rebirth bg-opacity-50" src="img/npc/doyle.png" />
-							</template>
-							<template #heading>?</template>
-							<template #subheading>Human Mage</template>
-
-							This man was talking to <Character>Shredder</Character> shortly before our fight in the <Location>Big Apple</Location>. He attempted to abduct <Character>Michelangelo</Character> after the battle while the <Character>Turtles</Character> were distracted. We thwarted his kidnapping attempt, and he somehow teleported away in a mass of inky tendrils.
-							<template #footer>Faction: Rebirth Caucus</template>
-						</CharacterCard>
+						<CharacterCard v-for="person in Rebirth" :person="person" />
 						<CharacterCard>
 							<template #image>
 								<Portrait src="img/party/pontiki.png" />
@@ -146,22 +119,6 @@ const DeadGang = [
 						</CharacterCard>
 					</CharacterCardDeck>
 				</AccordionItem>
-
-				<!-- <AccordionItem name="Acquaintances" parent-id="characters-accordion">
-					<CharacterCardDeck>
-						<CharacterCard>
-							<template #image>
-								<Portrait class="bg-nle bg-opacity-50" src="img/npc/cade.png" />
-							</template>
-							<template #heading>Hedge Knight</template>
-							<template #subheading>Halfling Cleric</template>
-
-							<b>Cade "Destiny's Child" Brightcloak</b> is an amicable knight the heroes met in <Location>Wonderland</Location>. He is a devout adherent of the Cerulean Star.
-						</CharacterCard>
-					</CharacterCardDeck>
-				</AccordionItem> -->
-
-				<!-- #endregion Major Characters -->
 
 				<AccordionItem name="People that don't seem too important to our quest" parent-id="characters-accordion">
 					<MinorCharacters />
@@ -218,13 +175,3 @@ const DeadGang = [
 		</main>
 	</PageContainerVue>
 </template>
-
-<style>
-/* #characters-accordion .character {
-	color: inherit;
-} */
- 
-#crew-characters-accordion > .accordion-item > .accordion-collapse > .accordion-body {
-	padding: 0.25rem;
-}
-</style>
