@@ -51,7 +51,8 @@ import { Utils } from '@/scripts/utils';
 </script>
 
 <template>
-	<span class="nav-item dropdown d-none d-lg-block">
+	<!-- <span class="nav-item dropdown d-none d-lg-block"> -->
+	<span class="nav-item dropdown">
 		<button class="btn btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-viewer-role" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
 			<svg class="menu-button-icon theme-color my-1 viewer-role-icon-active">
 				<use href="#globe2"></use>
