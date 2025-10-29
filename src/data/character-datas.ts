@@ -442,6 +442,31 @@ export const CharacterDatas: ICharacterData[] = [
         status: "alive"
     },
     {
+        name: "Gojiro",
+        id: "gojiro",
+        subtitle: "Cat out of Hell",
+        type: "rebirth",
+        species: ["tabaxi"],
+        occupation: ["warrior"],
+        physical: {
+            gender: "male",
+        },
+        affiliations: [
+            { name: "Rebirth Caucus", rank: "member", role: "unknown", primary: true }
+        ],
+        description: [
+            "<Character>Gojiro</Character> is an infamous mercenary known for his martial prowess, stealth, and tracking ability. He seems to have taken a shine to <c>Li'l Phil</c>."
+        ],
+        images: {
+            portrait: "img/npc/gojiro.png"
+        },
+        spotify: {
+			primaryPlaylistID: "3dvzEn8cNeZJWh53jgEmvN"
+        },
+        plotRelevance: 2,
+        status: "alive"
+    },
+    {
         name: "Shredder",
         id: "shredder",
         subtitle: "The Self-made Shogun",

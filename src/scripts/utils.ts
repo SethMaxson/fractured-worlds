@@ -157,6 +157,17 @@ export namespace Utils {
                 : compA > compB ? aWins : bWins
             );
         }
+        /** Compare two CammpaignDate objects */
+        export function campaignDate(a: CampaignDate, b: CampaignDate, ascending: boolean = true) {
+            const compA = Date.Format.MDY(a);
+            const compB = Date.Format.MDY(b);
+            const aWins = ascending ? 1 : -1;
+            const bWins = ascending ? -1 : 1;
+            return (
+                compA == compB ? 0
+                : compA > compB ? aWins : bWins
+            );
+        }
     }
     export namespace String {
 
