@@ -33,6 +33,8 @@ import Timeline from "./components/views/timeline/Timeline.vue";
 import WorldAnchors from "@/components/views/journal/WorldAnchors.vue";
 import WorldMap from "@/components/views/world-map/WorldMap.vue";
 import Worlds from "@/components/views/worlds/Worlds.vue";
+import Cuisine from "./components/views/cuisine/Cuisine.vue";
+import Recipe from "./components/views/cuisine/Recipe.vue";
 
 
 const pages = import.meta.glob("./components/views/**/*.vue", { eager: true }) as Record<string, { default: any}>;
@@ -73,8 +75,10 @@ const router = createRouter({
 		{ path: '/', component: Home},
 		{ path: '/home', name: 'Home', component: Home},
 		{ path: '/bounties', component: BountyBoard},
-		{ path: '/calendar', name: 'Calendar', component: Calendar},
-		{ path: '/contacts', name: 'Contacts', component: Contacts},
+		{ path: '/calendar', name: 'Calendar',	component: Calendar},
+		{ path: '/contacts', name: 'Contacts',	component: Contacts},
+		{ path: '/cuisine',	 name: 'Cuisine',	component: Cuisine},
+		{ path: '/cuisine/:id', component: Recipe, props: true },
 		{ path: '/dm-worlds', component: DmWorlds},
 		{ path: '/explorers-guide', name: 'Explorer\'s Guide', component: ExplorersGuide},
 		{ path: '/factions', name: 'Factions', component: Factions},

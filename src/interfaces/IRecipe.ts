@@ -13,4 +13,6 @@ export interface IRecipe {
 	type: RecipeType;
 	ingredients: string[];
 	instructions: string[];
+	summary?: string;
+	originWriteUp: string[];
 }
