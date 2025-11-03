@@ -21,6 +21,11 @@ const props = defineProps({
 		required: true,
 		default: "/"
 	},
+	unread: {
+		type: Number,
+		required: false,
+		default: 0
+	},
 })
 
 const url = props.to || "#";
@@ -30,14 +35,13 @@ const svgID = props.svg && props.svg.includes("#")? props.svg : "#" + props.svg;
 <template>
 	<div class="col" :class="props.class">
 		<router-link
-			class="w-100 h-100 nav-link px-1 px-lg-3 pb-1 pt-2 p-lg-3 border border-primary-subtle rounded"
+			class="w-100 h-100 nav-link px-1 px-lg-3 pb-1 pt-2 p-lg-3 border border-primary-subtle rounded position-relative"
 			:to="url"
 		>
-			<!-- <div class="m-0 mb-1 px-2 py-0 py-lg-2 ratio ratio-1x1">
-				<svg class="button-icon theme-color m-0 p-0" v-if="svg">
-					<use :href="svgID"></use>
-				</svg>
-			</div> -->
+			<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" v-if="unread > 0">
+				{{unread > 99 ? '99+' : unread}} 
+				<span class="visually-hidden">unread entries</span>
+			</span>
 			<div class="d-none d-lg-block m-0 mb-1 ratio ratio-1x1">
 				<svg class="button-icon theme-color m-0 p-0" v-if="svg">
 					<use :href="svgID"></use>

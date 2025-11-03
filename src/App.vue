@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Navbar from "@/components/core/Navbar.vue";
 import DataModals from "./components/core/DataModals.vue";
+import Settings from "./components/views/Settings.vue";
 </script>
 
 <template>
@@ -649,6 +650,7 @@ import DataModals from "./components/core/DataModals.vue";
 
 	<!-- Modals -->
 	 <DataModals />
+	 <Settings />
 
 	<!-- TODO: finish this footer -->
 	<div class="container-fluid border-top navbar-dark bg-navbar" v-if="false">

@@ -125,8 +125,14 @@
 					</li> -->
 				</ul>
 				<hr class="d-lg-none" />
-				<ColorModeToggle />
-				<GmModeToggle />
+				<span class="nav-item">
+					<button class="btn btn-link nav-link py-2 px-0 px-lg-2 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings">
+						<svg class="menu-button-icon theme-color" style="font-size: 1.25rem;">
+							<use href="#settings"></use>
+						</svg>
+						<span class="ms-1 d-inline d-xl-none">Settings</span>
+					</button>
+				</span>
 				<!-- <form class="d-flex">
 					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success" type="submit">Search</button>
@@ -158,12 +164,9 @@
 
 <script setup lang="ts">
 import { Config } from "@/scripts/config";
-import ColorModeToggle from "./ColorModeToggle.vue";
-import GmModeToggle from "./GmModeToggle.vue";
 defineProps<{
 	activePage?: string;
 }>();
 
 const svgHomeClass = "menu-button-icon theme-color me-1 d-inline";
-const svgClass = svgHomeClass + " d-lg-none";
 </script>

@@ -38,11 +38,27 @@ import JournalHeader from './subviews/JournalHeader.vue';
 			</div>
 
 
-			
 			<h3>Lingering Mysteries</h3>
 
 			<div class="list-group fs-6">
-				
+
+				<button
+					type="button"
+					class="list-group-item list-group-item-action"
+					data-bs-toggle="modal"
+					data-bs-target="#questModal"
+				>
+					<span class="title main-quest text-primary-emphasis">
+						<svg class="menu-button-icon theme-color d-inline"><use href="#globe2"></use></svg>
+						The World Anchor Message
+					</span>
+					<span class="def">
+						We have found a few <Important>World Anchors</Important> so far, and each contained a fragment of some message or passage.
+					</span>
+					<span class="footer">
+						Main Quest
+					</span>
+				</button>
 				<button
 					type="button"
 					class="list-group-item list-group-item-action"
@@ -57,23 +73,6 @@ import JournalHeader from './subviews/JournalHeader.vue';
 					</span>
 					<span class="footer">
 						Side Quest
-					</span>
-				</button>
-				<button
-					type="button"
-					class="list-group-item list-group-item-action"
-					data-bs-toggle="modal"
-					data-bs-target="#questModal"
-				>
-					<span class="title">
-						<svg class="menu-button-icon theme-color d-inline"><use href="#globe2"></use></svg>
-						The World Anchor Message
-					</span>
-					<span class="def">
-						We have found a few <Important>World Anchors</Important> so far, and each contained a fragment of some message or passage.
-					</span>
-					<span class="footer">
-						Main Quest
 					</span>
 				</button>
 				<button
@@ -190,5 +189,15 @@ export default defineComponent({
 .footer,
 .def {
 	display: none;
+}
+
+.main-quest {
+	font-weight: bold;
+}
+
+.main-quest::before {
+	content: 'MAIN:';
+	text-decoration: underline;
+	margin-right: 1rcap;
 }
 </style>

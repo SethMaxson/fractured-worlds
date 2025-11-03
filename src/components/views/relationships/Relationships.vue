@@ -10,7 +10,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 <template>
 	<PageContainerVue>
 		<header>
-			<Breadcrumb path="/relationships" />
+			<Breadcrumb />
 			<ViewBlurb header="Relationships" author="Susie" version="0.2.1">
 				<p>How many friends do you have, really?</p>
 				Other than me, I mean ;P
@@ -276,6 +276,11 @@ const Relationships = {
 			label: "mother",
 			met: new CampaignDate(0, 0, 0),
 			rank: 0
+		},
+		{
+			person: "marlowe",
+			met: new CampaignDate(10, 7, 1),
+			rank: 2
 		},
 		{
 			person: "nortle",

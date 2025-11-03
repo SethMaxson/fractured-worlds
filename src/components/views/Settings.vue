@@ -1,12 +1,11 @@
-<script setup lang="ts">
-import PageContainerVue from "@/components/core/PageContainer.vue";
-import ColorModeToggle from "@/components/core/ColorModeToggle.vue";
-import GmModeToggle from "@/components/core/GmModeToggle.vue";
-</script>
-
 <template>
-	<PageContainerVue>
-		<main class="py-4">
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSettings" aria-labelledby="offcanvasSettingsLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasSettingsLabel">Settings</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+
+		<div class="offcanvas-body">
 			<div class="form-floating">
 				<select class="form-select" id="userSelect" aria-label="Select user" @change="changeUserEvent">
 					<template v-for="opt, index in menu.users">
@@ -16,8 +15,35 @@ import GmModeToggle from "@/components/core/GmModeToggle.vue";
 				</select>
 				<label for="userSelect">Current user</label>
 			</div>
-			<ColorModeToggle />
 
+			<!-- color theme -->
+			<span class="dropdown">
+				<button class="btn btn-link nav-link p-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static">
+					<svg class="menu-button-icon theme-color">
+						<use :href="state.colorThemeIcon"></use>
+					</svg>
+					<span class="ms-2">Theme</span>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="static">
+					<li v-for="opt, index in menu.colorThemes" :key="opt.value">
+						<hr v-if="opt.value == 'separator'" class="dropdown-divider">
+						<button 
+							v-else 
+							type="button"
+							class="dropdown-item"
+							:class="{'active' : state.colorTheme == opt.value}"
+							@click="changeColorTheme(opt.value as 'auto'|'dark'|'light')"
+						>
+							<svg class="menu-button-icon theme-color me-2 opacity-50">
+								<use :href="opt.icon"></use>
+							</svg>
+							{{opt.text}}
+						</button>
+					</li>
+				</ul>
+			</span>
+
+			<!-- viewer role -->
 			<span class="dropdown">
 				<button class="btn btn-link nav-link p-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static">
 					<svg class="menu-button-icon theme-color">
@@ -26,7 +52,7 @@ import GmModeToggle from "@/components/core/GmModeToggle.vue";
 					<span class="ms-2">Viewer Role</span>
 				</button>
 				<ul class="dropdown-menu dropdown-menu-start" data-bs-popper="static">
-					<li v-for="opt, index in menu.viewerRoles">
+					<li v-for="opt, index in menu.viewerRoles" :key="opt.value">
 						<hr v-if="opt.value == 'separator'" class="dropdown-divider">
 						<button 
 							v-else 
@@ -44,9 +70,8 @@ import GmModeToggle from "@/components/core/GmModeToggle.vue";
 				</ul>
 			</span>
 
-
-		</main>
-	</PageContainerVue>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
@@ -61,11 +86,21 @@ export default defineComponent({
         data() {
             return {
                 menu: {
-					themes: [
+					colorThemes: [
+						{
+							text: "Light",
+							value: "light",
+							icon: "#sun-fill"
+						},
 						{
 							text: "Dark",
 							value: "dark",
-							icon: "#moon"
+							icon: "#moon-stars-fill"
+						},
+						{
+							text: "Auto",
+							value: "auto",
+							icon: "#circle-half"
 						},
 					] as IComponentMenuOption[],
 					users: [
@@ -108,7 +143,8 @@ export default defineComponent({
 					] as IComponentMenuOption[],
 				},
 				state: {
-					theme: "auto",
+					colorTheme: "auto",
+					colorThemeIcon: "",
 					user: "guest",
 					viewerRole: "player",
 					viewerRoleIcon: ""
@@ -126,6 +162,14 @@ export default defineComponent({
 				Utils.LocalStorage.setUser(newUser);
 				this.state.user = newUser;
 			},
+			changeColorTheme(value: 'auto' | 'dark' | 'light') {
+				this.state.colorTheme = value;
+				this.state.colorThemeIcon = value == 'auto' ? '#circle-half' 
+					: value == 'dark' ? '#moon-stars-fill'
+					: '#sun-fill';
+				Utils.LocalStorage.ColorTheme.set(this.state.colorTheme);
+				this.state.user = value;
+			},
 			changeViewerRole(value: 'gm' | 'player') {
 				this.state.viewerRole = value;
 				this.state.viewerRoleIcon = value == 'gm' ? '#globe2' : '#book-half';
@@ -135,7 +179,8 @@ export default defineComponent({
         },
 		mounted() {
 			this.state.user = Utils.LocalStorage.getUser();
-			this.changeViewerRole(Utils.LocalStorage.ViewerRole.get());
+			this.changeViewerRole(Utils.LocalStorage.ViewerRole.get() as 'player');
+			this.changeColorTheme(Utils.LocalStorage.ColorTheme.get() as 'auto');
 		},
     })
 </script>

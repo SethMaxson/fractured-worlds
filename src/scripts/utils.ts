@@ -22,8 +22,32 @@ export namespace Utils {
             ViewerRole.set(value ? 'gm' : 'player');;
         }
 
+        export namespace ColorTheme {
+            const colorThemeKey = 'colorTheme';
+            export function get() {
+                const storedValue = localStorage.getItem(colorThemeKey);
+                if (!storedValue || (storedValue && storedValue == 'auto')) {
+                    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
+                else {
+                    return storedValue;
+                }
+            }
+            export function set(value: string) {
+                if (value === 'auto') {
+                    _set(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                } else {
+                    _set(value as 'dark');
+                }
+            }
+            function _set(value: 'dark' | 'light') {
+                localStorage.setItem(colorThemeKey, value);
+                document.documentElement.setAttribute('data-bs-theme', value)
+            }
+        }
+
         export namespace ViewerRole {
-            export const get = () => localStorage.getItem(isGmKey) || Config.IsGM ? 'gm' : 'player';
+            export const get = () => localStorage.getItem(isGmKey) || (Config.IsGM ? 'gm' : 'player');
             export function set(value: string) {
                 localStorage.setItem(isGmKey, value);
                 document.documentElement.setAttribute('data-game-viewer-role', value)

@@ -1,6 +1,7 @@
 import type { ICharacterData } from "@/interfaces/ICharacterData";
-import { SomewhereCharacterDatas } from "./character-datas/characterDataSomewhere";
-import { CrewCharacterDatas } from "./character-datas/characterDataCrew";
+import { SomewhereCharacterDatas } from "./character-datas/character-data-somewhere";
+import { CrewCharacterDatas } from "./character-datas/character-data-crew";
+import { RebirthCharacterDatas } from "./character-datas/character-data-rebirth";
 
 /** Used to create a standardized set of character profiles that can be accessed from any page.
  * Some records contain information that is not yet known to the players, which is currently commented out.
@@ -9,7 +10,12 @@ import { CrewCharacterDatas } from "./character-datas/characterDataCrew";
 export const CharacterDatas: ICharacterData[] = [
     //#region include imported arrays
     ...CrewCharacterDatas,
+    ...RebirthCharacterDatas,
+
+    //#region location arrays
     ...SomewhereCharacterDatas,
+    //#endregion location arrays
+
     //#endregion include imported arrays
 
     //#region Player Characters
@@ -100,6 +106,34 @@ export const CharacterDatas: ICharacterData[] = [
         },
         plotRelevance: 3,
         status: "alive"
+    },
+    {
+        name: "Pontiki",
+        id: "pontiki",
+        type: "pc",
+        species: ["ratfolk"],
+        occupation: ["gunslinger"],
+        affiliations: [
+            { name: "None", primary: true }
+        ],
+        aliases: [ "Poo", "Rat-Man" ],
+        description: [
+            "<Character>Pontiki</Character> is a fierce warrior from an underground burrow. He learned the way of the gunslinger after an encounter with a destructive tomb raider left Pontiki scarred and without a family."
+        ],
+        mental: {
+            drive: "protect all of rat-kind"
+        },
+        physical: {
+            gender: "male",
+            eyeColor: "black",
+            hairColor: "white"
+        },
+        homeworld: "Tomb of Sir Richard",
+        images: {
+            portrait: "img/party/pontiki.png"
+        },
+        plotRelevance: 1,
+        status: "dead"
     },
     {
         name: "Tero",
@@ -383,115 +417,62 @@ export const CharacterDatas: ICharacterData[] = [
 
     //#endregion Nelly / N.L.E. / NLE
 
-    //#region Rebirth Caucus
+    //#region Misc
     {
-        name: "Jafar",
-        id: "jafar",
-        subtitle: "The Would-be Sultan",
-        type: "rebirth",
-        species: ["human"],
-        occupation: ["vizier"],
-        // physical: {
-        //     gender: "male",
-        //     eyeColor: "brown",
-        //     hairColor: "brown",
-        //     height: "5' 6\"",
-        //     weight: "101 lbs."
-        // },
-        affiliations: [
-            { name: "Rebirth Caucus", rank: "member", role: "Magical Muscle/Espionage", primary: true }
-        ],
-        description: [
-            "<Character>Jafar</Character> is a conniving, haughty sorcerer we encountered in <Location>Wonderland</Location>. He fled through a portal into another world after realizing that we and <Character>Cade Brightcloak</Character> outnumbered him five to one."
-        ],
-        homeworld: "Agrabah",
-        images: {
-            portrait: "img/npc/jafar.png"
-        },
-        plotRelevance: 2,
-        status: "alive"
-    },
-    {
-        name: "Doyle Akor",
-        id: "doyle-akor",
-        subtitle: "The Eldritch Agent",
-        type: "rebirth",
-        species: ["human"],
-        occupation: ["warlock"],
+        name: "Marlowe",
+        id: "marlowe",
+        subtitle: "Friend. Maybe best friend.",
+        type: "other",
+        species: ["unknown"],
+        occupation: ["unknown"],
         physical: {
             gender: "male",
-            eyeColor: "ice blue",
-            hairColor: "blonde",
-        //     height: "5' 6\"",
-        //     weight: "101 lbs."
+            eyeColor: "black",
+            hairColor: "cream",
+            height: "0' 11\"",
+            weight: "9 lbs."
         },
         affiliations: [
-            { name: "Rebirth Caucus", rank: "member", role: "unknown", primary: true }
+            // { name: "NLE", rank: "member", role: "armorer, mechanic" }
         ],
         description: [
-            "This man was talking to <Character>Shredder</Character> shortly before our fight in the <Location>Big Apple</Location>. He attempted to abduct <Character>Michelangelo</Character> after the battle while the <Character>Turtles</Character> were distracted. We thwarted his kidnapping attempt, and he somehow teleported away in a mass of inky tendrils."
+            "<Character>Marlowe</Character> is super cool, and you should definitely not be angry if you ever find out that he has been following you since you first came to the <Location>Void Realm</Location>. Cookies, yes! You should give him cookies. Made with Kupo Nuts."
         ],
-        homeworld: "???",
+        // homeworld: "Velarys",
         images: {
-            portrait: "img/npc/doyle.png"
+            portrait: "img/npc/marlowe-2.webp"
         },
         spotify: {
-			primaryPlaylistID: "58fX3Hi1oaBgOq21OMYah1"
+			primaryPlaylistID: "3XuOO1FOLPO9Ptn3h8daeL"
         },
         plotRelevance: 2,
         status: "alive"
     },
     {
-        name: "Gojiro",
-        id: "gojiro",
-        subtitle: "Cat out of Hell",
-        type: "rebirth",
-        species: ["tabaxi"],
-        occupation: ["warrior"],
+        // name: "Nihil",
+        name: "???",
+        id: "nihil",
+        subtitle: "The Father of Decay? Maybe the Father of Void?",
+        type: "other",
+        species: ["unknown"],
+        occupation: ["unknown"],
         physical: {
             gender: "male",
+            eyeColor: "black",
+            hairColor: "white",
+            height: "???",
+            weight: "???"
         },
-        affiliations: [
-            { name: "Rebirth Caucus", rank: "member", role: "unknown", primary: true }
-        ],
+        affiliations: [ ],
         description: [
-            "<Character>Gojiro</Character> is an infamous mercenary known for his martial prowess, stealth, and tracking ability. He seems to have taken a shine to <c>Li'l Phil</c>."
+            "<Character>This guy</Character> is pretty dang scary, kupo. Let's not go near him any more."
         ],
+        // homeworld: "Geoss",
         images: {
-            portrait: "img/npc/gojiro.png"
-        },
-        spotify: {
-			primaryPlaylistID: "3dvzEn8cNeZJWh53jgEmvN"
+            portrait: "img/npc/unknown.png"
         },
         plotRelevance: 2,
         status: "alive"
     },
-    {
-        name: "Shredder",
-        id: "shredder",
-        subtitle: "The Self-made Shogun",
-        type: "rebirth",
-        species: ["human"],
-        occupation: ["ninjutsu master"],
-        // physical: {
-        //     gender: "male",
-        //     eyeColor: "brown",
-        //     hairColor: "brown",
-        //     height: "5' 6\"",
-        //     weight: "101 lbs."
-        // },
-        affiliations: [
-            { name: "Rebirth Caucus", rank: "member", role: "ninja master", primary: true }
-        ],
-        description: [
-            "<Character>Shredder</Character> was a cruel, prideful martial artist we encountered in the <Location>Big Apple</Location>. We fought him to a near standstill before he took one of the <Character>Turtles</Character>—<Character>Donatello</Character>—hostage. He was last seen falling into a garbage truck and being compacted."
-        ],
-        homeworld: "Big Apple",
-        images: {
-            portrait: "img/npc/shredder.png"
-        },
-        plotRelevance: 2,
-        status: "unknown"
-    },
-    //#endregion Rebirth Caucus
+    //#endregion Misc
 ];

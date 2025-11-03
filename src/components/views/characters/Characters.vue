@@ -3,10 +3,6 @@ import AccordionItem from "@/components/core/AccordionItem.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import CharacterCard from '@/components/views/characters/components/CharacterCard.vue';
 import CharacterCardDeck from '@/components/core/CardDeck.vue';
-import Portrait from '@/components/core/Portrait.vue';
-import Character from '@/components/core/text-tags/Character.vue';
-import Important from '@/components/core/text-tags/Important.vue';
-import Location from '@/components/core/text-tags/Location.vue';
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import Breadcrumb from "@/components/core/Breadcrumb.vue";
 
@@ -38,6 +34,15 @@ const DeadGang = [
 	CharacterDataUtils.findCharacter(CharacterDatas, 'tropey')
 ];
 
+const ImportantChars = [
+	CharacterDataUtils.findCharacter(CharacterDatas, 'nihil'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'marlowe')
+];
+
+const OtherEnemies = [
+	CharacterDataUtils.findCharacter(CharacterDatas, 'pontiki')
+];
+
 const Rebirth = CharacterDataUtils.findCharactersByType("rebirth");
 </script>
 
@@ -57,7 +62,7 @@ const Rebirth = CharacterDataUtils.findCharactersByType("rebirth");
 				<!-- #region Player Characters -->
 				<AccordionItem name="The Gang" parent-id="characters-accordion">
 					<CharacterCardDeck>
-						<CharacterCard v-for="person in TheGang" :person="person" />
+						<CharacterCard v-for="person in TheGang" :person="person" :key="person?.id" />
 					</CharacterCardDeck>
 				</AccordionItem>
 				<!-- #endregion Player Characters -->
@@ -75,7 +80,7 @@ const Rebirth = CharacterDataUtils.findCharactersByType("rebirth");
 
 				<AccordionItem name="Allies" parent-id="characters-accordion">
 					<CharacterCardDeck>
-						<CharacterCard v-for="person in Allies" :person="person" />
+						<CharacterCard v-for="person in Allies" :person="person" :key="person?.id" />
 						<!-- <CharacterCard>
 							<template #image>
 								<Portrait src="img/npc/kenji.png" />
@@ -105,18 +110,8 @@ const Rebirth = CharacterDataUtils.findCharactersByType("rebirth");
 
 				<AccordionItem name="Enemies" parent-id="characters-accordion">
 					<CharacterCardDeck>
-						<CharacterCard v-for="person in Rebirth" :person="person" />
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/party/pontiki.png" />
-							</template>
-							<template #heading>Pontiki</template>
-							<template #subheading>Ratfolk Gunslinger</template>
-							<template #homeworld>Tomb of Sir Richard</template>
-
-							<Character>Pontiki</Character> is a fierce warrior from an underground burrow. He learned the way of the gunslinger after an encounter with a destructive tomb raider left Pontiki scarred and without a family.
-							<template #footer>Faction: None</template>
-						</CharacterCard>
+						<CharacterCard v-for="person in Rebirth" :person="person" :key="person.id" />
+						<CharacterCard v-for="person in OtherEnemies" :person="person" :key="person?.id" />
 					</CharacterCardDeck>
 				</AccordionItem>
 
@@ -126,24 +121,7 @@ const Rebirth = CharacterDataUtils.findCharactersByType("rebirth");
 
 				<AccordionItem name="People that are probably super important" parent-id="characters-accordion">
 					<CharacterCardDeck>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/npc/unknown.png" />
-							</template>
-							<template #heading>???</template>
-							<template #subheading>The Father of Decay? Maybe the Father of Void?</template>
-
-							<Character>This guy</Character> is pretty dang scary, kupo. Let's not go near him any more.
-						</CharacterCard>
-						<CharacterCard>
-							<template #image>
-								<Portrait src="img/npc/marlowe-2.webp" />
-							</template>
-							<template #heading>Marlowe</template>
-							<template #subheading>Friend. Maybe best friend.</template>
-
-							<Character>Marlowe</Character> is super cool, and you should definitely not be angry if you ever find out that he has been following you since you first came to the <Location>Void Realm</Location>. Cookies, yes! You should give him cookies. Made with Kupo Nuts.
-						</CharacterCard>
+						<CharacterCard v-for="person in ImportantChars" :person="person" :key="person?.id" />
 						<!-- <CharacterCard>
 							<template #image>
 								<Portrait :is-external="true" src="img/npc/ssssimon.png" />
@@ -167,7 +145,7 @@ const Rebirth = CharacterDataUtils.findCharactersByType("rebirth");
 
 				<AccordionItem name="Fallen Comrades" parent-id="characters-accordion">
 					<CharacterCardDeck>
-						<CharacterCard status="dead" v-for="person in DeadGang" :person="person" />
+						<CharacterCard status="dead" v-for="person in DeadGang" :person="person" :key="person?.id" />
 					</CharacterCardDeck>
 				</AccordionItem>
 

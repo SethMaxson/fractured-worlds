@@ -22,7 +22,7 @@ const props = defineProps({
 	path: {
 		type: String,
 		required: false,
-		default: false
+		default: undefined
 	},
 	class: {
 		type: [String, Boolean],
@@ -44,7 +44,7 @@ const pageDictionary = [
 	{ path: "/ship/crew", name: "Roster"},
 ]
 
-const pathParts = props.path? props.path.split("/") : useRoute().path;
+const pathParts = props.path? props.path.split("/") : useRoute().path.split("/");
 const breadcrumbs = [ { path: "/", name: "Home", isLast: pathParts.length < 2 } ];
 for (let index = 1; index < pathParts.length; index++) {
 	breadcrumbs.push(

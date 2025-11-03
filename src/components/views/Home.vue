@@ -10,6 +10,26 @@ import { GameStrings } from "@/scripts/game-strings";
 		<main>
 			<!-- <h2>Us</h2> -->
 			<AppIconContainer>
+				<div class="col">
+					<button
+						type="button"
+						class="w-100 h-100 nav-link px-1 px-lg-3 pb-1 pt-2 p-lg-3 border border-primary-subtle rounded position-relative btn"
+						data-bs-toggle="offcanvas"
+						data-bs-target="#offcanvasSettings"
+					>
+						<div class="d-none d-lg-block m-0 mb-1 ratio ratio-1x1">
+							<svg class="button-icon theme-color m-0 p-0">
+								<use href="#settings"></use>
+							</svg>
+						</div>
+						<div class="d-lg-none m-0 px-2 py-0 ratio ratio-1x1">
+							<svg class="button-icon theme-color">
+								<use href="#settings"></use>
+							</svg>
+						</div>
+						<div class="p-0 m-0 small">Settings</div>
+					</button>
+				</div>
 				<AppIcon svg="question" to="/faq">FAQ</AppIcon>
 				<AppIcon svg="user2" to="/people">People</AppIcon>
 				<AppIcon svg="anchor" to="/ship">Ship</AppIcon>
@@ -41,7 +61,6 @@ import { GameStrings } from "@/scripts/game-strings";
 				<AppIcon svg="list" to="/accomplishments" class="dev">Accomplishments</AppIcon>
 				<AppIcon svg="chat" to="/interviews" class="h-100 dev">Interviews</AppIcon>
 				<AppIcon svg="timeline" to="/timeline" class="dev">NPC Timeline</AppIcon>
-				<AppIcon svg="settings" to="/settings" class="dev">Settings</AppIcon>
 				<AppIcon svg="paths" to="/world-map" class="h-100 dev">World Map</AppIcon>
 				<AppIcon svg="globe2" to="/world-pages" class="dev">World Pages</AppIcon>
 
