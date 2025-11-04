@@ -125,6 +125,25 @@
 					</li> -->
 				</ul>
 				<hr class="d-lg-none" />
+				<!-- Fancy user icon -->
+				<!-- <div class="dropdown text-end">
+					<a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+					</a>
+					<ul class="dropdown-menu text-small" style="">
+						<li>
+							<button class="dropdown-item d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings">
+								<svg class="menu-button-icon theme-color" style="font-size: 1.25rem;">
+									<use href="#settings"></use>
+								</svg>
+								<span class="ms-1">Settings</span>
+							</button>
+						</li>
+						<li><a class="dropdown-item" href="#">Profile</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="#">Sign out</a></li>
+					</ul>
+				</div> -->
 				<span class="nav-item">
 					<button class="btn btn-link nav-link py-2 px-0 px-lg-2 d-flex align-items-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings">
 						<svg class="menu-button-icon theme-color" style="font-size: 1.25rem;">
