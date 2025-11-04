@@ -20,7 +20,7 @@ export default defineConfig({
         "name": "Fractured Worlds Companion",
         "short_name": "Fractured Worlds",
         "display": "standalone",
-        "start_url": "/",
+        "start_url": ".",
         "icons": [
           {
             "src": "icons/favicon/web-app-manifest-192x192.png",
