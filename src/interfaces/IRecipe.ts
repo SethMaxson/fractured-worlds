@@ -1,18 +1,38 @@
-export type RecipeType = 'cookie' | 'curry' | 'drink' | 'ice cream';
+export type RecipeType = 'biscuit' | 'curry' | 'drink' | 'ice cream';
+
+type RecipeTag = 
+	RecipeType
+	// Colors
+	| 'purple'
+	// Ingredients
+	| 'almond' | 'chocolate' | 'cocoa' | 'coconut' | 'taro' | 'white chocolate'
+	// Cultures
+	| 'halfling'|'gnome'|'tortle'
+	// Worlds
+	| 'geoss'
+	// Biomes
+	| 'beach'
+;
 
 /** A JSON definition for a cooking recipe. */
 export interface IRecipe {
-    /** e.g. 'Recipe Name' */
+    /** @example 'Recipe Name' */
 	name: string;
-    /** e.g. 'recipe-name' */
+    /** @example 'recipe-name' */
 	id: string;
-	/** e.g. 'Cade Brightcloak' */
+	/** Who wrote this?
+	 * @example 'Cade Brightcloak' */
 	author: string;
-	/** e.g. 'Traditional recipe from Clovershire' */
+	/** The original creator of the recipe. 
+	 * @example 'Cade Brightcloak' */
+	creator?: string;
+	/** Where did this recipe originate?
+	 * @example 'Traditional recipe from Clovershire' */
 	source?: string;
 	type: RecipeType;
 	ingredients: string[];
 	instructions: string[];
-	summary?: string;
 	originWriteUp: string[];
+	summary?: string;
+	tags: RecipeTag[];
 }

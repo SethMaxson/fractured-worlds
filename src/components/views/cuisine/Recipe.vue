@@ -26,24 +26,21 @@ const recipe = hits && hits.length > 0 ? hits[0] : undefined;
 			<Breadcrumb :path="path" />
 		</header>
 		<main>
-			<div v-if="recipe">
+			<div class="py-2" v-if="recipe">
+				<h6>Ingredients</h6>
+				<div class="ingredients mb-2">
+					<div v-for="ingredient, i in recipe.ingredients" :key="ingredient">
+						<input class="form-check-input me-2" type="checkbox" :id="'ingredient'+i">
+						<label class="form-check-label" :for="'ingredient'+i">{{ingredient}}</label>
+					</div>
+				</div>
 				<div class="accordion" id="recipe-accordion">
-					<AccordionItem name="Ingredients" parent-id="recipe-accordion" :default-open="true">
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item" v-for="i in recipe.ingredients" :key="i">
-								{{ i }}
-							</li>
-						</ul>
-						<!-- <ul>
-							<li class="mb-1" v-for="i in recipe.ingredients" :key="i">
-								{{ i }}
-							</li>
-						</ul> -->
-					</AccordionItem>
 					<AccordionItem name="Directions" parent-id="recipe-accordion">
-						<ol class="list-group list-group-numbered list-group-flush">
-							<li class="list-group-item" v-for="i in recipe.instructions" :key="i">
-								{{ i }}
+						<ol class="list-group list-group-numbered list-group-flush instructions">
+							<li class="list-group-item" v-for="step, i in recipe.instructions" :key="step">
+								<!-- <input class="form-check-input me-2" type="checkbox" :id="'step'+i">
+								<label class="form-check-label" :for="'step'+i">{{ step }}</label> -->
+								{{ step }}
 							</li>
 						</ol>
 						<!-- <ol>
@@ -70,3 +67,22 @@ const recipe = hits && hits.length > 0 ? hits[0] : undefined;
 		</main>
 	</PageContainerVue>
 </template>
+
+<style lang="css">
+.ingredients {
+	column-count: 2;
+	font-size: 0.8rem;
+}
+
+.instructions .form-check-label,
+.ingredients .form-check-label {
+	display: inline;
+}
+
+@media (min-width: 992px) {
+	.ingredients {
+		column-count: 3;
+		font-size: 1rem;
+	}	
+}
+</style>
