@@ -21,6 +21,8 @@ class TimelineDisplaySettings {
 		majorOnly: ref(false),
 		/** An array of tags to show (omits events that don't have the specified tags). */
 		tags: ref<string[]>([]),
+		/** An array of types to show (omits events that don't have the specified types). */
+		types: ref<string[]>([]),
 		/** An array of years to omit. */
 		years: ref<number[]>([]),
 	}
@@ -52,6 +54,91 @@ class TimelineDisplaySettings {
 	public set fullView(v : boolean) {
 		this.displayToggles.showDescription.value = this.displayToggles.showExtra.value = v;
 	}
+}
+
+const FilterSets = {
+	tags: { },
+	types: {
+		worldVisits: ["world", "world-special"]
+	},
+	years: { },
+}
+
+// class ToggleableFilter {
+// 	settings: TimelineDisplaySettings;
+// 	set: string[];
+// 	constructor(settings: any, section: string, set: string[]) {
+// 		this.settings = settings;
+// 		this.set = set;
+// 	}
+	
+// 	//#region Filters
+// 	public get worldsFilter(): boolean {
+// 		return getMatchableArrayString(this.settings.filters.types).includes(getMatchableArrayString(FilterSets.types.worldVisits));
+// 	}
+	
+// 	private set worldsFilter(v : boolean) {
+// 		this.activeSettings.filters.types = v ? FilterSets.types.worldVisits : [];
+// 	}
+	
+// 	public toggleWorldsFilter() {
+// 		this.worldsFilter = !this.worldsFilter;
+// 	}
+// 	//#endregion Filters
+// }
+
+
+class TimelineDisplaySettingsManager {
+	activeSettings;
+	storedSettings;
+	constructor() {
+		this.activeSettings = reactive(new TimelineDisplaySettings());
+		this.storedSettings = reactive(new TimelineDisplaySettings());
+	}
+	
+	public backupSettings() {
+		// Copy toggles
+		const me = this;
+		Object.keys(this.activeSettings.displayToggles).forEach(function(keyName) {
+			const key = keyName as keyof typeof me.activeSettings.displayToggles;
+			me.activeSettings.displayToggles[key] = me.storedSettings.displayToggles[key];
+		});
+	}
+	public restoreSettings() {
+		const me = this;
+		// Copy toggles
+		Object.keys(this.storedSettings.displayToggles).forEach(function(keyName) {
+			const key = keyName as keyof typeof me.activeSettings.displayToggles;
+			me.storedSettings.displayToggles[key] = me.activeSettings.displayToggles[key];
+		});
+	}
+	//#region Views
+	public worldsVisitedView() {
+		// this.backupSettings();
+
+		this.activeSettings.filters.types = ["world", "world-special"];
+		this.activeSettings.displayToggles.showDescription = false;
+		this.activeSettings.displayToggles.showExtra = false;
+	}
+	//#endregion Views
+	
+	//#region Filters
+	public get worldsFilter(): boolean {
+		return getMatchableArrayString(this.activeSettings.filters.types).includes(getMatchableArrayString(FilterSets.types.worldVisits));
+	}
+	
+	private set worldsFilter(v : boolean) {
+		this.activeSettings.filters.types = v ? FilterSets.types.worldVisits : [];
+	}
+	
+	public toggleWorldsFilter() {
+		this.worldsFilter = !this.worldsFilter;
+	}
+	//#endregion Filters
+}
+
+function getMatchableArrayString(array: string[]) {
+	return ("|" + array.join("|") + "|")
 }
 
 const timelineEvents: ITimelineEvent[] = [
@@ -144,7 +231,7 @@ const timelineEvents: ITimelineEvent[] = [
 	{
 		date: { year: 1, month: 5, day: 18 },
 		header: "Met with Nortle concerning the Umbra Caller",
-		type: "world"
+		type: "faction"
 	},
 	{
 		date: { year: 1, month: 5, day: 20 },
@@ -191,7 +278,7 @@ const timelineEvents: ITimelineEvent[] = [
 			{ name: "unlocked direct travel to Weapon World", type: "navigation" }
 		],
 		header: "Cade delivered Direct Prism Keys to Battle World & Weapon World",
-		type: "world"
+		type: "item"
 	},
 	{
 		date: { year: 1, month: 7, day: 3 },
@@ -315,7 +402,7 @@ const timelineEvents: ITimelineEvent[] = [
 			{ name: "set course for Jurassic Park to see if Owl could resurrect Cucu", type: "navigation" },
 		],
 		header: "Battle World",
-		type: "world"
+		type: "world-special"
 	},
 	{
 		date: { year: 1, month: 8, day: 11 },
@@ -375,12 +462,14 @@ const timelineEvents: ITimelineEvent[] = [
 	},
 	{
 		date: { year: 1, month: 8, day: 24 },
-		// endDate: { year: 1, month: 8, day: 3 },
+		endDate: { year: 1, month: 8, day: 25 },
 		isMajor: true,
-		// event: "We reached Duloc.",
+		// event: "We reached Treasure Island.",
 		extra: [
 			{ name: "reached Treasure Island", type: "world" },
-			// { name: "met Toadette", type: "person" },
+			{ name: "met Gonzo", type: "person" },
+			{ name: "met Rizzo", type: "person" },
+			{ name: "met Captain Smollett", type: "person" },
 		],
 		header: "Treasure Island",
 		type: "world"
@@ -396,6 +485,34 @@ const timelineEvents: ITimelineEvent[] = [
 		],
 		header: "Barbieland",
 		type: "world"
+	},
+	{
+		date: { year: 1, month: 8, day: 28 },
+		// endDate: { year: 1, month: 8, day: 3 },
+		isMajor: true,
+		// event: "We reached Looney Tune Land.",
+		extra: [
+			{ name: "reached Looney Tune Land", type: "world" },
+			// { name: "met Toadette", type: "person" },
+		],
+		header: "Looney Tune Land",
+		type: "world"
+	},
+	{
+		date: { year: 1, month: 9, day: 3 },
+		extra: [
+			{ name: "Teleglyph for Ella — from Cade", type: "item" },
+			{ name: "Final Fantasy Fables: Chocobo Tales for Nintendo DS — from Cade", type: "item" },
+			{ name: "Teleglyph for Owl — from Owl", type: "item" },
+		],
+		gmOnly: true,
+		header: "The Starlight Shroom reaches Looney Tune Land",
+		type: "lightship"
+	},
+	{
+		date: { year: 1, month: 9, day: 4 },
+		header: "The big game",
+		type: "holiday"
 	},
 	{
 		date: { year: 1, month: 9, day: 7 },
@@ -432,25 +549,31 @@ const timelineEvents: ITimelineEvent[] = [
 	},
 ];
 
-const settings = reactive(new TimelineDisplaySettings());
+const sm = reactive(new TimelineDisplaySettingsManager());
 
 function resetDisplay() {
-	settings.ascending = true;
-	settings.filters.majorOnly = false;
-	settings.filters.tags = [];
-	settings.filters.years = [];
-	settings.displayToggles.showDescription = true;
-	settings.displayToggles.showExtra = true;
-	settings.displayToggles.showFancyTables = false;
-	settings.displayToggles.showHeaders = false;
-	settings.displayToggles.truncateDescription = true;
+	sm.activeSettings.ascending = true;
+	sm.activeSettings.filters.majorOnly = false;
+	sm.activeSettings.filters.tags = [];
+	sm.activeSettings.filters.types = [];
+	sm.activeSettings.filters.years = [];
+	sm.activeSettings.displayToggles.showDescription = true;
+	sm.activeSettings.displayToggles.showExtra = true;
+	sm.activeSettings.displayToggles.showFancyTables = false;
+	sm.activeSettings.displayToggles.showHeaders = false;
+	sm.activeSettings.displayToggles.truncateDescription = true;
 }
 
 const sortedTimeline = computed<ITimelineEvent[]>(() => {
 	var sortedResults = timelineEvents.slice();
+	const settings = sm.activeSettings;
+
 	// Filter
 	if (settings.filters.majorOnly) {
 		sortedResults = sortedResults.filter(event => event.isMajor);
+	}
+	if (settings.filters.types.length > 0) {
+		sortedResults = sortedResults.filter(event => event.type && settings.filters.types.includes(event.type));
 	}
 	// Sort
 
@@ -491,7 +614,7 @@ const sortedTimeline = computed<ITimelineEvent[]>(() => {
 					<div class="modal-body">
 						<div id="settings-form">
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="switchMajorOnly" v-model="settings.filters.majorOnly" />
+								<input class="form-check-input" type="checkbox" role="switch" id="switchMajorOnly" v-model="sm.activeSettings.filters.majorOnly" />
 								<label class="form-check-label" for="switchMajorOnly">Major Events Only</label>
 							</div>
 							<!-- <div class="form-check form-switch">
@@ -499,12 +622,18 @@ const sortedTimeline = computed<ITimelineEvent[]>(() => {
 								<label class="form-check-label" for="switchFullView">Full View</label>
 							</div> -->
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="switchEventDescription" v-model="settings.displayToggles.showDescription" />
-								<label class="form-check-label" for="switchEventDescription">Description</label>
+								<input class="form-check-input" type="checkbox" role="switch" id="switchEventDescription" v-model="sm.activeSettings.displayToggles.showDescription" />
+								<label class="form-check-label" for="switchEventDescription">Show Description</label>
 							</div>
 							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="switchEventSubevents" v-model="settings.displayToggles.showExtra" />
-								<label class="form-check-label" for="switchEventSubevents">Subevents</label>
+								<input class="form-check-input" type="checkbox" role="switch" id="switchEventSubevents" v-model="sm.activeSettings.displayToggles.showExtra" />
+								<label class="form-check-label" for="switchEventSubevents">Show Subevents</label>
+							</div>
+							<hr />
+							<h6>Filters</h6>
+							<div class="mb-1">Event Type</div>
+							<div class="btn-group btn-group-sm" role="group">
+								<button class="btn btn-outline-primary" :class="{'active': sm.worldsFilter}" type="button" @click="sm.toggleWorldsFilter">Worlds Visits</button>
 							</div>
 						</div>
 					</div>
@@ -523,7 +652,7 @@ const sortedTimeline = computed<ITimelineEvent[]>(() => {
 			<!-- #region Timeline display -->
 			 <TimelineDisplay
 			 	:timeline-events="sortedTimeline"
-				:settings="settings.displayToggles"
+				:settings="sm.activeSettings.displayToggles"
 			 />
 			<!-- #endregion Timeline display -->
 		</main>

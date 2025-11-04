@@ -436,7 +436,8 @@ export const CrewCharacterDatas: ICharacterData[] = [
         },
         homeworld: "Scotland, Earth, 1998",
         images: {
-            portrait: "img/npc/joey-morton-cropped.png"
+            // portrait: "img/npc/joey-morton-cropped.png"
+            portrait: "img/npc/joey-morton-2.png"
         },
         spotify: {
 			primaryPlaylistID: "5ke9F1xiKQPtsdNTetNYet"

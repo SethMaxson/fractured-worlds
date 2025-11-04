@@ -3,8 +3,8 @@ import type { ICrewCardData } from "@/interfaces/ICrewCardData";
 export const CrewCardStats: ICrewCardData[] = [
     {
         name: "C.O.B.B.",
+        id: "cobb",
         subtitle: "Android Surgeon",
-        img: "img/party/cobb-toon.png",
         originType: "",
         type: "med",
         rarity:"legendary",
@@ -20,8 +20,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Li'l Phil Antonio",
+        id: "phil",
         subtitle: "Centaur Sorcerer",
-        img: "img/party/phil-toon.png",
         originType: "",
         type: "mag",
         rarity:"legendary",
@@ -36,12 +36,12 @@ export const CrewCardStats: ICrewCardData[] = [
         numberInSeries: 2,
     },
     {
-        name: "Potiki",
+        name: "Pontiki",
+        id: "pontiki",
         subtitle: "Ratfolk Gunslinger",
-        img: "img/party/pontiki.png",
         originType: "",
         type: "normal",
-        rarity:"legendary",
+        rarity:"uncommon",
         stats: {
             int: 1,
             magic: 1,
@@ -54,6 +54,7 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Tero",
+        id: "tero",
         subtitle: "Kitsune Kineticist",
         img: "img/party/tero-portrait.png",
         originType: "",
@@ -71,8 +72,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Hamisfore",
+        id: "hamisfore",
         subtitle: "Gnome Barbarian",
-        img: "img/npc/hamisfore-toon.png",
         originType: "",
         type: "combat",
         rarity:"uncommon",
@@ -88,8 +89,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Ootah",
+        id: "ootah",
         subtitle: "Orc Warrior",
-        img: "img/npc/ootah.webp",
         originType: "",
         type: "combat",
         rarity:"common",
@@ -105,8 +106,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Giuseppe da Albiate",
+        id: "giuseppe-da-albiate",
         subtitle: "Aspiring Painter",
-        img: "img/npc/giuseppe.png",
         originType: "",
         type: "craft",
         rarity:"common",
@@ -122,8 +123,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Tom Cox",
+        id: "tom-cox",
         subtitle: "Folk Singer",
-        img: "img/npc/tom-cox.webp",
         originType: "",
         type: "ent",
         rarity:"common",
@@ -139,8 +140,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Eva Davis",
+        id: "eva-davis",
         subtitle: "Computer Programmer",
-        img: "img/npc/eva-davis.png",
         originType: "",
         type: "tech",
         rarity:"common",
@@ -156,8 +157,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Carrie Ward",
+        id: "carrie-ward",
         subtitle: "Registered Nurse",
-        img: "img/npc/carrie-ward.webp",
         originType: "",
         type: "med",
         rarity:"common",
@@ -173,8 +174,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Gloria",
+        id: "gloria",
         subtitle: "Dystopian Squatter",
-        img: "img/npc/gloria.jpg",
         originType: "",
         type: "combat",
         rarity:"rare",
@@ -190,8 +191,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Tommy One",
+        id: "tommy-one",
         subtitle: "Android Factory Reject",
-        img: "img/npc/tommy-one.png",
         originType: "",
         type: "normal",
         rarity:"common",
@@ -207,6 +208,7 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Zuzu",
+        id: "zuzu",
         subtitle: "Mystical Child",
         img: "img/npc/zuzu.png",
         originType: "",
@@ -224,8 +226,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Joey Morton",
+        id: "joey-morton",
         subtitle: "Mall Cop",
-        img: "img/npc/joey-morton-2.png",
         originType: "",
         type: "normal",
         rarity:"common",
@@ -241,8 +243,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Gugg",
+        id: "gugg",
         subtitle: "Neanderthal Hunter",
-        img: "img/npc/gugg.png",
         originType: "",
         type: "combat",
         rarity:"common",
@@ -258,8 +260,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Bebop",
+        id: "bebop",
         subtitle: "Mutant Enforcer",
-        img: "img/tokens/bebop.png",
         originType: "",
         type: "combat",
         rarity:"uncommon",
@@ -275,8 +277,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Blackhand Roo",
+        id: "blackhand-roo",
         subtitle: "Train Mechanic",
-        img: "img/npc/blackhand-roo.png",
         originType: "",
         type: "eng",
         rarity:"uncommon",
@@ -292,8 +294,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Per Schnorr",
+        id: "per-schnorr",
         subtitle: "Spiritual Leader",
-        img: "img/tokens/per-schnorr.png",
         originType: "",
         type: "normal",
         rarity:"common",
@@ -309,8 +311,8 @@ export const CrewCardStats: ICrewCardData[] = [
     },
     {
         name: "Hoots the Owl",
+        id: "hoots",
         subtitle: "Jazz Musician",
-        img: "img/npc/hoots.jpg",
         originType: "",
         type: "ent",
         rarity:"common",

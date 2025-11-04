@@ -3,8 +3,9 @@ type CrewType = "normal" | "combat" | "craft" | "eng" | "ent" | "mag" | "med" | 
 
 export interface ICrewCardData {
 	name: string;
+	id: string;
 	subtitle: string;
-	img: string;
+	img?: string;
 	originType: string;
 	type: CrewType;
 	rarity: CrewRarity;

@@ -26,7 +26,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					:simplified="simplifiedView"
 					:balancing="balancingView"
 					:name="char.name"
-					:img="char.img"
+					:img="char.img as string"
 					:origin-type="char.originType"
 					:type="char.type || 'Normal'"
 					:rarity="char.rarity || 'common'"
@@ -52,6 +52,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 import { defineComponent } from "vue";
 import type { ICrewCardData } from '@/interfaces/ICrewCardData';
 import { CrewCardStats } from '@/data/characters/crew-card-stats';
+import { CharacterDataUtils } from '@/scripts/utils/character-data-utils';
 
 
 export default defineComponent({
@@ -76,6 +77,12 @@ export default defineComponent({
 				// else {
 					filteredCrew = this.crewData;
 				// }
+
+				filteredCrew.forEach(c => {
+					if (!c.img) {
+						c.img = CharacterDataUtils.findCharacterById(c.id)?.images.portrait;
+					}
+				})
 
 				return filteredCrew;
 				// return filteredCrew.sort(function(a, b) {
