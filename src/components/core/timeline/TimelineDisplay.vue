@@ -52,7 +52,7 @@ function shouldDrawMonthHeader(index: number): boolean {
 }
 
 function prettyDate(date: IDate): string {
-	return Utils.Date.Format.MDY(date);
+	return Utils.Dates.Format.MDY(date);
 }
 
 function getClassList(event: ITimelineEvent, index: number) {
@@ -60,6 +60,10 @@ function getClassList(event: ITimelineEvent, index: number) {
 	list.push(shouldAlignLeft(index) ? "left" : "right");
 	if (event.type) {
 		list.push(event.type, "use-theme");
+
+		if (event.type == "now") {
+			list.push("text-primary-emphasis", "fw-bold", "opacity-100", "fs-5");
+		}
 	}
 
 	if (shouldDrawMonthHeader(index)) {
@@ -99,6 +103,8 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 			return "#question";
 		case "navigation":
 			return "#compass-rose";
+		case "now":
+			return "#clock";
 		case "person":
 			return "#person";
 		case "rebirth":
@@ -122,8 +128,21 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 			<svg class="event-icon" v-if="event.isMajor"><use :href="getIcon(event.type) || '#compass-rose'"></use></svg>
 			<div class="time-header bg-info-subtle border border-info text-body" v-if="shouldDrawMonthHeader(i)">{{ event.date.month }}</div>
 
+			
+			<!-- Current date indicator -->
+			<div class="card ms-4 p-0 border-0 now" v-if="event.type == 'now'">
+				<div class="card-body ps-0 pe-4 py-0 now">
+					<h6 class="text-primary-emphasis mb-1 fst-italic fs-5">
+						<span class="pe-1">{{ prettyDate(event.date) + (event.endDate? ("  —  " + prettyDate(event.endDate)) : "")}} SE—</span>
+						<span>
+							<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#clock"></use></svg>{{ event.header}}
+						</span>
+					</h6>
+				</div>
+			</div>
+
 			<!-- #region major timeline event -->
-			<div class="card" v-if="event.isMajor">
+			<div class="card" v-else-if="event.isMajor">
 				<div class="card-body p-4 py-3">
 					<h6 class="text-body p-1 px-2 fst-italic date bg-info-subtle border-info-subtle">
 						<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#clock"></use></svg>{{ prettyDate(event.date) + (event.endDate? (" — " + prettyDate(event.endDate)) : "")}} SE
@@ -244,6 +263,10 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 .mystery {
 	--event-color: var(--zelda-c-text-tww-purple);
 }
+.now {
+	--event-color: var(--color-timeline-date);
+	color: var(--color-timeline-date);
+}
 .love,
 .zuzu,
 .person {
@@ -357,6 +380,20 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 	border-bottom-color: transparent;
 }
 
+.minor.left.now::before {
+	content: " ";
+	position: absolute;
+	top: 0px;
+	z-index: 1;
+	right: 30px;
+	border: medium solid;
+	border-width: 8px 0 8px 8px;
+	border-color: transparent transparent transparent var(--bs-primary-text);
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+}
+
 .major.left::before {
 	content: " ";
 	position: absolute;
@@ -399,6 +436,10 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 	border-style: dashed !important;
 	border-radius: 6px 6px;
 	opacity: 0.6;
+}
+
+.minor > .card.now {
+	opacity: 1;
 }
 
 .minor td {
@@ -496,6 +537,16 @@ function getIcon(type: TimelineSubEventType | undefined, minor: boolean = false)
 		border-top-color: transparent;
 		border-bottom-color: transparent;
 		border-left-color: transparent;
+	}
+	
+	.timeline.minor.left.now::before {
+		border: medium solid var(--bs-primary-text);
+		border-width: 8px 8px 8px 0;
+		border-top-color: transparent;
+		border-bottom-color: transparent;
+		border-left-color: transparent;
+		right: auto;
+		top: 4px;
 	}
 
 	/* Fancy circle */

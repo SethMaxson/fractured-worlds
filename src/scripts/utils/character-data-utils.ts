@@ -43,7 +43,7 @@ export namespace CharacterDataUtils {
 
     /** Lookup a character's birthday, if known. */
     export function getBirthday(character: ICharacterData, birthdayEventSet: ICalendarEvent[][]): IFullCalendarEvent | undefined {
-        const allBirthdays = Utils.Date.Convert.ICalendarEvent.arrayToIFullCalenderEvents(birthdayEventSet);
+        const allBirthdays = Utils.Dates.Convert.ICalendarEvent.arrayToIFullCalenderEvents(birthdayEventSet);
         const matches = allBirthdays.filter(b => {
             const compare = (b.id ? b.id : b.name).toLowerCase().trim();
             return compare == character.id.toLowerCase().trim() || compare == character.name.toLowerCase().trim();

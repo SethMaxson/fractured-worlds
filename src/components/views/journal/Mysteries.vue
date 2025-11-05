@@ -136,6 +136,7 @@ import JournalHeader from './subviews/JournalHeader.vue';
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { Utils } from "@/scripts/utils";
 
 export default defineComponent({
 	name: 'Mysteries',
@@ -157,6 +158,8 @@ export default defineComponent({
 		};
 	},
 	mounted() {
+		Utils.LocalStorage.Dates.LastPageView.setNow("QuestLog");
+
 		const exampleModal = document.getElementById('questModal');
 		if (exampleModal) {
 			exampleModal.addEventListener('show.bs.modal', event => {

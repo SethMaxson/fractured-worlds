@@ -306,6 +306,8 @@ export default defineComponent({
 			},
         },
 		mounted() {
+			Utils.LocalStorage.Dates.LastPageView.setNow("Reviews");
+			
 			this.changeMenu(parseInt(localStorage.getItem("reviewsIndex") || "0"));
 			this.changeSortDirection(localStorage.getItem("reviewsSortAscending") == "true");
 			this.changeSortOn(localStorage.getItem("reviewsSortOn") || "date");

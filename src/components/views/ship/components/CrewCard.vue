@@ -155,10 +155,10 @@ switch (props.rarity.toLowerCase()) {
 		<div class="w-100 h-100 rounded-4 pb-0 card-frame" :class="props.rarity">
 			<div class="card h-100 text-center text-bg-secondary rounded-4 border-0">
 				<div class="card-header font-emphasis text-start rounded-pill bg-primary-subtle border-bottom border-2 d-flex justify-content-between align-items-center m-1 mb-0">
-					<h3 class="font-emphasis fs-3 my-0">
+					<h3 class="font-emphasis fs-3 my-0 text-truncate">
 						{{ props.name }}
 					</h3>
-					<div>
+					<div class="flex-shrink-0">
 						<template v-for="icon in rarityStars">
 							<span class="icon" v-if="icon == 'spacer'"></span>
 							<svg class="icon" v-else>
@@ -172,7 +172,7 @@ switch (props.rarity.toLowerCase()) {
 					<Image class="portrait cover" alt="portrait" :src="props.img" :is-external="false" />
 				</div>
 				<div class="card-body my-0 p-0 mx-1">
-					<h6 class="card-subtitle px-2 px-lg-3 fs-5 font-emphasis rounded-pill bg-primary-subtle border border-2 border-secondary-subtle text-start">
+					<h6 class="card-subtitle px-2 px-lg-3 fs-6 font-emphasis rounded-pill bg-primary-subtle border border-2 border-secondary-subtle text-center">
 						<span class="text-capitalize">
 							<span v-if="props.type == 'tech'">
 								<abbr title="Advanced Technology">Adv. Tech</abbr>
@@ -218,7 +218,6 @@ switch (props.rarity.toLowerCase()) {
 							</div>
 						</div>
 						
-
 						<!-- Simplified Stat View -->
 						<div v-if="props.simplified" class="text-bg-secondary bg-info-subtle my-0 px-2 pt-1 stats simplified-stats">
 							<div class="text-center border-bottom">
@@ -233,7 +232,7 @@ switch (props.rarity.toLowerCase()) {
 										Drive
 									</div>
 								</div>
-								<div class="row">
+								<div class="row d-none d-lg-flex g-3">
 									<div class="col" :class="{ 'poor-score': simplifiedStats.mind < 1.5, 'max-score': simplifiedStats.mind > 4 }">
 										<svg class="icon" v-for="icon in starIconClasses(simplifiedStats.mind)">
 											<use :href="icon"></use>
@@ -248,6 +247,23 @@ switch (props.rarity.toLowerCase()) {
 										<svg class="icon" v-for="icon in starIconClasses(simplifiedStats.drive)">
 											<use :href="icon"></use>
 										</svg>
+									</div>
+								</div>
+								<div class="row d-flex d-lg-none py-1 g-3" style="font-size: 0.8rem;">
+									<div class="col">
+										<span class="badge rounded-pill border border-2 border-secondary" :class="{ 'border-danger': simplifiedStats.mind < 1.5, 'border-success': simplifiedStats.mind > 4 }">
+											{{simplifiedStats.mind}}
+										</span>
+									</div>
+									<div class="col">
+										<span class="badge rounded-pill border border-2 border-secondary" :class="{ 'border-danger': simplifiedStats.body < 1.5, 'border-success': simplifiedStats.body > 4 }">
+											{{simplifiedStats.body}}
+										</span>
+									</div>
+									<div class="col">
+										<span class="badge rounded-pill border border-2 border-secondary" :class="{ 'border-danger': simplifiedStats.drive < 1.5, 'border-success': simplifiedStats.drive > 4 }">
+											{{simplifiedStats.drive}}
+										</span>
 									</div>
 								</div>
 							</div>
@@ -288,11 +304,7 @@ switch (props.rarity.toLowerCase()) {
 							</li>
 						</ul>
 
-
 					</div>
-					<!-- <div class="card-text text-truncate">
-						<slot></slot>
-					</div> -->
 				</div>
 				<div class="card-footer m-0 p-1 pt-2 border-dark-subtle border-0 serif text-bg-dark row text-start">
 					<div class="col text-muted">
@@ -301,10 +313,9 @@ switch (props.rarity.toLowerCase()) {
 							◉ {{ props.rarity }}
 						</span>
 					</div>
-					<div class="col">
-						
-					</div>
-					<!-- {{props.type.length > 0 ? props.type : "Normal"}} -->
+					<!-- <div class="col">
+						{{props.type.length > 0 ? props.type : "Normal"}}
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -437,7 +448,7 @@ div.card-img {
 
 .stats,
 .stat-label {
-	font-size: 0.9rem;
+	font-size: 0.7rem;
 }
 
 /* .stat-line {

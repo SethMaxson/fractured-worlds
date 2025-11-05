@@ -4,47 +4,29 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import Portrait from "@/components/core/Portrait.vue";
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import { GameStrings } from "@/scripts/game-strings";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
+import { Utils } from "@/scripts/utils";
+
+onMounted(() => {
+    Utils.LocalStorage.Dates.LastPageView.setNow("Contacts");
+})
 </script>
 
 <template>
 	<PageContainerVue>
 		<header>
             <Breadcrumb path="/contacts" />
-			<ViewBlurb header="Contacts" author="Eva Davis">
+			<ViewBlurb header="Contacts" author="Eva Davis" version="1.0.1">
 				We have means of directly contacting these people without first having to find them in person every time.
 			</ViewBlurb>
 		</header>
 		<main>
-			<ul class="list-group list-group-flush" v-if="false">
-                <div class="row border-bottom border-2 m-0 fw-bold bg-info-subtle">
-                    <div class="col border-end border-1">Name</div>
-                    <div class="col text border-end border-1 d-none d-xl-block">Primary Contact in Party</div>
-                    <div class="col col-xl-4 border-1">Type(s)</div>
-                </div>
-                <div class="row border-bottom border-2 m-0" v-for="(item, index) in filteredContacts">
-                    <div class="col border-end border-1">
-                        {{item.name}}
-                    </div>
-                    <div class="col text border-end border-1 d-none d-xl-block">
-                        {{item.primaryPC || '—'}}
-                    </div>
-                    <div class="col col-xl-4 border-1">
-                        <span class="d-block d-lg-inline" v-for="(obj, index) in item.types">
-                            <span class="d-none d-lg-inline">{{ index > 0 ? ', ' : undefined }}</span>
-                            <svg class="menu-button-icon theme-color me-1 d-inline" v-if="getIcon(obj)"><use :href="getIcon(obj)"></use></svg>
-                            <span>{{obj}}</span>
-                        </span>
-                    </div>
-                </div>
-			</ul>
-            
-            <div class="card mb-3" v-for="(item, index) in filteredContacts" :key="index" v-else-if="true">
+            <div class="card mb-3" v-for="(item, index) in filteredContacts" :key="index">
                 <div class="row g-0 m-0 ps-1">
                     <div class="col-4 col-md-3 col-lg-2 col-xl-1 text-center">
                         <Portrait class="bg-nle bg-opacity-50 img-fluid rounded-circle" :src="item.image" />
                     </div>
-                    <div class="col-12 col-md-9 col-lg-10 col-xl-11">
+                    <div class="col-8 col-md-9 col-lg-10 col-xl-11">
                         <div class="card-body py-2 ps-lg-3 pe-0">
                             <h5 class="card-title">{{ item.name }}</h5>
                             <p class="card-text small text-body-secondary p-0 m-0 my-1" v-if="item.primaryPC">Primary contact in party: {{ item.primaryPC }}</p>

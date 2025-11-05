@@ -4,6 +4,7 @@ import type { IWorldData } from "@/interfaces/IWorldData";
 import { CampaignDate } from "@/objects/CampaignDate";
 import { GameStrings } from "./game-strings";
 import { Config } from "./config";
+import type { IDate } from "@/interfaces/IDate";
 
 export namespace Utils {
     export namespace LocalStorage {
@@ -21,7 +22,6 @@ export namespace Utils {
         export function setIsGM(value: boolean) {
             ViewerRole.set(value ? 'gm' : 'player');;
         }
-
         export namespace ColorTheme {
             const colorThemeKey = 'colorTheme';
             export function get() {
@@ -46,6 +46,24 @@ export namespace Utils {
             }
         }
 
+        export namespace Dates {
+            export namespace LastAppUpdate {
+                export const get = () => localStorage.getItem("lastAppUpdate") || new Date(0, 0, 0);
+                export const set = (value: string) => localStorage.setItem("lastAppUpdate", value);
+            }
+            export namespace LastPageView {
+                export function get(pageName: string) {
+                    return localStorage.getItem("lastPageView" + pageName) ? new Date(localStorage.getItem("lastPageView" + pageName) as string) : new Date(0, 0, 1);
+                }
+                export function set(pageName: string, value: Date) {
+                    localStorage.setItem("lastPageView" + pageName, value.toDateString());
+                }
+                export function setNow(pageName: string) {
+                    localStorage.setItem("lastPageView" + pageName, Date.now().toString());
+                }
+            }
+        }
+
         export namespace ViewerRole {
             export const get = () => localStorage.getItem(isGmKey) || (Config.IsGM ? 'gm' : 'player');
             export function set(value: string) {
@@ -55,7 +73,7 @@ export namespace Utils {
         }
 
     }
-    export namespace Date {
+    export namespace Dates {
         /** A collection of functions to convert one dates between formats. */
         export namespace Convert {
             export namespace ICalendarEvent {
@@ -169,6 +187,11 @@ export namespace Utils {
             return str;
         }
     }
+    export namespace Pages {
+        export function hasNotification(pageName: string, lastUpdate: Date) {
+            return lastUpdate > LocalStorage.Dates.LastPageView.get(pageName);
+        }
+    }
     export namespace SortComparators {
         /** Compare two date strings (e.g. "06/05/0001") */
         export function dateString(a: string|undefined, b: string|undefined, ascending: boolean = true) {
@@ -181,10 +204,10 @@ export namespace Utils {
                 : compA > compB ? aWins : bWins
             );
         }
-        /** Compare two CammpaignDate objects */
-        export function campaignDate(a: CampaignDate, b: CampaignDate, ascending: boolean = true) {
-            const compA = Date.Format.MDY(a);
-            const compB = Date.Format.MDY(b);
+        /** Compare two IDate objects */
+        export function campaignDate(a: IDate, b: IDate, ascending: boolean = true) {
+            const compA = Dates.Format.MDY(a);
+            const compB = Dates.Format.MDY(b);
             const aWins = ascending ? 1 : -1;
             const bWins = ascending ? -1 : 1;
             return (

@@ -20,7 +20,10 @@ import Image from '@/components/core/Image.vue';
 					:rarity="char.rarity || 'common'"
 				>
 					<div class="d-inline-flex gap-1 p-2 border align-items-stretch">
-						<Image class="portrait cover" alt="portrait" :src="char.img" :is-external="false" style="max-width: 5rem; max-height: 5rem;" />
+						<Image v-if="char.img" class="portrait cover" alt="portrait" :src="char.img" :is-external="false" style="max-width: 5rem; max-height: 5rem;" />
+						<svg class="portrait cover" width="300" height="300" v-else>
+							<use href="#user2"></use>
+						</svg>
 						<div>
 							<span>{{ char.name }}</span>
 							<div class="d-inline-flex gap-1">
@@ -48,6 +51,7 @@ import Image from '@/components/core/Image.vue';
 import { defineComponent } from "vue";
 import type { ICrewCardData } from '@/interfaces/ICrewCardData';
 import { CrewCardStats } from '@/data/characters/crew-card-stats';
+import { CharacterDataUtils } from '@/scripts/utils/character-data-utils';
 
 
 export default defineComponent({
@@ -73,6 +77,12 @@ export default defineComponent({
 				// else {
 					filteredCrew = this.crewData;
 				// }
+
+				filteredCrew.forEach(c => {
+					if (!c.img) {
+						c.img = CharacterDataUtils.findCharacterById(c.id)?.images.portrait;
+					}
+				})
 
 				return filteredCrew;
 				// return filteredCrew.sort(function(a, b) {

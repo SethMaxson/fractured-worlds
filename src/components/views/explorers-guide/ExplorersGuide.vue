@@ -7,11 +7,19 @@ import GlossaryEntry from "@/components/core/GlossaryEntry.vue";
 import { Glossary } from "@/data/glossary";
 import { GlossaryListGroups } from "@/data/enums/glossary-list-groups";
 import Image from "@/components/core/Image.vue";
+import { Utils } from "@/scripts/utils";
+import { onMounted } from "vue";
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
+
+onMounted(() => {
+    Utils.LocalStorage.Dates.LastPageView.setNow("ExplorersGuide");
+})
 </script>
 
 <template>
 	<PageContainerVue>
 		<header>
+			<Breadcrumb path="/explorers-guide" />
 			<ViewBlurb header="Explorer's Guide">
 				The writings of Marco Rayleigh (and others).
 			</ViewBlurb>

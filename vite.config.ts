@@ -41,7 +41,8 @@ export default defineConfig({
             "purpose": "any"
           }
         ],
-        "theme_color": "#434ff1",
+        // "theme_color": "#434ff1",
+        "theme_color": "#08337a",
         "background_color": "#08337a"
       },
       injectRegister: 'auto',

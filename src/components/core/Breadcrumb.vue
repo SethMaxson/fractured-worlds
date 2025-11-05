@@ -1,11 +1,11 @@
 <template>
-	<nav aria-label="breadcrumb" class="p-2 m-0 border-2 border-primary border-bottom fs-6 bg-navbar" :class="props.class">
+	<nav aria-label="breadcrumb" class="p-2 m-0 border-primary-subtle border-bottom fs-6 bg-dark-subtle" :class="props.class">
 		<ol class="breadcrumb my-0">
 			<template v-for="part in breadcrumbs">
-				<li class="breadcrumb-item active" aria-current="page" v-if="part.isLast">
+				<li class="small breadcrumb-item active" aria-current="page" v-if="part.isLast">
 					{{part.name}}
 				</li>
-				<li class="breadcrumb-item" v-else>
+				<li class="small breadcrumb-item" v-else>
 					<router-link active-class="active" :to="part.path">{{part.name}}</router-link>
 				</li>
 			</template>

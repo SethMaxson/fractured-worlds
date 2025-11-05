@@ -66,7 +66,7 @@ export const CrewCardStats: ICrewCardData[] = [
             spd: 3,
             str: 3,
             tech: 3.5,
-            will: 4
+            will: 5
         },
         numberInSeries: 3,
     },
@@ -141,7 +141,7 @@ export const CrewCardStats: ICrewCardData[] = [
     {
         name: "Eva Davis",
         id: "eva-davis",
-        subtitle: "Computer Programmer",
+        subtitle: "Programmer",
         originType: "",
         type: "tech",
         rarity:"common",
@@ -175,7 +175,7 @@ export const CrewCardStats: ICrewCardData[] = [
     {
         name: "Gloria",
         id: "gloria",
-        subtitle: "Dystopian Squatter",
+        subtitle: "Railroad Agent",
         originType: "",
         type: "combat",
         rarity:"rare",
@@ -244,7 +244,7 @@ export const CrewCardStats: ICrewCardData[] = [
     {
         name: "Gugg",
         id: "gugg",
-        subtitle: "Neanderthal Hunter",
+        subtitle: "Neanderthal",
         originType: "",
         type: "combat",
         rarity:"common",

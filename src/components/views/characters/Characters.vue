@@ -12,6 +12,12 @@ import CrewFormer from "./characterDecks/CrewFormer.vue";
 
 import { CharacterDatas } from "@/data/character-datas";
 import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
+import { Utils } from "@/scripts/utils";
+import { onMounted } from "vue";
+
+onMounted(() => {
+    Utils.LocalStorage.Dates.LastPageView.setNow("People");
+})
 
 const TheGang = [
 	CharacterDataUtils.findCharacter(CharacterDatas, 'cobb'),

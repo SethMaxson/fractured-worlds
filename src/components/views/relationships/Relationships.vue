@@ -61,7 +61,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 													({{ item.label }})
 												</span>
 												<div style="font-size: 0.8rem;" class="fw-normal card-text small text-body-secondary" v-if="item.met">
-													met {{ Utils.Date.Format.MDY(item.met) }}
+													met {{ Utils.Dates.Format.MDY(item.met) }}
 												</div>
 											</h6>
 											<div class="flex-shrink-0 ps-1" :class="item.rankDisplay.class" :key="item.person">
@@ -505,6 +505,7 @@ export default defineComponent({
 		},
 	},
 	mounted() {
+		Utils.LocalStorage.Dates.LastPageView.setNow("Relationships");
 		this.changeUser(localStorage.getItem("relationshipUser") || "unset");
 		this.state.sortAsc = (localStorage.getItem("relationshipSortDir") || "asc") == "asc";
 		this.state.sortBy = localStorage.getItem("relationshipSortBy") as "met" || "met";

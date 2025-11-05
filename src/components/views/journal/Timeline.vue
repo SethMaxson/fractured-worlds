@@ -9,7 +9,13 @@ import { CampaignDate } from "@/objects/CampaignDate";
 import { Utils } from "@/scripts/utils";
 import type { ITimelineEvent, TimelineSubEventType } from "@/interfaces/ITimeline";
 import type { IDate } from "@/interfaces/IDate";
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
+import { CampaignState } from "@/data/campaign-state";
+
+
+onMounted(() => {
+    Utils.LocalStorage.Dates.LastPageView.setNow("Timeline");
+})
 
 /** Display Settings states */
 class TimelineDisplaySettings {
@@ -566,6 +572,11 @@ function resetDisplay() {
 
 const sortedTimeline = computed<ITimelineEvent[]>(() => {
 	var sortedResults = timelineEvents.slice();
+	sortedResults.push({
+		header: "Now",
+		date: CampaignState.CurrentDate,
+		type: "now"
+	})
 	const settings = sm.activeSettings;
 
 	// Filter
@@ -576,6 +587,9 @@ const sortedTimeline = computed<ITimelineEvent[]>(() => {
 		sortedResults = sortedResults.filter(event => event.type && settings.filters.types.includes(event.type));
 	}
 	// Sort
+	sortedResults = sortedResults.sort((a, b) => {
+		return Utils.SortComparators.campaignDate(a.date, b.date);
+	})
 
 	// Return
 	return sortedResults;

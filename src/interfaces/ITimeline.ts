@@ -1,6 +1,6 @@
 import type { IDate } from "./IDate";
 
-export type TimelineEventType = "death" | "drug" | "faction" | "holiday" | "item" | "lightship" | "love" | "mystery" | "navigation" | "person" | "rebirth" | "world" | "world-special" | "zuzu";
+export type TimelineEventType = "death" | "drug" | "faction" | "holiday" | "item" | "lightship" | "love" | "mystery" | "now" | "navigation" | "person" | "rebirth" | "world" | "world-special" | "zuzu";
 
 /** An event on a timeline. */
 export interface ITimelineEvent {

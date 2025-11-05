@@ -101,7 +101,7 @@ const portraitClasses = Utils.Images.getPortraitClassesFromType(props.person?.ty
 						Homeworld: <b>{{person.homeworld}}</b>
 					</div>
 					<div v-if="birthday">
-						Birthday: <b>{{Utils.Date.Format.DMon(birthday)}}</b>
+						Birthday: <b>{{Utils.Dates.Format.DMon(birthday)}}</b>
 					</div>
 					<div v-if="person.mental?.drive">
 						Drive: <b>{{person.mental.drive}}</b>

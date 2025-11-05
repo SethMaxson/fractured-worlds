@@ -4,7 +4,16 @@
 		<div class="container">
 			<!-- <router-link class="navbar-brand" to="/"> Fractured Worlds </router-link> -->
 			<!-- This version forces a refresh, thereby fetching latest version -->
-			<a class="navbar-brand" :href="Config.IsDebug ? '/' : '/fractured-worlds/'"> Fractured Worlds </a>
+			<a class="navbar-brand" :href="Config.IsDebug ? '/' : '/fractured-worlds/'">
+				<!-- <span class="d-none d-lg-inline"> Fractured Worlds </span>
+				<span class="d-inline d-lg-none"> FW </span> -->
+				Fractured Worlds
+			</a>
+			<!-- <button class="btn nav-link p-0 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSettings">
+				<svg class="menu-button-icon theme-color" style="font-size: 1.25rem;">
+					<use href="#settings"></use>
+				</svg>
+			</button> -->
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
 				aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
