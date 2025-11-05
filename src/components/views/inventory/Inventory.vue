@@ -65,7 +65,24 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 			</div>
             <div name="content" class="border border-primary border-2 p-4 border-rounded">
 
-				<template v-if="state.mode == 'event'">
+				<div v-if="state.mode == 'prism_key'">
+					<h3>Prism Keys</h3>
+					<hr class="border border-secondary border-2 opacity-75" />
+					<ol class="list-group list-group-numbered">
+						<li class="list-group-item"> Somewhere — from Kenny Cobblerock </li>
+						<li class="list-group-item"> Wonderland </li>
+						<li class="list-group-item"> Big Apple </li>
+						<li class="list-group-item"> Land of Oz </li>
+						<li class="list-group-item"> Berk </li>
+						<li class="list-group-item"> Battle World — from Cade Brightcloak </li>
+						<li class="list-group-item"> Weapon World — from Cade Brightcloak </li>
+						<li class="list-group-item"> Duloc Outlands </li>
+						<li class="list-group-item"> Treasure Island </li>
+						<li class="list-group-item"> Barbieland </li>
+					</ol>
+				</div>
+
+				<template v-else-if="state.mode == 'event'">
 					<div name="Christmas-Gifts" v-if="state.selectedEvent == 'christmas_01'">
 						<h3>Christmas Gifts (0001 SE)</h3>
 						<hr class="border border-secondary border-2 opacity-75">
@@ -362,7 +379,6 @@ export default defineComponent({
 							value: "event"
 						},
 						{
-							disabled: true,
 							text: "Prism Keys",
 							value: "prism_key"
 						},
