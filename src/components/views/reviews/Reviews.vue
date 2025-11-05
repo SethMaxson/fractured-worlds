@@ -138,6 +138,7 @@ import { Utils } from "@/scripts/utils";
 import { type ICharacterReview, type IPartyReviewCollection, Reviews } from "@/data/reviews";
 import { UserProfiles } from "@/data/users";
 import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
+import { GameStrings } from "@/scripts/game-strings";
 
 
 
@@ -169,15 +170,15 @@ export default defineComponent({
 							value: "party"
 						},
 						{
-							text: "C.O.B.B.",
+							text: GameStrings.Party.Cobb.first,
 							value: "cobb"
 						},
 						{
-							text: "Li'l Phil",
+							text: GameStrings.Party.Phil.first,
 							value: "phil"
 						},
 						{
-							text: "Tero",
+							text: GameStrings.Party.Tero.first,
 							value: "tero"
 						},
 						{

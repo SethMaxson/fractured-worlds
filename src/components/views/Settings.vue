@@ -7,10 +7,10 @@
 
 		<div class="offcanvas-body">
 			<div class="form-floating">
-				<select class="form-select" id="userSelect" aria-label="Select user" @change="changeUserEvent">
+				<select class="form-select" id="userSelect" aria-label="Select user" v-model="state.user" @change="changeUserEvent">
 					<template v-for="opt, index in menu.users">
 						<option v-if="opt.value == 'separator'" disabled>————</option>
-						<option v-else type="button" :selected="state.user==opt.value" class="dropdown-item" :class="{ 'active': state.user==opt.value }" :value="opt.value">{{opt.text}}</option>
+						<option v-else :key="opt.value" :value="opt.value">{{opt.text}}</option>
 					</template>
 				</select>
 				<label for="userSelect">Current user</label>
@@ -109,6 +109,7 @@ export default defineComponent({
 							value: "guest"
 						},
 						{
+							disabled: true,
 							text: "",
 							value: "separator"
 						},
@@ -157,10 +158,7 @@ export default defineComponent({
 				this.state.user = value;
 			},
 			changeUserEvent(e: Event) {
-				e.preventDefault();
-				const newUser = (document.getElementById("userSelect") as HTMLSelectElement).value;
-				Utils.LocalStorage.setUser(newUser);
-				this.state.user = newUser;
+				Utils.LocalStorage.setUser((e.target as HTMLSelectElement).value);
 			},
 			changeColorTheme(value: 'auto' | 'dark' | 'light') {
 				this.state.colorTheme = value;
@@ -168,19 +166,20 @@ export default defineComponent({
 					: value == 'dark' ? '#moon-stars-fill'
 					: '#sun-fill';
 				Utils.LocalStorage.ColorTheme.set(this.state.colorTheme);
-				this.state.user = value;
 			},
 			changeViewerRole(value: 'gm' | 'player') {
 				this.state.viewerRole = value;
 				this.state.viewerRoleIcon = value == 'gm' ? '#globe2' : '#book-half';
 				Utils.LocalStorage.ViewerRole.set(this.state.viewerRole);
-				this.state.user = value;
 			},
         },
 		mounted() {
 			this.state.user = Utils.LocalStorage.getUser();
 			this.changeViewerRole(Utils.LocalStorage.ViewerRole.get() as 'player');
 			this.changeColorTheme(Utils.LocalStorage.ColorTheme.get() as 'auto');
+		},
+		beforeUnmount() {
+			Utils.LocalStorage.setUser(this.state.user);
 		},
     })
 </script>

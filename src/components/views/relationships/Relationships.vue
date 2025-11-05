@@ -24,7 +24,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					<select class="form-select" id="userSelect" aria-label="Select user" @change="changeUserEvent">
 						<template v-for="opt, index in menu.users">
 							<option v-if="opt.value == 'separator'" disabled>————</option>
-							<option v-else type="button" :selected="state.user==opt.value" class="dropdown-item" :class="{ 'active': state.user==opt.value }" :value="opt.value">{{opt.text}}</option>
+							<option v-else :selected="state.user==opt.value" :value="opt.value">{{opt.text}}</option>
 						</template>
 					</select>
 				</div>
@@ -33,7 +33,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					<select class="form-select" id="sortSelect" aria-label="Select sort" @change="changeSortByEvent">
 						<template v-for="opt, index in menu.sort">
 							<option v-if="opt.value == 'separator'" disabled>————</option>
-							<option v-else type="button" :selected="state.sortBy==opt.value" class="dropdown-item" :class="{ 'active': state.sortBy==opt.value }" :value="opt.value">{{opt.text}}</option>
+							<option v-else :selected="state.sortBy==opt.value" :value="opt.value">{{opt.text}}</option>
 						</template>
 					</select>
 					<button class="btn btn-outline-secondary" type="button" @click="toggleSortAsc">
@@ -382,7 +382,6 @@ export default defineComponent({
 				sortBy: 'met' as 'met'|'rank',
 				user: 'unset' as keyof typeof Relationships,
 			},
-			stateSortBy: 'met' as 'met'|'rank',
 		}
 	},
 	computed: {
@@ -441,12 +440,12 @@ export default defineComponent({
 		},
 		toggleSortAsc(e: Event) {
 			this.state.sortAsc = !this.state.sortAsc;
-			localStorage.setItem("relationshipSortDir", this.state.sortAsc ? "asc" : "desc");
+			sessionStorage.setItem("relationshipSortDir", this.state.sortAsc ? "asc" : "desc");
 		},
 		changeSortByEvent(e: Event) {
 			e.preventDefault();
 			this.state.sortBy = (document.getElementById("sortSelect") as HTMLSelectElement).value as 'met';
-			localStorage.setItem("relationshipSortBy", this.state.sortBy);
+			sessionStorage.setItem("relationshipSortBy", this.state.sortBy);
 		},
 		changeUserEvent(e: Event) {
 			e.preventDefault();
@@ -455,7 +454,7 @@ export default defineComponent({
 		},
 		changeUser(user: string) {
 			this.state.user = user as keyof typeof Relationships;
-			localStorage.setItem("relationshipUser", this.state.user);
+			sessionStorage.setItem("relationshipUser", this.state.user);
 		},
 		relationshipRankDisplay(rank: RelationshipRank) {
 			switch (rank) {
@@ -506,9 +505,10 @@ export default defineComponent({
 	},
 	mounted() {
 		Utils.LocalStorage.Dates.LastPageView.setNow("Relationships");
-		this.changeUser(localStorage.getItem("relationshipUser") || "unset");
-		this.state.sortAsc = (localStorage.getItem("relationshipSortDir") || "asc") == "asc";
-		this.state.sortBy = localStorage.getItem("relationshipSortBy") as "met" || "met";
+		let currentUser = Utils.LocalStorage.getUser();
+		this.changeUser(currentUser != "guest" ? currentUser : sessionStorage.getItem("relationshipUser") || "unset");
+		this.state.sortAsc = (sessionStorage.getItem("relationshipSortDir") || "asc") == "asc";
+		this.state.sortBy = sessionStorage.getItem("relationshipSortBy") as "met" || "met";
 	},
 })
 </script>

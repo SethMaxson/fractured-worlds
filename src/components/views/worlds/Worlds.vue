@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import AccordionItem from "@/components/core/AccordionItem.vue";
@@ -13,6 +13,11 @@ import { WorldDatas } from "@/data/world-datas";
 import type { IWorldData } from "@/interfaces/IWorldData";
 import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 import { WorldDataUtils } from "@/scripts/utils/world-data-utils";
+
+
+onMounted(() => {
+    Utils.LocalStorage.Dates.LastPageView.setNow("Worlds");
+})
 
 const knownWorlds = {
 	discovered: [

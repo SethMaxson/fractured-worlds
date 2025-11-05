@@ -8,6 +8,12 @@ import Character from '@/components/core/text-tags/Character.vue';
 import Location from '@/components/core/text-tags/Location.vue';
 import Important from '@/components/core/text-tags/Important.vue';
 import Breadcrumb from "@/components/core/Breadcrumb.vue";
+import { Utils } from "@/scripts/utils";
+import { onMounted } from "vue";
+
+onMounted(() => {
+    Utils.LocalStorage.Dates.LastPageView.setNow("Factions");
+})
 </script>
 
 <template>

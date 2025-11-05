@@ -7,6 +7,12 @@ import Character from '@/components/core/text-tags/Character.vue';
 import Location from '@/components/core/text-tags/Location.vue';
 import Important from '@/components/core/text-tags/Important.vue';
 import { GameStrings } from "@/scripts/game-strings";
+import { Utils } from "@/scripts/utils";
+import { onMounted } from "vue";
+
+onMounted(() => {
+    Utils.LocalStorage.Dates.LastPageView.setNow("Letters");
+})
 </script>
 
 <template>

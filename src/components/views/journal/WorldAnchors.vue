@@ -4,9 +4,12 @@ import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import { GameStrings } from "@/scripts/game-strings";
 import { onMounted } from "vue";
+import { Utils } from "@/scripts/utils";
 
 onMounted(() => {
 	
+Utils.LocalStorage.Dates.LastPageView.setNow("WorldAnchors");
+
 const list = document.querySelector('.sortable-list');
 let draggingItem: HTMLElement|null = null;
 
