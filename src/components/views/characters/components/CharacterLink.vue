@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type PropType, useSlots } from 'vue';
+import { type PropType } from 'vue';
 import CharacterFullView from "./CharacterFullView.vue";
 import { useRoute } from 'vue-router';
 import { Utils } from '@/scripts/utils';
