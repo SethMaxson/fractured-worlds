@@ -35,6 +35,7 @@ import WorldMap from "@/components/views/world-map/WorldMap.vue";
 import Worlds from "@/components/views/worlds/Worlds.vue";
 import Cuisine from "./components/views/cuisine/Cuisine.vue";
 import Recipe from "./components/views/cuisine/Recipe.vue";
+import VoidspaceMap from "./components/views/world-map/VoidspaceMap.vue";
 
 
 const pages = import.meta.glob("./components/views/**/*.vue", { eager: true }) as Record<string, { default: any}>;
@@ -99,6 +100,7 @@ const router = createRouter({
 		{ path: '/ship/ship', name: 'Ship', component: Ship},
 		{ path: '/ship/crew', name: 'Crew', component: ShipCrew},
 		{ path: '/timeline', name: 'Timeline', component: Timeline},
+		{ path: '/voidspace-map', name: 'Voidspace Map', component: VoidspaceMap},
 		{ path: '/world-map', name: 'World Map', component: WorldMap},
 		{ path: '/worlds', name: 'Worlds', component: Worlds, },
 		{ path: '/worlds/:id', component: SingleWorldView, props: true },

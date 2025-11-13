@@ -1,109 +1,248 @@
 <script setup lang="ts">
-import Breadcrumb from '@/components/core/Breadcrumb.vue';
-import CrewCard from '@/components/views/ship/components/CrewCard.vue';
-import CardDeck from '@/components/core/CardDeck.vue';
+import ViewBlurb from "@/components/core/ViewBlurb.vue";
+import Character from '@/components/core/text-tags/Character.vue';
+import Important from '@/components/core/text-tags/Important.vue';
+import Location from '@/components/core/text-tags/Location.vue';
 import PageContainerVue from "@/components/core/PageContainer.vue";
+import Breadcrumb from "@/components/core/Breadcrumb.vue";
 </script>
 
 <template>
-	<PageContainerVue class="px-0 pt-0 mt-0 pb-0">
+	<PageContainerVue>
 		<header>
-			<Breadcrumb path="/ship/crew" />
-			<div class="d-flex justify-content-between fs-5 py-1 px-2 m-0 mb-2 border-primary-subtle border-2 border-bottom text-bg-dark bg-dark-subtle">
-				<div class="form-check form-switch">
-					<input class="form-check-input" type="checkbox" role="switch" id="simpleCardView" v-model="simplifiedView">
-					<label class="form-check-label" for="simpleCardView">Simplified View</label>
-				</div>
-				<div class="form-check form-switch gm-only">
-					<input class="form-check-input" type="checkbox" role="switch" id="balancingCardView" v-model="balancingView">
-					<label class="form-check-label" for="balancingCardView">Balancing View</label>
+			<Breadcrumb path="/ship/ship" />
+			<ViewBlurb header="Crew Roster">
+				The crew of our current vessel, the Brightside.
+			</ViewBlurb>
+		</header>
+		<main class="px-2 px-lg-5">
+
+			<!-- Info Modal -->
+			<div class="modal" id="crewDefModal" tabindex="-1" aria-labelledby="crewDefModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-6" id="crewDefModalLabel">Definition</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<b class="def-title">...</b> -
+							<span class="def-text"></span>
+						</div>
+					</div>
 				</div>
 			</div>
-		</header>
-		<main class="px-2">
-			<CardDeck>
-				<CrewCard v-for="char in crew"
-					:simplified="simplifiedView"
-					:balancing="balancingView"
-					:name="char.name"
-					:img="char.img as string"
-					:origin-type="char.originType"
-					:type="char.type || 'Normal'"
-					:rarity="char.rarity || 'common'"
 
-					:intelligence="safeStat(char.stats.int)"
-					:magic="safeStat(char.stats.magic)"
-					:speed="safeStat(char.stats.spd)"
-					:strength="safeStat(char.stats.str)"
-					:tech="safeStat(char.stats.tech)"
-					:willpower="safeStat(char.stats.will)"
+			<h4>Officers</h4>
+			<ul class="list-group">
+				<li class="list-group-item p-0" v-for="role in officers" :key="role.role">
+					<ul class="list-group list-group-horizontal">
+						<button v-if="role.definition" type="button" class="list-group-item list-group-item-action border-0 border-end py-1" data-bs-toggle="modal" data-bs-target="#crewDefModal">
+							<span class="title">{{ role.role }}</span>
+							<span class="def" v-html="role.definition"></span>
+						</button>
+						<li class="list-group-item list-group-item-action border-0 border-end py-1" v-else>
+							{{ role.role }}
+						</li>
 
-					:number-in-series="char.numberInSeries"
-					:series-length="estimatedSeriesCurrentLength"
-				>
-					<template #subheading>{{ char.subtitle }}</template>
-				</CrewCard>
-			</CardDeck>
+
+						<li class="list-group-item list-group-item-action border-0 py-1" v-if="role.person">
+							<!-- <CharacterCard :person="role.person" :key="role.personId" /> -->
+							<CharacterLink :person="role.person" :key="role.personId" />
+						</li>
+						<li class="list-group-item list-group-item-action border-0 py-1 fst-italic text-warning" v-else>
+							Unassigned
+						</li>
+					</ul>
+				</li>
+			</ul>
+
+			<h4 class="mt-4">Enlisted</h4>
+			<div class="list-group">
+				<li class="list-group-item py-1" v-for="person in enlisted" :key="person.id">
+					<!-- <CharacterCard :person="role.person" :key="role.personId" /> -->
+					<CharacterLink :person="person" :key="person.id" />
+				</li>
+			</div>
 		</main>
 	</PageContainerVue>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type { ICrewCardData } from '@/interfaces/ICrewCardData';
-import { CrewCardStats } from '@/data/characters/crew-card-stats';
-import { CharacterDataUtils } from '@/scripts/utils/character-data-utils';
+import { Glossary } from "@/data/glossary";
+import type { IGlossaryEntry } from "@/interfaces/IGlossaryEntry";
+import { Utils } from "@/scripts/utils";
+import CharacterCard from "../characters/components/CharacterCard.vue";
+import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
+import { CharacterDatas } from "@/data/character-datas";
+import type { ICharacterData } from "@/interfaces/ICharacterData";
+import Crew from "../characters/characterDecks/Crew.vue";
+import CharacterLink from "../characters/components/CharacterLink.vue";
 
+const TheGang = [
+	CharacterDataUtils.findCharacter(CharacterDatas, 'cobb'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'phil'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'tero')
+];
+
+const matches = CharacterDatas.filter((c) => {
+    if (c.type == "crew") {
+        let a = CharacterDataUtils.getAffiliation(c, "Brightside Crew");
+        return a && !a.left;
+    }
+    return false;
+});
+
+const TheCrew = TheGang.concat(matches).sort(function(a, b) {
+    return !a?.name || !b?.name ? 0
+		: a?.name > b?.name ? 1
+		: a?.name < b?.name ? -1
+		: 0;
+});
+
+interface CrewRole {
+	role: string;
+	definition?: string;
+	personId: string;
+	person?: ICharacterData;
+}
 
 export default defineComponent({
-        name: 'CrewCards',
-        data() {
-            return {
-				simplifiedView: true,
-				balancingView: false,
-				crewData: CrewCardStats
-            }
-        },
-		computed: {
-			crew() {
-				let filteredCrew: ICrewCardData[] = [];
-				// if (this.mode == "all") {
-				// 	filteredCrew = filteredCrew.concat(this.reviews.party.map(r => ({ subject: "the party as a whole", ...r})));
-				// 	filteredCrew = filteredCrew.concat(this.reviews.cobb.map(r => ({ subject: "C.O.B.B.", ...r})));
-				// 	filteredCrew = filteredCrew.concat(this.reviews.phil.map(r => ({ subject: "Li'l Phil Antonio", ...r})));
-				// 	filteredCrew = filteredCrew.concat(this.reviews.pontiki.map(r => ({ subject: "Pontiki", ...r})));
-				// 	filteredCrew = filteredCrew.concat(this.reviews.tero.map(r => ({ subject: "Tero", ...r})));
-				// }
-				// else {
-					filteredCrew = this.crewData;
-				// }
-
-				filteredCrew.forEach(c => {
-					if (!c.img) {
-						c.img = CharacterDataUtils.findCharacterById(c.id)?.images.portrait;
-					}
-				})
-
-				return filteredCrew;
-				// return filteredCrew.sort(function(a, b) {
-				// 	const compA = a.date || "";
-				// 	const compB = b.date || "";
-				// 	return compA == compB ? 0
-				// 		: compA > compB ? -1 : 1;
-				// });
+	name: 'Ship',
+	data() {
+		return {
+			definitions: {
+				captain: "",
 			},
-			estimatedSeriesCurrentLength() {
-				const highestSeriesIndex = this.crewData.reduce((a, b)=>(a.numberInSeries||1)>(b.numberInSeries||1)?a:b).numberInSeries || 1;
-				return Math.max(highestSeriesIndex, this.crewData.length);
-			}
+			officerRoles: [
+				{
+					role: 'Captain',
+					definition: "<p>People usually think that most pirate Captains commanded by an iron fist, but in most cases, it was not true. The pirate Captains were selected because they were respected, not feared. When selecting a Captain, the crew looked for someone capable of commanding and navigating a ship. Also, the Captain needed courage and skill in sword and pistol fighting.</p>																	<p>Captain had absolute control only in a battle. In everyday life, Captains did not have much more rights than any other crewmember. Even sail courses were determined by voting.</p>																															<p>In the Navy, captains and officers had military ranks. There was always a big gap between a common sailor and an officer. However, on a ship full of murderers, bandits, and thieves, most decisions were determined by voting! The Pirates were Democrats! They had their pirate ranks! On a pirate's ship, there was no such thing as a member of the privileged class. Everybody had the same rights, and their roles and duties were appointed according to their abilities and knowledge.</p>",
+					personId: 'tero'
+				},
+				{
+					role: 'Cook',
+					personId: ''
+				},
+				{
+					role: 'Enchanter',
+					personId: 'zuzu'
+				},
+				{
+					role: 'Engineer',
+					personId: 'blackhand-roo'
+				},
+				{
+					role: 'First Mate',
+					personId: ''
+				},
+				{
+					role: 'Master Gunner',
+					personId: 'bebop'
+				},
+				{
+					role: 'Musician',
+					personId: ''
+				},
+				{
+					role: 'Navigator',
+					personId: 'tero'
+				},
+				{
+					role: 'Quartermaster',
+					definition: "After Captain, the most authority on a pirate ship belongs to the Quartermaster. As a Captain's right hand, he is in charge when Captain is not around. He has the authority and can punish men for not obeying commands. The Quartermaster is also in charge of food and water supplies.",
+					personId: 'hamisfore'
+				},
+				{
+					role: 'Shipwright',
+					personId: ''
+				},
+				{
+					role: 'Surgeon',
+					personId: 'cobb'
+				},
+				{
+					role: 'Tutor',
+					personId: 'teacher-barbie'
+				}
+			] as CrewRole[]
+		};
+	},
+	computed: {
+		enlisted() {
+			var results = [] as ICharacterData[];
+			const assignedCrewMembers = this.officerIDs;
+
+			TheCrew.forEach(c => {
+				if (c?.id && !assignedCrewMembers.includes(c?.id)) {
+					results.push(c);
+				}
+			})
+
+			return results;
 		},
-        methods: {
-			cleanText(text: string): string {
-				return text.replace(/\n/ig, "<br/>");
-			},
-			safeStat(statFromProperty: number): number {
-				return statFromProperty === undefined ? 1 : statFromProperty;
-			},
-        }
-    })
+		officers() {
+			var filteredResults = this.officerRoles.slice();
+
+			filteredResults.forEach(c => {
+				c.person = CharacterDataUtils.findCharacterById(c.personId || "");
+			})
+
+			return filteredResults;
+		},
+		officerIDs() {
+			return this.officerRoles.slice().map(a => a.personId);
+		}
+	},
+	mounted() {
+		Utils.LocalStorage.Dates.LastPageView.setNow("ShipCrewRoster");
+
+		const exampleModal = document.getElementById('crewDefModal');
+		if (exampleModal) {
+			exampleModal.addEventListener('show.bs.modal', event => {
+				// Button that triggered the modal
+				// @ts-ignore
+				const button = event.relatedTarget as HTMLButtonElement;
+
+				// Extract info from data children
+				const title = button.querySelector('.title')?.innerHTML;
+				const definition = button.querySelector('.def')?.innerHTML;
+
+				// Update the modal's content.
+				const modalTitle = exampleModal.querySelector('.modal-body .def-title') as HTMLElement;
+				const modalBody = exampleModal.querySelector('.modal-body .def-text') as HTMLElement;
+
+				modalTitle.textContent = title ? title : "Error";
+				modalBody.innerHTML = definition? definition : "Whoops! Encountered an error finding the definition.";
+			})
+		}
+	},
+});
+
 </script>
+
+<style scoped>
+button.list-group-item .title,
+.btn .title {
+	position: relative;
+}
+
+button.list-group-item .title::after,
+.btn .title::after {
+	position: absolute;
+	content: "ⓘ";
+	opacity: 0.5;
+	line-height: 1rem;
+	height: 1rem;
+	width: 1rem;
+	font-size: 0.9rem;
+	left: calc(100% + 0.3rem);
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.def {
+	display: none;
+}
+</style>

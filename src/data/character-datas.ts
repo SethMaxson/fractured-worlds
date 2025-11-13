@@ -65,14 +65,14 @@ export const CharacterDatas: ICharacterData[] = [
         },
         affiliations: [],
         description: [
-            "<Character>Izzy</Character> is a chill guy from a world where necromancers rule with an iron fist (and an army of reanimated corpses). He really likes heavy metal music."
+            "<Character>Izzy</Character> was a chill guy from a world where necromancers rule with an iron fist (and an army of reanimated corpses). He really liked heavy metal music."
         ],
         homeworld: "Necroworld",
         images: {
             portrait: "img/party/ozzy.png"
         },
         plotRelevance: 2,
-        status: "alive"
+        status: "dead"
     },
     {
         name: "Li'l Phil Antonio",
@@ -202,7 +202,7 @@ export const CharacterDatas: ICharacterData[] = [
         id: "owl",
         subtitle: "Tomb Appreciator",
         type: "nle",
-        // species: ["elf"],
+        // species: ["wood elf"],
         species: ["???"],
         occupation: ["botanist"],
         // physical: {
@@ -221,7 +221,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Geoss",
         images: {
-            // portrait: "img/npc/vilyth.png"
+            // portrait: "img/npc/althea.png"
         },
         spotify: {
 			primaryPlaylistID: "2OmclIVxqvgE0EVfbz8E1O"

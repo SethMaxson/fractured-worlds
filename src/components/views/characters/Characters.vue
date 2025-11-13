@@ -6,9 +6,9 @@ import CharacterCardDeck from '@/components/core/CardDeck.vue';
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import Breadcrumb from "@/components/core/Breadcrumb.vue";
 
-import MinorCharacters from './subviews/MinorCharacters.vue';
-import Crew from '@/components/views/characters/characterDecks/Crew.vue';
+import Crew from './characterDecks/Crew.vue';
 import CrewFormer from "./characterDecks/CrewFormer.vue";
+import LocationCharacterDeck from './characterDecks/DynamicCharacterDeck.vue';
 
 import { CharacterDatas } from "@/data/character-datas";
 import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
@@ -21,7 +21,6 @@ onMounted(() => {
 
 const TheGang = [
 	CharacterDataUtils.findCharacter(CharacterDatas, 'cobb'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'izzy'),
 	CharacterDataUtils.findCharacter(CharacterDatas, 'phil'),
 	CharacterDataUtils.findCharacter(CharacterDatas, 'tero')
 ];
@@ -37,7 +36,8 @@ const Allies = [
 ];
 
 const DeadGang = [
-	CharacterDataUtils.findCharacter(CharacterDatas, 'tropey')
+	CharacterDataUtils.findCharacter(CharacterDatas, 'tropey'),
+	CharacterDataUtils.findCharacter(CharacterDatas, 'izzy'),
 ];
 
 const ImportantChars = [
@@ -123,6 +123,11 @@ const Rebirth = CharacterDataUtils.findCharactersByType("rebirth");
 
 				<AccordionItem name="People that don't seem too important to our quest" parent-id="characters-accordion">
 					<MinorCharacters />
+					<div class="accordion" id="minor-characters-accordion">
+						<AccordionItem name="Somewhere" parent-id="minor-characters-accordion" :default-open="true">
+							<LocationCharacterDeck world-id="somewhere" />
+						</AccordionItem>
+					</div>
 				</AccordionItem>
 
 				<AccordionItem name="People that are probably super important" parent-id="characters-accordion">

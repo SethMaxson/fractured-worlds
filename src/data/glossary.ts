@@ -3,6 +3,13 @@ import type { IGlossaryEntry } from "@/interfaces/IGlossaryEntry";
 export const Glossary: IGlossaryEntry[] = [
     //#region Lightship parts
     {
+        name: "Anchor Circuit",
+        definition: [
+            "A complex, interconnected system of components that work together to allow a vessel to 'anchor' itself to a world so that its occupants can explore. The anchor is a beam made entirely of magical light, and is invisible to the inhabitants of a sheltered world. The crew can teleport almost instantly from one end of the beam to the other.",
+            "When engaged, the anchor renders the ship invisible and weightless, and also deploys a protective field around the vessel. This field causes the vessel to be harmlessly pushed aside if it is bumped by another ship, leaving the occupants of the other ship completely unaware of the anchored vessel."
+        ],
+    },
+    {
         name: "Bubble Coating",
         definition: [
             "An alchemical solution that projects a bubble around the ship in Voidspace, creating an artificial, livable atmosphere just large enough to cover the vessel."
@@ -21,10 +28,9 @@ export const Glossary: IGlossaryEntry[] = [
         ],
     },
     {
-        name: "Anchor Circuit",
+        name: "Language Circuit",
         definition: [
-            "A complex, interconnected system of components that work together to allow a vessel to 'anchor' itself to a world so that its occupants can explore. The anchor is a beam made entirely of magical light, and is invisible to the inhabitants of a sheltered world. The crew can teleport almost instantly from one end of the beam to the other.",
-            "When engaged, the anchor renders the ship invisible and weightless, and also deploys a protective field around the vessel. This field causes the vessel to be harmlessly pushed aside if it is bumped by another ship, leaving the occupants of the other ship completely unaware of the anchored vessel."
+            "A pattern of densely woven divination runes that automatically adjusts explorers' perceptions, causing the primary language of visited worlds to look and sound like Common to them. It also causes their speech and writing to be intelligible to the natives of such a visited worlds."
         ],
     },
     {

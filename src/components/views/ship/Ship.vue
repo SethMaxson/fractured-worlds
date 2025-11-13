@@ -84,7 +84,10 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 						</button>
 						<li class="list-group-item p-0">
 							<ul class="list-group list-group-horizontal">
-								<button type="button" class="list-group-item list-group-item-action border-0 border-end"> Language Circuit </button>
+								<button type="button" class="list-group-item list-group-item-action border-0 border-end" data-bs-toggle="modal" data-bs-target="#spiModal">
+									<span class="title">Language Circuit</span>
+									<span class="def">{{ definitions.circuits.language }}</span>
+								</button>
 								<button type="button" class="list-group-item list-group-item-action border-0"> Greater </button>
 							</ul>
 						</li>
@@ -100,6 +103,7 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 import { defineComponent } from "vue";
 import { Glossary } from "@/data/glossary";
 import type { IGlossaryEntry } from "@/interfaces/IGlossaryEntry";
+import { Utils } from "@/scripts/utils";
 
 export default defineComponent({
 	name: 'Ship',
@@ -121,6 +125,8 @@ export default defineComponent({
 		};
 	},
 	mounted() {
+		Utils.LocalStorage.Dates.LastPageView.setNow("ShipStats");
+
 		const exampleModal = document.getElementById('spiModal');
 		if (exampleModal) {
 			exampleModal.addEventListener('show.bs.modal', event => {

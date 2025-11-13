@@ -26,8 +26,8 @@ const props = defineProps({
 const idBase = id_ify(props.name);
 const id = 'collapse-'+idBase;
 
-const parent = typeof props.parentId == 'string' ? props.parentId + "-accord-state" : undefined;
-const lastParentState = (parent && localStorage.getItem(parent)) || undefined;
+const parent = typeof props.parentId == 'string' ? "AccordionState-" + props.parentId : undefined;
+const lastParentState = (parent && sessionStorage.getItem(parent)) || undefined;
 const startOpen = lastParentState ? lastParentState == id : props.defaultOpen;
 
 onMounted(() => {
@@ -35,14 +35,14 @@ onMounted(() => {
 	const collapsible = document.getElementById(id);
 	if (collapsible && parent) {
 		collapsible.addEventListener('hide.bs.collapse', event => {
-			localStorage.removeItem(parent);
+			sessionStorage.removeItem(parent);
 		})
 		collapsible.addEventListener('show.bs.collapse', event => {
-			localStorage.setItem(parent, id);
+			sessionStorage.setItem(parent, id);
 		})
 		// This one fires later, which makes it perfect for fixing anything overwritten by the hide listener
 		collapsible.addEventListener('shown.bs.collapse', event => {
-			localStorage.setItem(parent, id);
+			sessionStorage.setItem(parent, id);
 		})
 	}
 

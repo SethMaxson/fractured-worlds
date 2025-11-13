@@ -410,7 +410,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
             "<Character>Hoots the Owl</Character> served aboard our vessel for one trial tour to review our vessel as a potential pleasure cruise for citizens of <Location>Somewhere</Location>. We parted amicably, but I'm pretty sure he review-bombed us, kupo."
         ],
         images: {
-            portrait: "img/npc/hoots.jpg"
+            portrait: "img/npc/hoots.png"
         },
         spotify: {
 			primaryPlaylistID: "1EIfQZpQ9GDMuStubtJIRh"

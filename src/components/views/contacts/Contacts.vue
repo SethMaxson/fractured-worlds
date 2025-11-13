@@ -6,6 +6,7 @@ import ViewBlurb from "@/components/core/ViewBlurb.vue";
 import { GameStrings } from "@/scripts/game-strings";
 import { computed, onMounted } from "vue";
 import { Utils } from "@/scripts/utils";
+import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 
 onMounted(() => {
     Utils.LocalStorage.Dates.LastPageView.setNow("Contacts");
@@ -29,7 +30,7 @@ onMounted(() => {
                     <div class="col-8 col-md-9 col-lg-10 col-xl-11">
                         <div class="card-body py-2 ps-lg-3 pe-0">
                             <h5 class="card-title">{{ item.name }}</h5>
-                            <p class="card-text small text-body-secondary p-0 m-0 my-1" v-if="item.primaryPC">Primary contact in party: {{ item.primaryPC }}</p>
+                            <p class="card-text small text-body-secondary p-0 m-0 my-1" v-if="item.primaryPC">Primary contact in crew: {{ item.primaryPC }}</p>
                             <p class="card-text small gm-only" v-if="item.notes">
                                 <b>Notes:</b> {{ item.notes }}
                             </p>
@@ -56,7 +57,8 @@ onMounted(() => {
 type RemoteContactMethod = "Summonstone" | "Teleglyph";
 
 interface IContactDetails {
-    name: string;
+    name?: string;
+    id?: string;
     image?: string;
     types: RemoteContactMethod[];
     org?: string;
@@ -68,7 +70,7 @@ interface IContactDetails {
 
 const contacts: IContactDetails[] = [
     {
-        name: "Cade Brightcloak",
+        id: "cade",
         image: "img/npc/cade-toon.png",
         types: [
             "Teleglyph",
@@ -78,7 +80,7 @@ const contacts: IContactDetails[] = [
         primaryPC: "Tero"
     },
     {
-        name: "Nortle",
+        id: "nortle",
         image: "img/npc/nortle.png",
         types: ["Teleglyph"],
         since: "04/21/0001",
@@ -92,9 +94,21 @@ const contacts: IContactDetails[] = [
         since: "05/31/0001",
     },
     {
+        id: "smith",
         name: "Smith",
         types: ["Teleglyph"],
         since: "04/21/0001",
+    },
+    {
+        id: "ella",
+        image: "img/npc/ella-portrait.png",
+        types: ["Teleglyph"],
+        since: "09/03/0001",
+    },
+    {
+        id: "owl",
+        types: ["Teleglyph"],
+        since: "09/03/0001",
     },
 ];
 
@@ -118,6 +132,15 @@ const filteredContacts = computed<IContactDetails[]>(() => {
 	// Sort
 
 	// Return
+
+    filteredResults.forEach(c => {
+        const char = CharacterDataUtils.findCharacterById(c.id || "");
+        if (char) {
+            c.image = char.images.portrait;
+            c.name = char.name;
+        }
+    })
+
 	return filteredResults;
 });
 </script>

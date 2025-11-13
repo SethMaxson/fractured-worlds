@@ -6,7 +6,6 @@ import { AppState } from "@/data/app-state";
 import { GameStrings } from "@/scripts/game-strings";
 import { Utils } from "@/scripts/utils";
 
-const lastUpdate = AppState.PageMostRecentUpdates;
 function notification(pageName: keyof typeof AppState.PageMostRecentUpdates) {
 	return Utils.Pages.hasNotification(pageName, AppState.PageMostRecentUpdates[pageName] as Date);
 }
@@ -39,7 +38,7 @@ function notification(pageName: keyof typeof AppState.PageMostRecentUpdates) {
 				</div>
 				<AppIcon svg="question" to="/faq">FAQ</AppIcon>
 				<AppIcon svg="user2" to="/people" :notification="notification('People')">People</AppIcon>
-				<AppIcon svg="anchor" to="/ship">Ship</AppIcon>
+				<AppIcon svg="brightside" to="/ship" :notification="notification('ShipCrewCards') || notification('ShipCrewRoster') || notification('ShipStats')">Ship</AppIcon>
 				<AppIcon svg="suitcase-bag" to="/inventory">Inventory</AppIcon>
 				<AppIcon svg="contacts-book" to="/contacts" :notification="notification('Contacts')">Contacts</AppIcon>
 				<AppIcon svg="handshake" to="/perks">Banes & Boons</AppIcon>
@@ -61,6 +60,7 @@ function notification(pageName: keyof typeof AppState.PageMostRecentUpdates) {
 				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start">About Voidspace</h5>
 				<AppIcon svg="calendar" to="/calendar">Calendar</AppIcon>
 				<AppIcon svg="globe2" to="/worlds">Worlds</AppIcon>
+				<AppIcon svg="paths" to="/voidspace-map" :notification="notification('VoidspaceMap')">Voidspace Map</AppIcon>
 				<AppIcon svg="compass-rose" to="/explorers-guide" :notification="notification('ExplorersGuide')">Explorer's Guide</AppIcon>
 				<AppIcon svg="link" to="/links">External Links</AppIcon>
 

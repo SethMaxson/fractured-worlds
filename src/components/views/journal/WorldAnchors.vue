@@ -151,6 +151,14 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 						<span class="badge text-bg-info rounded-pill">Barbieland</span>
 					</span>
 				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
+					<div class="me-auto">
+						"way. By doing these things shall one be made worthy, and the secret road"
+					</div>
+					<span class="m-0 p-0">
+						<span class="badge text-bg-info rounded-pill">Looney Tune Land</span>
+					</span>
+				</li>
 			</ul>
 		</main>
 	</PageContainerVue>

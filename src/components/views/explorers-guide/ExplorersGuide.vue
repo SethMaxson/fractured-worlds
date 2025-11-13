@@ -117,7 +117,7 @@ onMounted(() => {
 							</p>
 							<figure class="figure mx-5 rounded-top-5 rounded-bottom-4 px-1 pt-1">
 								<Image
-									src="/public/img/reference/prism_keys_cropped.png"
+									src="/public/img/reference/prism_keys.jpg"
 									alt="Prism Keys"
 									class="figure-img img-fluid rounded-top-5 rounded-bottom-4"
 								 />
