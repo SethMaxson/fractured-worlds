@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type PropType } from 'vue';
+import type { PropType } from 'vue';
 import CharacterFullView from "./CharacterFullView.vue";
 import { useRoute } from 'vue-router';
 import { Utils } from '@/scripts/utils';
@@ -18,7 +18,6 @@ const hrefID = props.person?.id;
 const href = `#/people/${hrefID}?path=${refPath}`;
 
 // Configure the display
-const npcTypeClass = Utils.Images.getPortraitClassesFromType(props.person?.type);
 const offerFullPageView = false;
 const boxComponentType = offerFullPageView ? 'a'
     : 'button';
@@ -53,27 +52,9 @@ const boxComponentType = offerFullPageView ? 'a'
 
 <script lang="ts">
 export default {
-  name: 'CharacterCard',
+  name: 'CharacterLink',
 }
 </script>
-
-<style>
-.card img {
-	max-width: 100%;
-}
-.dead img::before {
-	content: " ";
-	/* background-image: url("@/assets/images/dead.png"); */
-	background: red;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 5;
-	opacity: 5;
-}
-</style>
 
 <style scoped>
 .btn {
