@@ -20,7 +20,7 @@ onMounted(() => {
 /** Display Settings states */
 class TimelineDisplaySettings {
 	/** Display the timeline dates in ascending order. */
-	ascending = ref(true);
+	ascending = ref(false);
 	/** A collection of filters. */
 	filters = {
 		/** Omit minor events. */
@@ -499,7 +499,8 @@ const timelineEvents: ITimelineEvent[] = [
 		// event: "We reached Looney Tune Land.",
 		extra: [
 			{ name: "reached Looney Tune Land", type: "world" },
-			// { name: "met Toadette", type: "person" },
+			{ name: "lost Ootah", type: "death" },
+			{ name: "won game against the Monstars", type: "holiday" }
 		],
 		header: "Looney Tune Land",
 		type: "world"
@@ -523,14 +524,15 @@ const timelineEvents: ITimelineEvent[] = [
 	{
 		date: { year: 1, month: 9, day: 7 },
 		extra: [
-			{ name: "invited Tero", type: "person" },
-			{ name: "invited Althea", type: "person" },
-			{ name: "invited Boo", type: "person" },
-			{ name: "invited Ella", type: "person" },
-			{ name: "invited Nortle", type: "person" },
+			// { name: "invited Tero", type: "person" },
+			// { name: "invited Althea", type: "person" },
+			// { name: "invited Boo", type: "person" },
+			// { name: "invited Ella", type: "person" },
+			// { name: "invited Nortle", type: "person" },
+			// { name: "invited Susie", type: "person" },
+			// { name: "invited Phil", type: "person" },
 		],
-		gmOnly: true,
-		header: "Cade uses Summonstones to invite friends to a Gazelle concert after clearing Zootopia",
+		header: "Tero and Phil attended Gazelle concert with Cade & other members of NLE",
 		type: "holiday"
 	},
 	{
@@ -558,7 +560,7 @@ const timelineEvents: ITimelineEvent[] = [
 const sm = reactive(new TimelineDisplaySettingsManager());
 
 function resetDisplay() {
-	sm.activeSettings.ascending = true;
+	sm.activeSettings.ascending = false;
 	sm.activeSettings.filters.majorOnly = false;
 	sm.activeSettings.filters.tags = [];
 	sm.activeSettings.filters.types = [];
@@ -568,6 +570,10 @@ function resetDisplay() {
 	sm.activeSettings.displayToggles.showFancyTables = false;
 	sm.activeSettings.displayToggles.showHeaders = false;
 	sm.activeSettings.displayToggles.truncateDescription = true;
+}
+
+function toggleSortAsc() {
+	sm.activeSettings.ascending = !sm.activeSettings.ascending;
 }
 
 const sortedTimeline = computed<ITimelineEvent[]>(() => {
@@ -588,7 +594,7 @@ const sortedTimeline = computed<ITimelineEvent[]>(() => {
 	}
 	// Sort
 	sortedResults = sortedResults.sort((a, b) => {
-		return Utils.SortComparators.campaignDate(a.date, b.date);
+		return Utils.SortComparators.campaignDate(a.date, b.date, sm.activeSettings.ascending);
 	})
 
 	// Return
@@ -610,6 +616,11 @@ const sortedTimeline = computed<ITimelineEvent[]>(() => {
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#timelineSettingsModal">
 						<svg class="menu-button-icon theme-color d-inline"><use href="#settings"></use></svg>
 						Configure Display
+					</button>
+					<button class="btn btn btn-primary border-start" type="button" @click="toggleSortAsc">
+						<svg class="menu-button-icon fs-4 theme-color">
+							<use :href=" sm.activeSettings.ascending ? '#sort-asc' : '#sort-desc'"></use>
+						</svg>
 					</button>
 					<button type="button" class="btn btn-primary border-start" @click="resetDisplay()">
 						<svg class="menu-button-icon theme-color d-inline"><use href="#reset"></use></svg>

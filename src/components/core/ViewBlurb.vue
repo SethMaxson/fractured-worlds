@@ -14,7 +14,7 @@ defineProps<{
 		</h1>
 		<figure>
 			<blockquote class="blockquote">
-				<p class="fs-6 fs-lg-5 lead text-secondary-emphasis lh-sm"><slot></slot></p>
+				<p style="font-size: 1rem;" class="lead text-secondary-emphasis lh-sm"><slot></slot></p>
 			</blockquote>
 			<div v-if="author" class="blockquote-footer text-end fw-normal">{{author}}</div>
 		</figure>

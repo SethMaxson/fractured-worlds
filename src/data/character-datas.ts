@@ -197,31 +197,30 @@ export const CharacterDatas: ICharacterData[] = [
 
     //#region Nelly / N.L.E. / NLE
     {
-        // name: "Althea Holimion",
-        name: "Owl",
+        name: "Althea Holimion",
         id: "owl",
         subtitle: "Tomb Appreciator",
         type: "nle",
         // species: ["wood elf"],
         species: ["???"],
         occupation: ["botanist"],
-        // physical: {
-        //     gender: "female",
-        //     eyeColor: "brown",
-        //     hairColor: "brown",
-        //     height: "5' 6\"",
-        //     weight: "101 lbs."
-        // },
+        physical: {
+            gender: "female",
+            eyeColor: "brown",
+            hairColor: "brown",
+            height: "5' 6\"",
+            weight: "101 lbs."
+        },
         affiliations: [
             { name: "NLE", rank: "member", role: "archaeologist, botanist", primary: true }
         ],
         aliases: [ "Owl" ],
         description: [
-            "<Character>Owl</Character> (we don't know her real name) serves as NLE's archaeologist and botany expert, in addition to standard scout work. <Character>Cade</Character>, <Character>Doc</Character>, and <Character>Ella</Character> all seem to hold her in high regard."
+            "<Character>Althea Holimion</Character> (codename: Owl) serves as NLE's archaeologist and botany expert, in addition to standard scout work. Her last assignment lasted for several months and seems to have driven her a little batty. <Character>Cade</Character>, <Character>Doc</Character>, and <Character>Ella</Character> all seem to hold her in high regard."
         ],
         // homeworld: "Geoss",
         images: {
-            // portrait: "img/npc/althea.png"
+            portrait: "img/npc/althea.png"
         },
         spotify: {
 			primaryPlaylistID: "2OmclIVxqvgE0EVfbz8E1O"

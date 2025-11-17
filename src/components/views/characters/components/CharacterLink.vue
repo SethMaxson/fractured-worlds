@@ -24,30 +24,26 @@ const boxComponentType = offerFullPageView ? 'a'
 </script>
 
 <template>
-	<div class="col">
-
-		<!-- person object was passed -->
-		<component
-			:is="boxComponentType"
-			class="btn btn-link"
-			:type="offerFullPageView ? undefined : 'button'"
-			:href="offerFullPageView ? href : undefined"
-			:data-bs-target="offerFullPageView ? undefined : '#modal-character'"
-			:data-bs-toggle="offerFullPageView ? undefined : 'modal'"
-		>
-			{{ person.name }}
-			<div class="d-none">
-				<div class="has-person"></div>
-				<h1 class="modal-title">
-					<slot name="heading">{{ person?.name }}</slot>
-				</h1>
-				<div class="modal-body">
-					<CharacterFullView :person="person" />
-				</div>
+	<component
+		:is="boxComponentType"
+		class="btn btn-link"
+		:type="offerFullPageView ? undefined : 'button'"
+		:href="offerFullPageView ? href : undefined"
+		:data-bs-target="offerFullPageView ? undefined : '#modal-character'"
+		:data-bs-toggle="offerFullPageView ? undefined : 'modal'"
+	>
+		{{ person.name }}
+		<!-- <svg class="menu-button-icon theme-color d-inline ms-1 small"><use href="#expand"></use></svg> -->
+		<div class="d-none">
+			<div class="has-person"></div>
+			<h1 class="modal-title">
+				<slot name="heading">{{ person?.name }}</slot>
+			</h1>
+			<div class="modal-body">
+				<CharacterFullView :person="person" />
 			</div>
-		</component>
-
-	</div>
+		</div>
+	</component>
 </template>
 
 <script lang="ts">
@@ -58,10 +54,14 @@ export default {
 
 <style scoped>
 .btn {
+	border-radius: unset;
 	text-align: inherit;
 	color: inherit;
 	font-weight: inherit;
 	font-size: inherit;
-	padding: 0.1rem;
+	display: block;
+	padding-left: var(--bs-list-group-item-padding-x) !important;
+	padding-right: var(--bs-list-group-item-padding-x) !important;
+	text-decoration: underline;
 }
 </style>

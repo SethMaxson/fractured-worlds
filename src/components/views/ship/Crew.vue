@@ -46,10 +46,7 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 						</li>
 
 
-						<li class="list-group-item list-group-item-action border-0 py-1" v-if="role.person">
-							<!-- <CharacterCard :person="role.person" :key="role.personId" /> -->
-							<CharacterLink :person="role.person" :key="role.personId" />
-						</li>
+						<CharacterLink class="list-group-item list-group-item-action border-0 py-1" :person="role.person" :key="role.personId" v-if="role.person" />
 						<li class="list-group-item list-group-item-action border-0 py-1 fst-italic text-warning" v-else>
 							Unassigned
 						</li>
@@ -59,10 +56,7 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 
 			<h4 class="mt-4">Enlisted</h4>
 			<div class="list-group">
-				<li class="list-group-item py-1" v-for="person in enlisted" :key="person.id">
-					<!-- <CharacterCard :person="role.person" :key="role.personId" /> -->
-					<CharacterLink :person="person" :key="person.id" />
-				</li>
+				<CharacterLink v-for="person in enlisted" class="list-group-item list-group-item-action py-1" :person="person" :key="person.id" />
 			</div>
 		</main>
 	</PageContainerVue>
@@ -160,6 +154,7 @@ export default defineComponent({
 				},
 				{
 					role: 'Surgeon',
+					definition: "The Surgeon is the only medical officer on the ship and is assisted by one or more Surgeon's Mates (inferior warrant officers). They are responsible for the sick and injured, performing surgical operations as necessary and dispense medicine. They are required to keep a journal of treatment and advise the Captain on health matters.",
 					personId: 'cobb'
 				},
 				{
