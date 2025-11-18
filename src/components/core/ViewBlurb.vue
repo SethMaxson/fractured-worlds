@@ -7,16 +7,16 @@ defineProps<{
 </script>
 
 <template>
-	<div class="greetings p-2 border-2 border-bottom mb-2">
+	<div class="greetings p-2 pb-0 border-2 border-bottom mb-2">
 		<h1 class="heading">
 			<span v-html="header"></span>
 			<span class="ms-3 fs-6 fw-normal text-secondary small" v-if="version" v-html="version"></span>
 		</h1>
-		<figure>
-			<blockquote class="blockquote">
+		<figure class="mb-1">
+			<blockquote class="blockquote mb-1">
 				<p style="font-size: 1rem;" class="lead text-secondary-emphasis lh-sm"><slot></slot></p>
 			</blockquote>
-			<div v-if="author" class="blockquote-footer text-end fw-normal">{{author}}</div>
+			<div v-if="author" class="blockquote-footer text-end fw-normal py-0 mb-0">{{author}}</div>
 		</figure>
 	</div>
 </template>
