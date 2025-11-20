@@ -40,12 +40,13 @@ function notification(pageName: keyof typeof AppState.PageMostRecentUpdates) {
 				<AppIcon svg="user2" to="/people" :notification="notification('People')">People</AppIcon>
 				<AppIcon svg="brightside" to="/ship" :notification="notification('ShipCrewCards') || notification('ShipCrewRoster') || notification('ShipStats')">Ship</AppIcon>
 				<AppIcon svg="suitcase-bag" to="/inventory">Inventory</AppIcon>
-				<AppIcon svg="contacts-book" to="/contacts" :notification="notification('Contacts')">Contacts</AppIcon>
 				<AppIcon svg="handshake" to="/perks">Banes & Boons</AppIcon>
 				<AppIcon svg="reviews" to="/reviews" :notification="notification('Reviews')"><span class="yep">YEP!</span> Reviews</AppIcon>
 
 				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start">People</h5>
+				<AppIcon svg="contacts-book" to="/contacts" :notification="notification('Contacts')">Contacts</AppIcon>
 				<AppIcon svg="people" to="/factions">Factions</AppIcon>
+				<AppIcon svg="chat" to="/interviews" :notification="notification('Interviews')">Interviews</AppIcon>
 				<AppIcon svg="user2" to="/people" :notification="notification('People')">People</AppIcon>
 				<AppIcon svg="relationship" to="/relationships" :notification="notification('Relationships')">Relationships</AppIcon>
 
@@ -66,7 +67,6 @@ function notification(pageName: keyof typeof AppState.PageMostRecentUpdates) {
 
 				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start dev">In Development</h5>
 				<AppIcon svg="list" to="/accomplishments" class="dev">Accomplishments</AppIcon>
-				<AppIcon svg="chat" to="/interviews" class="h-100 dev">Interviews</AppIcon>
 				<AppIcon svg="timeline" to="/timeline" class="dev">NPC Timeline</AppIcon>
 				<AppIcon svg="paths" to="/world-map" class="h-100 dev">World Map</AppIcon>
 				<AppIcon svg="globe2" to="/world-pages" class="dev">World Pages</AppIcon>

@@ -53,9 +53,7 @@ onMounted(() => {
 	<div class="accordion-item">
 		<h2 class="accordion-header" :id="'heading-'+idBase">
 			<button class="accordion-button" :class="{'collapsed': !startOpen}" type="button" data-bs-toggle="collapse" :data-bs-target="'#'+id"
-				:aria-expanded="startOpen" :aria-controls="'collapse-'+idBase">
-				{{ name }}
-			</button>
+				:aria-expanded="startOpen" :aria-controls="'collapse-'+idBase" v-html="name" />
 		</h2>
 		<div 
 			:id="id"

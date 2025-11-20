@@ -654,7 +654,7 @@ import Settings from "./components/views/Settings.vue";
 	</svg>
 	<Navbar />
 	<!-- Main content/body -->
-	<router-view></router-view>
+	<router-view :key="$route.fullPath"></router-view>
 
 	<!-- Modals -->
 	 <DataModals />

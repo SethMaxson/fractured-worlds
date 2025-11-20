@@ -518,7 +518,7 @@ const timelineEvents: ITimelineEvent[] = [
 	},
 	{
 		date: { year: 1, month: 9, day: 4 },
-		header: "The big game",
+		header: "Defeated the Monstars in basketball",
 		type: "holiday"
 	},
 	{
