@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router'
+import {createRouter, createWebHashHistory, createWebHistory, type RouterScrollBehavior} from 'vue-router'
 
 import App from "./App.vue";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -38,9 +38,37 @@ import Recipe from "./components/views/cuisine/Recipe.vue";
 import VoidspaceMap from "./components/views/world-map/VoidspaceMap.vue";
 
 
+type ScrollPositionNormalized = {
+	behavior?: ScrollOptions['behavior'];
+	left: number;
+	top: number;
+}
+
+declare module 'vue-router' {
+	interface RouteMeta {
+		scrollPos?: ScrollPositionNormalized;
+	}
+}
+
+//#region Config variables
+
+/** 
+ * TODO: Deprecate this one
+ * */
+const doAutoRouteExperiment = true;
+
+/** For route meta.scrollPos */
+const initialScrollPositions = {
+	default: {
+		left: 0,
+		top: 0
+	} as ScrollPositionNormalized,
+}
+//#endregion Config variables
+
+
 const pages = import.meta.glob("./components/views/**/*.vue", { eager: true }) as Record<string, { default: any}>;
 const autoRoutes = [];
-const doAutoRouteExperiment = true;
 
 function convertToKebabCase(text: string): string {
     return text.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
@@ -67,40 +95,53 @@ if (doAutoRouteExperiment) {
 	}
 }
 
+const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
+	if (to.name === from.name) {
+		to.meta?.scrollPos && (to.meta.scrollPos.top = 0)
+		return { left: 0, top: 0 }
+	}
+	const scrollpos = savedPosition || to.meta?.scrollPos || { left: 0, top: 0 }
+	// Automatically scroll to desired position
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve(scrollpos)
+		}, 100)
+	})
+}
 
 const router = createRouter({
 	history: createWebHashHistory('/fractured-worlds/'),
 	routes:[
 		// will match everything and put it under `route.params.pathMatch`
 		{ path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
-		{ path: '/', component: Home},
-		{ path: '/home', name: 'Home', component: Home},
-		{ path: '/bounties', component: BountyBoard},
-		{ path: '/calendar', name: 'Calendar',	component: Calendar},
-		{ path: '/contacts', name: 'Contacts',	component: Contacts},
-		{ path: '/cuisine',	 name: 'Cuisine',	component: Cuisine},
+		{ path: '/', component: Home, meta: { scrollPos: initialScrollPositions.default } },
+		{ path: '/home', name: 'Home', component: Home, meta: { scrollPos: initialScrollPositions.default }  },
+		{ path: '/bounties', component: BountyBoard },
+		{ path: '/calendar', name: 'Calendar',	component: Calendar },
+		{ path: '/contacts', name: 'Contacts',	component: Contacts },
+		{ path: '/cuisine',	 name: 'Cuisine',	component: Cuisine },
 		{ path: '/cuisine/:id', component: Recipe, props: true },
-		{ path: '/dm-worlds', component: DmWorlds},
-		{ path: '/explorers-guide', name: 'Explorer\'s Guide', component: ExplorersGuide},
-		{ path: '/factions', name: 'Factions', component: Factions},
+		{ path: '/dm-worlds', component: DmWorlds },
+		{ path: '/explorers-guide', name: 'Explorer\'s Guide', component: ExplorersGuide },
+		{ path: '/factions', name: 'Factions', component: Factions },
 		{ path: '/interviews/:id', name: 'interview', component: Interviews, props: true },
-		{ path: '/inventory', name: 'Inventory', component: Inventory},
-		{ path: '/journal/letters', name: 'Letters', component: Letters},
-		{ path: '/journal/log', name: 'Log', component: Journal},
-		{ path: '/journal/mysteries', name: 'Mysteries', component: Mysteries},
-		{ path: '/journal/world-anchors', name: 'World Anchors', component: WorldAnchors},
-		{ path: '/links', name: 'External Links', component: Links},
-		{ path: '/people', name: 'People', component: Characters, alias: '/characters'},
+		{ path: '/inventory', name: 'Inventory', component: Inventory },
+		{ path: '/journal/letters', name: 'Letters', component: Letters },
+		{ path: '/journal/log', name: 'Log', component: Journal },
+		{ path: '/journal/mysteries', name: 'Mysteries', component: Mysteries },
+		{ path: '/journal/world-anchors', name: 'World Anchors', component: WorldAnchors },
+		{ path: '/links', name: 'External Links', component: Links },
+		{ path: '/people', name: 'People', component: Characters, alias: '/characters' },
 		{ path: '/people/:id', component: SingleCharacterView, props: true },
-		{ path: '/perks', component: Effects},
-		{ path: '/relationships', name: 'Relationships', component: Relationships},
-		{ path: '/reviews', name: 'Yep! Reviews', component: Reviews},
-		{ path: '/ship', name: 'Lightships', component: ShipIndex},
-		{ path: '/ship/ship', name: 'Ship', component: Ship},
-		{ path: '/ship/crew', name: 'Crew', component: ShipCrew},
-		{ path: '/timeline', name: 'Timeline', component: Timeline},
-		{ path: '/voidspace-map', name: 'Voidspace Map', component: VoidspaceMap},
-		{ path: '/world-map', name: 'World Map', component: WorldMap},
+		{ path: '/perks', component: Effects },
+		{ path: '/relationships', name: 'Relationships', component: Relationships },
+		{ path: '/reviews', name: 'Yep! Reviews', component: Reviews },
+		{ path: '/ship', name: 'Lightships', component: ShipIndex },
+		{ path: '/ship/ship', name: 'Ship', component: Ship },
+		{ path: '/ship/crew', name: 'Crew', component: ShipCrew },
+		{ path: '/timeline', name: 'Timeline', component: Timeline },
+		{ path: '/voidspace-map', name: 'Voidspace Map', component: VoidspaceMap },
+		{ path: '/world-map', name: 'World Map', component: WorldMap },
 		{ path: '/worlds', name: 'Worlds', component: Worlds, },
 		{ path: '/worlds/:id', component: SingleWorldView, props: true },
 		...autoRoutes
@@ -108,11 +149,26 @@ const router = createRouter({
 		if (r1.path > r2.path) { return 1; }
 		if (r1.path < r2.path) { return -1; }
 		return 0;
-	})
+	}),
+	scrollBehavior
 });
 
+// Store scroll position before navigate
+router.beforeEach((to, from, next) => {
+	from.meta?.scrollPos && (from.meta.scrollPos.top = document.documentElement.scrollTop);
+	return next();
+});
+
+router.afterEach((to, from) => {
+	const toDepth = to.path.split('/').length;
+	const fromDepth = from.path.split('/').length;
+	to.meta.transition = toDepth < fromDepth ? 'slide-right' : 'slide-left';
+})
+
+// Actually mount app
 const app = createApp(App);
 app.use(router);
+await router.isReady();
 app.mount('#app');
 
 //#region stuff for Search Bar

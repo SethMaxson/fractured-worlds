@@ -654,7 +654,11 @@ import Settings from "./components/views/Settings.vue";
 	</svg>
 	<Navbar />
 	<!-- Main content/body -->
-	<router-view :key="$route.fullPath"></router-view>
+	<router-view v-slot="{ Component, route }" :key="$route.fullPath">
+		<transition :name="route.meta?.transition as string || 'fade'">
+			<component :is="Component" :key="route.fullPath" />
+		</transition> 
+	</router-view>
 
 	<!-- Modals -->
 	 <DataModals />

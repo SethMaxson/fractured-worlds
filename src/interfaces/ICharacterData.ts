@@ -41,6 +41,31 @@ export interface ICharacterDataPhysicalTraits {
 	weight?: string;
 }
 
+export interface ICharacterDataRelationship {
+    /** e.g. 'character-name' or 'Character Name' */
+	idOrName: string;
+	/**
+	 * @example 'father'
+	 * @example 'girlfriend'
+	 */
+	label?: string;
+	/**
+	 * TODO: this goes somewhere external so it can be used by the relationship entries on both affected characters
+	 * @deprecated
+	 *  */ 
+	met?: { year?: number; day: number; month: number; };
+	/** The character's last known status.
+	 * @example
+	 * "alive" | "dead"
+	 */
+	status?: "alive"|"dead"|"unknown";
+}
+
+export interface ICharacterDataNotableRelationships {
+    closeFriends?: ICharacterDataRelationship[];
+	family?: ICharacterDataRelationship[];
+}
+
 /** The raw JSON data for a character. */
 export interface ICharacterData {
     /** e.g. 'Character Name' */
@@ -79,6 +104,7 @@ export interface ICharacterData {
 	 * @3 - Major character. Protagonist or Antagonist level. Name would probably be on the movie poster.
 	*/
 	plotRelevance: number;
+	relationships?: ICharacterDataNotableRelationships;
 	/** The role the character plays within the party's entourage.
 	 * @example
 	 * "Deckhand (04/02/0001 SE-present)"

@@ -40,8 +40,8 @@ const npcTypeClass = Utils.Images.getPortraitClassesFromType(props.person?.type)
 // const portraitClasses = npcTypeClass?.concat(" card-img-top ratio ratio-1x1");
 const portraitClasses = npcTypeClass;
 // const offerFullPageView = props.person?.plotRelevance && props.person.plotRelevance > 1 ? true : false;
-const offerFullPageView = false;
-const openIcon = offerFullPageView && false ? '#enter'
+const offerFullPageView = true;
+const openIcon = offerFullPageView ? '#enter'
 	: !props.containedByModal ? '#expand'
 	: undefined;
 const boxComponentType = props.containedByModal ? 'div'

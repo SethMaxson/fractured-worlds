@@ -56,7 +56,7 @@ function notification(pageName: keyof typeof AppState.PageMostRecentUpdates) {
 				<AppIcon svg="book-half" to="/journal/log" class="dev"> Log </AppIcon>
 				<AppIcon svg="todo" to="/journal/mysteries" :notification="notification('QuestLog')"> Mysteries </AppIcon>
 				<AppIcon svg="timeline" to="/journal/timeline" :notification="notification('Timeline')"> Timeline </AppIcon>
-				<AppIcon svg="anchor" to="/journal/world-anchors"> World Anchors </AppIcon>				
+				<AppIcon svg="anchor" to="/journal/world-anchors"> World Anchors </AppIcon>
 
 				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start">About Voidspace</h5>
 				<AppIcon svg="calendar" to="/calendar">Calendar</AppIcon>

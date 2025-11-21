@@ -18,7 +18,7 @@ const hrefID = props.person?.id;
 const href = `#/people/${hrefID}?path=${refPath}`;
 
 // Configure the display
-const offerFullPageView = false;
+const offerFullPageView = true;
 const boxComponentType = offerFullPageView ? 'a'
     : 'button';
 </script>

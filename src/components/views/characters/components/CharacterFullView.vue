@@ -5,7 +5,7 @@ import { Utils } from "@/scripts/utils";
 import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 import Image from "@/components/core/Image.vue";
 import AccordionItem from "@/components/core/AccordionItem.vue";
-import type { ICharacterData, ICharacterDataAffiliation, ICharacterDataPhysicalTraits } from '@/interfaces/ICharacterData';
+import type { ICharacterData, ICharacterDataAffiliation, ICharacterDataPhysicalTraits, ICharacterDataRelationship } from '@/interfaces/ICharacterData';
 import type { PropType } from 'vue';
 
 const props = defineProps({
@@ -15,7 +15,7 @@ const props = defineProps({
 	}
 })
 
-type CharacterAccordionSectionTypes = "backstory" | "playlists" | "timeline";
+type CharacterAccordionSectionTypes = "backstory" | "playlists" | "relationships" | "timeline";
 const accordionItems: CharacterAccordionSectionTypes[] = [];
 
 const subheader = CharacterDataUtils.getSubheader(props.person);
@@ -49,10 +49,22 @@ const physicalTraitDisplay: { key: keyof ICharacterDataPhysicalTraits; label: st
 if (playlistEmbed) {
 	accordionItems.push("playlists");
 }
+
+if (
+	(props.person?.relationships?.closeFriends && props.person.relationships.closeFriends.length > 0) ||
+	(props.person?.relationships?.family && props.person.relationships.family.length > 0)
+) {
+	accordionItems.push("relationships");
+}
 //#endregion Check what accordion sections are present
 
 function getSpecialAffiliationString(a: ICharacterDataAffiliation): string {
-	return `<b>${a.role || a.rank}</b> (${a.joined}${a.left? "—" + a.left : ""} SE)`;
+	return `${a.role || a.rank} <i>(${a.joined}${a.left? "—" + a.left : ""} SE)</i>`;
+}
+
+function getRelationshipPersonName(person: ICharacterDataRelationship): string {
+	const char = CharacterDataUtils.findCharacterById(person.idOrName);
+	return char? char.name : person.idOrName;
 }
 
 
@@ -83,28 +95,28 @@ const portraitClasses = Utils.Images.getPortraitClassesFromType(props.person?.ty
 
 			<div class="details ps-md-2 ps-lg-3 text-muted">
 				<div v-if="person.aliases && person.aliases.length > 0">
-					{{ person.aliases.length > 1 ? "Aliases" : "Alias" }}: <b>{{ person.aliases.join(", ") }}</b>
+					<b class="me-2">{{ person.aliases.length > 1 ? "Aliases" : "Alias" }}:</b> {{ person.aliases.join(", ") }}
 				</div>
 				<div v-if="affiliations?.crew">
-					{{affiliations.crew.name}}: <span v-html="getSpecialAffiliationString(affiliations.crew)"></span>
+					<b class="me-2">{{affiliations.crew.name}}:</b> <span v-html="getSpecialAffiliationString(affiliations.crew)"></span>
 				</div>
 				<div v-if="affiliations?.other && affiliations.other.length > 0">
 					<ul class="list-inline mb-0">
-						<li class="list-inline-item">{{ person.affiliations.length > affiliations.other.length ? "Other Affiliations" : "Affiliations" }}:</li>
-						<li class="list-inline-item fw-bold" v-for="a, i in affiliations.other">
+						<li class="list-inline-item fw-bold me-2">{{ person.affiliations.length > affiliations.other.length ? "Other Affiliations" : "Affiliations" }}:</li>
+						<li class="list-inline-item" v-for="a, i in affiliations.other">
 							{{ `${a.name} ${a.role || a.rank ? " (" + (a.role || a.rank) + ")" : ""}${i+1 == affiliations.other.length ? '' : ','}` }}
 						</li>
 					</ul>
 				</div>
 				<div class="big-details text-capitalize">
 					<div v-if="person.homeworld">
-						Homeworld: <b>{{person.homeworld}}</b>
+						<b class="me-2">Homeworld:</b> {{person.homeworld}}
 					</div>
 					<div v-if="birthday">
-						Birthday: <b>{{Utils.Dates.Format.DMon(birthday)}}</b>
+						<b class="me-2">Birthday:</b> {{Utils.Dates.Format.DMon(birthday)}}
 					</div>
 					<div v-if="person.mental?.drive">
-						Drive: <b>{{person.mental.drive}}</b>
+						<b class="me-2">Drive:</b> {{person.mental.drive}}
 					</div>
 				</div>
 				<div class="details mt-2" v-if="person.physical">
@@ -130,11 +142,24 @@ const portraitClasses = Utils.Images.getPortraitClassesFromType(props.person?.ty
 		<!-- This div fixes some weird float behavior -->
 		<div class="clearfix m-0 p-0 d-none d-md-block">&nbsp;</div>
 
-		<!-- <div class="mt-4 accordion" id="section-collapse" v-if="accordionItems.length > 0"> -->
-			<div class="mt-4 accordion" id="playlist-collapse" v-if="playlistEmbed">
-				<AccordionItem name="Playlist" parent-id="playlist-collapse">
+		<div class="mt-4 accordion" id="section-collapse" v-if="accordionItems.length > 0">
+			<!-- <div class="mt-4 accordion" id="playlist-collapse" v-if="playlistEmbed"> -->
+				<AccordionItem name="Playlist" parent-id="section-collapse" v-if="playlistEmbed">
 					<!-- height="352" -->
-					<iframe data-testid="embed-iframe" style="border-radius:12px" :src="playlistEmbed" width="100%" height="704" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" v-if="playlistEmbed"></iframe>
+					<iframe data-testid="embed-iframe" style="border-radius:12px" :src="playlistEmbed" width="100%" height="704" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+				</AccordionItem>
+				<AccordionItem name="Relationships" parent-id="section-collapse" v-if="accordionItems.includes('relationships') && person.relationships">
+					<div class="details">
+						<div class="row" v-if="person.relationships.closeFriends && person.relationships.closeFriends.length > 0">
+							<div class="col fw-bold">Close Friends</div>
+							<div class="col">
+								<div v-for="rel in person.relationships.closeFriends">
+									{{ getRelationshipPersonName(rel) }}
+									<span v-if="rel.label">({{ rel.label }})</span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</AccordionItem>
 			</div>
 		<!-- </div> -->

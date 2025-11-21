@@ -55,6 +55,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         mental: {
             drive: "make as many friends as possible"
         },
+        relationships: {
+            closeFriends: [
+                { idOrName: "tero", label: "best friend" }
+            ],
+        },
         homeworld: "Weapon World",
         images: {
             portrait: "img/npc/susie-portrait.png"
