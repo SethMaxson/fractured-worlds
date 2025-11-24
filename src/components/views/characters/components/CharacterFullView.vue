@@ -7,6 +7,7 @@ import Image from "@/components/core/Image.vue";
 import AccordionItem from "@/components/core/AccordionItem.vue";
 import type { ICharacterData, ICharacterDataAffiliation, ICharacterDataPhysicalTraits, ICharacterDataRelationship } from '@/interfaces/ICharacterData';
 import type { PropType } from 'vue';
+import { useRoute } from 'vue-router';
 
 const props = defineProps({
 	person: {
@@ -62,11 +63,21 @@ function getSpecialAffiliationString(a: ICharacterDataAffiliation): string {
 	return `${a.role || a.rank} <i>(${a.joined}${a.left? "—" + a.left : ""} SE)</i>`;
 }
 
-function getRelationshipPersonName(person: ICharacterDataRelationship): string {
-	const char = CharacterDataUtils.findCharacterById(person.idOrName);
-	return char? char.name : person.idOrName;
-}
 
+const refPath = Utils.String.sanitizeUrl(useRoute().path);
+function getRelationshipPersonData(person: ICharacterDataRelationship) {
+	const char = CharacterDataUtils.findCharacterById(person.idOrName);
+	return {
+		name: char? char.name : person.idOrName,
+		href: char? `/people/${char.id}?path=${refPath}` : undefined,
+		label: person.label,
+		status: char? char.status : person.status,
+	};
+}
+const relationships = {
+	closeFriends: props.person?.relationships?.closeFriends?.map(p => getRelationshipPersonData(p)),
+	family: props.person?.relationships?.family?.map(p => getRelationshipPersonData(p)),
+}
 
 // Configure the display
 const portraitClasses = Utils.Images.getPortraitClassesFromType(props.person?.type);
@@ -150,12 +161,33 @@ const portraitClasses = Utils.Images.getPortraitClassesFromType(props.person?.ty
 				</AccordionItem>
 				<AccordionItem name="Relationships" parent-id="section-collapse" v-if="accordionItems.includes('relationships') && person.relationships">
 					<div class="details">
-						<div class="row" v-if="person.relationships.closeFriends && person.relationships.closeFriends.length > 0">
+						<div class="row mb-2" v-if="relationships.family && relationships.family.length > 0">
+							<div class="col fw-bold">Family</div>
+							<div class="col">
+								<div v-for="rel in relationships.family">
+									<router-link v-if="rel.href" :to="rel.href">
+										{{ rel.name }}
+										<span v-if="rel.label">({{ rel.label }})</span>
+									</router-link>
+									<div v-else>
+										{{ rel.name }}
+										<span v-if="rel.label">({{ rel.label }})</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mb-2" v-if="relationships.closeFriends && relationships.closeFriends.length > 0">
 							<div class="col fw-bold">Close Friends</div>
 							<div class="col">
-								<div v-for="rel in person.relationships.closeFriends">
-									{{ getRelationshipPersonName(rel) }}
-									<span v-if="rel.label">({{ rel.label }})</span>
+								<div v-for="rel in relationships.closeFriends">
+									<router-link v-if="rel.href" :to="rel.href">
+										{{ rel.name }}
+										<span v-if="rel.label">({{ rel.label }})</span>
+									</router-link>
+									<div v-else>
+										{{ rel.name }}
+										<span v-if="rel.label">({{ rel.label }})</span>
+									</div>
 								</div>
 							</div>
 						</div>

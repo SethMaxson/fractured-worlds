@@ -41,6 +41,12 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Construct Observing Biological Boundaries</Character>, or <Character>C.O.B.B.</Character>, is a gifted martial artist who is fascinated by the biological concept of mortality. With a mind as powerful as his blows, he seeks to unravel the mysteries of the <Location>Void Realm</Location>."
         ],
+        relationships: {
+            family: [
+                { idOrName: "yoshi-black", label: "adopted child" },
+                { idOrName: "yoshi-white", label: "adopted child" },
+            ],
+        },
         homeworld: "Golarion",
         spotify: {
 			primaryPlaylistID: "1wlvh0bWnBozYO9pLubU0g"
@@ -97,6 +103,20 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Li'l Phil Antonio</Character> is a manic, unpredictable sorcerer whose purple skin makes him an oddity even among other centaurs. He was raised by a trio of witches and now seeks to find his place in the universe. His aloof tendencies naturally blend with the	curious magic that flows within his veins to make Li'l Phil the ultimate agent of chaos."
         ],
+        relationships: {
+            closeFriends: [
+                { idOrName: "tero" },
+                { idOrName: "nortle", label: "surrogate father" },
+                { idOrName: "zuzu" },
+            ],
+            family: [
+                { idOrName: "Droogella", label: "adoptive mother" },
+                { idOrName: "Malladine", label: "adoptive mother" },
+                { idOrName: "Terribelle", label: "adoptive mother" },
+                { idOrName: "yoshi-light-blue", label: "adopted child" },
+                { idOrName: "yoshi-blue", label: "adopted child" },
+            ],
+        },
         homeworld: "Wildwood Forest",
         spotify: {
 			primaryPlaylistID: "18Gq2lmW0vhZhUOEqMgVDx"
@@ -159,6 +179,18 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Tero</Character> is a gifted student of the elements with an appetite for strength seemingly rivaled only by her appetite for new experiences. She grew up in isolation deep within the <Location>Forest of Spirits</Location>, surrounded by snow and evergreen trees."
         ],
+        relationships: {
+            closeFriends: [
+                { idOrName: "phil" },
+                { idOrName: "cade", label: "best friend" },
+                { idOrName: "susie", label: "best friend" },
+                { idOrName: "zuzu" },
+            ],
+            family: [
+                { idOrName: "yoshi-yellow", label: "adopted child" },
+                { idOrName: "yoshi-pink", label: "adopted child" },
+            ],
+        },
         homeworld: "Forest of Spirits, Golarion",
         spotify: {
 			primaryPlaylistID: "1CtXuwGctAYed6N5FcWNdT"
@@ -218,6 +250,14 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Althea Holimion</Character> (codename: Owl) serves as NLE's archaeologist and botany expert, in addition to standard scout work. Her last assignment lasted for several months and seems to have driven her a little batty. <Character>Cade</Character>, <Character>Doc</Character>, and <Character>Ella</Character> all seem to hold her in high regard."
         ],
+        relationships: {
+            closeFriends: [
+                { idOrName: "doc" },
+                { idOrName: "cade" },
+                { idOrName: "ella" },
+                { idOrName: "ferret" },
+            ],
+        },
         // homeworld: "Geoss",
         images: {
             portrait: "img/npc/althea.png"
@@ -249,6 +289,11 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Boo</Character> is a telepathic, telekinetic dog we met in the <Location>Big Apple</Location>. He is one of <Important>NLE</Important>'s foremost scouts."
         ],
+        relationships: {
+            closeFriends: [
+                { idOrName: "ella", label: "surrogate daughter" },
+            ],
+        },
         // homeworld: "Golarion",
         images: {
             portrait: "img/npc/boo.png"
@@ -280,6 +325,17 @@ export const CharacterDatas: ICharacterData[] = [
             "<Character>Cade Brightcloak</Character> is an amicable knight we met in <Location>Wonderland</Location>. He operates as a scout for <Important>NLE</Important>.",
             "He is a devout adherent of the Cerulean Star."
         ],
+        relationships: {
+            closeFriends: [
+                { idOrName: "tero" },
+                { idOrName: "owl" },
+                { idOrName: "ella" },
+                { idOrName: "nortle" },
+            ],
+            family: [
+                { idOrName: "Warrick Brightcloak", label: "adopted grandfather", status: "dead" },
+            ]
+        },
         // homeworld: "Clovershire, Geoss",
         images: {
             portrait: "img/npc/cade-2.png"
@@ -311,6 +367,13 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Doc</Character> is a peerless inventor whose experiencing with specialized, flying vehicles seems to predate his entry into Voidspace. He travels in a vessel he created himself: The Light Train III. He hasn't mentioned what happened to I and II."
         ],
+        relationships: {
+            closeFriends: [
+                { idOrName: "owl" },
+                { idOrName: "ella" },
+                { idOrName: "ferret" },
+            ],
+        },
         homeworld: "Hill Valley, Earth, 1895",
         images: {
             portrait: "img/npc/doc-brown.jpg"
@@ -342,6 +405,15 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Ella</Character> is an excitable young scholar we first encountered in the <Location>Big Apple</Location>. She serves as <Important>NLE</Important>'s zoologist, and is currently apprenticed to <Character>Boo</Character> to prepare for solo fieldwork."
         ],
+        relationships: {
+            closeFriends: [
+                { idOrName: "boo" },
+                { idOrName: "owl" },
+                { idOrName: "cade" },
+                { idOrName: "doc" },
+                { idOrName: "NLE Agent Puma", label: "boyfriend" },
+            ],
+        },
         // homeworld: "Hyrule",
         images: {
             portrait: "img/npc/ella-portrait.png"
@@ -403,6 +475,12 @@ export const CharacterDatas: ICharacterData[] = [
         description: [
             "<Character>Vilyth Koehlanna</Character> is a rare talent at working with magitech - a fact she is unapologetically proud of. She is the owner and sole employee of an arms dealer named <l>Koehl's</l>, located on <Location>Battle World</Location>."
         ],
+        relationships: {
+            closeFriends: [
+                { idOrName: "owl" },
+                { idOrName: "doc" },
+            ],
+        },
         // homeworld: "Geoss",
         images: {
             portrait: "img/npc/vilyth.png"

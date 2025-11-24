@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import ViewBlurb from "@/components/core/ViewBlurb.vue";
-import Character from '@/components/core/text-tags/Character.vue';
-import Important from '@/components/core/text-tags/Important.vue';
-import Location from '@/components/core/text-tags/Location.vue';
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import Breadcrumb from "@/components/core/Breadcrumb.vue";
 </script>
@@ -64,14 +61,10 @@ import Breadcrumb from "@/components/core/Breadcrumb.vue";
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Glossary } from "@/data/glossary";
-import type { IGlossaryEntry } from "@/interfaces/IGlossaryEntry";
 import { Utils } from "@/scripts/utils";
-import CharacterCard from "../characters/components/CharacterCard.vue";
 import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 import { CharacterDatas } from "@/data/character-datas";
 import type { ICharacterData } from "@/interfaces/ICharacterData";
-import Crew from "../characters/characterDecks/Crew.vue";
 import CharacterLink from "../characters/components/CharacterLink.vue";
 
 const TheGang = [
@@ -121,18 +114,22 @@ export default defineComponent({
 				},
 				{
 					role: 'Enchanter',
+					definition: "In charge of all ship's magical components and runes",
 					personId: 'zuzu'
 				},
 				{
 					role: 'Engineer',
+					definition: "In charge of all ship's engines",
 					personId: 'blackhand-roo'
 				},
 				{
 					role: 'First Mate',
+					definition: "First Mate ranks just below the Captain. They take control of the ship if the Captain can no longer perform their duties.",
 					personId: ''
 				},
 				{
 					role: 'Master Gunner',
+					definition: "In charge of all ship's armaments",
 					personId: 'bebop'
 				},
 				{

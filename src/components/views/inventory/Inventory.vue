@@ -10,7 +10,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 <template>
 	<PageContainerVue>
 		<header>
-			<Breadcrumb path="/inventory" />
+			<Breadcrumb />
 			<ViewBlurb header="Inventory">
 				Some of the more interesting or important looking items we've picked up during our adventures.
 			</ViewBlurb>
@@ -79,6 +79,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 						<li class="list-group-item"> Duloc Outlands </li>
 						<li class="list-group-item"> Treasure Island </li>
 						<li class="list-group-item"> Barbieland </li>
+						<li class="list-group-item"> Looney Tune Land </li>
 					</ol>
 				</div>
 
