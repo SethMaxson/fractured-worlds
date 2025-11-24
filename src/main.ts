@@ -166,10 +166,14 @@ router.afterEach((to, from) => {
 })
 
 // Actually mount app
-const app = createApp(App);
-app.use(router);
-await router.isReady();
-app.mount('#app');
+async function mount() {
+	const app = createApp(App);
+	app.use(router);
+	await router.isReady();
+	app.mount('#app');	
+}
+
+mount();
 
 //#region stuff for Search Bar
 export const metaRoutes = router
