@@ -45,7 +45,7 @@ function notification(pageName: keyof typeof AppState.PageMostRecentUpdates) {
 
 				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start">People</h5>
 				<AppIcon svg="contacts-book" to="/contacts" :notification="notification('Contacts')">Contacts</AppIcon>
-				<AppIcon svg="people" to="/factions">Factions</AppIcon>
+				<AppIcon svg="people" to="/factions" :notification="notification('Factions')">Factions</AppIcon>
 				<AppIcon svg="chat" to="/interviews" :notification="notification('Interviews')">Interviews</AppIcon>
 				<AppIcon svg="user2" to="/people" :notification="notification('People')">People</AppIcon>
 				<AppIcon svg="relationship" to="/relationships" :notification="notification('Relationships')">Relationships</AppIcon>
@@ -56,11 +56,11 @@ function notification(pageName: keyof typeof AppState.PageMostRecentUpdates) {
 				<AppIcon svg="book-half" to="/journal/log" class="dev"> Log </AppIcon>
 				<AppIcon svg="todo" to="/journal/mysteries" :notification="notification('QuestLog')"> Mysteries </AppIcon>
 				<AppIcon svg="timeline" to="/journal/timeline" :notification="notification('Timeline')"> Timeline </AppIcon>
-				<AppIcon svg="anchor" to="/journal/world-anchors"> World Anchors </AppIcon>
+				<AppIcon svg="anchor" to="/journal/world-anchors" :notification="notification('WorldAnchors')"> World Anchors </AppIcon>
 
 				<h5 class="w-100 pt-3 pt-lg-4 m-0 col-5 text-start">About Voidspace</h5>
 				<AppIcon svg="calendar" to="/calendar">Calendar</AppIcon>
-				<AppIcon svg="globe2" to="/worlds">Worlds</AppIcon>
+				<AppIcon svg="globe2" to="/worlds" :notification="notification('Worlds')">Worlds</AppIcon>
 				<AppIcon svg="paths" to="/voidspace-map" :notification="notification('VoidspaceMap')">Voidspace Map</AppIcon>
 				<AppIcon svg="compass-rose" to="/explorers-guide" :notification="notification('ExplorersGuide')">Explorer's Guide</AppIcon>
 				<AppIcon svg="link" to="/links">External Links</AppIcon>

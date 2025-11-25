@@ -7,7 +7,7 @@ export namespace AppState {
 		static get Interviews()			{ return new Date(2025, 0, 1); }
 		/** Inbox of received communications */
 		static get Letters()			{ return new Date(2025, 0, 1); }
-		static get People()				{ return new Date(2025, 10, 13); }
+		static get People()				{ return new Date(2025, 10, 25); }
 		static get QuestLog()			{ return new Date(2025, 10, 5); }
 		static get Relationships()		{ return new Date(2025, 10, 5); }
 		static get Reviews()			{ return new Date(2025, 10, 5); }
@@ -18,6 +18,6 @@ export namespace AppState {
 		static get VoidspaceMap()		{ return new Date(2025, 10, 13); }
 		static get Timeline()			{ return new Date(2025, 10, 5); }
 		static get WorldAnchors()		{ return new Date(2025, 10, 13); }
-		static get Worlds()				{ return new Date(2025, 0, 1); }
+		static get Worlds()				{ return new Date(2025, 10, 25); }
 	}
 }
