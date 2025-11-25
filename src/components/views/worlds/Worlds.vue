@@ -27,6 +27,10 @@ const knownWorlds = {
 		Utils.World.findWorld(WorldDatas, "blues-house"),
 		Utils.World.findWorld(WorldDatas, "neon-coast"),
 		Utils.World.findWorld(WorldDatas, "land-of-oz"),
+		Utils.World.findWorld(WorldDatas, "weapon-world"),
+		Utils.World.findWorld(WorldDatas, "battle-world"),
+		Utils.World.findWorld(WorldDatas, "barbieland"),
+		Utils.World.findWorld(WorldDatas, "looney-tune-land"),
 	] as IWorldData[],
 	heardAbout: [],
 }
@@ -42,7 +46,7 @@ const listedWorlds = computed(() => {
 })
 
 // TODO: deprecate this
-const doPages = false;
+const doPages = true;
 </script>
 
 <template>

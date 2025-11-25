@@ -25,15 +25,7 @@ const TheGang = [
 	CharacterDataUtils.findCharacter(CharacterDatas, 'tero')
 ];
 
-const Allies = [
-	CharacterDataUtils.findCharacter(CharacterDatas, 'boo'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'cade'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'ella'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'doc'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'nortle'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'owl'),
-	CharacterDataUtils.findCharacter(CharacterDatas, 'ferret'),
-];
+const Allies = CharacterDataUtils.findCharactersByType("nle").sort((a, b) => { return a.name > b.name ? 1 : -1; });
 
 const DeadGang = [
 	CharacterDataUtils.findCharacter(CharacterDatas, 'tropey'),
@@ -49,7 +41,7 @@ const OtherEnemies = [
 	CharacterDataUtils.findCharacter(CharacterDatas, 'pontiki')
 ];
 
-const Rebirth = CharacterDataUtils.findCharactersByType("rebirth");
+const Rebirth = CharacterDataUtils.findCharactersByType("rebirth").sort((a, b) => { return a.name > b.name ? 1 : -1; });
 </script>
 
 <template>

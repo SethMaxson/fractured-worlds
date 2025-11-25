@@ -6,7 +6,117 @@ import type { ICharacterData } from "@/interfaces/ICharacterData";
 export const RebirthCharacterDatas: ICharacterData[] = [
 
     //#region Phil's moms/kidnapper witches
-
+    {
+        name: "Droogella",
+        id: "droogella",
+        subtitle: "Ill Omen",
+        type: "rebirth",
+        species: ["human?"],
+        occupation: ["witch"],
+        physical: {
+            gender: "female",
+            eyeColor: "blue",
+            hairColor: "dark brown",
+            height: "7' 1\"",
+            weight: "550 lbs."
+        },
+        affiliations: [
+            { name: "Rebirth Caucus", rank: "member", role: "Magical Muscle", primary: true }
+        ],
+        description: [
+            "<Character>Droogella</Character> is one of the witches who raised <c>Li'l Phil</c>. She is the middle sister and the largest of the three. A broad-shouldered, heavy woman of few expressions and even fewer words. She was always hiding in places to jump out and scare people."
+        ],
+        homeworld: "Witching Wood",
+        images: {
+            portrait: "img/npc/droogella.png"
+        },
+        relationships: {
+            family: [
+                { idOrName: "phil", label: "adopted child" },
+                { idOrName: "malladine", label: "sister" },
+                { idOrName: "terribelle", label: "sister" },
+            ],
+        },
+        spotify: {
+			primaryPlaylistID: "15rSBJ4s9dW1qEQZlQ8fBb"
+        },
+        plotRelevance: 2,
+        status: "alive"
+    },
+    {
+        name: "Malladine",
+        id: "malladine",
+        subtitle: "Connoisseur of Kiddies",
+        type: "rebirth",
+        species: ["human?"],
+        occupation: ["witch"],
+        physical: {
+            gender: "female",
+            eyeColor: "gray",
+            hairColor: "silver",
+            height: "5' 0\"",
+            weight: "130 lbs."
+        },
+        affiliations: [
+            { name: "Rebirth Caucus", rank: "member", role: "Witch Leader", primary: true }
+        ],
+        description: [
+            "<Character>Malladine</Character> is one of the witches who raised <c>Li'l Phil</c>. She is the oldest and strictest of the three. A short, elderly woman with a kind face and glasses that were too big for her head. She always seemed to be hungry.",
+        ],
+        homeworld: "Witching Wood",
+        images: {
+            portrait: "img/npc/malladine.png"
+        },
+        relationships: {
+            family: [
+                { idOrName: "phil", label: "adopted child" },
+                { idOrName: "droogella", label: "sister" },
+                { idOrName: "terribelle", label: "sister" },
+            ],
+        },
+        spotify: {
+			primaryPlaylistID: "6vaKXjnUYrDdGRlhDD4aWr"
+        },
+        plotRelevance: 2,
+        status: "alive"
+    },
+    {
+        name: "Terribelle",
+        id: "terribelle",
+        subtitle: "Storm of Anxiety",
+        type: "rebirth",
+        species: ["human?"],
+        occupation: ["witch"],
+        physical: {
+            gender: "female",
+            eyeColor: "blue",
+            hairColor: "blonde",
+            height: "6' 5\"",
+            weight: "200 lbs."
+        },
+        affiliations: [
+            { name: "Rebirth Caucus", rank: "member", role: "Magical Espionage", primary: true }
+        ],
+        description: [
+            "<Character>Terribelle</Character> is one of the witches who raised <c>Li'l Phil</c>. She is the youngest and most anxious of the three. An obsessively kempt woman with an almost-permanent nervous smile. Always seemed to be on the verge of a panic attack.",
+        ],
+        homeworld: "Witching Wood",
+        images: {
+            portrait: "img/npc/terribelle.png"
+        },
+        relationships: {
+            family: [
+                { idOrName: "phil", label: "adopted child" },
+                { idOrName: "droogella", label: "sister" },
+                { idOrName: "malladine", label: "sister" },
+            ],
+        },
+        spotify: {
+			primaryPlaylistID: "3SFg3yIinMggLc7EVnmV4P"
+        },
+        plotRelevance: 2,
+        status: "alive"
+    },
     //#endregion Phil's moms/kidnapper witches
     
     //#region The Rest

@@ -33,6 +33,44 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Barbieland",
+        id: "barbieland",
+        copy: {
+            description: ["A pink world inhabited by the Barbies."],
+            oneLiner: "A pink world inhabited by the Barbies.",
+            quote: "I'm a Barbie girl, in a Barbie world.",
+        },
+        details: {
+            anchor: "Weird Barbie's House",
+            kindredWorlds: ["Land of Oz", "Looney Tune Land", "???", "???", "???", "Somewhere"],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/barbieland.png",
+        },
+        people: {
+            pureSoul: "Skipper",
+        }
+    },
+    {
+        name: "Battle World",
+        id: "battle-world",
+        copy: {
+            description: ["A world where combat-based entertainment is king."],
+            oneLiner: "A world where combat-based entertainment is king.",
+            quote: "Test your might.",
+        },
+        details: {
+            anchor: "gated courtyard",
+            kindredWorlds: ["???"],
+            timeType: "standard",
+        },
+        images: {
+            token: "img/worlds/mortal_kombat.png",
+        },
+        people: { }
+    },
+    {
         name: "Big Apple",
         id: "big-apple",
         copy: {
@@ -102,6 +140,26 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Looney Tune Land",
+        id: "looney-tune-land",
+        copy: {
+            description: ["A cartoon world inhabited by the Looney Tunes."],
+            oneLiner: "A cartoon world inhabited by the Looney Tunes.",
+            quote: "Everybody get up, it's time to slam now.",
+        },
+        details: {
+            anchor: "Basketball Statue",
+            kindredWorlds: ["Barbieland", "???", "???"],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/looney_tunes.png",
+        },
+        people: {
+            pureSoul: "Tweety",
+        }
+    },
+    {
         name: "Neon Coast [DESTROYED]",
         id: "neon-coast",
         copy: {
@@ -125,6 +183,24 @@ export const WorldDatas: IWorldData[] = [
         people: {
             allies: "Gloria Molloy, Tommy One"
         }
+    },
+    {
+        name: "Weapon World",
+        id: "weapon-world",
+        copy: {
+            description: ["A world where everything is either weapons or weapon themed."],
+            oneLiner: "The home of Tankman Enterprises.",
+            quote: "We've got the cure for who ails you.",
+        },
+        details: {
+            anchor: "gated courtyard",
+            kindredWorlds: ["???"],
+            timeType: "standard",
+        },
+        images: {
+            token: "img/worlds/shibuya.png",
+        },
+        people: { }
     },
     {
         name: "Wonderland",

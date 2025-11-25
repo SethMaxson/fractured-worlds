@@ -2,7 +2,6 @@
 import Navbar from "@/components/core/Navbar.vue";
 import DataModals from "./components/core/DataModals.vue";
 import Settings from "./components/views/Settings.vue";
-import { onMounted } from "vue";
 </script>
 
 <template>
@@ -708,63 +707,6 @@ import { onMounted } from "vue";
 </template>
 
 <script lang="ts">
-onMounted(
-/*! See: https://github.com/FranBar1966/bootstrap-5-modal-close-on-back */
-
-/*
- * Bootstrap 5 close a modal with back button
- * https://github.com/FranBar1966/bootstrap-5-modal-close-on-back
- */
-() => {
-    // const state = {
-    //     historyOpenModals: [] as string[],
-    //     skipModalHiddenEvent: false,
-    //     skipModalHashChangeEvent: false
-    // };
-
-    // function handleModalShown(ev: any) {
-	// 	const id = ev.target?.id as string;
-    //     if (!id) return;
-
-    //     if (!state.historyOpenModals.includes(id)) {
-    //         state.historyOpenModals.push(id);
-    //         window.history.pushState(null, '', '#' + id);
-    //     }
-    // }
-
-    // function handleModalHide(ev: any) {
-    //     if (state.skipModalHiddenEvent) {
-    //         state.skipModalHiddenEvent = false;
-    //         return;
-    //     }
-
-    //     state.skipModalHashChangeEvent = true;
-    //     window.history.go(-1);
-    //     state.historyOpenModals = state.historyOpenModals.filter(id => id !== ev.target?.id as string);
-    // }
-
-    // function handleHashChange() {
-    //     if (state.skipModalHashChangeEvent) {
-    //         state.skipModalHashChangeEvent = false;
-    //         return;
-    //     }
-
-    //     const lastModalId = state.historyOpenModals[state.historyOpenModals.length - 1];
-    //     if (!lastModalId) return;
-
-    //     const modal = bootstrap.Modal.getInstance(document.getElementById(lastModalId));
-    //     if (modal) {
-    //         state.skipModalHiddenEvent = true;
-    //         state.historyOpenModals = state.historyOpenModals.filter(id => id !== lastModalId);
-    //         modal.hide();
-    //     }
-    // }
-
-    // window.addEventListener('shown.bs.modal', handleModalShown);
-    // window.addEventListener('hide.bs.modal', handleModalHide);
-    // window.addEventListener('hashchange', handleHashChange);
-});
-
 function closeModals () {
 	const modalBackdrop = document.querySelector(".modal-backdrop.show") as HTMLElement;
 	if (modalBackdrop) {

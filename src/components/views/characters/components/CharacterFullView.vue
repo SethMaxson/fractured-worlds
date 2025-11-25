@@ -155,45 +155,45 @@ const portraitClasses = Utils.Images.getPortraitClassesFromType(props.person?.ty
 
 		<div class="mt-4 accordion" id="section-collapse" v-if="accordionItems.length > 0">
 			<!-- <div class="mt-4 accordion" id="playlist-collapse" v-if="playlistEmbed"> -->
-				<AccordionItem name="Playlist" parent-id="section-collapse" v-if="playlistEmbed">
-					<!-- height="352" -->
-					<iframe data-testid="embed-iframe" style="border-radius:12px" :src="playlistEmbed" width="100%" height="704" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-				</AccordionItem>
-				<AccordionItem name="Relationships" parent-id="section-collapse" v-if="accordionItems.includes('relationships') && person.relationships">
-					<div class="details">
-						<div class="row mb-2" v-if="relationships.family && relationships.family.length > 0">
-							<div class="col fw-bold">Family</div>
-							<div class="col">
-								<div v-for="rel in relationships.family">
-									<router-link v-if="rel.href" :to="rel.href">
-										{{ rel.name }}
-										<span v-if="rel.label">({{ rel.label }})</span>
-									</router-link>
-									<div v-else>
-										{{ rel.name }}
-										<span v-if="rel.label">({{ rel.label }})</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row mb-2" v-if="relationships.closeFriends && relationships.closeFriends.length > 0">
-							<div class="col fw-bold">Close Friends</div>
-							<div class="col">
-								<div v-for="rel in relationships.closeFriends">
-									<router-link v-if="rel.href" :to="rel.href">
-										{{ rel.name }}
-										<span v-if="rel.label">({{ rel.label }})</span>
-									</router-link>
-									<div v-else>
-										{{ rel.name }}
-										<span v-if="rel.label">({{ rel.label }})</span>
-									</div>
+			<AccordionItem name="Playlist" parent-id="section-collapse" v-if="playlistEmbed">
+				<!-- height="352" -->
+				<iframe data-testid="embed-iframe" style="border-radius:12px" :src="playlistEmbed" width="100%" height="704" frameBorder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+			</AccordionItem>
+			<AccordionItem name="Relationships" parent-id="section-collapse" v-if="accordionItems.includes('relationships') && person.relationships">
+				<div class="details">
+					<div class="row mb-2" v-if="relationships.family && relationships.family.length > 0">
+						<div class="col fw-bold">Family</div>
+						<div class="col">
+							<div v-for="rel in relationships.family">
+								<router-link v-if="rel.href" :to="rel.href">
+									{{ rel.name }}
+									<span v-if="rel.label">({{ rel.label }})</span>
+								</router-link>
+								<div v-else>
+									{{ rel.name }}
+									<span v-if="rel.label">({{ rel.label }})</span>
 								</div>
 							</div>
 						</div>
 					</div>
-				</AccordionItem>
-			</div>
+					<div class="row mb-2" v-if="relationships.closeFriends && relationships.closeFriends.length > 0">
+						<div class="col fw-bold">Close Friends</div>
+						<div class="col">
+							<div v-for="rel in relationships.closeFriends">
+								<router-link v-if="rel.href" :to="rel.href">
+									{{ rel.name }}
+									<span v-if="rel.label">({{ rel.label }})</span>
+								</router-link>
+								<div v-else>
+									{{ rel.name }}
+									<span v-if="rel.label">({{ rel.label }})</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</AccordionItem>
+		</div>
 		<!-- </div> -->
 
 		<!-- TODO: Put an image gallery somewhere near here. Take inspiration from standard wiki formats like these:

@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import PageContainerVue from "@/components/core/PageContainer.vue";
 import Breadcrumb from "@/components/core/Breadcrumb.vue";
+import AccordionItem from "@/components/core/AccordionItem.vue";
+import Image from "@/components/core/Image.vue";
+import LocationCharacterDeck from '@/components/views/characters/characterDecks/DynamicCharacterDeck.vue';
 import NittyGritty from "./components/WorldNittyGritty.vue";
-
 import { useRoute } from "vue-router";
 import { Utils } from "@/scripts/utils";
 import { WorldDatas } from "@/data/world-datas";
-import Image from "@/components/core/Image.vue";
+import { computed } from "vue";
+import { WorldDataUtils } from "@/scripts/utils/world-data-utils";
+import { CharacterDataUtils } from "@/scripts/utils/character-data-utils";
 
 const props = defineProps({
 	id: {
@@ -19,6 +23,7 @@ const queryPath = useRoute().query.path as string;
 
 const path = (queryPath? queryPath + "/" : "/worlds/") + props.id;
 const world = Utils.World.findWorld(WorldDatas, props.id);
+const cast = WorldDataUtils.findCharactersInWorld(CharacterDataUtils.getAll(), props.id);
 
 const bgImg = world?.images.wallpaper?.trim();
 </script>
@@ -42,7 +47,7 @@ const bgImg = world?.images.wallpaper?.trim();
 				</div>
 				
 				<!-- Content -->
-				<div class="modal-body row background-image" :style='{ "backgroundImage": "linear-gradient( to bottom, transparent 0%, var(--fw-bs-body-bg) 40%  ), url(\"" + bgImg + "\")" }'>
+				<div class="row background-image" :style='{ "backgroundImage": "linear-gradient( to bottom, transparent 0%, var(--fw-bs-body-bg) 40%  ), url(\"" + bgImg + "\")" }'>
 					
 					<!-- wiki-style InfoBox -->
 					<div class="col-xl-4">
@@ -90,6 +95,16 @@ const bgImg = world?.images.wallpaper?.trim();
 					</div>
 
 				</div>
+
+				<!-- This div fixes some weird float behavior -->
+				<div class="clearfix m-0 p-0 d-none d-md-block">&nbsp;</div>
+				
+				<div class="accordion mt-4" id="world-peopleAccordionID" v-if="cast.length > 0">
+					<AccordionItem name="People" parent-id="world-peopleAccordionID">
+						<LocationCharacterDeck :people="cast" :containedByModal="false" />
+					</AccordionItem>
+				</div>
+
 			</div>
 		</main>
 	</PageContainerVue>

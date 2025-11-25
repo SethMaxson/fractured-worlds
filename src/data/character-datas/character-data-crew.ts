@@ -55,14 +55,14 @@ export const CrewCharacterDatas: ICharacterData[] = [
         mental: {
             drive: "make as many friends as possible"
         },
+        homeworld: "Weapon World",
+        images: {
+            portrait: "img/npc/susie-portrait.png"
+        },
         relationships: {
             closeFriends: [
                 { idOrName: "tero", label: "best friend" }
             ],
-        },
-        homeworld: "Weapon World",
-        images: {
-            portrait: "img/npc/susie-portrait.png"
         },
         spotify: {
 			primaryPlaylistID: "4XeEQwogXECnNaDGhnkJ4A"
@@ -96,6 +96,14 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/winter.png"
         },
+        relationships: {
+            closeFriends: [
+                { idOrName: "cobb" },
+                { idOrName: "phil" },
+                { idOrName: "tero" },
+                { idOrName: "zuzu" },
+            ],
+        },
         spotify: {
 			primaryPlaylistID: "0zyxK6W0ROxoCzmHsCW9zS"
         },
@@ -127,6 +135,16 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/zuzu.png"
         },
+        relationships: {
+            closeFriends: [
+                { idOrName: "phil" },
+                { idOrName: "tero" },
+                { idOrName: "winter" },
+                { idOrName: "Bear" },
+                { idOrName: "Cookie Monster" },
+                { idOrName: "Elmo" },
+            ],
+        },
         spotify: {
 			primaryPlaylistID: "0P1Ckwy19TthbbCWApONXF",
             themeSong: "3MpK9vnxxgYvh0CNeGvx6G",
@@ -152,6 +170,12 @@ export const CrewCharacterDatas: ICharacterData[] = [
         homeworld: "New York City, Earth, 1991",
         images: {
             portrait: "img/npc/bebop.png"
+        },
+        relationships: {
+            closeFriends: [
+                { idOrName: "gugg" },
+                { idOrName: "ootah" },
+            ],
         },
         spotify: {
 			primaryPlaylistID: "3dZixNJssPoe8l0Ads4xyf"
@@ -268,6 +292,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/eva-davis.png"
         },
+        relationships: {
+            closeFriends: [
+                { idOrName: "giuseppe-da-albiate" },
+            ],
+        },
         spotify: {
 			primaryPlaylistID: "2Na0W104SEoRDyc8Sz4Xdn"
         },
@@ -323,6 +352,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/giuseppe.png"
         },
+        relationships: {
+            closeFriends: [
+                { idOrName: "eva-davis" },
+            ],
+        },
         spotify: {
 			primaryPlaylistID: "6dNdYWCXEt3dFx3AectPGs"
         },
@@ -350,6 +384,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/gloria.jpg"
         },
+        relationships: {
+            closeFriends: [
+                { idOrName: "tommy-one", label: "surrogate brother" }
+            ],
+        },
         spotify: {
 			primaryPlaylistID: "0HEWagioX9kGslrTmfRpZB"
         },
@@ -371,6 +410,12 @@ export const CrewCharacterDatas: ICharacterData[] = [
         homeworld: "Earth, prehistory",
         images: {
             portrait: "img/npc/gugg.png"
+        },
+        relationships: {
+            closeFriends: [
+                { idOrName: "bebop" },
+                { idOrName: "ootah" },
+            ],
         },
         spotify: {
 			primaryPlaylistID: "4KuWI0li6sA2naX6yISYZ3"
@@ -588,6 +633,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/todd-jenkins.png"
         },
+        relationships: {
+            closeFriends: [
+                { idOrName: "cobb" },
+            ],
+        },
         spotify: {
 			primaryPlaylistID: "0MD68ffLgJvFfygYY01S8l"
         },
@@ -642,6 +692,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/tommy-one.png"
         },
+        relationships: {
+            closeFriends: [
+                { idOrName: "gloria", label: "surrogate sister" },
+            ],
+        },
         spotify: {
 			primaryPlaylistID: "3F6SEwmMzY0iy940wNONtn"
         },
@@ -668,6 +723,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/yoshi-black.png"
         },
+        relationships: {
+            family: [
+                { idOrName: "cobb", label: "adoptive father" },
+            ],
+        },
         spotify: {
             primaryPlaylistID: "2xumMU5CzUQ0t5MNzn0lqk"
         },
@@ -690,6 +750,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
             portrait: "img/npc/yoshi-blue.jpg"
+        },
+        relationships: {
+            family: [
+                { idOrName: "phil", label: "adoptive father" },
+            ],
         },
         spotify: {
             primaryPlaylistID: "1VhLZOOpQ8v972e38DDtrS"
@@ -737,6 +802,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/yoshi-light-blue.png"
         },
+        relationships: {
+            family: [
+                { idOrName: "phil", label: "adoptive father" },
+            ],
+        },
         spotify: {
             primaryPlaylistID: "2dLFjGAOvBzieCy2RMfMGG"
         },
@@ -759,6 +829,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
             portrait: "img/npc/yoshi-pink.png"
+        },
+        relationships: {
+            family: [
+                { idOrName: "tero", label: "adoptive mother" },
+            ],
         },
         spotify: {
             primaryPlaylistID: "12n3g9L7k0FUi9kKdbaXhv"
@@ -806,6 +881,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         images: {
             portrait: "img/npc/yoshi-yellow.png"
         },
+        relationships: {
+            family: [
+                { idOrName: "tero", label: "adoptive mother" },
+            ],
+        },
         spotify: {
             primaryPlaylistID: "3Mfud8wqdN42FqOZH12Q8C"
         },
@@ -829,6 +909,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         homeworld: "Dinosaur Land, Mushroom World",
         images: {
             portrait: "img/npc/yoshi-white.png"
+        },
+        relationships: {
+            family: [
+                { idOrName: "cobb", label: "adoptive father" },
+            ],
         },
         spotify: {
             primaryPlaylistID: "4ur7MDXuqSwF3qbNwSRM9L"
