@@ -44,7 +44,7 @@ onMounted(() => {
 			<div class="text-center border border-black border-5 mx-lg-5 bg-dark-subtle overflow-hidden">
 				<div id="panzoom-element" class="position-relative">
 					<Image
-						class="position-relative"
+						class="position-relative w-100"
 						style="z-index: 0;"
 						src="img/maps/voidspace.png"
 					/>
