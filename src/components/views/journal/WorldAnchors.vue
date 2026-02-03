@@ -159,6 +159,22 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 						<span class="badge text-bg-info rounded-pill">Looney Tune Land</span>
 					</span>
 				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
+					<div class="me-auto">
+						"All shall fade to naught, for the Heart lies in the Belly of the Father"
+					</div>
+					<span class="m-0 p-0">
+						<span class="badge text-bg-info rounded-pill">Shaolin Soccer</span>
+					</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
+					<div class="me-auto">
+						"where it happened and in all worlds besides. All that remains drifts e'er"
+					</div>
+					<span class="m-0 p-0">
+						<span class="badge text-bg-info rounded-pill">Sanctuary</span>
+					</span>
+				</li>
 			</ul>
 		</main>
 	</PageContainerVue>

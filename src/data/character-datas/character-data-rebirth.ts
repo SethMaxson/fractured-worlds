@@ -169,7 +169,7 @@ export const RebirthCharacterDatas: ICharacterData[] = [
         ],
         homeworld: "???",
         images: {
-            portrait: "img/npc/doyle.png"
+            portrait: "img/npc/doyle-toon.png"
         },
         spotify: {
 			primaryPlaylistID: "58fX3Hi1oaBgOq21OMYah1"
@@ -194,7 +194,7 @@ export const RebirthCharacterDatas: ICharacterData[] = [
             "<Character>Gojiro</Character> is an infamous mercenary known for his martial prowess, stealth, and tracking ability. He seems to have taken a shine to <c>Li'l Phil</c>."
         ],
         images: {
-            portrait: "img/npc/gojiro.png"
+            portrait: "img/npc/gojiro-toon.png"
         },
         spotify: {
 			primaryPlaylistID: "3dvzEn8cNeZJWh53jgEmvN"

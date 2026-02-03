@@ -531,15 +531,33 @@ const timelineEvents: ITimelineEvent[] = [
 			// { name: "invited Nortle", type: "person" },
 			// { name: "invited Susie", type: "person" },
 			// { name: "invited Phil", type: "person" },
+			{ name: "met Althea", type: "person" },
 		],
 		header: "Tero and Phil attended Gazelle concert with Cade & other members of NLE",
 		type: "holiday"
 	},
 	{
-		date: { year: 1, month: 9, day: 21 },
-		header: "Ootah finally sobers up",
-		type: "drug"
+		date: { year: 1, month: 9, day: 7 },
+		header: "Tero entered a relationship with Cade",
+		type: "love"
 	},
+	{
+		date: { year: 1, month: 9, day: 12 },
+		endDate: { year: 1, month: 12, day: 13 },
+		isMajor: true,
+		// event: "We reached Duloc.",
+		extra: [
+			{ name: "reached Shaolin Soccer League", type: "world" },
+			{ name: "joined Team Shaolin", type: "faction" },
+		],
+		header: "Shaolin Soccer League",
+		type: "world"
+	},
+	// {
+	// 	date: { year: 1, month: 9, day: 21 },
+	// 	header: "Ootah finally sobers up",
+	// 	type: "drug"
+	// },
 	{
 		date: { year: 1, month: 10, day: 14 },
 		header: "Tero finally sobers up",

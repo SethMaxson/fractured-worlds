@@ -182,12 +182,12 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         homeworld: "Forest of Spirits, Golarion",
         images: {
-            portrait: "img/party/tero-kawaii.png"
+            portrait: "img/party/tero-kawaii1.png"
         },
         relationships: {
             closeFriends: [
                 { idOrName: "phil" },
-                { idOrName: "cade", label: "best friend" },
+                { idOrName: "cade", label: "boyfriend" },
                 { idOrName: "susie", label: "best friend" },
                 { idOrName: "winter" },
                 { idOrName: "zuzu" },
@@ -293,7 +293,7 @@ export const CharacterDatas: ICharacterData[] = [
         ],
         // homeworld: "Golarion",
         images: {
-            portrait: "img/npc/boo.png"
+            portrait: "img/npc/boo.jpg"
         },
         relationships: {
             closeFriends: [
@@ -333,7 +333,7 @@ export const CharacterDatas: ICharacterData[] = [
         },
         relationships: {
             closeFriends: [
-                { idOrName: "tero" },
+                { idOrName: "tero", label: "girlfriend" },
                 { idOrName: "owl" },
                 { idOrName: "ella" },
                 { idOrName: "nortle" },

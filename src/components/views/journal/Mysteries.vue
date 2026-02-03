@@ -53,10 +53,59 @@ import JournalHeader from './subviews/JournalHeader.vue';
 						The World Anchor Message
 					</span>
 					<span class="def">
-						We have found a few <Important>World Anchors</Important> so far, and each contained a fragment of some message or passage.
+						<p>
+							We have found a few <Important>World Anchors</Important> so far, and each contained a fragment of some message or passage.
+						</p>
+						<p>
+							Many people, including our peers in <Important>N.L.E.</Important>, believe that these fragments will reveal how to stop worlds from blinking out.
+						</p>
 					</span>
 					<span class="footer">
 						Main Quest
+					</span>
+				</button>
+				<button
+					type="button"
+					class="list-group-item list-group-item-action"
+					data-bs-toggle="modal"
+					data-bs-target="#questModal"
+				>
+					<span class="title main-quest text-primary-emphasis">
+						<svg class="menu-button-icon theme-color d-inline"><use href="#globe2"></use></svg>
+						Stop the Worlds from Blinking Out
+					</span>
+					<span class="def">
+						<p>
+							More worlds disappear with every day that passes in the <Location>Void Realm.</Location>. Unless something changes, all life as we know it will come to an end.
+						</p>
+						<p>
+							Many people, including our peers in <Important>N.L.E.</Important>, believe that the World Anchor passages will reveal how to stop worlds from blinking out.
+						</p>
+					</span>
+					<span class="footer">
+						Main Quest
+					</span>
+				</button>
+				<button
+					type="button"
+					class="list-group-item list-group-item-action"
+					data-bs-toggle="modal"
+					data-bs-target="#questModal"
+				>
+					<span class="title">
+						<svg class="menu-button-icon theme-color d-inline"><use href="#witch-hat-fill"></use></svg>
+						Zuzu
+					</span>
+					<span class="def">
+						<p>
+							<Character>Zuzu</Character>, a young wizard we recruited in <Location>Somewhere</Location>, seems to possess magical abilities well beyond that typically possible for mortals, especially ones so young. It seems this raw power makes him valuable to some unsavory types.
+						</p>
+						<p>
+							We now know <Character>Zuzu</Character> is a <Important>Shadowfolk</Important> - a creature created by burning a member of the <Location>Sylphata</Location> tribe to death in a specific manner.
+						</p>
+					</span>
+					<span class="footer">
+						Side Quest
 					</span>
 				</button>
 				<button

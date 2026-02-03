@@ -29,6 +29,8 @@ export interface ICharacterDataMentalTraits {
 	apparentDrive?: string;
 	/** This person's actual drive. */
 	drive?: string;
+	/** Not actually sure if this should live on this object. */
+	favoriteMovie?: string;
 }
 
 export interface ICharacterDataPhysicalTraits {

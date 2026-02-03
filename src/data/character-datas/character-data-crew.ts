@@ -71,8 +71,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         status: "alive"
     },
     {
-        // name: "Winter Duskward",
-        name: "Winter",
+        name: "Winter Duskward",
         id: "winter",
         subtitle: "Mystical Child",
         type: "crew",
@@ -624,6 +623,7 @@ export const CrewCharacterDatas: ICharacterData[] = [
         ],
         mental: {
             drive: "become the most famous rapper to ever live",
+            favoriteMovie: "8 Mile",
         },
         physical: {
             eyeColor: "brown",
