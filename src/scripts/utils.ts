@@ -153,6 +153,7 @@ export namespace Utils {
             export const DMonth = (date: IMinimumFormattableDate): string => formatDate(date, 'd m', { printMonthType: 'name'});
             export const DMonY = (date: IMinimumFormattableDate): string => formatDate(date, 'dd m, yyyy', { printMonthType: 'abbr'});
             export const DMonthY = (date: IMinimumFormattableDate): string => formatDate(date, 'd m, yyyy', { printMonthType: 'name'});
+            export const YMD = (date: IMinimumFormattableDate): string => formatDate(date, 'yyyy/mm/dd');
             
         }
     }
@@ -206,8 +207,8 @@ export namespace Utils {
         }
         /** Compare two IDate objects */
         export function campaignDate(a: IDate, b: IDate, ascending: boolean = true) {
-            const compA = Dates.Format.MDY(a);
-            const compB = Dates.Format.MDY(b);
+            const compA = Dates.Format.YMD(a);
+            const compB = Dates.Format.YMD(b);
             const aWins = ascending ? 1 : -1;
             const bWins = ascending ? -1 : 1;
             return (

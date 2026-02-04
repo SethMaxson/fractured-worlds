@@ -429,6 +429,11 @@ export const CrewCharacterDatas: ICharacterData[] = [
         type: "crew",
         species: ["gnome"],
         occupation: ["Quartermaster of the Brightside"],
+        physical: {
+            gender: "female",
+            height: "3' 6\"",
+            weight: "46 lbs."
+        },
         affiliations: [
             { name: "Brightside Crew", rank: "member", role: "Quartermaster", joined: "04/02/0001", primary: true }
         ],

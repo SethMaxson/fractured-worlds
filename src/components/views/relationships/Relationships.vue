@@ -206,6 +206,7 @@ const Relationships = {
 		},
 		{
 			person: "CORN",
+			label: "weird clone",
 			met: new CampaignDate(7, 7, 1),
 			rank: 1
 		},
@@ -235,11 +236,13 @@ const Relationships = {
 	"phil": [
 		{
 			person: "yoshi-light-blue",
+			label: "ward",
 			met: new CampaignDate(10, 7, 1),
 			rank: 2
 		},
 		{
 			person: "yoshi-blue",
+			label: "ward",
 			met: new CampaignDate(10, 7, 1),
 			rank: 1
 		},
@@ -255,6 +258,7 @@ const Relationships = {
 		},
 		{
 			person: "gojiro",
+			label: "frenemy?",
 			notes: "assaulting you seems to be his hobby",
 			met: new CampaignDate(6, 7, 1),
 			rank: 1
@@ -284,6 +288,7 @@ const Relationships = {
 		},
 		{
 			person: "nortle",
+			label: "basically ur dad lol",
 			met: new CampaignDate(2, 4, 1),
 			rank: 2
 		},
@@ -303,7 +308,7 @@ const Relationships = {
 	"tero": [
 		{
 			person: "cade",
-			// label: "crush",
+			label: "bf",
 			met: new CampaignDate(5, 4, 1),
 			rank: 3
 		},
@@ -321,11 +326,13 @@ const Relationships = {
 		},
 		{
 			person: "yoshi-yellow",
+			label: "ward",
 			met: new CampaignDate(10, 7, 1),
 			rank: 2
 		},
 		{
 			person: "yoshi-pink",
+			label: "ward",
 			met: new CampaignDate(10, 7, 1),
 			rank: 2
 		},

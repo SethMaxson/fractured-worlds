@@ -149,6 +149,17 @@ function getMatchableArrayString(array: string[]) {
 
 const timelineEvents: ITimelineEvent[] = [
 	{
+		date: { year: 1, month: 12, day: 22 },
+		isMajor: true,
+		// event: "We reached Duloc.",
+		extra: [
+			{ name: "reached Sanctuary", type: "world" },
+			{ name: "Christmas", type: "holiday" },
+		],
+		header: "Sanctuary",
+		type: "world-special"
+	},
+	{
 		date: { year: 1, month: 3, day: 14 },
 		isMajor: true,
 		event: "Each of us awoke within the streets of an unfamiliar city in eternal twilight. Our last memories were of being swallowed by darkness after the skies of our respective homelands shattered like glass mirrors.",
@@ -543,12 +554,13 @@ const timelineEvents: ITimelineEvent[] = [
 	},
 	{
 		date: { year: 1, month: 9, day: 12 },
-		endDate: { year: 1, month: 12, day: 13 },
+		endDate: { year: 1, month: 12, day: 19 },
 		isMajor: true,
 		// event: "We reached Duloc.",
 		extra: [
 			{ name: "reached Shaolin Soccer League", type: "world" },
 			{ name: "joined Team Shaolin", type: "faction" },
+			{ name: "won Tycoon Championship", type: "holiday" },
 		],
 		header: "Shaolin Soccer League",
 		type: "world"
@@ -571,6 +583,11 @@ const timelineEvents: ITimelineEvent[] = [
 	{
 		date: { year: 1, month: 12, day: 6 },
 		header: "Phil finally sobers up",
+		type: "drug"
+	},
+	{
+		date: { year: 2, month: 1, day: 23 },
+		header: "C.O.B.B. finally sobers up",
 		type: "drug"
 	},
 ];
