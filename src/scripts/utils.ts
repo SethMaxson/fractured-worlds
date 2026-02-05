@@ -53,7 +53,7 @@ export namespace Utils {
             }
             export namespace LastPageView {
                 export function get(pageName: string) {
-                    return localStorage.getItem("lastPageView" + pageName) ? new Date(localStorage.getItem("lastPageView" + pageName) as string) : new Date(0, 0, 1);
+                    return localStorage.getItem("lastPageView" + pageName) ? new Date(parseInt(localStorage.getItem("lastPageView" + pageName) as string)) : new Date(0, 0, 1);
                 }
                 export function set(pageName: string, value: Date) {
                     localStorage.setItem("lastPageView" + pageName, value.toDateString());
