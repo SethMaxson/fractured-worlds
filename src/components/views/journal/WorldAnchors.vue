@@ -75,33 +75,25 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 				</li>
 				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
 					<div class="me-auto">
-						"contain its power. It struggled 'gainst its"
+						"where it happened and in all worlds besides. All that remains drifts e'er"
 					</div>
-					<span class="badge text-bg-info rounded-pill">Big Apple</span>
+					<span class="m-0 p-0">
+						<span class="badge text-bg-info rounded-pill">Sanctuary</span>
+					</span>
 				</li>
 				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
 					<div class="me-auto">
 						"three. They bargained with the Father of Void to"
 					</div>
 					<span class="m-0 p-0">
-						<span class="badge text-bg-secondary rounded-pill me-1">Shared by NLE</span>
-						<span class="badge text-bg-info rounded-pill">???</span>
+						<span class="badge text-bg-secondary rounded-pill">???*</span>
 					</span>
 				</li>
 				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
 					<div class="me-auto">
-						"Decay. The Father of Decay awoke from his slumber in"
+						"contain its power. It struggled 'gainst its"
 					</div>
-					<span class="badge text-bg-info rounded-pill">Land of Oz</span>
-				</li>
-				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
-					<div class="me-auto">
-						"cracks, thus do the drifting fragments of worlds still slowly"
-					</div>
-					<span class="m-0 p-0">
-						<span class="badge text-bg-secondary rounded-pill me-1">Shared by NLE</span>
-						<span class="badge text-bg-info rounded-pill">Tokyo 2007</span>
-					</span>
+					<span class="badge text-bg-info rounded-pill">Big Apple</span>
 				</li>
 				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
 					<div class="me-auto">
@@ -109,22 +101,6 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 					</div>
 					<span class="m-0 p-0">
 						<span class="badge text-bg-info rounded-pill">Weapon World</span>
-					</span>
-				</li>
-				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
-					<div class="me-auto">
-						"to spread decay and extinguish all that ever was."
-					</div>
-					<span class="m-0 p-0">
-						<span class="badge text-bg-info rounded-pill">Berk</span>
-					</span>
-				</li>
-				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
-					<div class="me-auto">
-						"three wayfinding keystones from among the lights that point the"
-					</div>
-					<span class="m-0 p-0">
-						<span class="badge text-bg-info rounded-pill">Duloc Outlands</span>
 					</span>
 				</li>
 				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
@@ -145,10 +121,10 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 				</li>
 				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
 					<div class="me-auto">
-						"that binds worlds shall point towards the Fated World, but for the"
+						"three wayfinding keystones from among the lights that point the"
 					</div>
 					<span class="m-0 p-0">
-						<span class="badge text-bg-info rounded-pill">Barbieland</span>
+						<span class="badge text-bg-info rounded-pill">Duloc Outlands</span>
 					</span>
 				</li>
 				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
@@ -161,6 +137,14 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 				</li>
 				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
 					<div class="me-auto">
+						"that binds worlds shall point towards the Fated World, but for the"
+					</div>
+					<span class="m-0 p-0">
+						<span class="badge text-bg-info rounded-pill">Barbieland</span>
+					</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
+					<div class="me-auto">
 						"All shall fade to naught, for the Heart lies in the Belly of the Father"
 					</div>
 					<span class="m-0 p-0">
@@ -169,13 +153,66 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 				</li>
 				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
 					<div class="me-auto">
-						"where it happened and in all worlds besides. All that remains drifts e'er"
+						"The stone was taken by the Father of Void, who craved its"
 					</div>
 					<span class="m-0 p-0">
-						<span class="badge text-bg-info rounded-pill">Sanctuary</span>
+						<span class="badge text-bg-secondary rounded-pill">Shadow Moses Island*</span>
 					</span>
 				</li>
 			</ul>
+			<div class="card">
+				<ul class="list-group px-3 list-group-flush">
+					<li class="list-group-item d-flex justify-content-between align-items-start">
+						<div class="me-auto">
+							"The broken body of the Father of Void still bleeds and
+						</div>
+						<span class="m-0 p-0">
+							<span class="badge text-bg-secondary rounded-pill">???*</span>
+						</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-start">
+						<div class="me-auto">
+							"cracks, thus do the drifting fragments of worlds still slowly
+						</div>
+						<span class="m-0 p-0">
+							<span class="badge text-bg-secondary rounded-pill">Tokyo 2007*</span>
+						</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-start">
+						<div class="me-auto">
+							"fade out of all being. This entropy called to the harbinger, the Father of
+						</div>
+						<span class="m-0 p-0">
+							<span class="badge text-bg-secondary rounded-pill">LittleBigPlanet*</span>
+						</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-start">
+						<div class="me-auto">
+							"Decay. The Father of Decay awoke from his slumber in
+						</div>
+						<span class="badge text-bg-info rounded-pill">Land of Oz</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-start">
+						<div class="me-auto">
+							"the place beyond time. From his will he birthed servants
+						</div>
+						<span class="m-0 p-0">
+							<span class="badge text-bg-secondary rounded-pill">Gestahl Empire*</span>
+						</span>
+					</li>
+					<li class="list-group-item d-flex justify-content-between align-items-start">
+						<div class="me-auto">
+							"to spread decay and extinguish all that ever was."
+						</div>
+						<span class="m-0 p-0">
+							<span class="badge text-bg-info rounded-pill">Berk</span>
+						</span>
+					</li>
+				</ul>
+			</div>
+			<p class="small text-end pe-1 pe-lg-4">
+				* Shared by NLE
+			</p>
 		</main>
 	</PageContainerVue>
 </template>

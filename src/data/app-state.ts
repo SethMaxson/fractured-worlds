@@ -1,5 +1,6 @@
 export namespace AppState {
 	export class PageMostRecentUpdates {
+		// REMINDER: Months are 0-indexed.
 		static get Contacts()			{ return new Date(2025, 10, 13); }
 		static get ExplorersGuide()		{ return new Date(2025, 10, 5); }
 		static get Factions()			{ return new Date(2025, 0, 1); }
@@ -17,7 +18,7 @@ export namespace AppState {
 		static get ShipStats()			{ return new Date(2025, 0, 1); }
 		static get VoidspaceMap()		{ return new Date(2025, 10, 13); }
 		static get Timeline()			{ return new Date(2026, 1, 4); }
-		static get WorldAnchors()		{ return new Date(2026, 1, 4); }
+		static get WorldAnchors()		{ return new Date(2026, 1, 9); }
 		static get Worlds()				{ return new Date(2025, 10, 25); }
 	}
 }
