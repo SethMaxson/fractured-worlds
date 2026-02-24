@@ -8,13 +8,10 @@ import Character from '@/components/core/text-tags/Character.vue';
 import Location from '@/components/core/text-tags/Location.vue';
 import Important from '@/components/core/text-tags/Important.vue';
 import { GameStrings } from "@/scripts/game-strings";
-
-import JournalHeader from './subviews/JournalHeader.vue';
 </script>
 
 <template>
 	<PageContainerVue>
-		<!-- <JournalHeader /> -->
 		<header>
 			<Breadcrumb path="/journal/mysteries" />
 			<ViewBlurb header="">
@@ -44,7 +41,7 @@ import JournalHeader from './subviews/JournalHeader.vue';
 
 				<button
 					type="button"
-					class="list-group-item list-group-item-action"
+					class="list-group-item list-group-item-action fw-bold"
 					data-bs-toggle="modal"
 					data-bs-target="#questModal"
 				>
@@ -54,10 +51,7 @@ import JournalHeader from './subviews/JournalHeader.vue';
 					</span>
 					<span class="def">
 						<p>
-							We have found a few <Important>World Anchors</Important> so far, and each contained a fragment of some message or passage.
-						</p>
-						<p>
-							Many people, including our peers in <Important>N.L.E.</Important>, believe that these fragments will reveal how to stop worlds from blinking out.
+							We have found a few <Important>World Anchors</Important> so far, and each contained a fragment of some message or passage. Many people, including our peers in <Important>N.L.E.</Important>, believe that these fragments will reveal how to stop worlds from blinking out.
 						</p>
 					</span>
 					<span class="footer">
@@ -66,7 +60,7 @@ import JournalHeader from './subviews/JournalHeader.vue';
 				</button>
 				<button
 					type="button"
-					class="list-group-item list-group-item-action"
+					class="list-group-item list-group-item-action fw-bold"
 					data-bs-toggle="modal"
 					data-bs-target="#questModal"
 				>
@@ -97,12 +91,53 @@ import JournalHeader from './subviews/JournalHeader.vue';
 						Zuzu
 					</span>
 					<span class="def">
-						<p>
-							<Character>Zuzu</Character>, a young wizard we recruited in <Location>Somewhere</Location>, seems to possess magical abilities well beyond that typically possible for mortals, especially ones so young. It seems this raw power makes him valuable to some unsavory types.
+						<p class="border-bottom pb-3">
+							<Character>Zuzu</Character>, a young wizard we recruited in <Location>Somewhere</Location>, possesses magical abilities outside the reach of most mortals, especially ones so young. It seems this raw power makes him valuable to some unsavory types.
 						</p>
-						<p>
-							We now know <Character>Zuzu</Character> is a <Important>Shadowfolk</Important> - a creature created by burning a member of the <Location>Sylphata</Location> tribe to death in a specific manner.
+						<div class="details">
+							<h6>Updates</h6>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									We learned that Zuzu's species is referred to as <Important>Shadowfolk</Important> or <Important>Shadow Person</Important>.
+								</li>
+								<li class="list-group-item">
+									We learned that Zuzu and Winter both come from a world called <Location>Velarys</Location>.
+								</li>
+								<li class="list-group-item">
+									We now know that <Important>Shadowfolk</Important> are created by burning a member of the <Location>Sylphata</Location> tribe to death in a specific manner.
+								</li>
+							</ul>
+						</div>
+					</span>
+					<span class="footer">
+						Side Quest
+					</span>
+				</button>
+				<button
+					type="button"
+					class="list-group-item list-group-item-action"
+					data-bs-toggle="modal"
+					data-bs-target="#questModal"
+				>
+					<span class="title">
+						<svg class="menu-button-icon theme-color d-inline"><use href="#person"></use></svg>
+						Winter
+					</span>
+					<span class="def">
+						<p class="border-bottom pb-3">
+							<Character>Winter</Character>, a young priestess we recruited in <Location>Barbieland</Location>, possesses magical abilities outside the reach of most mortals, especially ones so young. It seems this raw power drains her energy when she overextends.
 						</p>
+						<div class="details">
+							<h6>Updates</h6>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									We learned that Zuzu and Winter both come from a world called <Location>Velarys</Location>.
+								</li>
+								<li class="list-group-item">
+									We learned that Winter comes from the noble <Important>Duskward</Important> family. Her mother died young, she never knew her father, and her remaining family despised her.
+								</li>
+							</ul>
+						</div>
 					</span>
 					<span class="footer">
 						Side Quest
@@ -135,7 +170,7 @@ import JournalHeader from './subviews/JournalHeader.vue';
 						Nortle's Knowledge
 					</span>
 					<span class="def">
-						Shortly after our disastrous meeting in the <Important>Rebirth Caucus</Important>'s headquarters, <Character>Li'l Phil</Character> wrote <Character>Nortle</Character> and informed him of the unscheduled invitation. <Character>Li'l Phil</Character> knew <Character>Nortle's</Character> tone well enough to notice that the elderly barkeep somehow already knew.
+						Shortly after our disastrous meeting in the <Important>Rebirth Caucus</Important>'s headquarters, <Character>Li'l Phil</Character> wrote <Character>Nortle</Character> and informed him of the unscheduled invitation. <Character>Li'l Phil</Character> knew <Character>Nortle's</Character> tone well enough (even in writing) to notice that the elderly barkeep somehow already knew.
 					</span>
 					<span class="footer">
 						Side Quest
@@ -243,8 +278,9 @@ export default defineComponent({
 	display: none;
 }
 
-.main-quest {
-	font-weight: bold;
+.details {
+	opacity: 0.75;
+	font-size: 0.95em;
 }
 
 .main-quest::before {

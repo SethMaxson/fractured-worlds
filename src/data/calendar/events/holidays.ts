@@ -5,7 +5,9 @@ export const Holidays = [
     // January
     [] as ICalendarEvent[],
     // February
-    [] as ICalendarEvent[],
+    [
+        { day: 14, name: "Valentine's Day", definition: ["An Earth holiday to express love and affection through gifts, cards, and romantic gestures."] },
+    ] as ICalendarEvent[],
     // March
     [] as ICalendarEvent[],
     // April

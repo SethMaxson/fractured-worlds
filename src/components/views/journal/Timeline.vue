@@ -149,17 +149,6 @@ function getMatchableArrayString(array: string[]) {
 
 const timelineEvents: ITimelineEvent[] = [
 	{
-		date: { year: 1, month: 12, day: 22 },
-		isMajor: true,
-		// event: "We reached Duloc.",
-		extra: [
-			{ name: "reached Sanctuary", type: "world" },
-			{ name: "Christmas", type: "holiday" },
-		],
-		header: "Sanctuary",
-		type: "world-special"
-	},
-	{
 		date: { year: 1, month: 3, day: 14 },
 		isMajor: true,
 		event: "Each of us awoke within the streets of an unfamiliar city in eternal twilight. Our last memories were of being swallowed by darkness after the skies of our respective homelands shattered like glass mirrors.",
@@ -584,6 +573,19 @@ const timelineEvents: ITimelineEvent[] = [
 		date: { year: 1, month: 12, day: 6 },
 		header: "Phil finally sobers up",
 		type: "drug"
+	},
+	{
+		date: { year: 1, month: 12, day: 22 },
+		isMajor: true,
+		// event: "We reached Duloc.",
+		extra: [
+			{ name: "reached Sanctuary", type: "world" },
+			{ name: "Christmas", type: "holiday" },
+			{ name: "Li'l Phil swapped bodies with Nibble", type: "mystery" },
+			{ name: "Tero became engaged to Cade", type: "love" },
+		],
+		header: "Sanctuary",
+		type: "world-special"
 	},
 	{
 		date: { year: 2, month: 1, day: 23 },

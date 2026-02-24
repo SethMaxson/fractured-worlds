@@ -110,6 +110,7 @@ export const CharacterDatas: ICharacterData[] = [
         relationships: {
             closeFriends: [
                 { idOrName: "tero" },
+                { idOrName: "marlowe", label: "best friend" },
                 { idOrName: "nortle", label: "surrogate father" },
                 { idOrName: "winter" },
                 { idOrName: "zuzu" },
@@ -187,12 +188,12 @@ export const CharacterDatas: ICharacterData[] = [
         relationships: {
             closeFriends: [
                 { idOrName: "phil" },
-                { idOrName: "cade", label: "boyfriend" },
                 { idOrName: "susie", label: "best friend" },
                 { idOrName: "winter" },
                 { idOrName: "zuzu" },
             ],
             family: [
+                { idOrName: "cade", label: "husband" },
                 { idOrName: "yoshi-yellow", label: "adopted child" },
                 { idOrName: "yoshi-pink", label: "adopted child" },
             ],
@@ -333,12 +334,12 @@ export const CharacterDatas: ICharacterData[] = [
         },
         relationships: {
             closeFriends: [
-                { idOrName: "tero", label: "girlfriend" },
                 { idOrName: "owl" },
                 { idOrName: "ella" },
                 { idOrName: "nortle" },
             ],
             family: [
+                { idOrName: "tero", label: "wife" },
                 { idOrName: "Warrick Brightcloak", label: "adopted grandfather", status: "dead" },
             ]
         },

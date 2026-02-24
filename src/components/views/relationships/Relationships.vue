@@ -308,7 +308,8 @@ const Relationships = {
 	"tero": [
 		{
 			person: "cade",
-			label: "bf",
+			label: "hubby",
+			notes: "good work, bestie ;)",
 			met: new CampaignDate(5, 4, 1),
 			rank: 3
 		},
@@ -320,7 +321,7 @@ const Relationships = {
 		{
 			person: "susie",
 			label: "bestie",
-			notes: "hey bestie ;)",
+			notes: "hey girl <3",
 			met: new CampaignDate(6, 7, 1),
 			rank: 3
 		},
