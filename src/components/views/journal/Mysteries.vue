@@ -91,10 +91,10 @@ import { GameStrings } from "@/scripts/game-strings";
 						Zuzu
 					</span>
 					<span class="def">
-						<p class="border-bottom pb-3">
+						<p>
 							<Character>Zuzu</Character>, a young wizard we recruited in <Location>Somewhere</Location>, possesses magical abilities outside the reach of most mortals, especially ones so young. It seems this raw power makes him valuable to some unsavory types.
 						</p>
-						<div class="details">
+						<div class="details pt-3 border-top">
 							<h6>Updates</h6>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
@@ -124,10 +124,10 @@ import { GameStrings } from "@/scripts/game-strings";
 						Winter
 					</span>
 					<span class="def">
-						<p class="border-bottom pb-3">
+						<p>
 							<Character>Winter</Character>, a young priestess we recruited in <Location>Barbieland</Location>, possesses magical abilities outside the reach of most mortals, especially ones so young. It seems this raw power drains her energy when she overextends.
 						</p>
-						<div class="details">
+						<div class="details pt-3 border-top">
 							<h6>Updates</h6>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
@@ -154,6 +154,70 @@ import { GameStrings } from "@/scripts/game-strings";
 					</span>
 					<span class="def">
 						On rare occasions, we've heard a telepathic voice in the back of our minds while in <Location>Somewhere</Location>. When <Character>{{ GameStrings.Party.Cobb.first }}</Character> asked the voice who it was, it declined to give a direct answer, instead saying that we could simply think of it as '<Character>the spirit of Somewhere</Character>.'
+					</span>
+					<span class="footer">
+						Side Quest
+					</span>
+				</button>
+				<button
+					type="button"
+					class="list-group-item list-group-item-action"
+					data-bs-toggle="modal"
+					data-bs-target="#questModal"
+				>
+					<span class="title">
+						<svg class="menu-button-icon theme-color d-inline"><use href="#nle"></use></svg>
+						Understanding N.L.E.
+					</span>
+					<span class="def">
+						<p>
+							Despite having joined <Important>{{ GameStrings.Nelly }}</Important>, we can't shake the feeling that there is more going on within the secretive organization than we have been privy to.
+						</p>
+						<div class="details pt-3 border-top">
+							<h6>Knowledge</h6>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<p>
+										During our interview to determine whether we were allowed to join {{ GameStrings.Nelly }}, <Character>Nortle</Character> let slip that there are two unofficial subgroups within the organization.
+									</p>
+									<dl>
+										<dt>Efficiency group</dt>
+										<dl>
+											This group of {{ GameStrings.Nelly }} agents focuses on the organization's immediate goal: finding world anchors.
+										</dl>
+										<dt>Empathy group</dt>
+										<dl>
+											<p>
+												This unofficial splinter faction within {{ GameStrings.Nelly }} is more willing to go out of their way to ensure the safety of a True Soul, even if that means spending more time on a world than required to locate its World Anchor.
+											</p>
+											<div class="ps-2">
+												Known members:
+												<ol>
+													<li>Boo</li>
+													<li>Cade</li>
+													<li>Ella</li>
+													<li>Nortle</li>
+												</ol>
+											</div>
+										</dl>
+									</dl>
+								</li>
+								<li class="list-group-item">
+									The organization is selective about what information is shared with us. Even world anchor text has been shared sparingly.
+								</li>
+							</ul>
+						</div>
+						<!-- <div class="details pt-3 border-top">
+							<h6>Updates</h6>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									We learned that Zuzu and Winter both come from a world called <Location>Velarys</Location>.
+								</li>
+								<li class="list-group-item">
+									We learned that Winter comes from the noble <Important>Duskward</Important> family. Her mother died young, she never knew her father, and her remaining family despised her.
+								</li>
+							</ul>
+						</div> -->
 					</span>
 					<span class="footer">
 						Side Quest

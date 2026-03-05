@@ -16,6 +16,7 @@ export const WorldDatas: IWorldData[] = [
         details: {
             anchor: "?",
             timeType: "standard",
+            isHub: true,
         },
         images: {
             token: "img/worlds/somewhere.png",
@@ -64,11 +65,12 @@ export const WorldDatas: IWorldData[] = [
             anchor: "gated courtyard",
             kindredWorlds: ["???"],
             timeType: "standard",
+            isHub: true,
         },
         images: {
             token: "img/worlds/mortal_kombat.png",
         },
-        people: { }
+        people: { },
     },
     {
         name: "Big Apple",

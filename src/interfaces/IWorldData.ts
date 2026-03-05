@@ -50,6 +50,8 @@ export interface IWorldData {
 		 * Uses the Looping, Resting, Standard labels set forth by the Voidspace explorer Marco Rayleigh.
 		 */
 		timeType: "looping" | "resting" | "standard" | "unknown";
+		/** Is this world eligible for Homeward Prism Keys (i.e. is it a potential fast travel point)? */
+        isHub?: boolean;
 	}
 
 	images: {

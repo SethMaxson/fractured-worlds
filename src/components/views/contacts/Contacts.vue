@@ -104,11 +104,13 @@ const contacts: IContactDetails[] = [
         image: "img/npc/ella-portrait.png",
         types: ["Teleglyph"],
         since: "09/03/0001",
+        primaryPC: "Tero"
     },
     {
         id: "owl",
         types: ["Teleglyph"],
         since: "09/03/0001",
+        primaryPC: "Tero"
     },
 ];
 
