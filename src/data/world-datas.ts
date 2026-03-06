@@ -73,6 +73,27 @@ export const WorldDatas: IWorldData[] = [
         people: { },
     },
     {
+        name: "Berk",
+        id: "berk",
+        copy: {
+            description: ["A world filled with dragons and the vikings to train them."],
+            oneLiner: "A world of dragons.",
+            quote: "While other places have...ponies or parrots, we have... dragons!",
+        },
+        details: {
+            anchor: "Inside CinderSludge Isle",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/berk.png",
+        },
+        people: {
+            allies: "Hiccup, Toothless, Astrid, Stormfly",
+            pureSoul: "Hiccup",
+        }
+    },
+    {
         name: "Big Apple",
         id: "big-apple",
         copy: {
@@ -118,6 +139,67 @@ export const WorldDatas: IWorldData[] = [
         },
         people: {
             allies: "Blue, Magenta, Curious George"
+        }
+    },
+    {
+        name: "Dallas, TX",
+        id: "dallas-shaolin",
+        copy: {
+            description: ["A world with two surviving pieces that are still connected by a dreamlike path: massive city under the thumb of an evil oil baron, and a secluded shaolin temple."],
+            oneLiner: "A world where martial artists play soccer.",
+            quote: "I'm not here to fight. I'm here to play soccer!",
+        },
+        details: {
+            anchor: "Team Shaolin monastery",
+            kindredWorlds: ["Big Apple", "???", "Looney Tune Land"],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/dallas.png",
+        },
+        people: {
+
+        }
+    },
+    {
+        name: "Duloc Outlands",
+        id: "duloc",
+        copy: {
+            description: ["A world filled with fairy tail creatures."],
+            oneLiner: "A fairy tail world.",
+            quote: "Ogres have layers.",
+        },
+        details: {
+            anchor: "Nice Boulder (Shrek's Swamp)",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/shrek.png",
+        },
+        people: {
+            allies: "Shrek, Donkey, Fiona",
+            pureSoul: "Donkey",
+        }
+    },
+    {
+        name: "Jurassic Park",
+        id: "jurassic-park",
+        copy: {
+            description: ["A dinosaur-themed amusement park. The creator spared no expense."],
+            oneLiner: "A world of ancient beasts.",
+            quote: "Life finds a way.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/jurassic_park.png",
+        },
+        people: {
+
         }
     },
     {
@@ -187,6 +269,69 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Sanctuary",
+        id: "sanctuary",
+        copy: {
+            description: ["A patchwork world made of pieces of worlds that have been lost."],
+            oneLiner: "A patchwork world made of pieces of worlds that have been lost.",
+            quote: "In you and I, there's a new land.",
+        },
+        details: {
+            anchor: "Hill Valley courthouse",
+            kindredWorlds: [],
+            timeType: "standard",
+            isHub: true,
+        },
+        images: {
+            token: "img/worlds/sanctuary.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Tokyo 2007",
+        id: "tokyo",
+        copy: {
+            description: ["A bustling city with a secret society of street racers."],
+            oneLiner: "A busting city with a secret society of street racers.",
+            quote: "If you see it... then you know you have to go fast and furious.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/shibuya.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Transylvania",
+        id: "transylvania",
+        copy: {
+            description: ["A world of darkness and monsters."],
+            oneLiner: "A world of darkness and monsters.",
+            quote: "Despair has its own calms.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/transylvania.png",
+        },
+        people: {
+            allies: "?",
+            pureSoul: "?",
+            rebirthAgent: "Dracula"
+        }
+    },
+    {
         name: "Weapon World",
         id: "weapon-world",
         copy: {
@@ -224,5 +369,25 @@ export const WorldDatas: IWorldData[] = [
         people: {
             pureSoul: "Alice",
         }
-    }
+    },
+    {
+        name: "Zootopia",
+        id: "zootopia",
+        copy: {
+            description: ["A metropolis of evolved animals."],
+            oneLiner: "A metropolis of evolved animals.",
+            quote: "I won't give up, no, I won't give in.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/blank.png",
+        },
+        people: {
+            
+        }
+    },
 ];

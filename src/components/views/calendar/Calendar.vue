@@ -13,6 +13,8 @@ import { Holidays } from '@/data/calendar/events/holidays';
 import { CampaignState } from '@/data/campaign-state';
 
 import type { ICalendarEvent } from "@/interfaces/ICalendarEvent";
+import { Anniversaries } from "@/data/calendar/events/anniversaries";
+import { OtherEventDates } from "@/data/calendar/events/other-event-dates";
 
 const currentDate = CampaignState.CurrentDate;
 var showHidden: boolean = false;
@@ -31,6 +33,14 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
 );
 }
 
+/**Get the romantic anniversaries for a given day of a given month.
+ * @param month 0-indexed
+ * @param day 1-indexed
+ */
+ function getAnniversaries(month: number, day: number) {
+	return getCalendarEvents(Anniversaries, month, day);
+}
+
 /**Get the birthdays for a given day of a given month.
  * @param month 0-indexed
  * @param day 1-indexed
@@ -45,6 +55,14 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
  */
  function getHolidays(month: number, day: number) {
 	return getCalendarEvents(Holidays, month, day);
+}
+
+/**Get the other notable days for a given day of a given month.
+ * @param month 0-indexed
+ * @param day 1-indexed
+ */
+ function getOther(month: number, day: number) {
+	return getCalendarEvents(OtherEventDates, month, day);
 }
 
 /**Check if an event date matches the current in-game date.
@@ -115,9 +133,17 @@ function getCalendarEvents(eventSet: ICalendarEvent[][], month: number, day: num
 												<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#party-horn"></use></svg>
 												{{ holiday.name }}
 											</li>
+											<li class="list-group-item bg-transparent" v-for="event in getAnniversaries(index, day)" :class="{ 'text-body-emphasis': isToday(index, day), 'gm-only': event.gmOnly }">
+												<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#heart"></use></svg>
+												{{ event.name }}
+											</li>
 											<li class="list-group-item bg-transparent" v-for="birthday in getBirthdays(index, day)" :class="{ 'text-body-emphasis': isToday(index, day), 'gm-only': birthday.gmOnly }">
 												<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#birthday-cake"></use></svg>
 												{{ birthday.name }}
+											</li>
+											<li class="list-group-item bg-transparent" v-for="event in getOther(index, day)" :class="{ 'text-body-emphasis': isToday(index, day), 'gm-only': event.gmOnly }">
+												<svg class="menu-button-icon theme-color me-1 d-inline"><use href="#arrow-right-short"></use></svg>
+												{{ event.name }}
 											</li>
 										</ul>
 									</div>

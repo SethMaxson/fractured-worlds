@@ -60,6 +60,8 @@ export interface IWorldData {
 	}
 
 	meta?: {
+		/** Indicates that this world needs more information. */
+		isStub?: boolean;
 		/** The default Challenge Rating of the world */
 		battleLevel?: number;
 		/**

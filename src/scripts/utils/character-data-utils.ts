@@ -41,6 +41,16 @@ export namespace CharacterDataUtils {
         return CharacterDatas;
     }
 
+    /** Lookup a character's anniversary, if known. */
+    export function getAnniversary(character: ICharacterData, eventSet: ICalendarEvent[][]): IFullCalendarEvent | undefined {
+        const allEvents = Utils.Dates.Convert.ICalendarEvent.arrayToIFullCalenderEvents(eventSet);
+        const matches = allEvents.filter(e => {
+            const compare = (e.id ? e.id : e.name).toLowerCase().trim();
+            return stringIncludesCharacterName(compare, character);
+        })
+        return matches[0];
+    }
+
     /** Lookup a character's birthday, if known. */
     export function getBirthday(character: ICharacterData, birthdayEventSet: ICalendarEvent[][]): IFullCalendarEvent | undefined {
         const allBirthdays = Utils.Dates.Convert.ICalendarEvent.arrayToIFullCalenderEvents(birthdayEventSet);
@@ -96,6 +106,19 @@ export namespace CharacterDataUtils {
             character.occupation.join(" ")
         ].join(" ");
     }
+
+    function stringIncludesCharacterName(searchString: string, character: ICharacterData): boolean {
+        const str = searchString.toLowerCase().trim() + ' '; //append a space to fix matching for instances at the end of the string
+        
+        // searches with space and comma delimiters to prevent erroneous matches such as 'Ella' in 'Cinderella'
+        return new RegExp(`${regExpQuote(character.id).trim()}(\\s|,)+`, 'gi').test(str) 
+            || new RegExp(`${regExpQuote(character.name).trim()}(\\s|,)+`, 'gi').test(str);
+    }
+
+    /** Escapes special characters in a string so it can be used in RegExp */
+    function regExpQuote(str: string) {
+        return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+    };
 }
 
 function isArray(test: string | string[]): test is string[] {

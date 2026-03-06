@@ -8,6 +8,7 @@ import AccordionItem from "@/components/core/AccordionItem.vue";
 import type { ICharacterData, ICharacterDataAffiliation, ICharacterDataPhysicalTraits, ICharacterDataRelationship } from '@/interfaces/ICharacterData';
 import type { PropType } from 'vue';
 import { useRoute } from 'vue-router';
+import { Anniversaries } from '@/data/calendar/events/anniversaries';
 
 const props = defineProps({
 	person: {
@@ -35,6 +36,7 @@ const affiliations = props.person?.affiliations ? {
 : undefined;
 
 const birthday = props.person && CharacterDataUtils.getBirthday(props.person, Birthdays);
+const anniversary = props.person && CharacterDataUtils.getAnniversary(props.person, Anniversaries);
 const playlistEmbed = props.person?.spotify?.primaryPlaylistID? CharacterDataUtils.getSpotifyEmbedUrl(props.person.spotify.primaryPlaylistID) : undefined;
 const themeSongEmbed = props.person?.spotify?.themeSong? CharacterDataUtils.getSpotifyEmbedUrl(props.person.spotify.themeSong, "song") : undefined;
 
@@ -62,7 +64,6 @@ if (
 function getSpecialAffiliationString(a: ICharacterDataAffiliation): string {
 	return `${a.role || a.rank} <i>(${a.joined}${a.left? "—" + a.left : ""} SE)</i>`;
 }
-
 
 const refPath = Utils.String.sanitizeUrl(useRoute().path);
 function getRelationshipPersonData(person: ICharacterDataRelationship) {
@@ -125,6 +126,9 @@ const portraitClasses = Utils.Images.getPortraitClassesFromType(props.person?.ty
 					</div>
 					<div v-if="birthday">
 						<b class="me-2">Birthday:</b> {{Utils.Dates.Format.DMon(birthday)}}
+					</div>
+					<div v-if="anniversary">
+						<b class="me-2">Anniversary:</b> {{Utils.Dates.Format.DMon(anniversary)}}
 					</div>
 					<div v-if="person.mental?.drive">
 						<b class="me-2">Drive:</b> {{person.mental.drive}}

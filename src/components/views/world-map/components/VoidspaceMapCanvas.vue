@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Panzoom, { type PanzoomObject } from '@panzoom/panzoom'
 import ImageVue from "@/components/core/Image.vue";
+import Panzoom, { type PanzoomObject } from '@panzoom/panzoom'
 import { Utils } from "@/scripts/utils";
 import { onBeforeUnmount, onMounted, onUnmounted, type PropType } from "vue";
 import type { IWorldNexusData } from '@/interfaces/IWorldNexusData';
@@ -52,15 +52,18 @@ const worldTokenMultiplier = 2;
 let mapUnitScale = props.defaultUnitScale;
 let panzoom: PanzoomObject;
 
+let timestamp = 0;
+
 // Initialize map and canvas stuff
 onMounted(() => {
     const elem = document.getElementById('panzoom-element') as HTMLElement;
+	timestamp = Date.now();
 	// const canvas = document.getElementById('map-canvas') as HTMLCanvasElement;
 	// const ctx = canvas.getContext("2d");
 	panzoom = Panzoom(elem, {
 		maxScale: 5,
 		contain: 'outside',
-		canvas: true,
+		// canvas: true,
 		// // Can add an element reference
 		// exclude: [document.getElementById('link')],
 		// // ...or set a class on the element
@@ -73,7 +76,8 @@ onMounted(() => {
 	// There are several available methods for zooming
 	// that can be bound on button clicks or mousewheel.
 	// button.addEventListener('click', panzoom.zoomIn);
-	elem.parentElement?.addEventListener('wheel', panzoom.zoomWithWheel);
+	// elem.parentElement?.addEventListener('wheel', panzoom.zoomWithWheel);
+	elem.addEventListener('wheel', panzoom.zoomWithWheel);
 
 	if (props.useCanvas) {
 		const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;
@@ -169,8 +173,15 @@ function draw() {
                     return;
                 }
                 let image = document.getElementById(world.id+"img") as HTMLImageElement|undefined;
-                if (image) {
-                    ctx.drawImage(image, (position.x + pt.x - (worldTokenMultiplier/2)) * mapUnitScale, (position.y + pt.y - (worldTokenMultiplier/2)) * mapUnitScale, mapUnitScale * worldTokenMultiplier, mapUnitScale * worldTokenMultiplier);
+                if (image) { // the image element has already been created
+					if (image.complete && (typeof image.naturalWidth === "undefined" || image.naturalWidth === 0)) {
+						// Image is broken. Set a default image.
+						image.src = "img/worlds/blank.png";
+					}
+					else {
+						// image is fine, render normally
+						ctx.drawImage(image, (position.x + pt.x - (worldTokenMultiplier/2)) * mapUnitScale, (position.y + pt.y - (worldTokenMultiplier/2)) * mapUnitScale, mapUnitScale * worldTokenMultiplier, mapUnitScale * worldTokenMultiplier);
+					}
                 }
                 else {
                     image = new Image(mapUnitScale, mapUnitScale); // Using optional size for image
@@ -180,10 +191,19 @@ function draw() {
                     image.style.display = 'none';
                 }
                 // draw world label
-                ctx.fillStyle = world.details.isHub? '#ffc800' : '#dedede';
-                ctx.font = "8px serif";
-                ctx.textAlign = 'center';
-                ctx.fillText(world.name, (position.x + pt.x) * mapUnitScale, ((position.y + pt.y + (worldTokenMultiplier/2)) * mapUnitScale) + 4); // '+ 4' because it is half of the current font 
+                // ctx.fillStyle = world.details.isHub? '#ffc800' : '#dedede';
+                // ctx.font = "8px serif";
+                // ctx.textAlign = 'center';
+                // ctx.fillText(world.name, (position.x + pt.x) * mapUnitScale, ((position.y + pt.y + (worldTokenMultiplier/2)) * mapUnitScale) + 4); // '+ 4' because it is half of the current font 
+				drawTextBG(
+					ctx,
+					world.name,
+					"8px sans-serif",
+					(position.x + pt.x) * mapUnitScale,
+					((position.y + pt.y + (worldTokenMultiplier/2)) * mapUnitScale) + 4,
+					world.details.isHub? '#ffc800' : '#dedede',
+					2
+				)
 			});
 		}
 
@@ -200,6 +220,39 @@ function draw() {
 	requestAnimationFrame(draw);
 }
 
+/// expand with color, background etc.
+function drawTextBG(ctx: CanvasRenderingContext2D, txt: string, font: string, x: number, y: number, color: string = "#dedede", padding: number = 0) {
+
+    /// lets save current state as we make a lot of changes        
+    ctx.save();
+
+    /// set font
+    ctx.font = font;
+
+    /// draw text from top - makes life easier at the moment
+    ctx.textBaseline = 'top';
+	ctx.textAlign = 'center';
+
+    /// color for background
+    ctx.fillStyle = '#555';
+    
+    /// get width of text
+    var width = ctx.measureText(txt).width;
+
+    /// draw background rect assuming height of font
+	const fontHeight = parseInt(font, 10);
+    ctx.fillRect(x - width/2 - padding, y - fontHeight/2 - padding, width + 2*padding, fontHeight + 2*padding);
+    
+    /// text color
+    ctx.fillStyle = color;
+
+    /// draw text on top
+    ctx.fillText(txt, x, y-fontHeight/2);
+    
+    /// restore original state
+    ctx.restore();
+}
+
 function getMapCanvas() {
     return document.getElementById("map-canvas") as HTMLCanvasElement;
 }
@@ -207,12 +260,13 @@ function getMapCanvas() {
 
 <template>
     <div class="text-center border border-black border-5 mx-lg-5 bg-dark-subtle overflow-hidden">
-        <div id="panzoom-element" class="position-relative" key="voidspace-map-canvas">
+        <div id="panzoom-element" class="position-relative" :key="'voidspace-map-canvas'+timestamp">
             <canvas
                 id="map-canvas"
                 class="position-absolute w-100 h-100"
                 style="z-index: 1;"
                 v-if="useCanvas"
+				:key="'map-canvas-' + timestamp"
             >
                 Unable to render map. Please try again in a different browser.
             </canvas>
