@@ -21,7 +21,9 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 				to: 'green',
 				segmentFrom: 1,
 				segmentTo: 4,
-				controlPoint: { x: 5 , y: 2 }
+				controlPoint: { x: 5 , y: 2 },
+				unlockType: 'half_anchors',
+				trackedNexus: 'violet'
 			},
 			{
 				to: 'violet',

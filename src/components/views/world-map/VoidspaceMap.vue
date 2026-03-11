@@ -9,6 +9,8 @@ import { WorldNexusDatas } from '@/data/world-nexus-datas';
 import type { IWorldNexusData } from '@/interfaces/IWorldNexusData';
 import VoidspaceMapCanvas from "./components/VoidspaceMapCanvas.vue";
 import { Config } from "@/scripts/config";
+import { TravelLogs } from "@/data/travel-logs";
+import { CampaignState } from "@/data/campaign-state";
 
 
 //#region Map Data
@@ -17,6 +19,9 @@ const worldNexuses: IWorldNexusData[] = WorldNexusDatas;
 //#endregion Map Data
 
 const mapDimensions = { width: 34, height: 29 };
+
+const log = TravelLogs.find(t => t.id == 'party');
+const selectedTravelLogs = log? [log] : [];
 
 // Initialize map and canvas stuff
 onMounted(() => {
@@ -42,6 +47,8 @@ onBeforeUnmount(() => {
 				:map-width-in-units="34"
 				:world-nexuses="worldNexuses"
 				:use-canvas="Config.IsDebug"
+				:travel-logs="selectedTravelLogs"
+				:known-worlds="CampaignState.KnownWorlds"
 			/>
 		</main>
 	</PageContainerVue>

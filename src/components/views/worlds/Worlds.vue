@@ -7,58 +7,15 @@ import { Utils } from "@/scripts/utils";
 import { WorldDatas } from "@/data/world-datas";
 import type { IWorldData } from "@/interfaces/IWorldData";
 import { WorldDataUtils } from "@/scripts/utils/world-data-utils";
-
+import { type IKnownWorldData, ExplorationState } from "@/interfaces/IKnownWorldData";
+import { CampaignState } from "@/data/campaign-state";
 
 onMounted(() => {
     Utils.LocalStorage.Dates.LastPageView.setNow("Worlds");
 })
 
-enum KnownWorldDisplayType {
-	Full = 'full',
-	NoName = 'no_name'
-};
-
-enum ExplorationState {
-	/** They discovered the world but know almost nothing about it */
-	Discovered = 'discovered',
-	/** They know a little about the world (i.e. they have heard about it) */
-	Known = 'known',
-	/** They have physically been to this world. */
-	Visited = 'visited'
-};
-
-interface IKnownWorldData {
-	worldId: string;
-	explorationState: ExplorationState;
-	/** They have a prism key corresponding to the World Anchor in this world.
-	 * TODO: remove this and create a separate Prism Key management system
-	*/
-	prismKey: boolean;
-	/** They have found and synced the World Anchor in this world. */
-	worldAnchor: boolean;
-	displayType?: KnownWorldDisplayType;
-}
-
-const knownWorlds: IKnownWorldData[] = [
-	{ worldId: 'somewhere', 		explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: false },
-	{ worldId: 'wonderland', 		explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "big-apple", 		explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "blues-house", 		explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "neon-coast", 		explorationState: ExplorationState.Visited, 	prismKey: false, worldAnchor: false },
-	{ worldId: "land-of-oz", 		explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "weapon-world", 		explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "berk", 				explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "duloc", 			explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "battle-world", 		explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "treasure-island", 	explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "barbieland", 		explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "looney-tune-land", 	explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "dallas-shaolin", 	explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-	{ worldId: "sanctuary", 		explorationState: ExplorationState.Visited, 	prismKey: true, worldAnchor: true },
-];
-
 const worlds = {
-	discovered: knownWorlds.map(kw => { return Utils.World.findWorld(WorldDatas, kw.worldId) }).filter(w => { return !!w }) as IWorldData[],
+	discovered: CampaignState.KnownWorlds.map(kw => { return kw.explorationState == ExplorationState.Visited && Utils.World.findWorld(WorldDatas, kw.worldId) }).filter(w => { return !!w }) as IWorldData[],
 	heardAbout: [],
 }
 </script>
