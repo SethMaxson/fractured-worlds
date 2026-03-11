@@ -56,6 +56,14 @@ const props = defineProps({
 		required: false,
 		default: 'img/maps/voidspace.png'
 	},
+	/**Forces all worlds and nexuses to be drawn, regardless of party knowledge
+	 * @default false
+	*/
+	drawAll: {
+		type: Boolean,
+		required: false,
+		default: false
+	},
 })
 
 interface IWorldPositionEntry {
@@ -244,7 +252,10 @@ function draw() {
 					return;
 				}
 				const world = Utils.World.findWorld(WorldDatas, pt.worldId);
+				
+				// Get the definition for what the traveler known about this world
 				const worldKnowledge = props.knownWorlds.find(k => k.worldId == world?.id);
+
                 if (!world || !world.images.token) {
                     return;
                 }
@@ -262,7 +273,12 @@ function draw() {
                 else {
                     image = new Image(mapUnitScale, mapUnitScale); // Using optional size for image
                     image.id = world.id+"img";
-                    // image.src = world.images.token;
+                    
+					if (!worldKnowledge && !props.drawAll) {
+						// don't draw the world if it isn't known to the traveler
+						return;
+					}
+					
 					image.src = worldKnowledge?.displayType == KnownWorldDisplayType.NoIcon || worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon ? "img/worlds/blank.png" : world.images.token,
                     document.body.append(image);
                     image.style.display = 'none';

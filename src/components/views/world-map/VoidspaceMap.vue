@@ -49,6 +49,7 @@ onBeforeUnmount(() => {
 				:use-canvas="Config.IsDebug"
 				:travel-logs="selectedTravelLogs"
 				:known-worlds="CampaignState.KnownWorlds"
+				:draw-all="false"
 			/>
 		</main>
 	</PageContainerVue>

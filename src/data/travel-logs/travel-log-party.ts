@@ -218,7 +218,7 @@ export const TravelLogParty: ITravelLog[] = [
                 stopped: true,
             },
             {
-                locationId: "dallas",
+                locationId: "dallas-shaolin",
                 accessMethod: "lightship",
                 dateStart: { year: 1, month: 9, day: 11 },
                 dateEnd: { year: 1, month: 12, day: 19 },
