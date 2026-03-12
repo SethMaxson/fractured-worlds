@@ -140,8 +140,8 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 			{
 				to: 'tangerine',
 				segmentFrom: 0,
-				segmentTo: 0,
-				controlPoint: { x: 2 , y: -7 }
+				segmentTo: 2,
+				controlPoint: { x: 2 , y: -8 }
 			}
 		]
 	},
@@ -150,7 +150,7 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 		color: "#ffa750",
 		position: { x: 19, y: 3.5 },
 		points: [
-			{ x: 0.1, y: -2.5 },
+			// { x: 0.1, y: -2.5 },
 			{ x: 1.5, y: 0, worldId: 'dallas-shaolin' },
 			{ x: -0.5, y: 2, worldId: 'looney-tune-land' },
 			{ x: -2, y: -0.5, worldId: 'chocolate-factory' }
@@ -158,7 +158,7 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 		links: [
 			{
 				to: 'celadon',
-				segmentFrom: 2,
+				segmentFrom: 1,
 				segmentTo: 1
 			}
 		]

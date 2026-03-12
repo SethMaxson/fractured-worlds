@@ -32,7 +32,7 @@ export class CampaignState {
 			{ worldId: "wubbulous-world",	explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoName },
 			{ worldId: "transylvania",		explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoName },
 			{ worldId: "tokyo",				explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoName },
-			{ worldId: "nyc-89",			explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoName },
+			{ worldId: "nyc-89",			explorationState: es.Discovered,	prismKey: true, worldAnchor: false, displayType: dt.NoName },
 			{ worldId: "moon",				explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoNameOrIcon },
 		];
 	}

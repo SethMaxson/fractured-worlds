@@ -1,369 +1,584 @@
 <script setup lang="ts">
-import ImageVue from "@/components/core/Image.vue";
 import Panzoom, { type PanzoomObject } from '@panzoom/panzoom'
+import ImageVue from "@/components/core/Image.vue";
 import { Utils } from "@/scripts/utils";
-import { onBeforeUnmount, onMounted, onUnmounted, type PropType } from "vue";
-import type { IWorldNexusData } from '@/interfaces/IWorldNexusData';
+import type { ISwitchtrackData, IWorldNexusData } from '@/interfaces/IWorldNexusData';
 import { WorldDatas } from '@/data/world-datas';
 import { WorldNexusDatas } from "@/data/world-nexus-datas";
 import type { ITravelLogTimelineEvent, ITravelLog } from "@/interfaces/travel-log/ITravelLog";
-import { KnownWorldDisplayType, type IKnownWorldData } from "@/interfaces/IKnownWorldData";
+import { ExplorationState, KnownWorldDisplayType, type IKnownWorldData } from "@/interfaces/IKnownWorldData";
+import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
+import { GameStrings } from "@/scripts/game-strings";
+</script>
 
-const props = defineProps({
-	worldNexuses: {
-		type: Array as PropType<IWorldNexusData[]>,
-		required: true
-	},
-	travelLogs: {
-		type: Array as PropType<ITravelLog[]>,
-		required: true
-	},
-	knownWorlds: {
-		type: Array as PropType<IKnownWorldData[]>,
-		required: true
-	},
-	defaultUnitScale: {
-		type: Number,
-		required: false,
-		default: 30
-	},
-	mapWidthInUnits: {
-		type: Number,
-		required: false,
-		default: 34
-	},
-	mapHeightInUnits: {
-		type: Number,
-		required: false,
-		default: 18
-	},
-	/**Indicates whether this map should use the canvas.
-     * TODO: Deprecate this
-	 * @default true
-	*/
-	useCanvas: {
-		type: Boolean,
-		required: false,
-		default: true
-	},
-	/**
-     * The background image for this map display.
-	 * @example "img/maps/voidspace.png"
-     * @default "img/maps/voidspace.png"
-	 */
-	backgroundImage: {
-		type: String,
-		required: false,
-		default: 'img/maps/voidspace.png'
-	},
-	/**Forces all worlds and nexuses to be drawn, regardless of party knowledge
-	 * @default false
-	*/
-	drawAll: {
-		type: Boolean,
-		required: false,
-		default: false
-	},
-})
+<template>
+    <div class="text-center border border-black border-5 mx-lg-5 bg-dark-subtle overflow-hidden">
+        <div id="panzoom-element" class="position-relative" :key="'voidspace-map-canvas'+initialTimestamp">
+            <canvas
+                id="map-canvas"
+                class="position-absolute w-100 h-100"
+                style="z-index: 1;"
+                v-if="useCanvas"
+				:key="'map-canvas-' + initialTimestamp"
+            >
+                Unable to render map. Please try again in a different browser.
+            </canvas>
+            <ImageVue
+                class="position-relative w-100"
+                style="z-index: 0;"
+                :src="backgroundImage"
+            />
+        </div>
+    </div>
+</template>
 
-interface IWorldPositionEntry {
-	x: number;
-	y: number;
+<script lang="ts">
+import { defineComponent, type PropType } from "vue";
+import { CampaignState } from '@/data/campaign-state';
+
+interface ISimplePoint { x: number, y: number };
+interface IWorldPositionEntry extends ISimplePoint {
 	worldId: string;
 	nexusId: string;
 }
 
-const mapDimensions = { width: props.mapWidthInUnits, height: props.mapHeightInUnits };
+interface ITravelerPosition extends ISimplePoint {
+	travelPathId: string;
+}
+
+interface IDrawnWorld extends ISimplePoint {
+	id: string;
+	img: string;
+	label: string;
+	color: string;
+	height: number;
+	width: number;
+}
+
 const worldTokenMultiplier = 2;
 const travelStopIconRadius = 4;
-let mapUnitScale = props.defaultUnitScale;
-let panzoom: PanzoomObject;
-let timestamp = 0;
 
-let worldPositions: IWorldPositionEntry[];
+export default defineComponent({
+	name: 'VoidspaceMapCanvasComponent',
+	props: {
+		worldNexuses: {
+			type: Array as PropType<IWorldNexusData[]>,
+			required: true
+		},
+		travelLogs: {
+			type: Array as PropType<ITravelLog[]>,
+			required: true
+		},
+		knownWorlds: {
+			type: Array as PropType<IKnownWorldData[]>,
+			required: true
+		},
+		defaultUnitScale: {
+			type: Number,
+			required: false,
+			default: 30
+		},
+		mapWidthInUnits: {
+			type: Number,
+			required: false,
+			default: 34
+		},
+		mapHeightInUnits: {
+			type: Number,
+			required: false,
+			default: 18
+		},
+		/**Indicates whether this map should use the canvas.
+		 * TODO: Deprecate this
+		 * @default true
+		*/
+		useCanvas: {
+			type: Boolean,
+			required: false,
+			default: true
+		},
+		/**
+		 * The background image for this map display.
+		 * @example "img/maps/voidspace.png"
+		 * @default "img/maps/voidspace.png"
+		 */
+		backgroundImage: {
+			type: String,
+			required: false,
+			default: 'img/maps/voidspace.png'
+		},
+		/**Forces all worlds and nexuses to be drawn, regardless of party knowledge
+		 * @default false
+		*/
+		drawAll: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+	},
+	data() {
+		return {
+			mapDimensions: { width: this.$props.mapWidthInUnits, height: this.$props.mapHeightInUnits },
+			mapUnitScale: this.$props.defaultUnitScale,
+			panzoom: undefined as unknown as PanzoomObject,
+			initialTimestamp: Date.now(),
+			worldPositions: [] as IWorldPositionEntry[],
+			data: {
+				switchtracks: {
+					all: [] as ISwitchtrackData[],
+					unlocked: [] as ISwitchtrackData[],
+				}
+			},
+			state: {
+				travelerPositions: [] as ITravelerPosition[],
+				paused: false,
+				shownDate: CampaignState.CurrentDate,
+			},
+			stateModeIndexSelected: 0,
+			stateSortOn: 'date',
+			stateSortAsc: true,
+		}
+	},
+	computed: {
+		drawnNexuses() {
+			// May eventually want to refine this to show the nexuses being unlocked during playback.
+			const validNexuses = this.$props.worldNexuses.filter(w => !!w.points);
+			return this.$props.drawAll ? validNexuses : validNexuses.filter(n => this.nexusUnlocked(n));
+		},
+		drawnSwitchtracks() {
+			return this.$props.drawAll ? this.data.switchtracks.all : this.data.switchtracks.unlocked;
+		},
+		drawnWorlds(): IDrawnWorld[] {
+			const drawnWorlds: IDrawnWorld[] = [];
+			this.drawnNexuses.forEach(nexus => {
+				const {position} = nexus;
+				const switchtracks = this.getSwitchtrackIndexes(nexus);
+				nexus.points?.forEach((pt, i) => {
+					if (!pt.worldId || pt.worldId.length == 0 || !nexus.points) {
+						return;
+					}
+					const world = Utils.World.findWorld(WorldDatas, pt.worldId);					
+					
+					// don't draw the world if it is invalid
+					if (!world || !world.images.token) return;
 
-// Initialize map and canvas stuff
-onMounted(() => {
-    const elem = document.getElementById('panzoom-element') as HTMLElement;
-	timestamp = Date.now();
-	// const canvas = document.getElementById('map-canvas') as HTMLCanvasElement;
-	// const ctx = canvas.getContext("2d");
-	panzoom = Panzoom(elem, {
-		maxScale: 5,
-		contain: 'outside',
-		// canvas: true,
-		// // Can add an element reference
-		// exclude: [document.getElementById('link')],
-		// // ...or set a class on the element
-		// excludeClass: 'custom-excluded-class'
-	});
-	// panzoom.pan(10, 10);
-	// panzoom.zoom(2, { animate: true });
+					// Get the definition for what the traveler knows about this world
+					const worldKnowledge = this.$props.knownWorlds.find(k => k.worldId == world?.id);
+					// don't draw the world if it isn't known to the traveler
+					if ((!worldKnowledge && !this.$props.drawAll)) {
+						// Check if the world should be drawn due to bordering a known switchtrack
+						let leftSwitchtrackIndex = i - 1 < 0 ? nexus.points.length - 1 : i - 1;
+						if (!switchtracks.includes(i) && !switchtracks.includes(leftSwitchtrackIndex)) {
+							return;
+						}
+					}
 
-	// Panning and pinch zooming are bound automatically (unless disablePan is true).
-	// There are several available methods for zooming
-	// that can be bound on button clicks or mousewheel.
-	// button.addEventListener('click', panzoom.zoomIn);
-	// elem.parentElement?.addEventListener('wheel', panzoom.zoomWithWheel);
-	elem.addEventListener('wheel', panzoom.zoomWithWheel);
+					const noName = !worldKnowledge || worldKnowledge?.displayType == KnownWorldDisplayType.NoName || worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
+					const noIcon = !worldKnowledge || worldKnowledge?.displayType == KnownWorldDisplayType.NoIcon || worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
 
-	if (props.useCanvas) {
-		const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;
-		const bound = elem.getBoundingClientRect();
-		canvas.height = bound.height;
-		canvas.width = bound.width;
-		mapUnitScale = Math.round(bound.width / mapDimensions.width);
-		draw();
-	}
+					drawnWorlds.push({
+						id: world.id,
+						label: noName && !this.$props.drawAll ? "???" : world.name,
+						img: noIcon && !this.$props.drawAll ? "img/worlds/blank.png" : world.images.token,
+						color: !!worldKnowledge && world.details.isHub? '#ffc800' : '#dedede',
+						x: position.x + pt.x - (worldTokenMultiplier/2),
+						y: position.y + pt.y - (worldTokenMultiplier/2),
+						height: worldTokenMultiplier,
+						width: worldTokenMultiplier,
+					});
+				});
+			});
 
-	worldPositions = [];
-	props.worldNexuses.forEach(nexus => {
-		nexus.points?.forEach(world => {
-			if (!world.worldId) {
+			return drawnWorlds;
+		},
+		/** List of unique prism keys owned by the current set of travelers */
+		prismKeyIDs(): string[] {
+			let matches: string[] = [];
+			this.$props.knownWorlds.forEach(k => {
+				if (k.prismKey && !matches.includes(k.worldId)) {
+					matches.push(k.worldId);
+				}
+			});
+			return matches;
+		},
+		/** The latest possible date viewable on the map.
+		 * TODO: currently just defaults to the current campaign date.
+		 */
+		maximumPlaybackDate() {
+			return CampaignState.CurrentDate;
+		}
+	},
+	methods: {
+		draw() {
+			const ctx = getMapCanvas().getContext("2d");
+
+			if (!ctx) {
+				console.error("Unable to find canvas!");
 				return;
 			}
 
-			worldPositions.push({
-				x: nexus.position.x + world.x,
-				y: nexus.position.y + world.y,
-				worldId: world.worldId,
-				nexusId: nexus.id
-			});
-		});
-	});
-})
+			//#region scale fix
+			// Get the DPR and size of the canvas
+			const canvas = getMapCanvas();
+			const dpr = window.devicePixelRatio;
+			const panZoomScale = this.panzoom?.getScale() || 1;
+			const rect = canvas.getBoundingClientRect();
 
-onBeforeUnmount(() => {
-	panzoom.destroy();
-})
+			// Set the "actual" size of the canvas
+			canvas.width = rect.width * dpr;
+			canvas.height = rect.height * dpr;
 
-function draw() {
-	const ctx = getMapCanvas().getContext("2d");
+			// Scale the context to ensure correct drawing operations
+			ctx.scale(dpr * panZoomScale, dpr * panZoomScale);
 
-	if (!ctx) {
-		console.error("Unable to find canvas!");
-		return;
-	}
+			// Set the "drawn" size of the canvas
+			canvas.style.width = `${rect.width}px`;
+			canvas.style.height = `${rect.height}px`;
+			//#endregion scale fix
 
-	//#region scale fix
-	// Get the DPR and size of the canvas
-	const canvas = getMapCanvas();
-	const dpr = window.devicePixelRatio;
-	const panZoomScale = panzoom.getScale();
-	const rect = canvas.getBoundingClientRect();
-
-	// Set the "actual" size of the canvas
-	canvas.width = rect.width * dpr;
-	canvas.height = rect.height * dpr;
-
-	// Scale the context to ensure correct drawing operations
-	ctx.scale(dpr * panZoomScale, dpr * panZoomScale);
-
-	// Set the "drawn" size of the canvas
-	canvas.style.width = `${rect.width}px`;
-	canvas.style.height = `${rect.height}px`;
-	//#endregion scale fix
-
-	//#region Draw nexuses
-	ctx.globalAlpha = 0.6;
-	ctx.lineWidth = 3;
-	ctx.lineJoin = ctx.lineCap = "round";
-	
-	// iterate over nexuses
-	props.worldNexuses.forEach((nexus, i) => {
-		ctx.fillStyle = ctx.strokeStyle = nexus.color;
-		const {position, points} = nexus;
-		if (points?.length) {
-		    // draw lines
-		    ctx.beginPath();
-			ctx.moveTo(
-				(position.x + points[0].x) * mapUnitScale,
-				(position.y + points[0].y) * mapUnitScale
-			);
-			points.forEach((pt, i) => {
-				if (i == 0) {
-					return;
-				}
-				ctx.lineTo(
-					(position.x + pt.x) * mapUnitScale,
-					(position.y + pt.y) * mapUnitScale
-				);
-			});
-			ctx.lineTo(
-				(position.x + points[0].x) * mapUnitScale,
-				(position.y + points[0].y) * mapUnitScale
-			);
-		    ctx.stroke();
+			ctx.globalAlpha = 0.6;
+			ctx.lineWidth = 3;
+			ctx.lineJoin = ctx.lineCap = "round";
 
 			//#region draw switchtracks
-			if (nexus.links?.length && nexus.links.length > 0) {
-				ctx.save();
-				for (let i = 0; i < nexus.links.length; i++) {
-					const link = nexus.links[i];
-					const linkedNexus = nexus.links?.length ? getNexus(nexus.links[i].to) : undefined;
-					if (link && linkedNexus) {
-						ctx.fillStyle = ctx.strokeStyle = linkedNexus.color;
-						let pointFrom = getLinkPoint(nexus, link.segmentFrom);
-						let pointTo = getLinkPoint(linkedNexus, link.segmentTo);
-						ctx.beginPath();
-						ctx.moveTo(
-							(position.x + pointFrom.x) * mapUnitScale,
-							(position.y + pointFrom.y) * mapUnitScale
-						);
-						const endPoint = { x: (linkedNexus.position.x + pointTo.x) * mapUnitScale, y: (linkedNexus.position.y + pointTo.y) * mapUnitScale };
+			ctx.save();
+			this.drawnSwitchtracks.forEach((link, i) => {
+				const nexus = this.findNexus(link._from as string);
+				const endNexus = this.findNexus(link.to);
+				if (nexus && endNexus) {
+					ctx.fillStyle = ctx.strokeStyle = endNexus.color;
+					const pointFrom = getLinkPoint(nexus, link.segmentFrom);
+					const pointTo = getLinkPoint(endNexus, link.segmentTo);
+					ctx.beginPath();
+					ctx.moveTo(
+						(nexus.position.x + pointFrom.x) * this.mapUnitScale,
+						(nexus.position.y + pointFrom.y) * this.mapUnitScale
+					);
+					const endPoint = { x: (endNexus.position.x + pointTo.x) * this.mapUnitScale, y: (endNexus.position.y + pointTo.y) * this.mapUnitScale };
 
-						//#region actually draw the switchtrack link
-						if (link.controlPoint && link.controlPoint2) {
-							// draw curve with two control points
-							ctx.bezierCurveTo(
-								(nexus.position.x + link.controlPoint.x) * mapUnitScale,
-								(nexus.position.y + link.controlPoint.y) * mapUnitScale,
-								(nexus.position.x + link.controlPoint2.x) * mapUnitScale,
-								(nexus.position.y + link.controlPoint2.y) * mapUnitScale,
-								endPoint.x,
-								endPoint.y,
-							);
-						}
-						else if (link.controlPoint) {
-							// draw curve with one control points
-							ctx.quadraticCurveTo(
-								(nexus.position.x + link.controlPoint.x) * mapUnitScale,
-								(nexus.position.y + link.controlPoint.y) * mapUnitScale,
-								endPoint.x,
-								endPoint.y,
-							);
-						}
-						else {
-							// draw straight line
-							ctx.lineTo(endPoint.x, endPoint.y);
-						}
-						ctx.stroke();
-						//#endregion actually draw the switchtrack link
+					//#region actually draw the switchtrack link
+					if (link.controlPoint && link.controlPoint2) {
+						// draw curve with two control points
+						ctx.bezierCurveTo(
+							(nexus.position.x + link.controlPoint.x) * this.mapUnitScale,
+							(nexus.position.y + link.controlPoint.y) * this.mapUnitScale,
+							(nexus.position.x + link.controlPoint2.x) * this.mapUnitScale,
+							(nexus.position.y + link.controlPoint2.y) * this.mapUnitScale,
+							endPoint.x,
+							endPoint.y,
+						);
 					}
+					else if (link.controlPoint) {
+						// draw curve with one control points
+						ctx.quadraticCurveTo(
+							(nexus.position.x + link.controlPoint.x) * this.mapUnitScale,
+							(nexus.position.y + link.controlPoint.y) * this.mapUnitScale,
+							endPoint.x,
+							endPoint.y,
+						);
+					}
+					else {
+						// draw straight line
+						ctx.lineTo(endPoint.x, endPoint.y);
+					}
+					ctx.stroke();
+					//#endregion actually draw the switchtrack link
 				}
-				ctx.restore();
-			}
+			});
+			ctx.restore();
 			//#endregion draw switchtracks
 
-            // draw world at point
-            ctx.globalAlpha = 1;
-			points.forEach((pt, i) => {
-				if (!pt.worldId || pt.worldId.length == 0) {
-					return;
-				}
-				const world = Utils.World.findWorld(WorldDatas, pt.worldId);
-				
-				// Get the definition for what the traveler known about this world
-				const worldKnowledge = props.knownWorlds.find(k => k.worldId == world?.id);
+			//#region Draw nexuses
+			this.drawnNexuses.forEach((nexus, i) => {
+				ctx.fillStyle = ctx.strokeStyle = nexus.color;
+				const {position, points} = nexus;
+				if (points?.length) {
+					// draw lines
+					ctx.beginPath();
+					let penDown = false;
+					points.forEach((pt, i) => {
+						let nextIndex = i + 1 < points.length ? i + 1 : 0;
+						let nextSegment = points[nextIndex];
+						if (
+							(pt.worldId && this.prismKeyIDs.includes(pt.worldId)) ||
+							(nextSegment.worldId && this.prismKeyIDs.includes(nextSegment.worldId)) ||
+							(this.getSwitchtrackIndexes(nexus).includes(i))
+						) {
+							const x = (position.x + pt.x) * this.mapUnitScale;
+							const y = (position.y + pt.y) * this.mapUnitScale;
 
-                if (!world || !world.images.token) {
-                    return;
-                }
-                let image = document.getElementById(world.id+"img") as HTMLImageElement|undefined;
-                if (image) { // the image element has already been created
+							if (!penDown) {
+								ctx.moveTo(x, y);
+								penDown = true;
+							}
+							ctx.lineTo(
+								(position.x + nextSegment.x) * this.mapUnitScale,
+								(position.y + nextSegment.y) * this.mapUnitScale
+							)
+						}
+						else {
+							penDown = false;
+						}
+					});
+					ctx.stroke();
+				}
+
+				// draw label
+				ctx.globalAlpha = 0.8;
+				ctx.fillStyle = ctx.strokeStyle = nexus.color;
+				ctx.font = "italic 8px serif";
+				ctx.textAlign = 'center';
+				ctx.fillText(`${Utils.String.capitalize(nexus.id)} Nexus`, position.x * this.mapUnitScale, (position.y * this.mapUnitScale) + 4); // '+ 4' because it is half of the current font size.
+			});
+			//#endregion Draw nexuses
+
+			//#region draw worlds
+			ctx.save();
+			ctx.globalAlpha = 1;
+			this.drawnWorlds.forEach(world => {
+				let image = document.getElementById(world.id+"img") as HTMLImageElement|undefined;
+
+				// the image element has already been created
+				if (image) {
 					if (image.complete && (typeof image.naturalWidth === "undefined" || image.naturalWidth === 0)) {
 						// Image is broken. Set a default image.
 						image.src = "img/worlds/atlantica.png";
 					}
 					else {
 						// image is fine, render normally
-						ctx.drawImage(image, (position.x + pt.x - (worldTokenMultiplier/2)) * mapUnitScale, (position.y + pt.y - (worldTokenMultiplier/2)) * mapUnitScale, mapUnitScale * worldTokenMultiplier, mapUnitScale * worldTokenMultiplier);
+						ctx.drawImage(image, world.x * this.mapUnitScale, world.y * this.mapUnitScale, this.mapUnitScale * world.width, this.mapUnitScale * world.height);
 					}
-                }
-                else {
-                    image = new Image(mapUnitScale, mapUnitScale); // Using optional size for image
-                    image.id = world.id+"img";
-                    
-					if (!worldKnowledge && !props.drawAll) {
-						// don't draw the world if it isn't known to the traveler
-						return;
-					}
+				}
+				// create the image element
+				else {
+					image = new Image(this.mapUnitScale, this.mapUnitScale); // Using optional size for image
+					image.id = world.id+"img";
 					
-					image.src = worldKnowledge?.displayType == KnownWorldDisplayType.NoIcon || worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon ? "img/worlds/blank.png" : world.images.token,
-                    document.body.append(image);
-                    image.style.display = 'none';
-                }
+					image.src = world.img;
+					document.body.append(image);
+					image.style.display = 'none';
+				}
+				
 				drawTextWithBG(
 					ctx,
-					worldKnowledge?.displayType == KnownWorldDisplayType.NoName || worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon ? "???" : world.name,
+					world.label,
 					"8px sans-serif",
-					(position.x + pt.x) * mapUnitScale,
-					((position.y + pt.y + (worldTokenMultiplier/2)) * mapUnitScale) + 4,
-					world.details.isHub? '#ffc800' : '#dedede',
+					(world.x + (world.width/2)) * this.mapUnitScale,
+					((world.y + (world.height)) * this.mapUnitScale) + 4,
+					world.color,
 					2
 				)
+				
 			});
-		}
+			ctx.restore();
+			//#endregion draw worlds
 
-		// draw label
-        ctx.globalAlpha = 0.8;
-		ctx.fillStyle = ctx.strokeStyle = nexus.color;
-		ctx.font = "italic 8px serif";
-		ctx.textAlign = 'center';
-		ctx.fillText(`${Utils.String.capitalize(nexus.id)} Nexus`, position.x * mapUnitScale, (position.y * mapUnitScale) + 4); // '+ 4' because it is half of the current font size.
-	});
-	//#endregion Draw nexuses
+			//#region Draw travel paths
+			ctx.save();
+			this.$props.travelLogs.forEach(log => {
+				const stops = log?.history || [];
+				const startPosition = this.worldPositions.length > 0 ? this.worldPositions.find(w => w.worldId == stops[0].locationId) : undefined;
+				if (startPosition) {
+					ctx.strokeStyle = log?.themeColor || "#fff";
+					ctx.fillStyle = shadeColor(ctx.strokeStyle as string, 10);
+					const stopSpaceMods = spaceStopMods(stops);
+					ctx.globalAlpha = 0.9;
+					ctx.lineWidth = 1;
+					ctx.setLineDash([4, 4]);
+					const yOffset = 5;
 
-	//#region Draw travel paths
-	ctx.save();
-	props.travelLogs.forEach(log => {
-		const stops = log?.history || [];
-		const startPosition = worldPositions && worldPositions.length > 0 ? worldPositions.find(w => w.worldId == stops[0].locationId) : undefined;
-		if (startPosition) {
-			ctx.strokeStyle = log?.themeColor || "#fff";
-			ctx.fillStyle = shadeColor(ctx.strokeStyle as string, 10);
-			const stopSpaceMods = spaceStopMods(stops);
-			ctx.globalAlpha = 0.9;
-			ctx.lineWidth = 1;
-			ctx.setLineDash([4, 4]);
-			const yOffset = 5;
+					ctx.beginPath();
+					ctx.moveTo(
+						(startPosition.x) * this.mapUnitScale,
+						(startPosition.y) * this.mapUnitScale + yOffset
+					);
+					
+					// dashed lines
+					stops.forEach((stop, i) => {
+						// no need to handle the first stop
+						if (i == 0) {
+							return;
+						}
 
-			ctx.beginPath();
-			ctx.moveTo(
-				(startPosition.x) * mapUnitScale,
-				(startPosition.y) * mapUnitScale + yOffset
-			);
+						const position = this.worldPositions.find(w => w.worldId == stop.locationId);
+						if (stop.eventType == 'world' && position) {
+							ctx.lineTo((position.x + stopSpaceMods[i].x) * this.mapUnitScale, (position.y + stopSpaceMods[i].y) * this.mapUnitScale + yOffset);
+						}
+					});
+					ctx.stroke();
+
+					// points at stops
+					ctx.globalAlpha = 1;
+					ctx.lineWidth = 3;
+					ctx.setLineDash([]);
+					ctx.strokeStyle = shadeColor(ctx.strokeStyle as string, -40);
+					stops.forEach((stop, i) => {
+						const position = this.worldPositions.find(w => w.worldId == stop.locationId);
+						if (stop.eventType == 'world' && position && stop.stopped) {
+							ctx.beginPath();
+							ctx.ellipse((position.x + stopSpaceMods[i].x) * this.mapUnitScale, (position.y + stopSpaceMods[i].y) * this.mapUnitScale + yOffset, travelStopIconRadius, travelStopIconRadius, 0, 0, 2 * Math.PI);
+							ctx.stroke();
+							ctx.fill();
+						}
+					});
+				}
+			});	
+			ctx.restore();
+			//#endregion Draw travel paths
+
+			// queue next frame
+			requestAnimationFrame(this.draw);
+		},
+		findNexus(id: string): IWorldNexusData | undefined {
+			return this.$props.worldNexuses.find(n => n.id == id);
+		},
+		/** Get the segment indexes of the switchtracks in a given nexus. */
+		getSwitchtrackIndexes(nexus: IWorldNexusData, drawnOnly: boolean = true): number[] {
+			const switchtracks = drawnOnly ? this.drawnSwitchtracks : this.data.switchtracks.all;
+			return switchtracks.reduce((acc: number[], curr: ISwitchtrackData) => {
+				if (curr.to == nexus.id)
+					acc.push(curr.segmentTo);
+				else if (curr._from == nexus.id)
+					acc.push(curr.segmentFrom);
+				return acc;
+			}, []);
+		},
+		/** Check whether a nexus is unlocked. */
+		nexusUnlocked(nexus: IWorldNexusData): boolean {
+			let unlocked = false;
 			
-			// dashed lines
-			stops.forEach((stop, i) => {
-				// no need to handle the first stop
-				if (i == 0) {
+			if (this.data.switchtracks.unlocked.find(s => s.to == nexus.id)) {
+				return true;
+			}
+			
+			nexus.points?.forEach(p => {
+				this.$props.knownWorlds.filter(k => k.worldId == p.worldId).forEach(w => {
+					if (w.prismKey || w.explorationState == ExplorationState.Discovered) {
+						unlocked = true;
+						return;
+					}
+				});
+			});
+
+			return unlocked;
+		},
+		/** Check whether a Switchtrack is unlocked.
+		 * TODO: finish logic for the final world.
+		 */
+		switchtrackUnlocked(switchtrack: ISwitchtrackData): boolean {
+			let unlocked = false;
+			const nexus = this.$props.worldNexuses.find(n => n.id == switchtrack.trackedNexus as string);
+
+			if (!nexus || !nexus.points) {
+				return false;
+			}
+
+			if (switchtrack.unlockType == "half_anchors") {
+				return this.countPrismKeysFromNexus(nexus)/(nexus.points.length) > 0.5;
+			}
+
+			if (switchtrack.unlockType == "all_anchors") {
+				return nexus.points.length == this.countPrismKeysFromNexus(nexus);
+			}
+
+			return unlocked;
+		},
+		countPrismKeysFromNexus(nexus: IWorldNexusData): number {
+			let count = 0;
+			nexus.points?.forEach(p => {
+				if (p.worldId && p.worldId.length > 0 && this.prismKeyIDs.includes(p.worldId)) {
+					count += 1;
+				}
+			});
+			return count;
+		},
+		cleanText(text: string): string {
+			let temp = text;
+			if (temp.match(/\n\n/ig)) {
+				temp = temp.replace(/\n\n(?![\s\S]*\n\n)/ig, "</p>"); // special handling for last paragraph to prevent weird space below review body
+				temp = "<p>" + temp.replace(/\n\n/ig, "</p><p>");
+			}
+			return temp.replace(/\n/ig, "<br/>");
+		},
+	},
+	mounted() {
+		// Initialize map and canvas stuff
+		const elem = document.getElementById('panzoom-element') as HTMLElement;
+		this.panzoom = Panzoom(elem, {
+			maxScale: 5,
+			contain: 'outside',
+			// canvas: true,
+			// // Can add an element reference
+			// exclude: [document.getElementById('link')],
+			// // ...or set a class on the element
+			// excludeClass: 'custom-excluded-class'
+		});
+		// panzoom.pan(10, 10);
+		// panzoom.zoom(2, { animate: true });
+
+		// Panning and pinch zooming are bound automatically (unless disablePan is true).
+		// There are several available methods for zooming
+		// that can be bound on button clicks or mousewheel.
+		// button.addEventListener('click', panzoom.zoomIn);
+		// elem.parentElement?.addEventListener('wheel', panzoom.zoomWithWheel);
+		elem.addEventListener('wheel', this.panzoom.zoomWithWheel);
+
+		this.worldPositions = [];
+		this.$props.worldNexuses.forEach(nexus => {
+			nexus.points?.forEach(world => {
+				if (!world.worldId) {
 					return;
 				}
 
-				const position = worldPositions.find(w => w.worldId == stop.locationId);
-				if (stop.eventType == 'world' && position) {
-					ctx.lineTo((position.x + stopSpaceMods[i].x) * mapUnitScale, (position.y + stopSpaceMods[i].y) * mapUnitScale + yOffset);
-				}
+				this.worldPositions.push({
+					x: nexus.position.x + world.x,
+					y: nexus.position.y + world.y,
+					worldId: world.worldId,
+					nexusId: nexus.id
+				});
 			});
-			ctx.stroke();
+			nexus.links?.forEach((switchtrack, i) => {
+				this.data.switchtracks.all.push(
+					{
+						_from: nexus.id,
+						trackedNexus: switchtrack.trackedNexus || nexus.id,
+						unlockType: switchtrack.unlockType || 'half_anchors',
+						...switchtrack
+					}
+				);
+			});
+		});
 
-			// points at stops
-			ctx.globalAlpha = 1;
-			ctx.lineWidth = 3;
-			ctx.setLineDash([]);
-			ctx.strokeStyle = shadeColor(ctx.strokeStyle as string, -40);
-			stops.forEach((stop, i) => {
-				const position = worldPositions.find(w => w.worldId == stop.locationId);
-				if (stop.eventType == 'world' && position && stop.stopped) {
-					ctx.beginPath();
-					ctx.ellipse((position.x + stopSpaceMods[i].x) * mapUnitScale, (position.y + stopSpaceMods[i].y) * mapUnitScale + yOffset, travelStopIconRadius, travelStopIconRadius, 0, 0, 2 * Math.PI);
-					ctx.stroke();
-					ctx.fill();
-				}
-			});
+		//TODO: add real logic here
+		// this.data.switchtracks.unlocked = this.data.switchtracks.all.filter(s => this.switchtrackUnlocked(s));
+		this.data.switchtracks.all.forEach((s, i) => {
+			if (this.switchtrackUnlocked(s)) {
+				this.data.switchtracks.unlocked.push(s);
+			}
+		});
+
+		if (this.$props.useCanvas) {
+			const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;
+			const bound = elem.getBoundingClientRect();
+			canvas.height = bound.height;
+			canvas.width = bound.width;
+			this.mapUnitScale = Math.round(bound.width / this.mapDimensions.width);
+			this.draw();
 		}
-	});	
-	ctx.restore();
-	//#endregion Draw travel paths
+	},
+	beforeUnmount() {
+		this.panzoom?.destroy();
+	},
+})
 
-	// queue next frame
-	requestAnimationFrame(draw);
-}
-
-interface ISimplePoint { x: number, y: number };
 function getMidpoint(a: ISimplePoint, b: ISimplePoint): ISimplePoint {
 	return { x: (a.x + b.x)/2, y: (a.y + b.y)/2}
+}
+/** Gets the index of the segments bordering a world or point. 
+ * TODO: Actually implement. */
+function getAdjacentSegments(points: ISimplePoint[], worldIndex: number): number[] {
+	let secondSegment = worldIndex == 0 ? points.length-1 : worldIndex-1;
+	return [worldIndex, secondSegment].sort();
 }
 function getSegmentEnds(points: ISimplePoint[], segmentIndex: number): ISimplePoint[] {
 	let firstEnd = points[segmentIndex];
@@ -376,10 +591,6 @@ function getLinkPoint(nexus: IWorldNexusData, segmentIndex: number = 0): ISimple
 	}
 	const ends = getSegmentEnds(nexus.points, segmentIndex);
 	return getMidpoint(ends[0], ends[1]);
-}
-
-function getNexus(id: string): IWorldNexusData | undefined {
-	return WorldNexusDatas.filter(n => n.id == id)[0];
 }
 
 function spaceStopMods(stops: ITravelLogTimelineEvent[]): {x :number, y: number}[] {
@@ -462,29 +673,7 @@ function shadeColor(color: string, percent: number) {
     return "#"+RR+GG+BB;
 }
 
-
 function getMapCanvas() {
     return document.getElementById("map-canvas") as HTMLCanvasElement;
 }
 </script>
-
-<template>
-    <div class="text-center border border-black border-5 mx-lg-5 bg-dark-subtle overflow-hidden">
-        <div id="panzoom-element" class="position-relative" :key="'voidspace-map-canvas'+timestamp">
-            <canvas
-                id="map-canvas"
-                class="position-absolute w-100 h-100"
-                style="z-index: 1;"
-                v-if="useCanvas"
-				:key="'map-canvas-' + timestamp"
-            >
-                Unable to render map. Please try again in a different browser.
-            </canvas>
-            <ImageVue
-                class="position-relative w-100"
-                style="z-index: 0;"
-                :src="backgroundImage"
-            />
-        </div>
-    </div>
-</template>
