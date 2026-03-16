@@ -42,6 +42,7 @@ onBeforeUnmount(() => {
 			</ViewBlurb>
 		</header>
 		<main class="px-lg-5">
+			<!-- background-image="img/voidspace.png" -->
 			<VoidspaceMapCanvas
 				:map-height-in-units="29"
 				:map-width-in-units="34"

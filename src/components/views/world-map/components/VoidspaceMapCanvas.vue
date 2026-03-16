@@ -55,6 +55,12 @@ interface IDrawnWorld extends ISimplePoint {
 	width: number;
 }
 
+interface IDrawnSwitchtrack extends ISwitchtrackData {
+	startPoint: ISimplePoint;
+	endPoint: ISimplePoint;
+	color: string;
+}
+
 const worldTokenMultiplier = 2;
 const travelStopIconRadius = 4;
 
@@ -179,7 +185,11 @@ export default defineComponent({
 					drawnWorlds.push({
 						id: world.id,
 						label: noName && !this.$props.drawAll ? "???" : world.name,
-						img: noIcon && !this.$props.drawAll ? "img/worlds/blank.png" : world.images.token,
+						img: noIcon && !this.$props.drawAll 
+							? "img/worlds/blank.png"
+							: world.details.status?.toLowerCase() == 'destroyed'
+								? "img/worlds/dead_world.png"
+								: world.images.token,
 						color: !!worldKnowledge && world.details.isHub? '#ffc800' : '#dedede',
 						x: position.x + pt.x - (worldTokenMultiplier/2),
 						y: position.y + pt.y - (worldTokenMultiplier/2),
@@ -210,7 +220,8 @@ export default defineComponent({
 	},
 	methods: {
 		draw() {
-			const ctx = getMapCanvas().getContext("2d");
+			const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;
+			const ctx = canvas.getContext("2d");
 
 			if (!ctx) {
 				console.error("Unable to find canvas!");
@@ -219,7 +230,6 @@ export default defineComponent({
 
 			//#region scale fix
 			// Get the DPR and size of the canvas
-			const canvas = getMapCanvas();
 			const dpr = window.devicePixelRatio;
 			const panZoomScale = this.panzoom?.getScale() || 1;
 			const rect = canvas.getBoundingClientRect();
@@ -243,47 +253,7 @@ export default defineComponent({
 			//#region draw switchtracks
 			ctx.save();
 			this.drawnSwitchtracks.forEach((link, i) => {
-				const nexus = this.findNexus(link._from as string);
-				const endNexus = this.findNexus(link.to);
-				if (nexus && endNexus) {
-					ctx.fillStyle = ctx.strokeStyle = endNexus.color;
-					const pointFrom = getLinkPoint(nexus, link.segmentFrom);
-					const pointTo = getLinkPoint(endNexus, link.segmentTo);
-					ctx.beginPath();
-					ctx.moveTo(
-						(nexus.position.x + pointFrom.x) * this.mapUnitScale,
-						(nexus.position.y + pointFrom.y) * this.mapUnitScale
-					);
-					const endPoint = { x: (endNexus.position.x + pointTo.x) * this.mapUnitScale, y: (endNexus.position.y + pointTo.y) * this.mapUnitScale };
-
-					//#region actually draw the switchtrack link
-					if (link.controlPoint && link.controlPoint2) {
-						// draw curve with two control points
-						ctx.bezierCurveTo(
-							(nexus.position.x + link.controlPoint.x) * this.mapUnitScale,
-							(nexus.position.y + link.controlPoint.y) * this.mapUnitScale,
-							(nexus.position.x + link.controlPoint2.x) * this.mapUnitScale,
-							(nexus.position.y + link.controlPoint2.y) * this.mapUnitScale,
-							endPoint.x,
-							endPoint.y,
-						);
-					}
-					else if (link.controlPoint) {
-						// draw curve with one control points
-						ctx.quadraticCurveTo(
-							(nexus.position.x + link.controlPoint.x) * this.mapUnitScale,
-							(nexus.position.y + link.controlPoint.y) * this.mapUnitScale,
-							endPoint.x,
-							endPoint.y,
-						);
-					}
-					else {
-						// draw straight line
-						ctx.lineTo(endPoint.x, endPoint.y);
-					}
-					ctx.stroke();
-					//#endregion actually draw the switchtrack link
-				}
+				this.drawSwitchtrack(ctx, link);
 			});
 			ctx.restore();
 			//#endregion draw switchtracks
@@ -336,27 +306,11 @@ export default defineComponent({
 			ctx.save();
 			ctx.globalAlpha = 1;
 			this.drawnWorlds.forEach(world => {
-				let image = document.getElementById(world.id+"img") as HTMLImageElement|undefined;
+				const image = this.getImageElement(world.id+"-img", world.img) as HTMLImageElement|undefined;
 
 				// the image element has already been created
 				if (image) {
-					if (image.complete && (typeof image.naturalWidth === "undefined" || image.naturalWidth === 0)) {
-						// Image is broken. Set a default image.
-						image.src = "img/worlds/atlantica.png";
-					}
-					else {
-						// image is fine, render normally
-						ctx.drawImage(image, world.x * this.mapUnitScale, world.y * this.mapUnitScale, this.mapUnitScale * world.width, this.mapUnitScale * world.height);
-					}
-				}
-				// create the image element
-				else {
-					image = new Image(this.mapUnitScale, this.mapUnitScale); // Using optional size for image
-					image.id = world.id+"img";
-					
-					image.src = world.img;
-					document.body.append(image);
-					image.style.display = 'none';
+					ctx.drawImage(image, world.x * this.mapUnitScale, world.y * this.mapUnitScale, this.mapUnitScale * world.width, this.mapUnitScale * world.height);
 				}
 				
 				drawTextWithBG(
@@ -375,6 +329,9 @@ export default defineComponent({
 
 			//#region Draw travel paths
 			ctx.save();
+			ctx.globalAlpha = 0.9;
+			ctx.lineWidth = 1;
+			ctx.setLineDash([4, 4]);
 			this.$props.travelLogs.forEach(log => {
 				const stops = log?.history || [];
 				const startPosition = this.worldPositions.length > 0 ? this.worldPositions.find(w => w.worldId == stops[0].locationId) : undefined;
@@ -382,9 +339,6 @@ export default defineComponent({
 					ctx.strokeStyle = log?.themeColor || "#fff";
 					ctx.fillStyle = shadeColor(ctx.strokeStyle as string, 10);
 					const stopSpaceMods = spaceStopMods(stops);
-					ctx.globalAlpha = 0.9;
-					ctx.lineWidth = 1;
-					ctx.setLineDash([4, 4]);
 					const yOffset = 5;
 
 					ctx.beginPath();
@@ -394,20 +348,36 @@ export default defineComponent({
 					);
 					
 					// dashed lines
+					let lastNexus = '';
 					stops.forEach((stop, i) => {
+						const position = this.worldPositions.find(w => w.worldId == stop.locationId);
 						// no need to handle the first stop
 						if (i == 0) {
+							lastNexus = position?.nexusId || '';
 							return;
 						}
 
-						const position = this.worldPositions.find(w => w.worldId == stop.locationId);
 						if (stop.eventType == 'world' && position) {
+							// Check if we need to draw a path across a switchtrack before the current world
+							if (!stop.fastTravel && stop.accessMethod == 'lightship' && lastNexus != '' && lastNexus != position?.nexusId) {
+								const switchtrack = this.getSwitchtrack(lastNexus, position.nexusId, false);
+								if (switchtrack) {
+									this.drawSwitchtrack(ctx, switchtrack, true, {x:-5, y:yOffset});
+								}
+							}
+
+							// draw the actual line
 							ctx.lineTo((position.x + stopSpaceMods[i].x) * this.mapUnitScale, (position.y + stopSpaceMods[i].y) * this.mapUnitScale + yOffset);
 						}
+
+						// if (i-1 == stops.length && log.token && position) {
+						// 	ctx.drawImage(log.token, position.x * this.mapUnitScale, position.y * this.mapUnitScale, this.mapUnitScale, this.mapUnitScale);
+						// }
+						lastNexus = position?.nexusId || lastNexus;
 					});
 					ctx.stroke();
 
-					// points at stops
+					// draw points at stops
 					ctx.globalAlpha = 1;
 					ctx.lineWidth = 3;
 					ctx.setLineDash([]);
@@ -421,6 +391,15 @@ export default defineComponent({
 							ctx.fill();
 						}
 					});
+
+					if (log.token) {
+						const image = this.getImageElement(log.id+"-img", log.token) as HTMLImageElement|undefined;
+						// the image element has already been created
+						if (image) {
+							const pos = this.getTravelerPosition(log);
+							ctx.drawImage(image, (pos.x - 1/2) * this.mapUnitScale, (pos.y - 1/2) * this.mapUnitScale, this.mapUnitScale, this.mapUnitScale);
+						}
+					}
 				}
 			});	
 			ctx.restore();
@@ -429,8 +408,88 @@ export default defineComponent({
 			// queue next frame
 			requestAnimationFrame(this.draw);
 		},
+		drawSwitchtrack(ctx: CanvasRenderingContext2D, link: ISwitchtrackData, continuePath: boolean = false, offset: ISimplePoint = {x:0,y:0}) {
+			const nexus = this.findNexus(link._from as string);
+			const endNexus = this.findNexus(link.to);
+			ctx.save();
+			if (nexus && endNexus) {
+				const pointFrom = getLinkPoint(nexus, link.segmentFrom);
+				const pointTo = getLinkPoint(endNexus, link.segmentTo);
+				const startPoint = { x: (nexus.position.x + pointFrom.x) * this.mapUnitScale + offset.x, y: (nexus.position.y + pointFrom.y) * this.mapUnitScale + offset.y };
+				const endPoint = { x: (endNexus.position.x + pointTo.x) * this.mapUnitScale + offset.x, y: (endNexus.position.y + pointTo.y) * this.mapUnitScale + offset.y };
+				if (continuePath) {
+					ctx.lineTo(startPoint.x, startPoint.y);
+				} else {
+					ctx.fillStyle = ctx.strokeStyle = endNexus.color;
+					ctx.beginPath();
+					ctx.moveTo(startPoint.x, startPoint.y);
+				}
+
+				//#region actually draw the switchtrack link
+				if (link.controlPoint && link.controlPoint2) {
+					// draw curve with two control points
+					ctx.bezierCurveTo(
+						(nexus.position.x + link.controlPoint.x) * this.mapUnitScale + offset.x,
+						(nexus.position.y + link.controlPoint.y) * this.mapUnitScale + offset.y,
+						(nexus.position.x + link.controlPoint2.x) * this.mapUnitScale + offset.x,
+						(nexus.position.y + link.controlPoint2.y) * this.mapUnitScale + offset.y,
+						endPoint.x,
+						endPoint.y,
+					);
+				}
+				else if (link.controlPoint) {
+					// draw curve with one control points
+					ctx.quadraticCurveTo(
+						(nexus.position.x + link.controlPoint.x) * this.mapUnitScale + offset.x,
+						(nexus.position.y + link.controlPoint.y) * this.mapUnitScale + offset.y,
+						endPoint.x,
+						endPoint.y,
+					);
+				}
+				else {
+					// draw straight line
+					ctx.lineTo(endPoint.x, endPoint.y);
+				}
+				if (!continuePath) {
+					ctx.stroke();
+				}
+				//#endregion actually draw the switchtrack link
+			}
+			ctx.restore();
+		},
 		findNexus(id: string): IWorldNexusData | undefined {
 			return this.$props.worldNexuses.find(n => n.id == id);
+		},
+		/** Get the current position of the traveler from the given log */
+		getTravelerPosition(log: ITravelLog): ISimplePoint {
+			const locationId = log.history[log.history.length-1].locationId;
+			const worldPosition = locationId ? this.worldPositions.find(w => w.worldId == locationId) : undefined;
+			return worldPosition ? {x:worldPosition.x, y:worldPosition.y} : {x: 0, y:0};
+		},
+		getImageElement(id: string, src: string) {
+			let image = document.getElementById(id) as HTMLImageElement|undefined;
+
+			// the image element has already been created
+			if (image) {
+				if (image.complete && (typeof image.naturalWidth === "undefined" || image.naturalWidth === 0)) {
+					// Image is broken. Set a default image.
+					image.src = "img/worlds/atlantica.png";
+				}
+				else {
+					// image is fine, render normally
+					return image;
+				}
+			}
+			// create the image element
+			else {
+				image = new Image(this.mapUnitScale, this.mapUnitScale); // Using optional size for image
+				image.id = id;
+				
+				image.src = src;
+				document.body.append(image);
+				image.style.display = 'none';
+			}
+			return undefined;
 		},
 		/** Get the segment indexes of the switchtracks in a given nexus. */
 		getSwitchtrackIndexes(nexus: IWorldNexusData, drawnOnly: boolean = true): number[] {
@@ -442,6 +501,11 @@ export default defineComponent({
 					acc.push(curr.segmentFrom);
 				return acc;
 			}, []);
+		},
+		/** Get the segment indexes of the switchtracks in a given nexus. */
+		getSwitchtrack(nexusFrom: string, nexusTo: string, drawnOnly: boolean = true): ISwitchtrackData | undefined {
+			const switchtracks = drawnOnly ? this.drawnSwitchtracks : this.data.switchtracks.all;
+			return switchtracks.find(s => (s._from == nexusFrom && s.to == nexusTo) || (s._from == nexusTo && s.to == nexusFrom));
 		},
 		/** Check whether a nexus is unlocked. */
 		nexusUnlocked(nexus: IWorldNexusData): boolean {
@@ -524,6 +588,7 @@ export default defineComponent({
 		elem.addEventListener('wheel', this.panzoom.zoomWithWheel);
 
 		this.worldPositions = [];
+		this.data.switchtracks.all = [];
 		this.$props.worldNexuses.forEach(nexus => {
 			nexus.points?.forEach(world => {
 				if (!world.worldId) {
@@ -549,8 +614,7 @@ export default defineComponent({
 			});
 		});
 
-		//TODO: add real logic here
-		// this.data.switchtracks.unlocked = this.data.switchtracks.all.filter(s => this.switchtrackUnlocked(s));
+		this.data.switchtracks.unlocked = [];
 		this.data.switchtracks.all.forEach((s, i) => {
 			if (this.switchtrackUnlocked(s)) {
 				this.data.switchtracks.unlocked.push(s);
@@ -671,9 +735,5 @@ function shadeColor(color: string, percent: number) {
     var BB = ((B.toString(16).length==1)?"0"+B.toString(16):B.toString(16));
 
     return "#"+RR+GG+BB;
-}
-
-function getMapCanvas() {
-    return document.getElementById("map-canvas") as HTMLCanvasElement;
 }
 </script>

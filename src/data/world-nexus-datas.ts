@@ -148,12 +148,12 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 	{
 		id: "tangerine",
 		color: "#ffa750",
-		position: { x: 19, y: 3.5 },
+		position: { x: 18.75, y: 3.5 },
 		points: [
 			// { x: 0.1, y: -2.5 },
-			{ x: 1.5, y: 0, worldId: 'dallas-shaolin' },
-			{ x: -0.5, y: 2, worldId: 'looney-tune-land' },
-			{ x: -2, y: -0.5, worldId: 'chocolate-factory' }
+			{ x: 1.75, y: 0, worldId: 'dallas-shaolin' },
+			{ x: -0.25, y: 2, worldId: 'looney-tune-land' },
+			{ x: -1.75, y: -0.5, worldId: 'chocolate-factory' }
 		],
 		links: [
 			{

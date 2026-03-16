@@ -19,6 +19,7 @@ import { GameStrings } from "@/scripts/game-strings";
 			<AppIconContainer>
 				<AppIcon svg="globe2" to="/world-pages/battle-world" class="dev">Battle World</AppIcon>
 				<AppIcon svg="globe2" to="/world-pages/haven" class="dev">Haven</AppIcon>
+				<AppIcon svg="globe2" to="/world-pages/sanctuary" class="dev">Sanctuary</AppIcon>
 				<AppIcon svg="globe2" to="/world-pages/somewhere" class="dev">Somewhere</AppIcon>
 				<AppIcon svg="globe2" to="/world-pages/weapon-world" class="dev">Weapon World</AppIcon>
 			</AppIconContainer>
