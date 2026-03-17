@@ -56,9 +56,15 @@ interface IDrawnWorld extends ISimplePoint {
 }
 
 interface IDrawnSwitchtrack extends ISwitchtrackData {
+	/** The id of the starting nexus.
+	 * ONLY USED BY AUTOMATED PROCESSES.
+	 */
+	_from?: string;
 	startPoint: ISimplePoint;
 	endPoint: ISimplePoint;
-	color: string;
+	color?: string;
+	/** Used in the rare event of a traveler losing access to a previously unlocked switchtrack .  */
+	relocked?: boolean;
 }
 
 const worldTokenMultiplier = 2;
@@ -128,31 +134,72 @@ export default defineComponent({
 			mapUnitScale: this.$props.defaultUnitScale,
 			panzoom: undefined as unknown as PanzoomObject,
 			initialTimestamp: Date.now(),
-			worldPositions: [] as IWorldPositionEntry[],
 			data: {
-				switchtracks: {
-					all: [] as ISwitchtrackData[],
-					unlocked: [] as ISwitchtrackData[],
-				}
+				
 			},
 			state: {
 				travelerPositions: [] as ITravelerPosition[],
 				paused: false,
 				shownDate: CampaignState.CurrentDate,
 			},
-			stateModeIndexSelected: 0,
-			stateSortOn: 'date',
-			stateSortAsc: true,
 		}
 	},
 	computed: {
+		//#region computed base datasets
+		dataSwitchtracksAll(): IDrawnSwitchtrack[] {
+			const results: IDrawnSwitchtrack[] = [];
+			this.$props.worldNexuses.forEach(nexus => {
+				nexus.links?.forEach((switchtrack) => {
+					const endNexus = this.findNexus(switchtrack.to);
+					if (!endNexus) {
+						return;
+					}
+
+					const pointFrom = getLinkPoint(nexus, switchtrack.segmentFrom);
+					const pointTo = getLinkPoint(endNexus, switchtrack.segmentTo);
+					const startPoint = { x: (nexus.position.x + pointFrom.x), y: (nexus.position.y + pointFrom.y) };
+					const endPoint = { x: (endNexus.position.x + pointTo.x), y: (endNexus.position.y + pointTo.y) };
+					const controlPoint = switchtrack.controlPoint
+						? { x: (nexus.position.x + switchtrack.controlPoint.x), y: (nexus.position.y + switchtrack.controlPoint.y) } 
+						: undefined;
+					const controlPoint2 = switchtrack.controlPoint2
+						? { x: (nexus.position.x + switchtrack.controlPoint2.x), y: (nexus.position.y + switchtrack.controlPoint2.y) } 
+						: undefined;
+					results.push(
+						{
+							...switchtrack,
+							_from: nexus.id,
+							trackedNexus: switchtrack.trackedNexus || nexus.id,
+							unlockType: switchtrack.unlockType || 'half_anchors',
+							color: endNexus.color,
+							controlPoint,
+							controlPoint2,
+							startPoint,
+							endPoint,
+						}
+					);
+				});
+			});
+			return results;
+		},
+		dataSwitchtracksUnlocked(): IDrawnSwitchtrack[] {
+			return this.dataSwitchtracksAll.filter(s => this.switchtrackUnlocked(s));
+		},
+		//#endregion computed base datasets
 		drawnNexuses() {
-			// May eventually want to refine this to show the nexuses being unlocked during playback.
+			// TODO: May eventually want to refine this to show the nexuses being unlocked during playback.
 			const validNexuses = this.$props.worldNexuses.filter(w => !!w.points);
 			return this.$props.drawAll ? validNexuses : validNexuses.filter(n => this.nexusUnlocked(n));
 		},
-		drawnSwitchtracks() {
-			return this.$props.drawAll ? this.data.switchtracks.all : this.data.switchtracks.unlocked;
+		/** Get the switchtracks to be drawn */
+		drawnSwitchtracks(): IDrawnSwitchtrack[] {
+			return this.$props.drawAll ? this.dataSwitchtracksAll : this.dataSwitchtracksUnlocked;
+		},
+		drawnTravelLogs() {
+
+
+
+			"img/ships/default.png"
 		},
 		drawnWorlds(): IDrawnWorld[] {
 			const drawnWorlds: IDrawnWorld[] = [];
@@ -201,6 +248,12 @@ export default defineComponent({
 
 			return drawnWorlds;
 		},
+		/** The latest possible date viewable on the map.
+		 * TODO: currently just defaults to the current campaign date.
+		 */
+		maximumPlaybackDate() {
+			return CampaignState.CurrentDate;
+		},
 		/** List of unique prism keys owned by the current set of travelers */
 		prismKeyIDs(): string[] {
 			let matches: string[] = [];
@@ -211,12 +264,24 @@ export default defineComponent({
 			});
 			return matches;
 		},
-		/** The latest possible date viewable on the map.
-		 * TODO: currently just defaults to the current campaign date.
-		 */
-		maximumPlaybackDate() {
-			return CampaignState.CurrentDate;
-		}
+		worldPositions(): IWorldPositionEntry[] {
+			const results: IWorldPositionEntry[] = [];
+			this.$props.worldNexuses.forEach(nexus => {
+				nexus.points?.forEach(world => {
+					if (!world.worldId) {
+						return;
+					}
+
+					results.push({
+						x: nexus.position.x + world.x,
+						y: nexus.position.y + world.y,
+						worldId: world.worldId,
+						nexusId: nexus.id
+					});
+				});
+			});
+			return results;
+		},
 	},
 	methods: {
 		draw() {
@@ -392,12 +457,44 @@ export default defineComponent({
 						}
 					});
 
+					// Draw the traveler icon and label
 					if (log.token) {
 						const image = this.getImageElement(log.id+"-img", log.token) as HTMLImageElement|undefined;
-						// the image element has already been created
 						if (image) {
-							const pos = this.getTravelerPosition(log);
-							ctx.drawImage(image, (pos.x - 1/2) * this.mapUnitScale, (pos.y - 1/2) * this.mapUnitScale, this.mapUnitScale, this.mapUnitScale);
+							const travelerTokenRadius = 0.3 * worldTokenMultiplier;
+							const basePos = this.getTravelerPosition(log);
+							const pos = {
+								x: basePos.x + travelerTokenRadius + 0.25,
+								y: basePos.y + 0.5 * travelerTokenRadius - 0.1
+							};
+							const size = {width: 1, height: 1};
+
+							// draw outline
+							ctx.globalAlpha = 0.4;
+							ctx.lineWidth = 1;
+							ctx.setLineDash([5,2]);
+							ctx.fillStyle = shadeColor(log.themeColor as string, -20);
+							ctx.strokeStyle = log.themeColor;
+							ctx.beginPath();
+							ctx.ellipse(pos.x * this.mapUnitScale, pos.y * this.mapUnitScale, travelerTokenRadius * this.mapUnitScale, travelerTokenRadius * this.mapUnitScale, 0, 0, 2 * Math.PI);
+							ctx.fill();
+							// ctx.globalAlpha = 1;
+							// ctx.stroke();
+							
+							// draw token
+							ctx.globalAlpha = 1;
+							ctx.drawImage(image, (pos.x - size.width/2) * this.mapUnitScale, (pos.y - size.height/2) * this.mapUnitScale, size.width * this.mapUnitScale, size.height * this.mapUnitScale);
+
+							// draw label
+							drawTextWithBG(
+								ctx,
+								log.name,
+								"6px sans-serif",
+								pos.x * this.mapUnitScale,
+								((pos.y + (size.height/2)) * this.mapUnitScale),
+								log.themeColor,
+								2
+							)
 						}
 					}
 				}
@@ -408,53 +505,51 @@ export default defineComponent({
 			// queue next frame
 			requestAnimationFrame(this.draw);
 		},
-		drawSwitchtrack(ctx: CanvasRenderingContext2D, link: ISwitchtrackData, continuePath: boolean = false, offset: ISimplePoint = {x:0,y:0}) {
-			const nexus = this.findNexus(link._from as string);
-			const endNexus = this.findNexus(link.to);
+		drawSwitchtrack(ctx: CanvasRenderingContext2D, link: IDrawnSwitchtrack, continuePath: boolean = false, offset: ISimplePoint = {x:0,y:0}) {
 			ctx.save();
-			if (nexus && endNexus) {
-				const pointFrom = getLinkPoint(nexus, link.segmentFrom);
-				const pointTo = getLinkPoint(endNexus, link.segmentTo);
-				const startPoint = { x: (nexus.position.x + pointFrom.x) * this.mapUnitScale + offset.x, y: (nexus.position.y + pointFrom.y) * this.mapUnitScale + offset.y };
-				const endPoint = { x: (endNexus.position.x + pointTo.x) * this.mapUnitScale + offset.x, y: (endNexus.position.y + pointTo.y) * this.mapUnitScale + offset.y };
-				if (continuePath) {
-					ctx.lineTo(startPoint.x, startPoint.y);
-				} else {
-					ctx.fillStyle = ctx.strokeStyle = endNexus.color;
-					ctx.beginPath();
-					ctx.moveTo(startPoint.x, startPoint.y);
-				}
 
-				//#region actually draw the switchtrack link
-				if (link.controlPoint && link.controlPoint2) {
-					// draw curve with two control points
-					ctx.bezierCurveTo(
-						(nexus.position.x + link.controlPoint.x) * this.mapUnitScale + offset.x,
-						(nexus.position.y + link.controlPoint.y) * this.mapUnitScale + offset.y,
-						(nexus.position.x + link.controlPoint2.x) * this.mapUnitScale + offset.x,
-						(nexus.position.y + link.controlPoint2.y) * this.mapUnitScale + offset.y,
-						endPoint.x,
-						endPoint.y,
-					);
-				}
-				else if (link.controlPoint) {
-					// draw curve with one control points
-					ctx.quadraticCurveTo(
-						(nexus.position.x + link.controlPoint.x) * this.mapUnitScale + offset.x,
-						(nexus.position.y + link.controlPoint.y) * this.mapUnitScale + offset.y,
-						endPoint.x,
-						endPoint.y,
-					);
-				}
-				else {
-					// draw straight line
-					ctx.lineTo(endPoint.x, endPoint.y);
-				}
-				if (!continuePath) {
-					ctx.stroke();
-				}
-				//#endregion actually draw the switchtrack link
+			const startPoint = { x: link.startPoint.x * this.mapUnitScale + offset.x, y: link.startPoint.y * this.mapUnitScale + offset.y };
+			const endPoint = { x: link.endPoint.x * this.mapUnitScale + offset.x, y: link.endPoint.y * this.mapUnitScale + offset.y };
+
+			if (continuePath) {
+				ctx.lineTo(startPoint.x, startPoint.y);
+			} else {
+				ctx.fillStyle = ctx.strokeStyle = link.color || "#ddd";
+				ctx.beginPath();
+				ctx.moveTo(startPoint.x, startPoint.y);
 			}
+
+			//#region actually draw the switchtrack link
+			if (link.controlPoint && link.controlPoint2) {
+				// draw curve with two control points
+				ctx.bezierCurveTo(
+					(link.controlPoint.x * this.mapUnitScale) + offset.x,
+					(link.controlPoint.y * this.mapUnitScale) + offset.y,
+					link.controlPoint2.x * this.mapUnitScale + offset.x,
+					link.controlPoint2.y * this.mapUnitScale + offset.y,
+					endPoint.x,
+					endPoint.y,
+				);
+			}
+			else if (link.controlPoint) {
+				// draw curve with one control points
+				ctx.quadraticCurveTo(
+					link.controlPoint.x * this.mapUnitScale + offset.x,
+					link.controlPoint.y * this.mapUnitScale + offset.y,
+					endPoint.x,
+					endPoint.y,
+				);
+			}
+			else {
+				// draw straight line
+				ctx.lineTo(endPoint.x, endPoint.y);
+			}
+
+			if (!continuePath) {
+				ctx.stroke();
+			}
+			//#endregion actually draw the switchtrack link
+
 			ctx.restore();
 		},
 		findNexus(id: string): IWorldNexusData | undefined {
@@ -493,8 +588,8 @@ export default defineComponent({
 		},
 		/** Get the segment indexes of the switchtracks in a given nexus. */
 		getSwitchtrackIndexes(nexus: IWorldNexusData, drawnOnly: boolean = true): number[] {
-			const switchtracks = drawnOnly ? this.drawnSwitchtracks : this.data.switchtracks.all;
-			return switchtracks.reduce((acc: number[], curr: ISwitchtrackData) => {
+			const switchtracks = drawnOnly ? this.drawnSwitchtracks : this.dataSwitchtracksAll;
+			return switchtracks.reduce((acc: number[], curr: IDrawnSwitchtrack) => {
 				if (curr.to == nexus.id)
 					acc.push(curr.segmentTo);
 				else if (curr._from == nexus.id)
@@ -503,15 +598,15 @@ export default defineComponent({
 			}, []);
 		},
 		/** Get the segment indexes of the switchtracks in a given nexus. */
-		getSwitchtrack(nexusFrom: string, nexusTo: string, drawnOnly: boolean = true): ISwitchtrackData | undefined {
-			const switchtracks = drawnOnly ? this.drawnSwitchtracks : this.data.switchtracks.all;
+		getSwitchtrack(nexusFrom: string, nexusTo: string, drawnOnly: boolean = true): IDrawnSwitchtrack | undefined {
+			const switchtracks = drawnOnly ? this.drawnSwitchtracks : this.dataSwitchtracksAll;
 			return switchtracks.find(s => (s._from == nexusFrom && s.to == nexusTo) || (s._from == nexusTo && s.to == nexusFrom));
 		},
 		/** Check whether a nexus is unlocked. */
 		nexusUnlocked(nexus: IWorldNexusData): boolean {
 			let unlocked = false;
 			
-			if (this.data.switchtracks.unlocked.find(s => s.to == nexus.id)) {
+			if (this.dataSwitchtracksUnlocked.find(s => s.to == nexus.id)) {
 				return true;
 			}
 			
@@ -586,40 +681,6 @@ export default defineComponent({
 		// button.addEventListener('click', panzoom.zoomIn);
 		// elem.parentElement?.addEventListener('wheel', panzoom.zoomWithWheel);
 		elem.addEventListener('wheel', this.panzoom.zoomWithWheel);
-
-		this.worldPositions = [];
-		this.data.switchtracks.all = [];
-		this.$props.worldNexuses.forEach(nexus => {
-			nexus.points?.forEach(world => {
-				if (!world.worldId) {
-					return;
-				}
-
-				this.worldPositions.push({
-					x: nexus.position.x + world.x,
-					y: nexus.position.y + world.y,
-					worldId: world.worldId,
-					nexusId: nexus.id
-				});
-			});
-			nexus.links?.forEach((switchtrack, i) => {
-				this.data.switchtracks.all.push(
-					{
-						_from: nexus.id,
-						trackedNexus: switchtrack.trackedNexus || nexus.id,
-						unlockType: switchtrack.unlockType || 'half_anchors',
-						...switchtrack
-					}
-				);
-			});
-		});
-
-		this.data.switchtracks.unlocked = [];
-		this.data.switchtracks.all.forEach((s, i) => {
-			if (this.switchtrackUnlocked(s)) {
-				this.data.switchtracks.unlocked.push(s);
-			}
-		});
 
 		if (this.$props.useCanvas) {
 			const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;

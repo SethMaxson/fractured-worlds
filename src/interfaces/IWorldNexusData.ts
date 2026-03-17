@@ -16,10 +16,6 @@ export interface ISwitchtrackData {
 	controlPoint?: { x: number; y: number; };
 	/** A control point to render the switchtrack link as a cubic Bezier curve */
 	controlPoint2?: { x: number; y: number; };
-	/** The id of the starting nexus.
-	 * ONLY USED BY AUTOMATED PROCESSES.
-	 */
-	_from?: string;
 }
 
 /** The raw JSON data for a world nexus. */
