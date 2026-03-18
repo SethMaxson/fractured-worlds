@@ -512,6 +512,24 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Monster High",
+        id: "monster-high",
+        copy: {
+            description: [],
+            oneLiner: "",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+            status: "destroyed"
+        },
+        images: {
+            token: "img/worlds/blank.png",
+        },
+        people: { }
+    },
+    {
         name: "Moon",
         id: "moon",
         copy: {

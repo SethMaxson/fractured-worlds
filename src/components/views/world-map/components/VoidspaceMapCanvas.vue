@@ -2,7 +2,7 @@
 import Panzoom, { type PanzoomObject } from '@panzoom/panzoom'
 import ImageVue from "@/components/core/Image.vue";
 import { Utils } from "@/scripts/utils";
-import type { ISwitchtrackData, IWorldNexusData } from '@/interfaces/IWorldNexusData';
+import type { INexusPointData, ISwitchtrackData, IWorldNexusData } from '@/interfaces/IWorldNexusData';
 import { WorldDatas } from '@/data/world-datas';
 import { WorldNexusDatas } from "@/data/world-nexus-datas";
 import type { ITravelLogTimelineEvent, ITravelLog } from "@/interfaces/travel-log/ITravelLog";
@@ -27,14 +27,41 @@ import { GameStrings } from "@/scripts/game-strings";
                 class="position-relative w-100"
                 style="z-index: 0;"
                 :src="backgroundImage"
+				:key="'voidspace-map-background'+initialTimestamp"
             />
         </div>
     </div>
+	<div class="playback-controls bg-menu border border-black border-5 mx-lg-5 bg-dark-subtle" v-if="showPlaybackControls">
+		<div class="playback-controls-holder">
+			<button class="btn playback-button" @click="togglePlayPause">{{ state.paused ? 'Pause' : 'Play' }}</button>
+			<div class="col-md-6" style="display: inline-block;">
+				<!-- Need to turn this into a scrubbable progress bar -->
+				<div class="progress" role="progressbar" aria-label="Animated striped example" :aria-valuenow="state.progress" aria-valuemin="0" aria-valuemax="100">
+					<div class="progress-bar text-bg-info progress-bar-striped progress-bar-animated py-1 text-light" :style="{width: state.progress + '%'}">{{ Utils.Dates.Format.DMY(state.shownDate) }}</div>
+				</div>
+				<input type="range" name="progress" min="0" max="1" step="0.05" value="1" />
+			</div>
+		</div>
+		<div class="playback-controls-holder">
+			<div class="col-md-2" style="display: inline-block;">
+				<select class="form-select form-select-sm" name="playback-speed">
+					<option value="0.5">0.5</option>
+					<option value="0.75">0.75</option>
+					<option value="1" selected>Normal</option>
+					<option value="1.5">1.5</option>
+					<option value="2">2</option>
+				</select>
+			</div>
+			<button class="btn playback-button" title="Toggle Fullscreen">⛶</button>
+		</div>
+	</div>
+	<div id="images-for-canvas" style="display: none;"></div>
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import { CampaignState } from '@/data/campaign-state';
+import { Config } from '@/scripts/config';
 
 interface ISimplePoint { x: number, y: number };
 interface IWorldPositionEntry extends ISimplePoint {
@@ -44,6 +71,20 @@ interface IWorldPositionEntry extends ISimplePoint {
 
 interface ITravelerPosition extends ISimplePoint {
 	travelPathId: string;
+}
+
+interface IDrawnNexusPath {
+	pastTense?: boolean;
+	points: IDrawnNexusPathPoint[];
+}
+
+interface IDrawnNexusPathPoint extends ISimplePoint {
+	break?: boolean;
+}
+
+interface IDrawnNexus extends IWorldNexusData {
+	rawPoints: INexusPointData[];
+	paths: IDrawnNexusPath[];
 }
 
 interface IDrawnWorld extends ISimplePoint {
@@ -69,6 +110,10 @@ interface IDrawnSwitchtrack extends ISwitchtrackData {
 
 const worldTokenMultiplier = 2;
 const travelStopIconRadius = 4;
+/** Controls whether the video-esque controls are shown.
+ * TODO: deprecate
+ */
+const showPlaybackControls = Config.IsDebug;
 
 export default defineComponent({
 	name: 'VoidspaceMapCanvasComponent',
@@ -134,13 +179,12 @@ export default defineComponent({
 			mapUnitScale: this.$props.defaultUnitScale,
 			panzoom: undefined as unknown as PanzoomObject,
 			initialTimestamp: Date.now(),
-			data: {
-				
-			},
 			state: {
 				travelerPositions: [] as ITravelerPosition[],
 				paused: false,
 				shownDate: CampaignState.CurrentDate,
+				/** Not sure if this will be a percentage or a timestamp in the final draft. */
+				progress: 75,
 			},
 		}
 	},
@@ -186,15 +230,81 @@ export default defineComponent({
 			return this.dataSwitchtracksAll.filter(s => this.switchtrackUnlocked(s));
 		},
 		//#endregion computed base datasets
-		drawnNexuses() {
+		drawnNexuses(): IDrawnNexus[] {
 			// TODO: May eventually want to refine this to show the nexuses being unlocked during playback.
-			const validNexuses = this.$props.worldNexuses.filter(w => !!w.points);
-			return this.$props.drawAll ? validNexuses : validNexuses.filter(n => this.nexusUnlocked(n));
+			const validNexuses = this.nexuses.filter(w => !!w.points);
+			return (this.$props.drawAll ? validNexuses : validNexuses.filter(n => this.nexusUnlocked(n))).map(nexus => {
+				const {position, points} = nexus;
+				const paths: IDrawnNexusPath[] = [];
+				// handle dead worlds/nodes
+				if (nexus.rawPoints?.length) {
+					// prepare lines for drawing
+					let currentPath: IDrawnNexusPath = { points: [], pastTense: true };
+					nexus.rawPoints.forEach((pt, i) => {
+						let nextIndex = i + 1 < nexus.rawPoints.length ? i + 1 : 0;
+						let nextSegment = nexus.rawPoints[nextIndex];
+						let prevIndex = i - 1 < 0 ? nexus.rawPoints.length - 1 : i - 1;
+						let prevSegment = nexus.rawPoints[prevIndex];
+						const x = (position.x + pt.x);
+						const y = (position.y + pt.y);
+						const isConnected = (
+								(pt.worldId && this.prismKeyIDs.includes(pt.worldId))
+								|| this.getSwitchtrackIndexes(nexus).includes(i)
+							) || (nextSegment.worldId && this.prismKeyIDs.includes(nextSegment.worldId))
+							|| (prevSegment.worldId && this.prismKeyIDs.includes(prevSegment.worldId));
+						const isDestroyed = (pt.worldId && Utils.World.findWorld(WorldDatas, pt.worldId)?.details.status == 'destroyed')
+							|| (nextSegment.worldId && Utils.World.findWorld(WorldDatas, nextSegment.worldId)?.details.status == 'destroyed')
+							|| (prevSegment.worldId && Utils.World.findWorld(WorldDatas, prevSegment.worldId)?.details.status == 'destroyed');
+
+						if (isDestroyed) {
+							currentPath.points.push({ x, y, break: !isConnected });
+							// handle closing the nexus on the last index
+							if (i == nexus.rawPoints.length - 1 && isConnected) {
+								currentPath.points.push({ x: (position.x + nextSegment.x), y: (position.y + nextSegment.y) });
+							}
+						}
+					});
+					if (currentPath.points.length > 1) {
+						paths.push(currentPath);
+					}
+				}
+
+				// handle normal worlds/nodes
+				if (points?.length) {
+					// prepare lines for drawing
+					let currentPath: IDrawnNexusPath = { points: [] };
+					points.forEach((pt, i) => {
+						let nextIndex = i + 1 < points.length ? i + 1 : 0;
+						let nextSegment = points[nextIndex];
+						const x = (position.x + pt.x);
+						const y = (position.y + pt.y);
+						const isConnected = (pt.worldId && this.prismKeyIDs.includes(pt.worldId))
+							|| (this.getSwitchtrackIndexes(nexus).includes(i))
+							|| (nextSegment.worldId && this.prismKeyIDs.includes(nextSegment.worldId))
+						;
+
+						currentPath.points.push({ x, y, break: !isConnected });
+						// handle closing the nexus on the last index
+						if (i == points.length - 1 && isConnected) {
+							currentPath.points.push({ x: (position.x + nextSegment.x), y: (position.y + nextSegment.y) });
+						}
+					});
+					if (currentPath.points.length > 1) {
+						paths.push(currentPath);
+					}
+				}
+				return {
+					...nexus,
+					paths,
+				}
+			});
 		},
 		/** Get the switchtracks to be drawn */
 		drawnSwitchtracks(): IDrawnSwitchtrack[] {
 			return this.$props.drawAll ? this.dataSwitchtracksAll : this.dataSwitchtracksUnlocked;
 		},
+		/**
+		 * TODO: implement */
 		drawnTravelLogs() {
 
 
@@ -206,11 +316,11 @@ export default defineComponent({
 			this.drawnNexuses.forEach(nexus => {
 				const {position} = nexus;
 				const switchtracks = this.getSwitchtrackIndexes(nexus);
-				nexus.points?.forEach((pt, i) => {
-					if (!pt.worldId || pt.worldId.length == 0 || !nexus.points) {
+				nexus.rawPoints?.forEach((pt, i) => {
+					if (!pt.worldId || pt.worldId.length == 0 || !nexus.rawPoints) {
 						return;
 					}
-					const world = Utils.World.findWorld(WorldDatas, pt.worldId);					
+					const world = Utils.World.findWorld(WorldDatas, pt.worldId);
 					
 					// don't draw the world if it is invalid
 					if (!world || !world.images.token) return;
@@ -220,14 +330,18 @@ export default defineComponent({
 					// don't draw the world if it isn't known to the traveler
 					if ((!worldKnowledge && !this.$props.drawAll)) {
 						// Check if the world should be drawn due to bordering a known switchtrack
-						let leftSwitchtrackIndex = i - 1 < 0 ? nexus.points.length - 1 : i - 1;
+						let leftSwitchtrackIndex = i - 1 < 0 ? nexus.rawPoints.length - 1 : i - 1;
 						if (!switchtracks.includes(i) && !switchtracks.includes(leftSwitchtrackIndex)) {
 							return;
 						}
 					}
 
-					const noName = !worldKnowledge || worldKnowledge?.displayType == KnownWorldDisplayType.NoName || worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
-					const noIcon = !worldKnowledge || worldKnowledge?.displayType == KnownWorldDisplayType.NoIcon || worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
+					const noName = !worldKnowledge 
+						|| worldKnowledge?.displayType == KnownWorldDisplayType.NoName 
+						|| worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
+					const noIcon = !worldKnowledge 
+						|| worldKnowledge?.displayType == KnownWorldDisplayType.NoIcon 
+						|| worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
 
 					drawnWorlds.push({
 						id: world.id,
@@ -253,6 +367,19 @@ export default defineComponent({
 		 */
 		maximumPlaybackDate() {
 			return CampaignState.CurrentDate;
+		},
+		/** All the nexuses as IDrawnNexus objects */
+		nexuses(): IDrawnNexus[] {
+			return this.$props.worldNexuses.map(n => {
+				return {
+					...n,
+					rawPoints: n.points || [],
+					points: n.points?.filter(pt => !(pt.worldId && Utils.World.findWorld(WorldDatas, pt.worldId)?.details.status == 'destroyed')) || [],
+					//TODO: Finish this
+					segments: [],
+					paths: [],
+				}
+			});
 		},
 		/** List of unique prism keys owned by the current set of travelers */
 		prismKeyIDs(): string[] {
@@ -299,6 +426,8 @@ export default defineComponent({
 			const panZoomScale = this.panzoom?.getScale() || 1;
 			const rect = canvas.getBoundingClientRect();
 
+			const nexusOpacity = 0.9;
+
 			// Set the "actual" size of the canvas
 			canvas.width = rect.width * dpr;
 			canvas.height = rect.height * dpr;
@@ -311,61 +440,52 @@ export default defineComponent({
 			canvas.style.height = `${rect.height}px`;
 			//#endregion scale fix
 
-			ctx.globalAlpha = 0.6;
+			ctx.globalAlpha = nexusOpacity;
 			ctx.lineWidth = 3;
 			ctx.lineJoin = ctx.lineCap = "round";
 
 			//#region draw switchtracks
 			ctx.save();
+			ctx.lineWidth = 2;
 			this.drawnSwitchtracks.forEach((link, i) => {
 				this.drawSwitchtrack(ctx, link);
 			});
 			ctx.restore();
 			//#endregion draw switchtracks
 
-			//#region Draw nexuses
+			//#region Draw nexus paths
 			this.drawnNexuses.forEach((nexus, i) => {
 				ctx.fillStyle = ctx.strokeStyle = nexus.color;
-				const {position, points} = nexus;
-				if (points?.length) {
-					// draw lines
+				ctx.save();
+				nexus.paths.forEach(path => {
+					ctx.globalAlpha = path.pastTense ? 0.4 : nexusOpacity;
+					ctx.lineWidth = path.pastTense ? 2 : 3;
+					let color = path.pastTense ? shadeColor(nexus.color, -20) : nexus.color;
+					ctx.fillStyle = ctx.strokeStyle = color;
 					ctx.beginPath();
 					let penDown = false;
-					points.forEach((pt, i) => {
-						let nextIndex = i + 1 < points.length ? i + 1 : 0;
-						let nextSegment = points[nextIndex];
-						if (
-							(pt.worldId && this.prismKeyIDs.includes(pt.worldId)) ||
-							(nextSegment.worldId && this.prismKeyIDs.includes(nextSegment.worldId)) ||
-							(this.getSwitchtrackIndexes(nexus).includes(i))
-						) {
-							const x = (position.x + pt.x) * this.mapUnitScale;
-							const y = (position.y + pt.y) * this.mapUnitScale;
 
-							if (!penDown) {
-								ctx.moveTo(x, y);
-								penDown = true;
-							}
-							ctx.lineTo(
-								(position.x + nextSegment.x) * this.mapUnitScale,
-								(position.y + nextSegment.y) * this.mapUnitScale
-							)
+					path.points.forEach(pt => {
+						const x = pt.x * this.mapUnitScale;
+						const y = pt.y * this.mapUnitScale;
+
+						if (!penDown) {
+							ctx.moveTo( x, y );
+							penDown = true;
 						}
 						else {
+							ctx.lineTo( x, y );
+						}
+						if (pt.break) {
 							penDown = false;
 						}
 					});
+					
 					ctx.stroke();
-				}
-
-				// draw label
-				ctx.globalAlpha = 0.8;
-				ctx.fillStyle = ctx.strokeStyle = nexus.color;
-				ctx.font = "italic 8px serif";
-				ctx.textAlign = 'center';
-				ctx.fillText(`${Utils.String.capitalize(nexus.id)} Nexus`, position.x * this.mapUnitScale, (position.y * this.mapUnitScale) + 4); // '+ 4' because it is half of the current font size.
+				});
+				ctx.restore();
 			});
-			//#endregion Draw nexuses
+			//#endregion Draw nexus paths
 
 			//#region draw worlds
 			ctx.save();
@@ -413,19 +533,19 @@ export default defineComponent({
 					);
 					
 					// dashed lines
-					let lastNexus = '';
+					let previousNexus = '';
 					stops.forEach((stop, i) => {
 						const position = this.worldPositions.find(w => w.worldId == stop.locationId);
 						// no need to handle the first stop
 						if (i == 0) {
-							lastNexus = position?.nexusId || '';
+							previousNexus = position?.nexusId || '';
 							return;
 						}
 
 						if (stop.eventType == 'world' && position) {
 							// Check if we need to draw a path across a switchtrack before the current world
-							if (!stop.fastTravel && stop.accessMethod == 'lightship' && lastNexus != '' && lastNexus != position?.nexusId) {
-								const switchtrack = this.getSwitchtrack(lastNexus, position.nexusId, false);
+							if (!stop.fastTravel && stop.accessMethod == 'lightship' && previousNexus != '' && previousNexus != position?.nexusId) {
+								const switchtrack = this.getSwitchtrack(previousNexus, position.nexusId, false);
 								if (switchtrack) {
 									this.drawSwitchtrack(ctx, switchtrack, true, {x:-5, y:yOffset});
 								}
@@ -438,7 +558,7 @@ export default defineComponent({
 						// if (i-1 == stops.length && log.token && position) {
 						// 	ctx.drawImage(log.token, position.x * this.mapUnitScale, position.y * this.mapUnitScale, this.mapUnitScale, this.mapUnitScale);
 						// }
-						lastNexus = position?.nexusId || lastNexus;
+						previousNexus = position?.nexusId || previousNexus;
 					});
 					ctx.stroke();
 
@@ -502,6 +622,23 @@ export default defineComponent({
 			ctx.restore();
 			//#endregion Draw travel paths
 
+			//#region Draw nexus labels
+			this.drawnNexuses.forEach((nexus) => {
+				// draw label
+				ctx.save();
+				ctx.fillStyle = nexus.color;
+				ctx.strokeStyle = '#000';
+				ctx.lineWidth = 3;
+				ctx.font = "italic 10px serif";
+				ctx.textAlign = 'center';
+				ctx.globalAlpha = 0.9;
+				ctx.strokeText(`${Utils.String.capitalize(nexus.id)} Nexus`, nexus.position.x * this.mapUnitScale, (nexus.position.y * this.mapUnitScale) + 5); // '+ 5' because it is half of the current font size.
+				ctx.globalAlpha = 1;
+				ctx.fillText(`${Utils.String.capitalize(nexus.id)} Nexus`, nexus.position.x * this.mapUnitScale, (nexus.position.y * this.mapUnitScale) + 5); // '+ 5' because it is half of the current font size.
+				ctx.restore();
+			});
+			//#endregion Draw nexus labels
+
 			// queue next frame
 			requestAnimationFrame(this.draw);
 		},
@@ -552,8 +689,8 @@ export default defineComponent({
 
 			ctx.restore();
 		},
-		findNexus(id: string): IWorldNexusData | undefined {
-			return this.$props.worldNexuses.find(n => n.id == id);
+		findNexus(id: string): IDrawnNexus | undefined {
+			return this.nexuses.find(n => n.id == id);
 		},
 		/** Get the current position of the traveler from the given log */
 		getTravelerPosition(log: ITravelLog): ISimplePoint {
@@ -579,9 +716,10 @@ export default defineComponent({
 			else {
 				image = new Image(this.mapUnitScale, this.mapUnitScale); // Using optional size for image
 				image.id = id;
-				
 				image.src = src;
-				document.body.append(image);
+
+				const imgContainer = document.getElementById("images-for-canvas");
+				(imgContainer ? imgContainer : document.body).append(image);
 				image.style.display = 'none';
 			}
 			return undefined;
@@ -641,6 +779,9 @@ export default defineComponent({
 			}
 
 			return unlocked;
+		},
+		togglePlayPause() {
+			this.state.paused = !this.state.paused;
 		},
 		countPrismKeysFromNexus(nexus: IWorldNexusData): number {
 			let count = 0;

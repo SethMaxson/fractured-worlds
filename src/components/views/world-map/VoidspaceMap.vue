@@ -44,6 +44,7 @@ onBeforeUnmount(() => {
 		<main class="px-lg-5">
 			<!-- background-image="img/voidspace.png" -->
 			<VoidspaceMapCanvas
+				:background-image="Config.IsDebug ? 'img/maps/voidspace.png' : 'img/voidspace.png'"
 				:map-height-in-units="29"
 				:map-width-in-units="34"
 				:world-nexuses="worldNexuses"

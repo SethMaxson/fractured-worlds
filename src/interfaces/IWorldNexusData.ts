@@ -1,3 +1,9 @@
+export interface INexusPointData {
+	x: number;
+	y: number;
+	worldId?: string;
+}
+
 /** The data for a switchtrack that links two world nexuses. */
 export interface ISwitchtrackData {
 	/** The id of the linked nexus */
@@ -27,6 +33,6 @@ export interface IWorldNexusData {
 	/** HTML hex code to use for the color of this nexus. */
 	color: string;
 	position: { x: number; y: number; };
-	points?: { x: number; y: number; worldId?: string; }[];
+	points?: INexusPointData[];
 	links?: ISwitchtrackData[];
 }

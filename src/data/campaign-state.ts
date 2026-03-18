@@ -34,6 +34,7 @@ export class CampaignState {
 			{ worldId: "tokyo",				explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoName },
 			{ worldId: "nyc-89",			explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoName },
 			{ worldId: "moon",				explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoNameOrIcon },
+			{ worldId: "monster-high",		explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoNameOrIcon },
 		];
 	}
 	//#endregion Progress
