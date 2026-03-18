@@ -290,7 +290,7 @@ export const WorldDatas: IWorldData[] = [
         name: "Dallas, TX",
         id: "dallas-shaolin",
         copy: {
-            description: ["A world with two surviving pieces that are still connected by a dreamlike path: massive city under the thumb of an evil oil baron, and a secluded shaolin temple."],
+            description: ["A world with two surviving pieces that are still connected by a dreamlike path: a massive city under the thumb of an evil oil baron, and a secluded shaolin temple."],
             oneLiner: "A world where martial artists play soccer.",
             quote: "I'm not here to fight. I'm here to play soccer!",
         },

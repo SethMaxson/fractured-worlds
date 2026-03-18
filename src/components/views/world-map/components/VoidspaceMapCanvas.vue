@@ -444,6 +444,52 @@ export default defineComponent({
 			ctx.lineWidth = 3;
 			ctx.lineJoin = ctx.lineCap = "round";
 
+			//#region draw legend boxes
+			const legendBox = {
+				width: 5 * this.mapUnitScale,
+				height: 5 * this.mapUnitScale,
+				pad: 8,
+			};
+			ctx.save();
+			ctx.lineJoin = 'miter';
+			ctx.globalAlpha = 0.95;
+			ctx.lineWidth = 2;
+			ctx.fillStyle = "#393838";
+			ctx.strokeStyle = shadeColor(ctx.fillStyle, 50);
+			
+			const lb1 = {
+				x: 0,
+				y: 0,
+			};
+			const lb2 = {
+				x: this.mapWidthInUnits * this.mapUnitScale - legendBox.width,
+				y: 0,
+			};
+
+			// draw legend backgrounds
+			// legend
+			ctx.fillRect(lb1.x, lb1.y, legendBox.width, legendBox.height);
+			ctx.strokeRect(lb1.x, lb1.y, legendBox.width, legendBox.height);
+			// area for known worlds with unknown locations
+			ctx.fillRect(lb2.x, lb2.y, legendBox.width, legendBox.height);
+			ctx.strokeRect(lb2.x, lb2.y, legendBox.width, legendBox.height);
+
+			// draw the text content
+			ctx.fillStyle = "#ddd";
+			ctx.textAlign = 'left';
+			ctx.textBaseline = 'top';
+			ctx.globalAlpha = 1;
+			
+			// headers
+			ctx.font = "14px sans-serif";
+			ctx.fillText("Legend", lb1.x + legendBox.pad, lb1.y + legendBox.pad);
+			ctx.font = "12px sans-serif";
+			ctx.fillText("Location Unknown", lb2.x + legendBox.pad, lb2.y + legendBox.pad);
+
+			// restore ctx settings
+			ctx.restore();
+			//#endregion draw legend boxes
+
 			//#region draw switchtracks
 			ctx.save();
 			ctx.lineWidth = 2;
@@ -692,12 +738,6 @@ export default defineComponent({
 		findNexus(id: string): IDrawnNexus | undefined {
 			return this.nexuses.find(n => n.id == id);
 		},
-		/** Get the current position of the traveler from the given log */
-		getTravelerPosition(log: ITravelLog): ISimplePoint {
-			const locationId = log.history[log.history.length-1].locationId;
-			const worldPosition = locationId ? this.worldPositions.find(w => w.worldId == locationId) : undefined;
-			return worldPosition ? {x:worldPosition.x, y:worldPosition.y} : {x: 0, y:0};
-		},
 		getImageElement(id: string, src: string) {
 			let image = document.getElementById(id) as HTMLImageElement|undefined;
 
@@ -739,6 +779,12 @@ export default defineComponent({
 		getSwitchtrack(nexusFrom: string, nexusTo: string, drawnOnly: boolean = true): IDrawnSwitchtrack | undefined {
 			const switchtracks = drawnOnly ? this.drawnSwitchtracks : this.dataSwitchtracksAll;
 			return switchtracks.find(s => (s._from == nexusFrom && s.to == nexusTo) || (s._from == nexusTo && s.to == nexusFrom));
+		},
+		/** Get the current position of the traveler from the given log */
+		getTravelerPosition(log: ITravelLog): ISimplePoint {
+			const locationId = log.history[log.history.length-1].locationId;
+			const worldPosition = locationId ? this.worldPositions.find(w => w.worldId == locationId) : undefined;
+			return worldPosition ? {x:worldPosition.x, y:worldPosition.y} : {x: 0, y:0};
 		},
 		/** Check whether a nexus is unlocked. */
 		nexusUnlocked(nexus: IWorldNexusData): boolean {
