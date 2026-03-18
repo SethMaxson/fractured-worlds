@@ -576,16 +576,24 @@ const timelineEvents: ITimelineEvent[] = [
 	},
 	{
 		date: { year: 1, month: 12, day: 22 },
+		endDate: { year: 2, month: 1, day: 12 },
 		isMajor: true,
 		// event: "We reached Duloc.",
 		extra: [
 			{ name: "reached Sanctuary", type: "world" },
 			{ name: "Christmas", type: "holiday" },
 			{ name: "Li'l Phil swapped bodies with Nibble", type: "mystery" },
-			{ name: "Tero became engaged to Cade", type: "love" },
+			{ name: "Tero married Cade", type: "love" },
+			{ name: "Li'l Phil recovered his original body", type: "mystery" },
 		],
 		header: "Sanctuary",
 		type: "world-special"
+	},
+	{
+		date: { year: 2, month: 1, day: 15 },
+		isMajor: true,
+		header: "The Suburbs",
+		type: "world"
 	},
 	{
 		date: { year: 2, month: 1, day: 23 },

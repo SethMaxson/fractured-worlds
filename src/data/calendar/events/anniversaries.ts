@@ -50,6 +50,7 @@ export const Anniversaries = [
     ] as ICalendarEvent[],
     // December
     [
+        { day: 28, name: "Tero and Cade Brightcloak", definition: [] },
         
     ] as ICalendarEvent[]
 ];
