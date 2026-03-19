@@ -1041,10 +1041,10 @@ function drawTextWithBG(ctx: CanvasRenderingContext2D, txt: string, font: string
     // draw background rect assuming height of font
 	const fontHeight = parseInt(font, 10);
     const width = ctx.measureText(txt).width;
-    // ctx.fillRect(x - width/2 - padding, y - fontHeight/2 - padding, width + 2*padding, fontHeight + 2*padding);
-	ctx.beginPath();
-    ctx.roundRect(x - width/2 - padding, y - fontHeight/2 - padding, width + 2*padding, fontHeight + 2*padding, 5);
-	ctx.fill();
+    ctx.fillRect(x - width/2 - padding, y - fontHeight/2 - padding, width + 2*padding, fontHeight + 2*padding);
+	// ctx.beginPath();
+    // ctx.roundRect(x - width/2 - padding, y - fontHeight/2 - padding, width + 2*padding, fontHeight + 2*padding, 5);
+	// ctx.fill();
 
     // draw text on top
     ctx.fillStyle = color;
