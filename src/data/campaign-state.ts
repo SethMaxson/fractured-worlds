@@ -25,7 +25,7 @@ export class CampaignState {
 			{ worldId: "moon",				explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoNameOrIcon },
 			{ worldId: "neon-coast", 		explorationState: es.Visited, 		prismKey: false, worldAnchor: false, displayType: dt.Full },
 			{ worldId: "nyc-89",			explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoName },
-			{ worldId: "oasis",				explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.Full,		unknownLocation: true },
+			{ worldId: "oasis",				explorationState: es.Visited,		prismKey: false, worldAnchor: false, displayType: dt.Full,		unknownLocation: true },
 			{ worldId: "sanctuary", 		explorationState: es.Visited, 		prismKey: true,  worldAnchor: true,  displayType: dt.Full },
 			{ worldId: 'somewhere', 		explorationState: es.Visited, 		prismKey: true,  worldAnchor: false, displayType: dt.Full },
 			{ worldId: "suburbs",			explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.Full },
@@ -36,7 +36,7 @@ export class CampaignState {
 			{ worldId: "weapon-world", 		explorationState: es.Visited, 		prismKey: true,  worldAnchor: true,  displayType: dt.Full },
 			{ worldId: "wonderland", 		explorationState: es.Visited, 		prismKey: true,  worldAnchor: true,  displayType: dt.Full },
 			{ worldId: "wubbulous-world",	explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.NoName },
-			{ worldId: "zootopia",			explorationState: es.Discovered,	prismKey: false, worldAnchor: false, displayType: dt.Full,		unknownLocation: true },
+			{ worldId: "zootopia",			explorationState: es.Visited,		prismKey: false, worldAnchor: false, displayType: dt.Full,		unknownLocation: true },
 		];
 	}
 	//#endregion Progress

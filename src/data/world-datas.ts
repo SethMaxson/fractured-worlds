@@ -644,9 +644,9 @@ export const WorldDatas: IWorldData[] = [
         name: "The Oasis",
         id: "oasis",
         copy: {
-            description: [ "" ],
-            oneLiner: "",
-            quote: "",
+            description: [ "A wretched hive of scum and villainy" ],
+            oneLiner: "A jazz lounge that serves as the Rebirth Caucus' HQ.",
+            quote: "A whole new world.",
         },
         details: {
             anchor: "",
@@ -962,7 +962,7 @@ export const WorldDatas: IWorldData[] = [
             timeType: "resting",
         },
         images: {
-            token: "img/worlds/blank.png",
+            token: "img/worlds/zootopia.png",
         },
         people: {
             

@@ -39,8 +39,10 @@ function getRowWeightRange(row: IRandomTableEntry): string {
 		<table class="random-table table table-striped table-sm">
 			<caption class="ps-2 caption-top fw-bold" v-if="name.length > 0">{{ name }}</caption>
 			<thead>
-				<th scope="col" class="ps-2">1d{{ diceSize }}</th>
-				<th scope="col">Result</th>
+				<tr>
+					<th scope="col" class="ps-2">1d{{ diceSize }}</th>
+					<th scope="col">Result</th>
+				</tr>
 			</thead>
 			<tbody class="table-group-divider">
 				<tr v-for="row, i in rows">

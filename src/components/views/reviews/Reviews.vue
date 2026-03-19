@@ -36,7 +36,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 
 
             <div>
-                <p class="d-flex justify-content-between align-items-start p-2 flex-column flex-lg-row border-bottom summary">
+                <div class="d-flex justify-content-between align-items-start p-2 flex-column flex-lg-row border-bottom summary">
                     <div class="order-3 order-lg-1">
                         <span class="fw-bold">Overall rating: </span>
                         <span v-if="listReviews.length > 0">
@@ -84,7 +84,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 					</div> -->
 
 
-                </p>
+                </div>
             </div>
 			<!-- The reviews are shown here -->
             <div>
@@ -107,7 +107,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 								</small>
 							</div>
 						</div>
-						<p class="ps-3 ps-lg-4">
+						<div class="ps-3 ps-lg-4 pb-3">
 							<div v-if="review.text" v-html="cleanText(review.text)"></div>
 							<div v-if="review.edits">
 								<div class="edit pt-1" v-for="edit in review.edits">
@@ -119,7 +119,7 @@ import PageContainerVue from "@/components/core/PageContainer.vue";
 								<small v-if="review.date">Written on {{ review.date }}.</small>
 								<small class="ms-2" v-if="review.lastEdit">Last edit on {{ review.lastEdit }}.</small>
 							</div>
-						</p>
+						</div>
 					</li>
 
 				</ul>
