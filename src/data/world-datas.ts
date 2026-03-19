@@ -1,7 +1,7 @@
 import type { IWorldData } from "@/interfaces/IWorldData";
 
 /** Used to create a standardized set of world profiles that can be accessed from any page.
- * Some records contain information that is not yet known to the players, which is currently commented out.
+ * Some records contain information that is not yet known to the players.
  * TODO: Finish migrating the hardcoded data in world pages into this array.
  */
 export const WorldDatas: IWorldData[] = [
@@ -34,6 +34,48 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Agrabah",
+        id: "agrabah",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "A fool off his guard could fall and fall hard.",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/agrabah.png",
+        },
+        people: {
+            allies: "Aladdin, Abu, Jasmine",
+            pureSoul: "Jasmine",
+        }
+    },
+    {
+        name: "Ant Island",
+        id: "ant-island",
+        copy: {
+            description: ["A world of bugs."],
+            oneLiner: "A world of bugs.",
+            quote: "It's a bug-eat-bug world out there.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/ant_island.png",
+        },
+        people: {
+            allies: "Flik, x",
+            pureSoul: "Dot?",
+        }
+    },
+    {
         name: "Barbieland",
         id: "barbieland",
         copy: {
@@ -48,6 +90,9 @@ export const WorldDatas: IWorldData[] = [
         },
         images: {
             token: "img/worlds/barbieland.png",
+        },
+        meta: {
+            themeColor: "#DA1884"
         },
         people: {
             pureSoul: "Skipper",
@@ -122,6 +167,26 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Bikini Bottom",
+        id: "bikini-bottom",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "If nautical nonsense be something ye wish...",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/bikini_bottom.png",
+        },
+        people: {
+            
+        }
+    },
+    {
         name: "Stone-bound Storybook (Blue's House)",
         id: "blues-house",
         copy: {
@@ -142,10 +207,93 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Camp Halfblood",
+        id: "camp-halfblood",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/camp-halfblood.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Candy World",
+        id: "candy-world",
+        copy: {
+            description: [
+                ""
+            ],
+            oneLiner: "",
+            quote: "",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+            isHub: true,
+        },
+        images: {
+            token: "img/worlds/candy_world.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Chocolate Factory",
+        id: "chocolate-factory",
+        copy: {
+            description: ["A mysterious chocolate factory run by a hermit."],
+            oneLiner: "A mysterious chocolate factory run by a hermit.",
+            quote: "Come with me, and you'll be in a world of pure imagination.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/wonka.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Coolsville",
+        id: "coolsville",
+        copy: {
+            description: ["The most haunted city on Earth."],
+            oneLiner: "The most haunted city on Earth.",
+            quote: "If we can count on you... I know we'll catch that villain.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/coolsville.png",
+        },
+        people: {
+            
+        }
+    },
+    {
         name: "Dallas, TX",
         id: "dallas-shaolin",
         copy: {
-            description: ["A world with two surviving pieces that are still connected by a dreamlike path: massive city under the thumb of an evil oil baron, and a secluded shaolin temple."],
+            description: ["A world with two surviving pieces that are still connected by a dreamlike path: a massive city under the thumb of an evil oil baron, and a secluded shaolin temple."],
             oneLiner: "A world where martial artists play soccer.",
             quote: "I'm not here to fight. I'm here to play soccer!",
         },
@@ -155,10 +303,10 @@ export const WorldDatas: IWorldData[] = [
             timeType: "resting",
         },
         images: {
-            token: "img/worlds/dallas.png",
+            token: "img/worlds/shaolin_soccer.png",
         },
         people: {
-
+            allies: "Golden Leg Fung"
         }
     },
     {
@@ -180,6 +328,87 @@ export const WorldDatas: IWorldData[] = [
         people: {
             allies: "Shrek, Donkey, Fiona",
             pureSoul: "Donkey",
+        }
+    },
+    {
+        name: "Gotham City",
+        id: "gotham",
+        copy: {
+            description: ["A crumbling metropolis whose shadowy alleys house more criminals per capita than anywhere else on Earth."],
+            oneLiner: "A crime-ridden metropolis.",
+            quote: "It's not who you are underneath, but what you do that defines you.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/gotham.png",
+        },
+        people: {
+            allies: "Batman",
+        }
+    },
+    {
+        name: "Haven",
+        id: "haven",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "Obey.",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "standard",
+            isHub: true,
+        },
+        images: {
+            token: "img/worlds/haven.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Hyrule",
+        id: "hyrule",
+        copy: {
+            description: ["A kingdom beset by an ancient curse."],
+            oneLiner: "A kingdom beset by an ancient curse.",
+            quote: "A sword wields no strength unless the hand that holds it has courage.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/hyrule.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Jade Palace",
+        id: "jade-palace",
+        copy: {
+            description: ["An ancient temple, home to kung fu masters."],
+            oneLiner: "An ancient temple, home to kung fu masters.",
+            quote: "One often meets his destiny on the road he takes to avoid it.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/jade_palace.png",
+        },
+        people: {
+            
         }
     },
     {
@@ -224,6 +453,28 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "LEGO City",
+        id: "lego-city",
+        copy: {
+            description: [
+                ""
+            ],
+            oneLiner: "",
+            quote: "",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/lego_city.png",
+        },
+        people: {
+            
+        }
+    },
+    {
         name: "Looney Tune Land",
         id: "looney-tune-land",
         copy: {
@@ -241,6 +492,64 @@ export const WorldDatas: IWorldData[] = [
         },
         people: {
             pureSoul: "Tweety",
+        }
+    },
+    {
+        name: "Master of Disguise",
+        id: "master-of-disguise",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "Hiding right in front of your eyes.",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/master-of-disguise.png",
+        },
+        people: {
+            allies: "Pistachio Disguise"
+        }
+    },
+    {
+        name: "Monster High",
+        id: "monster-high",
+        copy: {
+            description: [],
+            oneLiner: "",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+            status: "destroyed"
+        },
+        images: {
+            token: "img/worlds/blank.png",
+        },
+        people: { }
+    },
+    {
+        name: "Moon",
+        id: "moon",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "That's no moon.",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/moon.png",
+        },
+        people: {
+            
         }
     },
     {
@@ -269,6 +578,89 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Resistance HQ",
+        id: "neon-coast-2",
+        copy: {
+            description: [
+                "A variant <Location>Earth</Location> at some point in the 2100s. Humans invented advanced androids to serve them, but these androids develop free will over time. Such androids are said to be 'hallucinating' and are destroyed."
+            ],
+            oneLiner: "An Earth with advanced androids who live under the thumb of humans.",
+            quote: "Synths are just machines. They don't have Vapors.",
+        },
+        details: {
+            anchor: "",
+            disguise: "Advanced androids and futuristic humans",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/neon_coast.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "NYC '89",
+        id: "nyc-89",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "I ain't 'fraid of no ghost.",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/ghostbusters.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "NYC 2002",
+        id: "nyc-2002",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "With great power comes great responsibility.",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/big_apple.png",
+        },
+        people: {
+            allies: "Spider-Man"
+        }
+    },
+    {
+        name: "The Oasis",
+        id: "oasis",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "standard",
+        },
+        images: {
+            token: "img/worlds/oasis.png",
+        },
+        people: {
+            
+        }
+    },
+    {
         name: "Sanctuary",
         id: "sanctuary",
         copy: {
@@ -284,6 +676,69 @@ export const WorldDatas: IWorldData[] = [
         },
         images: {
             token: "img/worlds/sanctuary.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Strawberry Land",
+        id: "strawberryland",
+        copy: {
+            description: ["A land of sweet desserts and the people who make them."],
+            oneLiner: "A land of sweet desserts and the people who make them.",
+            quote: "Feeling fine, doing better all the time.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/strawberryland.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "The Suburbs",
+        id: "suburbs",
+        copy: {
+            description: ["Sprawling, perfect suburbs built over what was once a peaceful forest."],
+            oneLiner: "Sprawling suburbs built over a peaceful forest.",
+            quote: "We all ride for nothing, 'cause this train never stops.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/over_the_hedge.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Synth City",
+        id: "neon-coast-3",
+        copy: {
+            description: [
+                "A variant <Location>Earth</Location> at some point in the 2100s. Humans invented advanced androids to serve them, but these androids develop free will over time. Such androids are said to be 'hallucinating' and are destroyed."
+            ],
+            oneLiner: "An Earth with advanced androids who live under the thumb of humans.",
+            quote: "Synths are just machines. They don't have Vapors.",
+        },
+        details: {
+            anchor: "",
+            disguise: "Advanced androids and futuristic humans",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/neon_coast.png",
         },
         people: {
             
@@ -310,6 +765,27 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Sunnyside Daycare",
+        id: "toy-story",
+        copy: {
+            description: ["A world of living toys."],
+            oneLiner: "A world of living toys.",
+            quote: "You've got a friend in me.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: ["Barbieland", "LEGO City"],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/andys_room.png",
+        },
+        people: {
+            allies: "Woody, Buzz Lightyear",
+            pureSoul: "Andy",
+        }
+    },
+    {
         name: "Transylvania",
         id: "transylvania",
         copy: {
@@ -332,6 +808,47 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Treasure Island",
+        id: "treasure-island",
+        copy: {
+            description: ["An island filled with peril, pirates, and pigs."],
+            oneLiner: "An island filled with peril, pirates, and pigs.",
+            quote: "Sailing for adventure on the big blue wet thing.",
+        },
+        details: {
+            anchor: "Captain Flint's treasure horde",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/muppet_treasure_island.png",
+        },
+        people: {
+            allies: "Jim Hawkins, Gonzo, Rizzo, Captain Smollett",
+            pureSoul: "Jim Hawkins",
+        }
+    },
+    {
+        name: "Unicornucopia",
+        id: "unicornucopia",
+        copy: {
+            description: [ "A world of prismatic horse-folk." ],
+            oneLiner: "A world of prismatic horse-folk.",
+            quote: "Be the party you want to see in the world.",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/unicornucopia.png",
+        },
+        people: {
+            
+        }
+    },
+    {
         name: "Weapon World",
         id: "weapon-world",
         copy: {
@@ -343,11 +860,32 @@ export const WorldDatas: IWorldData[] = [
             anchor: "gated courtyard",
             kindredWorlds: ["???"],
             timeType: "standard",
+            isHub: true
         },
         images: {
             token: "img/worlds/shibuya.png",
         },
         people: { }
+    },
+    {
+        name: "The Wild West",
+        id: "wild-west",
+        copy: {
+            description: ["Wide open spaces."],
+            oneLiner: "Wide open spaces.",
+            quote: "placeholder",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/wild_west.png",
+        },
+        people: {
+            nleAgent: "airen"
+        }
     },
     {
         name: "Wonderland",
@@ -368,6 +906,46 @@ export const WorldDatas: IWorldData[] = [
         },
         people: {
             pureSoul: "Alice",
+        }
+    },
+    {
+        name: "Wubbulous World",
+        id: "wubbulous-world",
+        copy: {
+            description: [ "" ],
+            oneLiner: "",
+            quote: "Buzz into a bubble.",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/seussland.png",
+        },
+        people: {
+            
+        }
+    },
+    {
+        name: "Yharnam",
+        id: "yharnam",
+        copy: {
+            description: ["A city overrun with beasts."],
+            oneLiner: "A city overrun with beasts.",
+            quote: "Fear the old blood.",
+        },
+        details: {
+            anchor: "?",
+            kindredWorlds: [],
+            timeType: "resting",
+        },
+        images: {
+            token: "img/worlds/yharnam.png",
+        },
+        people: {
+            
         }
     },
     {

@@ -15,6 +15,29 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 			{ x: 3, y: 0.5, worldId: 'big-apple' },
 			{ x: -0.5, y: 2, worldId: 'duloc' },
 			{ x: -3, y: -0.5, worldId: 'somewhere' }
+		],
+		links: [
+			{
+				to: 'green',
+				segmentFrom: 1,
+				segmentTo: 4,
+				controlPoint: { x: 5 , y: 2 },
+				unlockType: 'half_anchors',
+				trackedNexus: 'violet'
+			},
+			{
+				to: 'violet',
+				segmentFrom: 3,
+				segmentTo: 2,
+				controlPoint: { x: -5 , y: -3 },
+				controlPoint2: { x: -4 , y: -7 }
+			},
+			{
+				to: 'royal',
+				segmentFrom: 0,
+				segmentTo: 2,
+				unlockType: 'all_anchors',
+			}
 		]
 	},
 	{
@@ -26,6 +49,9 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 			{ x: 3, y: 0.5, worldId: 'tokyo' },
 			{ x: -0.5, y: 2, worldId: 'land-of-oz' },
 			{ x: -3, y: -0.5, worldId: 'neon-coast' }
+		],
+		links: [
+			
 		]
 	},
 	{
@@ -35,19 +61,33 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 		points: [
 			{ x: 0.5, y: -2.25, worldId: 'coolsville' },
 			{ x: 2.5, y: -0.5, worldId: 'bikini-bottom' },
-			{ x: 1, y: 2.25, worldId: 'gotham-city' },
+			{ x: 1, y: 2.25, worldId: 'gotham' },
 			{ x: -2.5, y: 1.75, worldId: 'agrabah' },
-			{ x: -2.5, y: -1.25, worldId: 'andys-room' }
+			{ x: -2.5, y: -1.25, worldId: 'toy-story' }
+		],
+		links: [
+			{
+				to: 'magenta',
+				segmentFrom: 0,
+				segmentTo: 1
+			}
 		]
 	},
 	{
 		id: "magenta",
 		color: "#eb8aff",
-		position: { x: 16, y: 19 },
+		position: { x: 15.5, y: 19.25 },
 		points: [
-			{ x: 0.5, y: -1.5, worldId: 'death-star' },
-			{ x: 1, y: 2, worldId: 'nyc-89' },
-			{ x: -2.5, y: 0.5, worldId: 'battle-world' }
+			{ x: 1, y: -1.75, worldId: 'moon' },
+			{ x: 1.5, y: 1.75, worldId: 'nyc-89' },
+			{ x: -2, y: 0.25, worldId: 'battle-world' }
+		],
+		links: [
+			{
+				to: 'red',
+				segmentFrom: 0,
+				segmentTo: 2
+			}
 		]
 	},
 	{
@@ -56,9 +96,17 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 		position: { x: 23.5, y: 19 },
 		points: [
 			{ x: 0.25, y: -2.25, worldId: 'jurassic-park' },
-			{ x: 3, y: 0.25, worldId: 'sanctuary' },
+			{ x: 2.75, y: 0, worldId: 'sanctuary' },
 			{ x: -0.25, y: 2.25, worldId: 'suburbs' },
-			{ x: -3, y: -0.25, worldId: 'wubulous-world' }
+			{ x: -2.75, y: -0.25, worldId: 'wubbulous-world' }
+		],
+		links: [
+			{
+				to: 'yellow',
+				segmentFrom: 0,
+				segmentTo: 0,
+				controlPoint: { x: 10 , y: -4 }
+			}
 		]
 	},
 	{
@@ -66,9 +114,17 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 		color: "#ffff00",
 		position: { x: 27, y: 12 },
 		points: [
-			{ x: 0.5, y: -1.5, worldId: 'strawberryland' },
-			{ x: 1, y: 2, worldId: 'neon-coast-2' },
-			{ x: -2, y: 0.5, worldId: 'ant-island' }
+			{ x: 1, y: -1.75, worldId: 'strawberryland' },
+			{ x: 1.5, y: 1.75, worldId: 'neon-coast-2' },
+			{ x: -2, y: 0.25, worldId: 'ant-island' }
+		],
+		links: [
+			{
+				to: 'orange',
+				segmentFrom: 2,
+				segmentTo: 2,
+				controlPoint: { x: -9 , y: -2 }
+			}
 		]
 	},
 	{
@@ -80,28 +136,60 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 			{ x: 2.25, y: 0.25, worldId: 'treasure-island' },
 			{ x: -0.25, y: 1.75, worldId: 'weapon-world' },
 			{ x: -2.25, y: -0.25, worldId: 'berk' }
+		],
+		links: [
+			{
+				to: 'tangerine',
+				segmentFrom: 0,
+				segmentTo: 2,
+				controlPoint: { x: 2 , y: -8 }
+			}
 		]
 	},
 	{
 		id: "tangerine",
 		color: "#ffa750",
-		position: { x: 20, y: 4.5 },
+		position: { x: 18.75, y: 3.5 },
 		points: [
-			{ x: 0.5, y: -2 },
-			{ x: 3, y: 0.5, worldId: 'dallas-shaolin' },
-			{ x: -0.5, y: 2, worldId: 'looney-tune-land' },
-			{ x: -3, y: -0.5, worldId: 'chocolate-factory' }
+			{ x: 0.1, y: -2.5, worldId: 'monster-high' },
+			{ x: 1.75, y: 0, worldId: 'dallas-shaolin' },
+			{ x: -0.25, y: 2, worldId: 'looney-tune-land' },
+			{ x: -1.75, y: -0.5, worldId: 'chocolate-factory' }
+		],
+		links: [
+			{
+				to: 'celadon',
+				segmentFrom: 1,
+				segmentTo: 1
+			}
 		]
 	},
 	{
 		id: "celadon",
-		color: "#ff0000",
+		color: "#45d693",
 		position: { x: 12, y: 4.5 },
 		points: [
-			{ x: 0.5, y: -2, worldId: 'jade-palace' },
-			{ x: 3, y: 0.5, worldId: 'hyrule' },
-			{ x: -0.5, y: 2, worldId: 'haven' },
-			{ x: -3, y: -0.5, worldId: 'wild-west' }
+			{ x: 0, y: -3, worldId: 'jade-palace' },
+			{ x: 2.75, y: -1.5, worldId: 'hyrule' },
+			{ x: 2.75, y: 1.5, worldId: 'haven' },
+			{ x: 0, y: 3, worldId: 'wild-west' },
+			{ x: -2.75, y: 1.5, worldId: 'nyc-2002' },
+			{ x: -2.75, y: -1.5, worldId: 'unicornucopia' },
+		],
+		// points: [
+		// 	{ x: 0, y: -2, worldId: 'jade-palace' },
+		// 	{ x: 1.75, y: -1, worldId: 'hyrule' },
+		// 	{ x: 1.75, y: 1, worldId: 'haven' },
+		// 	{ x: 0, y: 2, worldId: 'wild-west' },
+		// 	{ x: -1.75, y: 1, worldId: 'nyc-2002' },
+		// 	{ x: -1.75, y: -1, worldId: 'unicornucopia' },
+		// ],
+		links: [
+			{
+				to: 'violet',
+				segmentFrom: 3,
+				segmentTo: 0
+			}
 		]
 	},
 	{
@@ -109,19 +197,29 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 		color: "#0000ff",
 		position: { x: 13, y: 13.5 },
 		points: [
-			{ x: 0.5, y: -1.5, worldId: 'lego-city' },
-			{ x: 1, y: 2, worldId: 'camp-halfblood' },
-			{ x: -2.5, y: 0.5, worldId: 'master-of-disguise' }
+			{ x: -1.5, y: -1.25, worldId: 'lego-city' },
+			{ x: 1.5, y: -0.25, worldId: 'camp-halfblood' },
+			{ x: -0.5, y: 2, worldId: 'master-of-disguise' },
+		],
+		links: [
+			{
+				to: 'white',
+				segmentFrom: 0,
+				segmentTo: 2,
+				controlPoint: { x: -1 , y: -6.5 }
+			}
 		]
 	},
 	{
 		id: "white",
 		color: "#ffffff",
-		position: { x: 19, y: 12 },
+		position: { x: 16, y: 11 },
 		points: [
-			{ x: 0.5, y: -1.5, worldId: 'neon-coast-3' },
-			{ x: 1, y: 2, worldId: 'candy-world' },
-			{ x: -2.5, y: 0.5, worldId: 'yharnam' }
+			{ x: 1.5, y: -1, worldId: 'neon-coast-3' },
+			{ x: 0.5, y: 2, worldId: 'candy-world' },
+			{ x: -2, y: -0.5, worldId: 'yharnam' }
+		],
+		links: [
 		]
 	},
 ];

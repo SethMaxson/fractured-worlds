@@ -293,6 +293,7 @@ const timelineEvents: ITimelineEvent[] = [
 	},
 	{
 		date: { year: 1, month: 7, day: 6 },
+		endDate: { year: 1, month: 7, day: 10 },
 		isMajor: true,
 		event: "We reached Weapon World, where we met Tankman and agreed to allow his technicians to study our ship.",
 		extra: [
@@ -305,7 +306,7 @@ const timelineEvents: ITimelineEvent[] = [
 		type: "world"
 	},
 	{
-		date: { year: 1, month: 7, day: 6 },
+		date: { year: 1, month: 7, day: 7 },
 		isMajor: true,
 		// event: "event",
 		extra: [
