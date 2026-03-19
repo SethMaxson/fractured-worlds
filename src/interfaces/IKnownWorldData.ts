@@ -16,6 +16,8 @@ export enum ExplorationState {
 
 export interface IKnownWorldData {
 	worldId: string;
+	/** A more specific instruction on how to render this world's token or label. */
+	displayType?: KnownWorldDisplayType;
 	explorationState: ExplorationState;
 	/** They have a prism key corresponding to the World Anchor in this world.
 	 * TODO: remove this and create a separate Prism Key management system
@@ -23,5 +25,6 @@ export interface IKnownWorldData {
 	prismKey: boolean;
 	/** They have found and synced the World Anchor in this world. */
 	worldAnchor: boolean;
-	displayType?: KnownWorldDisplayType;
+	/** The party knows about this world, but doesn't know what nexus it's in or where it's located. */
+	unknownLocation?: boolean;
 }

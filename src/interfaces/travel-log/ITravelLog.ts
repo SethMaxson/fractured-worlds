@@ -1,7 +1,7 @@
-import { IDate } from "../IDate";
+import type { IDate } from "../IDate";
 
 export type TravelLogTimelineEventType = "world" | "switchtrack" | "rift" | "lightship" | "other";
-export type WorldAccessMethods = "lightship" | "kindred-portal" | "darkness-portal" | "fracturing" | "other";
+export type WorldAccessMethods = "lightship" | "kindred-portal" | "darkness-portal" | "fracturing" | "summonstone" | "other";
 
 /** A reference to another travel log. */
 export interface ITravelLogReference {

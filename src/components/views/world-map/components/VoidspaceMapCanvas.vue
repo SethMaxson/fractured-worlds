@@ -62,6 +62,7 @@ import { GameStrings } from "@/scripts/game-strings";
 import { defineComponent, type PropType } from "vue";
 import { CampaignState } from '@/data/campaign-state';
 import { Config } from '@/scripts/config';
+import type { IKindredPortal } from '@/interfaces/IKindredPortal';
 
 interface ISimplePoint { x: number, y: number };
 interface IWorldPositionEntry extends ISimplePoint {
@@ -96,19 +97,29 @@ interface IDrawnWorld extends ISimplePoint {
 	width: number;
 }
 
-interface IDrawnSwitchtrack extends ISwitchtrackData {
+interface IDrawnConnection {
+	startPoint: ISimplePoint;
+	endPoint: ISimplePoint;
+	color?: string;
+	/** Optional control point to render the link as a quadratic curve */
+	controlPoint?: ISimplePoint;
+	/** Optional control point to render the link as a cubic Bezier curve */
+	controlPoint2?: ISimplePoint;
+}
+
+interface IDrawnKindredPortal extends IKindredPortal, IDrawnConnection { }
+
+interface IDrawnSwitchtrack extends ISwitchtrackData, IDrawnConnection {
 	/** The id of the starting nexus.
 	 * ONLY USED BY AUTOMATED PROCESSES.
 	 */
 	_from?: string;
-	startPoint: ISimplePoint;
-	endPoint: ISimplePoint;
-	color?: string;
 	/** Used in the rare event of a traveler losing access to a previously unlocked switchtrack .  */
 	relocked?: boolean;
 }
 
 const worldTokenMultiplier = 2;
+const luScale = 0.7 * worldTokenMultiplier;
 const travelStopIconRadius = 4;
 /** Controls whether the video-esque controls are shown.
  * TODO: deprecate
@@ -128,6 +139,10 @@ export default defineComponent({
 		},
 		knownWorlds: {
 			type: Array as PropType<IKnownWorldData[]>,
+			required: true
+		},
+		kindredPortals: {
+			type: Array as PropType<IKindredPortal[]>,
 			required: true
 		},
 		defaultUnitScale: {
@@ -230,6 +245,20 @@ export default defineComponent({
 			return this.dataSwitchtracksAll.filter(s => this.switchtrackUnlocked(s));
 		},
 		//#endregion computed base datasets
+		drawnKindredPortals(): IDrawnKindredPortal[] {
+			const errDefault = {x: -1, y: -1};
+			return this.$props.kindredPortals.map(kp => {
+				const startPoint = this.worldPositions.find(w => w.worldId == kp.from) || errDefault;
+				return {
+					...kp,
+					startPoint: startPoint,
+					endPoint: this.worldPositions.find(w => w.worldId == kp.to) || errDefault,
+					color: Utils.World.findWorld(WorldDatas, kp.from)?.meta?.themeColor,
+					controlPoint: kp.controlPoint ? {x: startPoint.x + kp.controlPoint.x, y: startPoint.y + kp.controlPoint.y} : undefined,
+					controlPoint2: kp.controlPoint2 ? {x: startPoint.x + kp.controlPoint2.x, y: startPoint.y + kp.controlPoint2.y} : undefined
+				}
+			})
+		},
 		drawnNexuses(): IDrawnNexus[] {
 			// TODO: May eventually want to refine this to show the nexuses being unlocked during playback.
 			const validNexuses = this.nexuses.filter(w => !!w.points);
@@ -313,54 +342,105 @@ export default defineComponent({
 		},
 		drawnWorlds(): IDrawnWorld[] {
 			const drawnWorlds: IDrawnWorld[] = [];
+			const handled: string[] = [];
+			let switchtracks: number[] = [];
+			
+			const handleWorld = (worldId: string, position: ISimplePoint, tokenSize: number = worldTokenMultiplier, checkSwitchtracks: boolean = true, worldIndex: number = 0, nexus?: IDrawnNexus) => {
+				// don't bother checking anything if the world has already been handled
+				if (handled.includes(worldId)) return;
+
+				const world = Utils.World.findWorld(WorldDatas, worldId);
+				// don't draw the world if it is invalid
+				if (!world) return;
+
+				// Get the definition for what the traveler knows about this world
+				const worldKnowledge = this.$props.knownWorlds.find(k => k.worldId == world?.id);
+				// don't draw the world if it isn't known to the traveler
+				if ((!worldKnowledge && !this.$props.drawAll)) {
+					// don't bother checking the switchtrack unless specified
+					if (!checkSwitchtracks || !nexus) {
+						return;
+					}
+					// check for switchtrack
+					else {
+						// Check if the world should be drawn due to bordering a known switchtrack
+						let leftSwitchtrackIndex = worldIndex - 1 < 0 ? nexus.rawPoints.length - 1 : worldIndex - 1;
+						if (!switchtracks.includes(worldIndex) && !switchtracks.includes(leftSwitchtrackIndex)) {
+							return;
+						}
+					}
+				}
+
+				const noName = !worldKnowledge 
+					|| worldKnowledge?.displayType == KnownWorldDisplayType.NoName 
+					|| worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
+				const noIcon = !worldKnowledge 
+					|| worldKnowledge?.displayType == KnownWorldDisplayType.NoIcon 
+					|| worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
+
+				drawnWorlds.push({
+					id: world.id,
+					label: noName && !this.$props.drawAll ? "???" : world.name,
+					img: world.details.status?.toLowerCase() == 'destroyed'
+						? "img/worlds/dead_world.png"
+						: noIcon && !this.$props.drawAll 
+						? "img/worlds/blank.png"
+						: world.images.token || "img/worlds/blank.png",
+					color: !!worldKnowledge && world.details.isHub? '#ffc800' : '#dedede',
+					x: position.x,
+					y: position.y,
+					height: tokenSize,
+					width: tokenSize,
+				});
+				handled.push(world.id);
+			};
+
+			// handle the worlds in the nexuses
 			this.drawnNexuses.forEach(nexus => {
 				const {position} = nexus;
-				const switchtracks = this.getSwitchtrackIndexes(nexus);
+				switchtracks = this.getSwitchtrackIndexes(nexus);
 				nexus.rawPoints?.forEach((pt, i) => {
 					if (!pt.worldId || pt.worldId.length == 0 || !nexus.rawPoints) {
 						return;
 					}
-					const world = Utils.World.findWorld(WorldDatas, pt.worldId);
-					
-					// don't draw the world if it is invalid
-					if (!world || !world.images.token) return;
-
-					// Get the definition for what the traveler knows about this world
-					const worldKnowledge = this.$props.knownWorlds.find(k => k.worldId == world?.id);
-					// don't draw the world if it isn't known to the traveler
-					if ((!worldKnowledge && !this.$props.drawAll)) {
-						// Check if the world should be drawn due to bordering a known switchtrack
-						let leftSwitchtrackIndex = i - 1 < 0 ? nexus.rawPoints.length - 1 : i - 1;
-						if (!switchtracks.includes(i) && !switchtracks.includes(leftSwitchtrackIndex)) {
-							return;
-						}
-					}
-
-					const noName = !worldKnowledge 
-						|| worldKnowledge?.displayType == KnownWorldDisplayType.NoName 
-						|| worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
-					const noIcon = !worldKnowledge 
-						|| worldKnowledge?.displayType == KnownWorldDisplayType.NoIcon 
-						|| worldKnowledge?.displayType == KnownWorldDisplayType.NoNameOrIcon;
-
-					drawnWorlds.push({
-						id: world.id,
-						label: noName && !this.$props.drawAll ? "???" : world.name,
-						img: noIcon && !this.$props.drawAll 
-							? "img/worlds/blank.png"
-							: world.details.status?.toLowerCase() == 'destroyed'
-								? "img/worlds/dead_world.png"
-								: world.images.token,
-						color: !!worldKnowledge && world.details.isHub? '#ffc800' : '#dedede',
-						x: position.x + pt.x - (worldTokenMultiplier/2),
-						y: position.y + pt.y - (worldTokenMultiplier/2),
-						height: worldTokenMultiplier,
-						width: worldTokenMultiplier,
-					});
+					handleWorld(
+						pt.worldId,
+						{
+							x: position.x + pt.x - (worldTokenMultiplier/2),
+							y: position.y + pt.y - (worldTokenMultiplier/2),
+						},
+						worldTokenMultiplier, true, i, nexus
+					);
 				});
 			});
+			// handle worlds with unknown locations
+			this.knownWorlds.filter(kw => !!kw.unknownLocation).forEach(kw => {
+				const pos = this.worldPositions.find(wp => wp.worldId == kw.worldId);
+				if (!pos) return;
+				handleWorld(
+					kw.worldId,
+					{
+						x: pos.x - (luScale/2),
+						y: pos.y - (luScale/2),
+					},
+					luScale
+				);
+			})
 
 			return drawnWorlds;
+		},
+		legendBoxSize() {
+			return {
+				width: 5,
+				height: 5,
+				padPx: 8,
+			};
+		},
+		legendBox1Position(): ISimplePoint {
+			return { x: 0, y: 0 };
+		},
+		legendBox2Position(): ISimplePoint {
+			return { x: this.mapWidthInUnits - this.legendBoxSize.width, y: 0 };
 		},
 		/** The latest possible date viewable on the map.
 		 * TODO: currently just defaults to the current campaign date.
@@ -407,6 +487,25 @@ export default defineComponent({
 					});
 				});
 			});
+			
+			// handle worlds with unknown locations
+			let unknownCount = 0;
+			const legendBoxWidth = Math.floor(this.legendBoxSize.width/luScale);
+			this.knownWorlds.filter(kw => !!kw.unknownLocation).forEach(kw => {
+				// don't add duplicate entries
+				if (results.find(r => r.worldId == kw.worldId)) return;
+
+				const row = Math.floor(unknownCount/legendBoxWidth);
+				const column = unknownCount % legendBoxWidth;
+				results.push({
+					x: this.legendBox2Position.x + (column * luScale) + (this.legendBoxSize.padPx / this.mapUnitScale) + (luScale/2),
+					y: this.legendBox2Position.y + (row * luScale) + 0.5 + (this.legendBoxSize.padPx / this.mapUnitScale) + (luScale/2),
+					worldId: kw.worldId,
+					nexusId: '',
+				});
+				unknownCount++;
+			})
+
 			return results;
 		},
 	},
@@ -425,6 +524,7 @@ export default defineComponent({
 			const dpr = window.devicePixelRatio;
 			const panZoomScale = this.panzoom?.getScale() || 1;
 			const rect = canvas.getBoundingClientRect();
+			const scale = this.mapUnitScale;
 
 			const nexusOpacity = 0.9;
 
@@ -445,11 +545,6 @@ export default defineComponent({
 			ctx.lineJoin = ctx.lineCap = "round";
 
 			//#region draw legend boxes
-			const legendBox = {
-				width: 5 * this.mapUnitScale,
-				height: 5 * this.mapUnitScale,
-				pad: 8,
-			};
 			ctx.save();
 			ctx.lineJoin = 'miter';
 			ctx.globalAlpha = 0.95;
@@ -457,22 +552,17 @@ export default defineComponent({
 			ctx.fillStyle = "#393838";
 			ctx.strokeStyle = shadeColor(ctx.fillStyle, 50);
 			
-			const lb1 = {
-				x: 0,
-				y: 0,
-			};
-			const lb2 = {
-				x: this.mapWidthInUnits * this.mapUnitScale - legendBox.width,
-				y: 0,
-			};
+			const lbSize = this.legendBoxSize;
+			const lb1 = this.legendBox1Position;
+			const lb2 = this.legendBox2Position;
 
 			// draw legend backgrounds
 			// legend
-			ctx.fillRect(lb1.x, lb1.y, legendBox.width, legendBox.height);
-			ctx.strokeRect(lb1.x, lb1.y, legendBox.width, legendBox.height);
+			ctx.fillRect(lb1.x * scale, lb1.y * scale, lbSize.width * scale, lbSize.height * scale);
+			ctx.strokeRect(lb1.x * scale, lb1.y * scale, lbSize.width * scale, lbSize.height * scale);
 			// area for known worlds with unknown locations
-			ctx.fillRect(lb2.x, lb2.y, legendBox.width, legendBox.height);
-			ctx.strokeRect(lb2.x, lb2.y, legendBox.width, legendBox.height);
+			ctx.fillRect(lb2.x * scale, lb2.y * scale, lbSize.width * scale, lbSize.height * scale);
+			ctx.strokeRect(lb2.x * scale, lb2.y * scale, lbSize.width * scale, lbSize.height * scale);
 
 			// draw the text content
 			ctx.fillStyle = "#ddd";
@@ -482,9 +572,9 @@ export default defineComponent({
 			
 			// headers
 			ctx.font = "14px sans-serif";
-			ctx.fillText("Legend", lb1.x + legendBox.pad, lb1.y + legendBox.pad);
+			ctx.fillText("Legend", lb1.x * scale + lbSize.padPx, lb1.y * scale + lbSize.padPx);
 			ctx.font = "12px sans-serif";
-			ctx.fillText("Location Unknown", lb2.x + legendBox.pad, lb2.y + legendBox.pad);
+			ctx.fillText("Location Unknown", lb2.x * scale + lbSize.padPx, lb2.y * scale + lbSize.padPx);
 
 			// restore ctx settings
 			ctx.restore();
@@ -493,11 +583,22 @@ export default defineComponent({
 			//#region draw switchtracks
 			ctx.save();
 			ctx.lineWidth = 2;
-			this.drawnSwitchtracks.forEach((link, i) => {
-				this.drawSwitchtrack(ctx, link);
+			this.drawnSwitchtracks.forEach((link) => {
+				this.drawConnection(ctx, link);
 			});
 			ctx.restore();
 			//#endregion draw switchtracks
+
+			//#region draw Kindred Portals
+			ctx.save();
+			ctx.globalAlpha = 0.4;
+			ctx.lineWidth = 1;
+			ctx.setLineDash([1, 4]);
+			this.drawnKindredPortals.forEach((link) => {
+				this.drawConnection(ctx, link);
+			});
+			ctx.restore();
+			//#endregion draw Kindred Portals
 
 			//#region Draw nexus paths
 			this.drawnNexuses.forEach((nexus, i) => {
@@ -593,7 +694,7 @@ export default defineComponent({
 							if (!stop.fastTravel && stop.accessMethod == 'lightship' && previousNexus != '' && previousNexus != position?.nexusId) {
 								const switchtrack = this.getSwitchtrack(previousNexus, position.nexusId, false);
 								if (switchtrack) {
-									this.drawSwitchtrack(ctx, switchtrack, true, {x:-5, y:yOffset});
+									this.drawConnection(ctx, switchtrack, true, {x:-5, y:yOffset});
 								}
 							}
 
@@ -688,7 +789,7 @@ export default defineComponent({
 			// queue next frame
 			requestAnimationFrame(this.draw);
 		},
-		drawSwitchtrack(ctx: CanvasRenderingContext2D, link: IDrawnSwitchtrack, continuePath: boolean = false, offset: ISimplePoint = {x:0,y:0}) {
+		drawConnection(ctx: CanvasRenderingContext2D, link: IDrawnConnection, continuePath: boolean = false, offset: ISimplePoint = {x:0,y:0}) {
 			ctx.save();
 
 			const startPoint = { x: link.startPoint.x * this.mapUnitScale + offset.x, y: link.startPoint.y * this.mapUnitScale + offset.y };

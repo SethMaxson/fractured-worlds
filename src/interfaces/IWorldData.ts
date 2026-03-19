@@ -76,6 +76,8 @@ export interface IWorldData {
 		outsidePlayerSpace?: boolean;
 		/** Where did this world originate? */
 		source?: string;
+		/** The color to use when theming UI items for this world. */
+		themeColor?: string;
 	}
 
 	people: {

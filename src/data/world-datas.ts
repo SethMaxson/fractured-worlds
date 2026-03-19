@@ -91,6 +91,9 @@ export const WorldDatas: IWorldData[] = [
         images: {
             token: "img/worlds/barbieland.png",
         },
+        meta: {
+            themeColor: "#DA1884"
+        },
         people: {
             pureSoul: "Skipper",
         }
@@ -651,7 +654,7 @@ export const WorldDatas: IWorldData[] = [
             timeType: "standard",
         },
         images: {
-            token: "img/worlds/destiny_islands.png",
+            token: "img/worlds/oasis.png",
         },
         people: {
             
