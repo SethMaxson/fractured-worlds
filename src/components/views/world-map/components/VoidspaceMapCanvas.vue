@@ -188,6 +188,7 @@ export default defineComponent({
 	},
 	data() {
 		return {
+			dpr: 1,
 			mapDimensions: { width: this.$props.mapWidthInUnits, height: this.$props.mapHeightInUnits },
 			mapUnitScale: this.$props.defaultUnitScale,
 			panzoom: undefined as unknown as PanzoomObject,
@@ -431,7 +432,7 @@ export default defineComponent({
 			return {
 				width: 5,
 				height: 5,
-				padPx: 8,
+				padPx: 4,
 			};
 		},
 		legendBox1Position(): ISimplePoint {
@@ -489,6 +490,7 @@ export default defineComponent({
 			// handle worlds with unknown locations
 			let unknownCount = 0;
 			const legendBoxWidth = Math.floor(this.legendBoxSize.width/luScale);
+			const pad = (this.legendBoxSize.padPx / (this.mapUnitScale * this.dpr));
 			this.knownWorlds.filter(kw => !!kw.unknownLocation).forEach(kw => {
 				// don't add duplicate entries
 				if (results.find(r => r.worldId == kw.worldId)) return;
@@ -496,8 +498,8 @@ export default defineComponent({
 				const row = Math.floor(unknownCount/legendBoxWidth);
 				const column = unknownCount % legendBoxWidth;
 				results.push({
-					x: this.legendBox2Position.x + (column * luScale) + (this.legendBoxSize.padPx / this.mapUnitScale) + (luScale/2),
-					y: this.legendBox2Position.y + (row * luScale) + 0.5 + (this.legendBoxSize.padPx / this.mapUnitScale) + (luScale/2),
+					x: this.legendBox2Position.x + (column * luScale) + pad + (luScale/2),
+					y: this.legendBox2Position.y + (row * luScale) + 0.5 + pad + (luScale/2),
 					worldId: kw.worldId,
 					nexusId: '',
 				});
@@ -508,6 +510,7 @@ export default defineComponent({
 		},
 	},
 	methods: {
+		//#region draw methods
 		draw() {
 			const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;
 			const ctx = canvas.getContext("2d");
@@ -519,7 +522,10 @@ export default defineComponent({
 
 			//#region scale fix
 			// Get the DPR and size of the canvas
-			const dpr = window.devicePixelRatio;
+			if (this.dpr != window.devicePixelRatio) {
+				// try not to change the data property unless it needs to be changed, just in case that triggers needless updates
+				this.dpr = window.devicePixelRatio;
+			}
 			const panZoomScale = this.panzoom?.getScale() || 1;
 			const rect = canvas.getBoundingClientRect();
 			const scale = this.mapUnitScale;
@@ -527,11 +533,11 @@ export default defineComponent({
 			const nexusOpacity = 0.9;
 
 			// Set the "actual" size of the canvas
-			canvas.width = rect.width * dpr;
-			canvas.height = rect.height * dpr;
+			canvas.width = rect.width * this.dpr;
+			canvas.height = rect.height * this.dpr;
 
 			// Scale the context to ensure correct drawing operations
-			ctx.scale(dpr * panZoomScale, dpr * panZoomScale);
+			ctx.scale(this.dpr * panZoomScale, this.dpr * panZoomScale);
 
 			// Set the "drawn" size of the canvas
 			canvas.style.width = `${rect.width}px`;
@@ -539,20 +545,22 @@ export default defineComponent({
 			//#endregion scale fix
 
 			ctx.globalAlpha = nexusOpacity;
-			ctx.lineWidth = 3;
+			ctx.lineWidth = this.adjustDPR(3);
 			ctx.lineJoin = ctx.lineCap = "round";
+			ctx.textBaseline = "middle";
 
 			//#region draw legend boxes
 			ctx.save();
 			ctx.lineJoin = 'miter';
 			ctx.globalAlpha = 0.95;
-			ctx.lineWidth = 2;
+			ctx.lineWidth = this.adjustDPR(2);
 			ctx.fillStyle = "#393838";
 			ctx.strokeStyle = shadeColor(ctx.fillStyle, 50);
 			
 			const lbSize = this.legendBoxSize;
 			const lb1 = this.legendBox1Position;
 			const lb2 = this.legendBox2Position;
+			const lblPad = this.adjustDPR(this.legendBoxSize.padPx);
 
 			// draw legend backgrounds
 			// legend
@@ -569,10 +577,10 @@ export default defineComponent({
 			ctx.globalAlpha = 1;
 			
 			// headers
-			ctx.font = "14px sans-serif";
-			ctx.fillText("Legend", lb1.x * scale + lbSize.padPx, lb1.y * scale + lbSize.padPx);
-			ctx.font = "12px sans-serif";
-			ctx.fillText("Location Unknown", lb2.x * scale + lbSize.padPx, lb2.y * scale + lbSize.padPx);
+			ctx.font = `${this.adjustDPR(1)}em sans-serif`;
+			ctx.fillText("Legend", lb1.x * scale + lblPad, lb1.y * scale + lblPad);
+			ctx.font = `${this.adjustDPR(12)}px sans-serif`;
+			ctx.fillText("Location Unknown", lb2.x * scale + lblPad, lb2.y * scale + lblPad);
 
 			// restore ctx settings
 			ctx.restore();
@@ -580,7 +588,7 @@ export default defineComponent({
 
 			//#region draw switchtracks
 			ctx.save();
-			ctx.lineWidth = 2;
+			ctx.lineWidth = this.adjustDPR(2);
 			this.drawnSwitchtracks.forEach((link) => {
 				this.drawConnection(ctx, link);
 			});
@@ -590,7 +598,7 @@ export default defineComponent({
 			//#region draw Kindred Portals
 			ctx.save();
 			ctx.globalAlpha = 0.4;
-			ctx.lineWidth = 1;
+			ctx.lineWidth = this.adjustDPR(1);
 			ctx.setLineDash([1, 4]);
 			this.drawnKindredPortals.forEach((link) => {
 				this.drawConnection(ctx, link);
@@ -604,7 +612,7 @@ export default defineComponent({
 				ctx.save();
 				nexus.paths.forEach(path => {
 					ctx.globalAlpha = path.pastTense ? 0.4 : nexusOpacity;
-					ctx.lineWidth = path.pastTense ? 2 : 3;
+					ctx.lineWidth = this.adjustDPR(path.pastTense ? 2 : 3);
 					let color = path.pastTense ? shadeColor(nexus.color, -20) : nexus.color;
 					ctx.fillStyle = ctx.strokeStyle = color;
 					ctx.beginPath();
@@ -642,15 +650,17 @@ export default defineComponent({
 				if (image) {
 					ctx.drawImage(image, world.x * this.mapUnitScale, world.y * this.mapUnitScale, this.mapUnitScale * world.width, this.mapUnitScale * world.height);
 				}
+
+				const worldLabelFontSize = this.adjustDPR(8);
 				
 				drawTextWithBG(
 					ctx,
 					world.label,
-					"8px sans-serif",
+					`${worldLabelFontSize}px sans-serif`,
 					(world.x + (world.width/2)) * this.mapUnitScale,
-					((world.y + (world.height)) * this.mapUnitScale) + 4,
+					((world.y + (world.height)) * this.mapUnitScale) + (worldLabelFontSize / 2),
 					world.color,
-					2
+					this.adjustDPR(2)
 				)
 				
 			});
@@ -660,8 +670,8 @@ export default defineComponent({
 			//#region Draw travel paths
 			ctx.save();
 			ctx.globalAlpha = 0.9;
-			ctx.lineWidth = 1;
-			ctx.setLineDash([4, 4]);
+			ctx.lineWidth = this.adjustDPR(1);
+			ctx.setLineDash([this.adjustDPR(4), this.adjustDPR(4)]);
 			this.$props.travelLogs.forEach(log => {
 				const stops = log?.history || [];
 				const startPosition = this.worldPositions.length > 0 ? this.worldPositions.find(w => w.worldId == stops[0].locationId) : undefined;
@@ -709,14 +719,14 @@ export default defineComponent({
 
 					// draw points at stops
 					ctx.globalAlpha = 1;
-					ctx.lineWidth = 3;
+					ctx.lineWidth = this.adjustDPR(3);
 					ctx.setLineDash([]);
 					ctx.strokeStyle = shadeColor(ctx.strokeStyle as string, -40);
 					stops.forEach((stop, i) => {
 						const position = this.worldPositions.find(w => w.worldId == stop.locationId);
 						if (stop.eventType == 'world' && position && stop.stopped) {
 							ctx.beginPath();
-							ctx.ellipse((position.x + stopSpaceMods[i].x) * this.mapUnitScale, (position.y + stopSpaceMods[i].y) * this.mapUnitScale + yOffset, travelStopIconRadius, travelStopIconRadius, 0, 0, 2 * Math.PI);
+							ctx.ellipse((position.x + stopSpaceMods[i].x) * this.mapUnitScale, (position.y + stopSpaceMods[i].y) * this.mapUnitScale + yOffset, this.adjustDPR(travelStopIconRadius), this.adjustDPR(travelStopIconRadius), 0, 0, 2 * Math.PI);
 							ctx.stroke();
 							ctx.fill();
 						}
@@ -736,8 +746,8 @@ export default defineComponent({
 
 							// draw outline
 							ctx.globalAlpha = 0.4;
-							ctx.lineWidth = 1;
-							ctx.setLineDash([5,2]);
+							ctx.lineWidth = this.adjustDPR(1);
+							ctx.setLineDash([this.adjustDPR(5),this.adjustDPR(2)]);
 							ctx.fillStyle = shadeColor(log.themeColor as string, -20);
 							ctx.strokeStyle = log.themeColor;
 							ctx.beginPath();
@@ -754,11 +764,11 @@ export default defineComponent({
 							drawTextWithBG(
 								ctx,
 								log.name,
-								"6px sans-serif",
+								`${this.adjustDPR(6)}px sans-serif`,
 								pos.x * this.mapUnitScale,
 								((pos.y + (size.height/2)) * this.mapUnitScale),
 								log.themeColor,
-								2
+								this.adjustDPR(2)
 							)
 						}
 					}
@@ -768,18 +778,19 @@ export default defineComponent({
 			//#endregion Draw travel paths
 
 			//#region Draw nexus labels
+			const nexusLabelOffsetY = this.adjustDPR(5);
 			this.drawnNexuses.forEach((nexus) => {
 				// draw label
 				ctx.save();
 				ctx.fillStyle = nexus.color;
 				ctx.strokeStyle = '#000';
-				ctx.lineWidth = 3;
-				ctx.font = "italic 10px serif";
+				ctx.lineWidth = this.adjustDPR(3);
+				ctx.font = `italic ${this.adjustDPR(10)}px serif`;
 				ctx.textAlign = 'center';
 				ctx.globalAlpha = 0.9;
-				ctx.strokeText(`${Utils.String.capitalize(nexus.id)} Nexus`, nexus.position.x * this.mapUnitScale, (nexus.position.y * this.mapUnitScale) + 5); // '+ 5' because it is half of the current font size.
+				ctx.strokeText(`${Utils.String.capitalize(nexus.id)} Nexus`, nexus.position.x * this.mapUnitScale, (nexus.position.y * this.mapUnitScale) + nexusLabelOffsetY);
 				ctx.globalAlpha = 1;
-				ctx.fillText(`${Utils.String.capitalize(nexus.id)} Nexus`, nexus.position.x * this.mapUnitScale, (nexus.position.y * this.mapUnitScale) + 5); // '+ 5' because it is half of the current font size.
+				ctx.fillText(`${Utils.String.capitalize(nexus.id)} Nexus`, nexus.position.x * this.mapUnitScale, (nexus.position.y * this.mapUnitScale) + nexusLabelOffsetY);
 				ctx.restore();
 			});
 			//#endregion Draw nexus labels
@@ -833,6 +844,26 @@ export default defineComponent({
 			//#endregion actually draw the switchtrack link
 
 			ctx.restore();
+		},
+		//#endregion draw methods
+		//#region other methods, alphabetized
+		adjustDPR(pixels: number): number { return pixels / this.dpr; },
+		cleanText(text: string): string {
+			let temp = text;
+			if (temp.match(/\n\n/ig)) {
+				temp = temp.replace(/\n\n(?![\s\S]*\n\n)/ig, "</p>"); // special handling for last paragraph to prevent weird space below review body
+				temp = "<p>" + temp.replace(/\n\n/ig, "</p><p>");
+			}
+			return temp.replace(/\n/ig, "<br/>");
+		},
+		countPrismKeysFromNexus(nexus: IWorldNexusData): number {
+			let count = 0;
+			nexus.points?.forEach(p => {
+				if (p.worldId && p.worldId.length > 0 && this.prismKeyIDs.includes(p.worldId)) {
+					count += 1;
+				}
+			});
+			return count;
 		},
 		findNexus(id: string): IDrawnNexus | undefined {
 			return this.nexuses.find(n => n.id == id);
@@ -904,6 +935,42 @@ export default defineComponent({
 
 			return unlocked;
 		},
+		resize() {
+			// Initialize map and canvas stuff
+			const elem = document.getElementById('panzoom-element') as HTMLElement;
+			if (!this.panzoom || this.$props.useCanvas) {
+				if (this.$props.useCanvas) {
+					this.panzoom?.destroy();
+				}
+				this.panzoom = Panzoom(elem, {
+					maxScale: 5,
+					contain: 'outside',
+					// canvas: true,
+					// // Can add an element reference
+					// exclude: [document.getElementById('link')],
+					// // ...or set a class on the element
+					// excludeClass: 'custom-excluded-class'
+				});
+				// panzoom.pan(10, 10);
+				// panzoom.zoom(2, { animate: true });
+
+				// Panning and pinch zooming are bound automatically (unless disablePan is true).
+				// There are several available methods for zooming
+				// that can be bound on button clicks or mousewheel.
+				// button.addEventListener('click', panzoom.zoomIn);
+				// elem.parentElement?.addEventListener('wheel', panzoom.zoomWithWheel);
+				elem.addEventListener('wheel', this.panzoom.zoomWithWheel);
+			}
+
+			if (this.$props.useCanvas) {
+				const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;
+				const bound = elem.getBoundingClientRect();
+				canvas.height = bound.height;
+				canvas.width = bound.width;
+				this.mapUnitScale = Math.round(bound.width / this.mapDimensions.width);
+				this.dpr = window.devicePixelRatio;
+			}
+		},
 		/** Check whether a Switchtrack is unlocked.
 		 * TODO: finish logic for the final world.
 		 */
@@ -928,57 +995,21 @@ export default defineComponent({
 		togglePlayPause() {
 			this.state.paused = !this.state.paused;
 		},
-		countPrismKeysFromNexus(nexus: IWorldNexusData): number {
-			let count = 0;
-			nexus.points?.forEach(p => {
-				if (p.worldId && p.worldId.length > 0 && this.prismKeyIDs.includes(p.worldId)) {
-					count += 1;
-				}
-			});
-			return count;
-		},
-		cleanText(text: string): string {
-			let temp = text;
-			if (temp.match(/\n\n/ig)) {
-				temp = temp.replace(/\n\n(?![\s\S]*\n\n)/ig, "</p>"); // special handling for last paragraph to prevent weird space below review body
-				temp = "<p>" + temp.replace(/\n\n/ig, "</p><p>");
-			}
-			return temp.replace(/\n/ig, "<br/>");
-		},
+		//#endregion other methods, alphabetized
 	},
 	mounted() {
-		// Initialize map and canvas stuff
-		const elem = document.getElementById('panzoom-element') as HTMLElement;
-		this.panzoom = Panzoom(elem, {
-			maxScale: 5,
-			contain: 'outside',
-			// canvas: true,
-			// // Can add an element reference
-			// exclude: [document.getElementById('link')],
-			// // ...or set a class on the element
-			// excludeClass: 'custom-excluded-class'
-		});
-		// panzoom.pan(10, 10);
-		// panzoom.zoom(2, { animate: true });
-
-		// Panning and pinch zooming are bound automatically (unless disablePan is true).
-		// There are several available methods for zooming
-		// that can be bound on button clicks or mousewheel.
-		// button.addEventListener('click', panzoom.zoomIn);
-		// elem.parentElement?.addEventListener('wheel', panzoom.zoomWithWheel);
-		elem.addEventListener('wheel', this.panzoom.zoomWithWheel);
+		window.addEventListener('resize', this.resize);
+		this.resize();
 
 		if (this.$props.useCanvas) {
-			const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;
-			const bound = elem.getBoundingClientRect();
-			canvas.height = bound.height;
-			canvas.width = bound.width;
-			this.mapUnitScale = Math.round(bound.width / this.mapDimensions.width);
 			this.draw();
 		}
 	},
 	beforeUnmount() {
 		this.panzoom?.destroy();
+		if (this.$props.useCanvas) {
+			window.removeEventListener('resize', this.resize);
+		}
 	},
 })
 
