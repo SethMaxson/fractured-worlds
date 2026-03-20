@@ -412,6 +412,19 @@ export default defineComponent({
 					);
 				});
 			});
+			// handle known worlds in locked nexuses
+			this.knownWorlds.filter(kw => !kw.unknownLocation).forEach(kw => {
+				const pos = this.worldPositions.find(wp => wp.worldId == kw.worldId);
+				if (!pos) return;
+				handleWorld(
+					kw.worldId,
+					{
+						x: pos.x - (worldTokenMultiplier/2),
+						y: pos.y - (worldTokenMultiplier/2),
+					},
+					worldTokenMultiplier
+				);
+			})
 			// handle worlds with unknown locations
 			this.knownWorlds.filter(kw => !!kw.unknownLocation).forEach(kw => {
 				const pos = this.worldPositions.find(wp => wp.worldId == kw.worldId);
