@@ -151,7 +151,7 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 		color: "#ffa750",
 		position: { x: 18.75, y: 3.5 },
 		points: [
-			{ x: 0.1, y: -2.5, worldId: 'monster-high' },
+			{ x: 0.1, y: -2.5, worldId: 'golden-girls' },
 			{ x: 1.75, y: 0, worldId: 'dallas-shaolin' },
 			{ x: -0.25, y: 2, worldId: 'looney-tune-land' },
 			{ x: -1.75, y: -0.5, worldId: 'chocolate-factory' }
@@ -159,7 +159,7 @@ export const WorldNexusDatas: IWorldNexusData[] = [
 		links: [
 			{
 				to: 'celadon',
-				segmentFrom: 1,
+				segmentFrom: 2,
 				segmentTo: 1
 			}
 		]

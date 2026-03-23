@@ -8,10 +8,35 @@ export interface INotableDestination {
 	description: string;
 }
 
+/** The raw JSON data for a world outside the player space. */
+export interface IWorldDataMinimal  {
+
+	/** What is the name of the medium from which this source originated?
+	 * @example 'The Addams Family'
+	 * @example 'RoboCop 2'
+	 * @example 'original' if created by the GM
+	 */
+	source: string;
+	
+	isDestroyed?: boolean;
+
+	/** Is this world eligible for Homeward Prism Keys (i.e. is it a potential fast travel point)? */
+	isHub?: boolean;
+
+    /** Same as source if omitted.
+	 * @example 'World Name' */
+	name?: string;
+
+    /** The year in Earth's timeline for this world. Only applies to variants of Earth or worlds that existed alongside a variant of Earth. */
+	earthYear?: number;
+}
+
 /** The raw JSON data for a world. */
 export interface IWorldData {
+
     /** e.g. 'World Name' */
 	name: string;
+	
     /** e.g. 'world-name' */
 	id: string;
 	
@@ -41,6 +66,8 @@ export interface IWorldData {
 		 * "per episode"
 		 */
 		exit?: string;
+		/** The year in Earth's timeline for this world. Only applies to variants of Earth or worlds that existed alongside a variant of Earth. */
+		earthYear?: number;
 		kindredWorlds?: string[];
 		/** Meaningful locations within this world. */
 		notableDestinations?: INotableDestination[];
@@ -74,7 +101,10 @@ export interface IWorldData {
 		isLinear?: boolean;
 		/** Indicates that a world exists outside the Cradle of Remaining Civilization (i.e. the player's will not be visiting) */
 		outsidePlayerSpace?: boolean;
-		/** Where did this world originate? */
+		/** What is the name of the medium from which this source originated?
+		 * @example 'The Addams Family'
+		 * @example 'RoboCop 2'
+		 */
 		source?: string;
 		/** The color to use when theming UI items for this world. */
 		themeColor?: string;

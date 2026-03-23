@@ -309,6 +309,7 @@ export default defineComponent({
 						const isConnected = (pt.worldId && this.prismKeyIDs.includes(pt.worldId))
 							|| (this.getSwitchtrackIndexes(nexus).includes(i))
 							|| (nextSegment.worldId && this.prismKeyIDs.includes(nextSegment.worldId))
+							|| this.$props.drawAll
 						;
 
 						currentPath.points.push({ x, y, break: !isConnected });
@@ -931,6 +932,9 @@ export default defineComponent({
 		},
 		/** Check whether a nexus is unlocked. */
 		nexusUnlocked(nexus: IWorldNexusData): boolean {
+			if (this.drawAll) {
+				return true;
+			}
 			let unlocked = false;
 			
 			if (this.dataSwitchtracksUnlocked.find(s => s.to == nexus.id)) {
@@ -989,7 +993,7 @@ export default defineComponent({
 		 */
 		switchtrackUnlocked(switchtrack: ISwitchtrackData): boolean {
 			let unlocked = false;
-			const nexus = this.$props.worldNexuses.find(n => n.id == switchtrack.trackedNexus as string);
+			const nexus = this.findNexus(switchtrack.trackedNexus as string);
 
 			if (!nexus || !nexus.points) {
 				return false;

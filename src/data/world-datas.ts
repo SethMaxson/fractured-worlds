@@ -1,4 +1,4 @@
-import type { IWorldData } from "@/interfaces/IWorldData";
+import type { IWorldData, IWorldDataMinimal } from "@/interfaces/IWorldData";
 
 /** Used to create a standardized set of world profiles that can be accessed from any page.
  * Some records contain information that is not yet known to the players.
@@ -331,6 +331,24 @@ export const WorldDatas: IWorldData[] = [
         }
     },
     {
+        name: "Golden Girls",
+        id: "golden-girls",
+        copy: {
+            description: [],
+            oneLiner: "",
+        },
+        details: {
+            anchor: "",
+            kindredWorlds: [],
+            timeType: "resting",
+            status: "destroyed"
+        },
+        images: {
+            token: "img/worlds/blank.png",
+        },
+        people: { }
+    },
+    {
         name: "Gotham City",
         id: "gotham",
         copy: {
@@ -513,24 +531,6 @@ export const WorldDatas: IWorldData[] = [
         people: {
             allies: "Pistachio Disguise"
         }
-    },
-    {
-        name: "Monster High",
-        id: "monster-high",
-        copy: {
-            description: [],
-            oneLiner: "",
-        },
-        details: {
-            anchor: "",
-            kindredWorlds: [],
-            timeType: "resting",
-            status: "destroyed"
-        },
-        images: {
-            token: "img/worlds/blank.png",
-        },
-        people: { }
     },
     {
         name: "Moon",
@@ -966,6 +966,137 @@ export const WorldDatas: IWorldData[] = [
         },
         people: {
             
+        },
+        meta: {
+            outsidePlayerSpace: true
         }
     },
+];
+
+export const MinimalWorldDatas: IWorldDataMinimal[] = [
+    { source: "1001 Nights" },
+    { source: "Aaahh!!! Real Monsters" },
+    { source: "Addams Family" },
+    { source: "Adventure Time" },
+    { source: "Alf" },
+    { source: "Angry Birds" },
+    { source: "Aperture Science" },
+    { source: "Aquaman", earthYear: 2018 },
+    { source: "Assassin's Creed II" },
+    { source: "Atlantis" },
+    { source: "Avatar: The Way of Water" },
+    { source: "The Bad Guys" },
+    { source: "Banjo Kazooie" },
+    { source: "Baywatch" },
+    { source: "Bee Movie" },
+    { source: "Bionicle" },
+    { source: "Bioshock" },
+    { source: "Cats & Dogs" },
+    { source: "Cheetah Girls" },
+    { source: "Chicken Run" },
+    { source: "Coraline" },
+    { source: "Dinosaur Sitcom" },
+    { source: "Doom" },
+    { source: "Dragon Quest XI" },
+    { source: "Earthbound" },
+    { source: "El Dorado" },
+    { source: "E.T. The Extra Terrestrial" },
+    { source: "Fairy Tail" },
+    { source: "Fallout 3" },
+    { source: "Fallout: New Vegas" },
+    { source: "Fifth Element" },
+    { source: "Final Fantasy VI" },
+    { source: "Final Fantasy VII" },
+    { source: "Final Fantasy VIII" },
+    { source: "Final Fantasy X" },
+    { source: "Final Fantasy XII" },
+    { source: "Finding Nemo" },
+    { source: "Frankenstein (1931)", earthYear: 1931 },
+    { source: "Frozen" },
+    { source: "Gargoyles" },
+    { source: "George of the Jungle" },
+    { source: "Godzilla '98", earthYear: 1998 },
+    { source: "Grim Adventures of Billy and Mandy" },
+    { source: "Half Life" },
+    { source: "High School Musical" },
+    { source: "Hocus Pocus" },
+    { source: "Hotel Transylvania" },
+    { source: "Hunger Games" },
+    { source: "Ice Age" },
+    { source: "Incredible Hulk (television)" },
+    { source: "The Incredibles" },
+    { source: "Indiana Jones and the Temple of Doom" },
+    { source: "Iron Man" },
+    { source: "Jackass" },
+    { source: "Jaws" },
+    { source: "Jimmy Neutron", isHub: true, name: "Retroville" },
+    { source: "Jumanji" },
+    { source: "Kid Dracula" },
+    { source: "Land Before Time" },
+    { source: "Law & Order" },
+    { source: "Legend of Zelda: Wind Waker", name: "The Great Sea" },
+    { source: "LEGO Indiana Jones" },
+    { source: "Leprechaun" },
+    { source: "LittleBigPlanet", isHub: true },
+    { source: "Little Mermaid" },
+    { source: "Madagascar 2: Escape 2 Africa" },
+    { source: "Magnum, P.I." },
+    { source: "Mary Poppins" },
+    { source: "Maximum Overdrive", isHub: true },
+    { source: "Megamind" },
+    { source: "Men in Black" },
+    { source: "Metal Gear Solid" },
+    { source: "Moana" },
+    { source: "The Secret of Monkey Island", isHub: true, name: "Monkey Island" },
+    { source: "Monster High" },
+    { source: "Monster House" },
+    { source: "Monster Squad" },
+    { source: "Monty Python and the Holy Grail" },
+    { source: "The Mummy" },
+    { source: "Mushroom Kingdom" },
+    { source: "My Life as a Teenage Robot" },
+    { source: "Nanny McPhee" },
+    { source: "Neverland" },
+    { source: "Night of the Zoopocalypse" },
+    { source: "Ninjago", isHub: true },
+    { source: "Planet of the Apes" },
+    { source: "Ponyo" },
+    { source: "Popeye" },
+    { source: "Powerpuff Girls" },
+    { source: "The Office" },
+    { source: "Rampage" },
+    { source: "Rio" },
+    { source: "RoboCop" },
+    { source: "Robots" },
+    { source: "Rugrats" },
+    { source: "Sabrina the Teenage Witch" },
+    { source: "Sam & Max", isHub: true, name: "Sam & Max's NYC" },
+    { source: "The Santa Clause" },
+    { source: "Secret Life of Pets", earthYear: 2016, name: "NYC 2016" },
+    { source: "The Shining" },
+    { source: "The Simpsons" },
+    { source: "Son of the Mask" },
+    { source: "Soul Eater" },
+    { source: "Spyro the Dragon" },
+    { source: "Spy Kids" },
+    { source: "Street Sharks" },
+    { source: "Super Metroid" },
+    { source: "Surf Ninjas" },
+    { source: "Tarzan" },
+    { source: "Three Amigos" },
+    { source: "Thumbelina" },
+    { source: "Top Gun" },
+    { source: "Transformers One" },
+    { source: "Treasure Planet" },
+    { source: "Usagi Yojimbo" },
+    { source: "Veggie Tales", isHub: true },
+    { source: "Veronica Mars" },
+    { source: "Walking Dead", isHub: true },
+    { source: "WALL*E" },
+    { source: "Wallace and Gromit" },
+    { source: "Wild Wild West" },
+    { source: "Willow" },
+    { source: "Wolfenstein 3D", earthYear: 1944, name: "Castle Wolfenstein" },
+    { source: "XCOM: Enemy Within" },
+    { source: "Yu-Gi-Oh! Duel Monsters" }
 ];
