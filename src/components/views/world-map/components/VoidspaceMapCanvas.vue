@@ -30,18 +30,34 @@ import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
         </div>
     </div>
 	<div class="playback-controls bg-menu border border-black border-5 mx-lg-5 bg-dark-subtle" v-if="showPlaybackControls">
+		<input 
+			class="w-100" 
+			type="range" 
+			name="progress" 
+			:min="minimumPlaybackDate.getTime()" 
+			:max="maximumPlaybackDate.getTime()" 
+			:step="1" 
+			v-model.number="state.shownTime" 
+			v-on:mousedown="startScrub"
+			v-on:mouseup="stopScrub"
+		/>
 		<div class="playback-controls-holder">
-			<button class="btn playback-button" @click="togglePlayPause">{{ state.paused ? 'Pause' : 'Play' }}</button>
-			<div class="col-md-6" style="display: inline-block;">
+			<button class="btn playback-button" @click="togglePlayPause">{{ 
+				state.paused 
+				? 'Play' 
+				: 'Pause' 
+				}}</button>
+			<div class="flex-fill px-2">
+				{{ Utils.Dates.Format.MDY(Utils.Dates.Convert.JavascriptDate.toCampaignDate(shownDate)) }}
+				<span class="fs-5">/</span>
+				{{ Utils.Dates.Format.MDY(Utils.Dates.Convert.JavascriptDate.toCampaignDate(maximumPlaybackDate)) }}
 				<!-- Need to turn this into a scrubbable progress bar -->
-				<div class="progress" role="progressbar" aria-label="Animated striped example" :aria-valuenow="state.progress" aria-valuemin="0" aria-valuemax="100">
-					<div class="progress-bar text-bg-info progress-bar-striped progress-bar-animated py-1 text-light" :style="{width: state.progress + '%'}">{{ Utils.Dates.Format.DMY(state.shownDate) }}</div>
+				<!-- <div class="progress" role="progressbar" aria-label="Animated striped example" :aria-valuenow="state.progress" aria-valuemin="0" aria-valuemax="100">
+					<div class="progress-bar text-bg-info progress-bar-striped progress-bar-animated py-1 text-light" :style="{width: state.progress + '%'}">{{ Utils.Dates.Format.MDY(Utils.Dates.Convert.JavascriptDate.toCampaignDate(shownDate)) }}</div>
 				</div>
-				<input type="range" name="progress" min="0" max="1" step="0.05" value="1" />
+				<input type="range" name="progress" min="0" max="1" step="0.05" value="1" /> -->
 			</div>
-		</div>
-		<div class="playback-controls-holder">
-			<div class="col-md-2" style="display: inline-block;">
+			<!-- <div class="col-md-2" style="display: inline-block;">
 				<select class="form-select form-select-sm" name="playback-speed">
 					<option value="0.5">0.5</option>
 					<option value="0.75">0.75</option>
@@ -49,18 +65,33 @@ import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
 					<option value="1.5">1.5</option>
 					<option value="2">2</option>
 				</select>
-			</div>
+			</div> -->
 			<button class="btn playback-button" title="Toggle Fullscreen">⛶</button>
 		</div>
 	</div>
 	<div id="images-for-canvas" style="display: none;"></div>
 </template>
+<style>
+.playback-controls-holder {
+    /* position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+</style>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import { CampaignState } from '@/data/campaign-state';
 import { Config } from '@/scripts/config';
 import type { IKindredPortal } from '@/interfaces/IKindredPortal';
+import { id_ify } from '@/scripts/id_ify';
+import { CampaignDate } from '@/objects/CampaignDate';
 
 interface ISimplePoint { x: number, y: number };
 interface IWorldPositionEntry extends ISimplePoint {
@@ -123,6 +154,8 @@ const travelStopIconRadius = 4;
  * TODO: deprecate
  */
 const showPlaybackControls = Config.IsDebug;
+let imgLoaded = false;
+const minuteInMs = 60000;
 
 export default defineComponent({
 	name: 'VoidspaceMapCanvasComponent',
@@ -189,16 +222,24 @@ export default defineComponent({
 	data() {
 		return {
 			dpr: 1,
+			initialTimestamp: Date.now(),
 			mapDimensions: { width: this.$props.mapWidthInUnits, height: this.$props.mapHeightInUnits },
 			mapUnitScale: this.$props.defaultUnitScale,
+			needsRedraw: true,
 			panzoom: undefined as unknown as PanzoomObject,
-			initialTimestamp: Date.now(),
+			playbackSettings: {
+				loop: false,
+				timeScale: 1,
+			},
 			state: {
-				travelerPositions: [] as ITravelerPosition[],
+				lastFrame: performance.now(),
+				lastTimeShown: Utils.Dates.Convert.CampaignDate.toJSDate(CampaignState.CurrentDate).getTime(),
 				paused: false,
-				shownDate: CampaignState.CurrentDate,
 				/** Not sure if this will be a percentage or a timestamp in the final draft. */
 				progress: 75,
+				shownTime: Utils.Dates.Convert.CampaignDate.toJSDate(CampaignState.CurrentDate).getTime(),
+				travelerPositions: [] as ITravelerPosition[],
+				unpauseAfterScrub: false,
 			},
 		}
 	},
@@ -335,10 +376,19 @@ export default defineComponent({
 		/**
 		 * TODO: implement */
 		drawnTravelLogs() {
+			const logs: ITravelLog[] = [];
+			this.$props.travelLogs.forEach(log => {
+				const history = log.history.filter(h => new Date(h.dateStart.year, h.dateStart.month-1, h.dateStart.day) <= this.shownDate);
+				if (history) {
+					logs.push({
+						...log,
+						history 
+					})
+				}
+			});
+			return logs;
 
-
-
-			"img/ships/default.png"
+			// "img/ships/default.png"
 		},
 		drawnWorlds(): IDrawnWorld[] {
 			const drawnWorlds: IDrawnWorld[] = [];
@@ -455,11 +505,17 @@ export default defineComponent({
 		legendBox2Position(): ISimplePoint {
 			return { x: this.mapWidthInUnits - this.legendBoxSize.width, y: 0 };
 		},
+		/** The earliest possible date viewable on the map.
+		 * TODO: currently just defaults to 0. Should default to the earliest date in the provided timeline.
+		 */
+		minimumPlaybackDate() {
+			return Utils.Dates.Convert.CampaignDate.toJSDate(new CampaignDate(0, 1, 0));
+		},
 		/** The latest possible date viewable on the map.
 		 * TODO: currently just defaults to the current campaign date.
 		 */
 		maximumPlaybackDate() {
-			return CampaignState.CurrentDate;
+			return Utils.Dates.Convert.CampaignDate.toJSDate(CampaignState.CurrentDate);
 		},
 		/** All the nexuses as IDrawnNexus objects */
 		nexuses(): IDrawnNexus[] {
@@ -483,6 +539,13 @@ export default defineComponent({
 				}
 			});
 			return matches;
+		},
+		shownDate(): Date {
+			return new Date(this.state.shownTime);
+		},
+		stopped(): boolean {
+			return this.state.paused && 
+			(this.shownDate >= this.maximumPlaybackDate && !this.playbackSettings.loop);
 		},
 		worldPositions(): IWorldPositionEntry[] {
 			const results: IWorldPositionEntry[] = [];
@@ -524,39 +587,67 @@ export default defineComponent({
 		},
 	},
 	methods: {
-		//#region draw methods
-		draw() {
+		//#region draw & cycle methods
+		cycle() {
+			const now = performance.now();
+			const delta = now - this.state.lastFrame;
 			const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;
 			const ctx = canvas.getContext("2d");
+			let redrawnThisCycle = false;
 
-			if (!ctx) {
-				console.error("Unable to find canvas!");
-				return;
+			if (this.state.lastTimeShown != this.state.shownTime) {
+				this.needsRedraw = true;
 			}
 
-			//#region scale fix
-			// Get the DPR and size of the canvas
-			if (this.dpr != window.devicePixelRatio) {
-				// try not to change the data property unless it needs to be changed, just in case that triggers needless updates
-				this.dpr = window.devicePixelRatio;
+			if (ctx) {
+				this.scaleFix(canvas, ctx);
 			}
-			const panZoomScale = this.panzoom?.getScale() || 1;
-			const rect = canvas.getBoundingClientRect();
-			const scale = this.mapUnitScale;
+			
+			if (true || this.needsRedraw || imgLoaded) {
+				if (ctx) {
+					this.draw(ctx);
+					redrawnThisCycle = true;
+				}
+				else {
+					console.error("Unable to find canvas!");
+				}
+				
+				this.needsRedraw = !redrawnThisCycle || !this.state.paused;
+				imgLoaded = imgLoaded && !redrawnThisCycle;
+			}
 
+			if (redrawnThisCycle) {
+				this.state.lastTimeShown = this.state.shownTime;
+			}
+
+			// handle behavior that only applies during active playback
+			if (!this.state.paused) {
+				// handle looping/pausing at end of playback
+				if (this.shownDate >= this.maximumPlaybackDate) {
+					if (this.playbackSettings.loop) {
+						// restart loop from the beginning
+						this.playFromStart();
+					}
+					else {
+						// pause playback at the last available frame
+						this.state.shownTime = this.maximumPlaybackDate.getTime();
+						this.state.paused = true;
+						this.needsRedraw = !redrawnThisCycle;
+					}
+				}
+				else {
+					this.state.shownTime = this.state.shownTime + (delta * minuteInMs * 100);
+				}
+			}
+
+			this.state.lastFrame = now;
+
+			// queue next frame
+			requestAnimationFrame(this.cycle);
+		},
+		draw(ctx: CanvasRenderingContext2D) {
 			const nexusOpacity = 0.9;
-
-			// Set the "actual" size of the canvas
-			canvas.width = rect.width * this.dpr;
-			canvas.height = rect.height * this.dpr;
-
-			// Scale the context to ensure correct drawing operations
-			ctx.scale(this.dpr * panZoomScale, this.dpr * panZoomScale);
-
-			// Set the "drawn" size of the canvas
-			canvas.style.width = `${rect.width}px`;
-			canvas.style.height = `${rect.height}px`;
-			//#endregion scale fix
+			const scale = this.mapUnitScale;
 
 			ctx.globalAlpha = nexusOpacity;
 			ctx.lineWidth = this.adjustDPR(3);
@@ -593,7 +684,7 @@ export default defineComponent({
 			// headers
 			ctx.font = `${this.adjustDPR(1)}em sans-serif`;
 			ctx.fillText("Legend", lb1.x * scale + lblPad, lb1.y * scale + lblPad);
-			ctx.font = `${this.adjustDPR(12)}px sans-serif`;
+			ctx.font = `${this.adjustDPR(0.7)}em sans-serif`;
 			ctx.fillText("Location Unknown", lb2.x * scale + lblPad, lb2.y * scale + lblPad);
 
 			// restore ctx settings
@@ -658,7 +749,7 @@ export default defineComponent({
 			ctx.save();
 			ctx.globalAlpha = 1;
 			this.drawnWorlds.forEach(world => {
-				const image = this.getImageElement(world.id+"-img", world.img) as HTMLImageElement|undefined;
+				const image = this.getImageElement(world.img) as HTMLImageElement|undefined;
 
 				// the image element has already been created
 				if (image) {
@@ -686,8 +777,11 @@ export default defineComponent({
 			ctx.globalAlpha = 0.9;
 			ctx.lineWidth = this.adjustDPR(1);
 			ctx.setLineDash([this.adjustDPR(4), this.adjustDPR(4)]);
-			this.$props.travelLogs.forEach(log => {
+			this.drawnTravelLogs.forEach(log => {
 				const stops = log?.history || [];
+				if (stops.length == 0) {
+					return;
+				}
 				const startPosition = this.worldPositions.length > 0 ? this.worldPositions.find(w => w.worldId == stops[0].locationId) : undefined;
 				if (startPosition) {
 					ctx.strokeStyle = log?.themeColor || "#fff";
@@ -748,7 +842,7 @@ export default defineComponent({
 
 					// Draw the traveler icon and label
 					if (log.token) {
-						const image = this.getImageElement(log.id+"-img", log.token) as HTMLImageElement|undefined;
+						const image = this.getImageElement(log.token) as HTMLImageElement|undefined;
 						if (image) {
 							const travelerTokenRadius = 0.3 * worldTokenMultiplier;
 							const basePos = this.getTravelerPosition(log);
@@ -809,8 +903,7 @@ export default defineComponent({
 			});
 			//#endregion Draw nexus labels
 
-			// queue next frame
-			requestAnimationFrame(this.draw);
+			return true;
 		},
 		drawConnection(ctx: CanvasRenderingContext2D, link: IDrawnConnection, continuePath: boolean = false, offset: ISimplePoint = {x:0,y:0}) {
 			ctx.save();
@@ -859,7 +952,27 @@ export default defineComponent({
 
 			ctx.restore();
 		},
-		//#endregion draw methods
+		scaleFix(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+			// Get the DPR and size of the canvas
+			if (this.dpr != window.devicePixelRatio) {
+				// try not to change the data property unless it needs to be changed, just in case that triggers needless updates
+				this.dpr = window.devicePixelRatio;
+			}
+			const panZoomScale = this.panzoom?.getScale() || 1;
+			const rect = canvas.getBoundingClientRect();
+
+			// Set the "actual" size of the canvas
+			canvas.width = rect.width * this.dpr;
+			canvas.height = rect.height * this.dpr;
+
+			// Scale the context to ensure correct drawing operations
+			ctx.scale(this.dpr * panZoomScale, this.dpr * panZoomScale);
+
+			// Set the "drawn" size of the canvas
+			canvas.style.width = `${rect.width}px`;
+			canvas.style.height = `${rect.height}px`;
+		},
+		//#endregion draw & cycle methods
 		//#region other methods, alphabetized
 		adjustDPR(pixels: number): number { return pixels / this.dpr; },
 		cleanText(text: string): string {
@@ -882,7 +995,8 @@ export default defineComponent({
 		findNexus(id: string): IDrawnNexus | undefined {
 			return this.nexuses.find(n => n.id == id);
 		},
-		getImageElement(id: string, src: string) {
+		getImageElement(src: string) {
+			const id = id_ify(src);
 			let image = document.getElementById(id) as HTMLImageElement|undefined;
 
 			// the image element has already been created
@@ -900,6 +1014,10 @@ export default defineComponent({
 			else {
 				image = new Image(this.mapUnitScale, this.mapUnitScale); // Using optional size for image
 				image.id = id;
+				image.onload = (ev) => { if (image?.complete) {
+					// imgLoaded = true;
+					this.needsRedraw = true;
+				}};
 				image.src = src;
 
 				const imgContainer = document.getElementById("images-for-canvas");
@@ -952,6 +1070,9 @@ export default defineComponent({
 
 			return unlocked;
 		},
+		playFromStart() {
+			this.state.shownTime = this.minimumPlaybackDate.getTime();
+		},
 		resize() {
 			// Initialize map and canvas stuff
 			const elem = document.getElementById('panzoom-element') as HTMLElement;
@@ -988,6 +1109,13 @@ export default defineComponent({
 				this.dpr = window.devicePixelRatio;
 			}
 		},
+		startScrub() {
+			this.state.unpauseAfterScrub = !this.state.paused;
+			this.state.paused = true;
+		},
+		stopScrub() {
+			this.state.paused = !this.state.unpauseAfterScrub;
+		},
 		/** Check whether a Switchtrack is unlocked.
 		 * TODO: finish logic for the final world.
 		 */
@@ -1010,6 +1138,9 @@ export default defineComponent({
 			return unlocked;
 		},
 		togglePlayPause() {
+			if (this.stopped) {
+				this.playFromStart();
+			}
 			this.state.paused = !this.state.paused;
 		},
 		//#endregion other methods, alphabetized
@@ -1019,7 +1150,7 @@ export default defineComponent({
 		this.resize();
 
 		if (this.$props.useCanvas) {
-			this.draw();
+			this.cycle();
 		}
 	},
 	beforeUnmount() {

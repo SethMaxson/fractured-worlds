@@ -1,7 +1,7 @@
 import { Months } from "@/data/calendar/months";
 import type { ICalendarEvent, IFullCalendarEvent } from "@/interfaces/ICalendarEvent";
 import type { IWorldData } from "@/interfaces/IWorldData";
-import { CampaignDate } from "@/objects/CampaignDate";
+import { CampaignDate as cd } from "@/objects/CampaignDate";
 import { GameStrings } from "./game-strings";
 import { Config } from "./config";
 import type { IDate } from "@/interfaces/IDate";
@@ -76,6 +76,11 @@ export namespace Utils {
     export namespace Dates {
         /** A collection of functions to convert one dates between formats. */
         export namespace Convert {
+            export namespace CampaignDate {
+                export function toJSDate(campaignDate: cd): Date {
+                    return new Date(campaignDate.year, campaignDate.month-1, campaignDate.day);
+                }
+            }
             export namespace ICalendarEvent {
                 /** Allows a year to be provided, since ICalendarEvent doesn't have a year property. */
                 export function arrayToIFullCalenderEvents(calendarEvents: ICalendarEvent[][], year?: number): IFullCalendarEvent[] {
@@ -90,7 +95,7 @@ export namespace Utils {
                 }
 
                 /** Get an array of CampaignDate objects from the provided ICalendarEvent dataset. Allows a year to be provided, since ICalendarEvent doesn't have a year property. */
-                export function arrayToCampaignDates(calendarEvents: ICalendarEvent[][], year: number = 1): CampaignDate[] {
+                export function arrayToCampaignDates(calendarEvents: ICalendarEvent[][], year: number = 1): cd[] {
                     return IFullCalendarEvent.arrayToCampaignDates(ICalendarEvent.arrayToIFullCalenderEvents(calendarEvents, year));
                 }
 
@@ -100,7 +105,7 @@ export namespace Utils {
             }
             export namespace IFullCalendarEvent {
                 /** Get an array of CampaignDate objects from the provided IFullCalendarEvent dataset. */
-                export function arrayToCampaignDates(calendarEvents: IFullCalendarEvent[]): CampaignDate[] {
+                export function arrayToCampaignDates(calendarEvents: IFullCalendarEvent[]): cd[] {
                     const result = [];
                     for (let index = 0; index < calendarEvents.length; index++) {
                         result.push(toCampaignDate(calendarEvents[index]));
@@ -108,8 +113,13 @@ export namespace Utils {
                     return result;
                 }
 
-                export function toCampaignDate(calendarEvent: IFullCalendarEvent): CampaignDate {
-                    return new CampaignDate(calendarEvent.day, calendarEvent.month, calendarEvent.year || 0);
+                export function toCampaignDate(calendarEvent: IFullCalendarEvent): cd {
+                    return new cd(calendarEvent.day, calendarEvent.month, calendarEvent.year || 0);
+                }
+            }
+            export namespace JavascriptDate {
+                export function toCampaignDate(jsDate: Date): cd {
+                    return new cd(jsDate.getDate(), jsDate.getMonth()+1, jsDate.getFullYear() - 1900);
                 }
             }
         }
