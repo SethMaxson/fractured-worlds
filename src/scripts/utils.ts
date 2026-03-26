@@ -103,6 +103,14 @@ export namespace Utils {
                     return { month, year, ...calendarEvent };
                 }
             }
+            export namespace IDate {
+                export function toCampaignDate(date: IDate): cd {
+                    return new cd(date.day, date.month, date.year);
+                }
+                export function toJSDate(date: IDate): Date {
+                    return new Date(date.year, Math.max(date.month-1, 0), date.day, date.hour || 0, date.minute || 0, date.second || 0);
+                }
+            }
             export namespace IFullCalendarEvent {
                 /** Get an array of CampaignDate objects from the provided IFullCalendarEvent dataset. */
                 export function arrayToCampaignDates(calendarEvents: IFullCalendarEvent[]): cd[] {

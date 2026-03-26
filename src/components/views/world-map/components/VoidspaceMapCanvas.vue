@@ -29,7 +29,7 @@ import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
             />
         </div>
     </div>
-	<div class="playback-controls bg-menu border border-black border-5 mx-lg-5 bg-dark-subtle" v-if="showPlaybackControls">
+	<div class="playback-controls bg-menu border border-black border-5 mx-lg-5 bg-dark-subtle">
 		<input 
 			class="w-100" 
 			type="range" 
@@ -39,14 +39,17 @@ import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
 			:step="1" 
 			v-model.number="state.shownTime" 
 			v-on:mousedown="startScrub"
+			v-on:touchstart="startScrub"
 			v-on:mouseup="stopScrub"
+			v-on:touchend="stopScrub"
+			v-on:touchcancel="stopScrub"
 		/>
 		<div class="playback-controls-holder">
-			<button class="btn playback-button" @click="togglePlayPause">{{ 
-				state.paused 
-				? 'Play' 
-				: 'Pause' 
-				}}</button>
+			<button class="btn playback-button" @click="togglePlayPause">
+				<svg class="menu-button-icon theme-color d-inline ms-1 small">
+					<use :href="state.paused ? '#play' : '#pause'"></use>
+				</svg>
+			</button>
 			<div class="flex-fill px-2">
 				{{ Utils.Dates.Format.MDY(Utils.Dates.Convert.JavascriptDate.toCampaignDate(shownDate)) }}
 				<span class="fs-5">/</span>
@@ -103,13 +106,22 @@ interface ITravelerPosition extends ISimplePoint {
 	travelPathId: string;
 }
 
-interface IDrawnNexusPath {
+interface IDrawnNexusPath extends IDrawnPath {
+	/** Indicates that this path no longer exists. */
 	pastTense?: boolean;
-	points: IDrawnNexusPathPoint[];
 }
 
-interface IDrawnNexusPathPoint extends ISimplePoint {
+interface IDrawnPath {
+	points: IDrawnPathPoint[];
+}
+
+
+interface IDrawnPathPoint extends ISimplePoint {
 	break?: boolean;
+	/** Optional control point to render the link as a quadratic curve */
+	controlPoint?: ISimplePoint;
+	/** Optional control point to render the link as a cubic Bezier curve */
+	controlPoint2?: ISimplePoint;
 }
 
 interface IDrawnNexus extends IWorldNexusData {
@@ -147,13 +159,20 @@ interface IDrawnSwitchtrack extends ISwitchtrackData, IDrawnConnection {
 	relocked?: boolean;
 }
 
+interface IDrawnTravelPath extends IDrawnPath {
+	name: string;
+	stopPoints: ISimplePoint[];
+	themeColor: string;
+	token: string;
+	travelerPosition: ISimplePoint;
+}
+
 const worldTokenMultiplier = 2;
 const luScale = 0.7 * worldTokenMultiplier;
 const travelStopIconRadius = 4;
 /** Controls whether the video-esque controls are shown.
  * TODO: deprecate
  */
-const showPlaybackControls = Config.IsDebug;
 let imgLoaded = false;
 const minuteInMs = 60000;
 
@@ -375,20 +394,93 @@ export default defineComponent({
 		},
 		/**
 		 * TODO: implement */
-		drawnTravelLogs() {
-			const logs: ITravelLog[] = [];
+		drawnTravelLogs(): IDrawnTravelPath[] {
+			const logs: IDrawnTravelPath[] = [];
 			this.$props.travelLogs.forEach(log => {
-				const history = log.history.filter(h => new Date(h.dateStart.year, h.dateStart.month-1, h.dateStart.day) <= this.shownDate);
-				if (history) {
+				const history = log.history.filter(h => new Date(h.dateStart.year, h.dateStart.month-1, h.dateStart.day).getTime() <= this.state.shownTime);
+				if (history.length > 0) {
+					const stopPoints: IDrawnPathPoint[] = [];
+					const pathPoints: IDrawnPathPoint[] = [];
+					const lastCompleteStop = history[history.length - 1];
+					const end = lastCompleteStop.timeEnd || lastCompleteStop.timeStart;
+					let travelerPosition = this.worldPositions.find(w => w.worldId == lastCompleteStop.locationId) || {x:0,y:0};
+
+					// is moving if the current shownTime is between entries and the current entry is not the final entry in the log
+					const moving = end < this.state.shownTime && history.length < log.history.length;
+					const nextStop = log.history.find(h => new Date(h.dateStart.year, h.dateStart.month-1, h.dateStart.day).getTime() > this.state.shownTime);
+					
+					const stopSpaceMods = spaceStopMods(history);
+					let previousNexus = '';
+					history.forEach((stop, i) => {
+						const position = this.worldPositions.find(w => w.worldId == stop.locationId);
+						if (!position) {
+							return;
+						}
+
+						const allowNexusChanges = !stop.fastTravel && stop.accessMethod == 'lightship';
+						let lastPosition: ISimplePoint = position;
+
+						if (stop.eventType == 'world') {
+							// Check if we need to draw a path across a switchtrack before the current world
+							if (allowNexusChanges && previousNexus != '' && previousNexus != position?.nexusId) {
+								const switchtrack = this.getSwitchtrack(previousNexus, position.nexusId, false);
+								if (switchtrack) {
+									lastPosition = switchtrack.endPoint;
+									// start point of the switchtrack
+									pathPoints.push({
+										x: switchtrack.startPoint.x,
+										y: switchtrack.startPoint.y
+									});
+									// end point of the switchtrack
+									pathPoints.push({
+										x: switchtrack.endPoint.x,
+										y: switchtrack.endPoint.y,
+										controlPoint: switchtrack.controlPoint,
+										controlPoint2: switchtrack.controlPoint2
+									});
+								}
+							}
+
+							// add the actual point for this world
+							pathPoints.push({
+								x: position.x + stopSpaceMods[i].x,
+								y: position.y + stopSpaceMods[i].y
+							});
+
+							// add a point to indicate a stop was made
+							if (stop.stopped) {
+								stopPoints.push({
+									x: position.x + stopSpaceMods[i].x,
+									y: position.y + stopSpaceMods[i].y
+								});
+							}
+						}
+
+						if (i == history.length-1 && moving && nextStop) {
+							const nextStopPosition = this.worldPositions.find(w => w.worldId == nextStop.locationId);
+							if (nextStopPosition) {
+								const percentage = (this.state.shownTime - end) / (nextStop.timeStart - end);
+								console.log("currentTime, percentage", this.state.shownTime, percentage);
+								const currentPoint = animateLine(lastPosition, nextStopPosition, percentage);
+								travelerPosition = currentPoint;
+								pathPoints.push(currentPoint);
+							}
+						}
+						
+						previousNexus = allowNexusChanges && position?.nexusId || previousNexus;
+					});
+
 					logs.push({
-						...log,
-						history 
+						name: log.name,
+						points: pathPoints,
+						stopPoints,
+						themeColor: log.themeColor || "#fff",
+						token: log.token || "img/ships/default.png",
+						travelerPosition,
 					})
 				}
 			});
 			return logs;
-
-			// "img/ships/default.png"
 		},
 		drawnWorlds(): IDrawnWorld[] {
 			const drawnWorlds: IDrawnWorld[] = [];
@@ -509,6 +601,13 @@ export default defineComponent({
 		 * TODO: currently just defaults to 0. Should default to the earliest date in the provided timeline.
 		 */
 		minimumPlaybackDate() {
+			let minDate = Utils.Dates.Convert.CampaignDate.toJSDate(CampaignState.CurrentDate).getTime();
+			this.$props.travelLogs.forEach(log => {
+				const dateStart = log.history?.length > 0 && log.history[0].dateStart;
+				const earliest = dateStart && Utils.Dates.Convert.CampaignDate.toJSDate(dateStart).getTime() || minDate;
+				minDate = Math.min(minDate, earliest);
+			});
+			return new Date(minDate);
 			return Utils.Dates.Convert.CampaignDate.toJSDate(new CampaignDate(0, 1, 0));
 		},
 		/** The latest possible date viewable on the map.
@@ -777,111 +876,118 @@ export default defineComponent({
 			ctx.globalAlpha = 0.9;
 			ctx.lineWidth = this.adjustDPR(1);
 			ctx.setLineDash([this.adjustDPR(4), this.adjustDPR(4)]);
-			this.drawnTravelLogs.forEach(log => {
-				const stops = log?.history || [];
-				if (stops.length == 0) {
-					return;
-				}
-				const startPosition = this.worldPositions.length > 0 ? this.worldPositions.find(w => w.worldId == stops[0].locationId) : undefined;
-				if (startPosition) {
-					ctx.strokeStyle = log?.themeColor || "#fff";
-					ctx.fillStyle = shadeColor(ctx.strokeStyle as string, 10);
-					const stopSpaceMods = spaceStopMods(stops);
-					const yOffset = 5;
+			
+			this.drawnTravelLogs.forEach((log, i) => {
+				ctx.strokeStyle = log?.themeColor || "#fff";
+				ctx.fillStyle = shadeColor(ctx.strokeStyle as string, 10);
+				const yOffset = 5;
+				ctx.save();
+				ctx.beginPath();
+				let penDown = false;
+				let lastPoint = {x:0,y:0};
 
-					ctx.beginPath();
-					ctx.moveTo(
-						(startPosition.x) * this.mapUnitScale,
-						(startPosition.y) * this.mapUnitScale + yOffset
-					);
-					
-					// dashed lines
-					let previousNexus = '';
-					stops.forEach((stop, i) => {
-						const position = this.worldPositions.find(w => w.worldId == stop.locationId);
-						// no need to handle the first stop
-						if (i == 0) {
-							previousNexus = position?.nexusId || '';
-							return;
-						}
+				log.points.forEach(pt => {
+					const x = pt.x * this.mapUnitScale;
+					const y = pt.y * this.mapUnitScale + yOffset;
 
-						if (stop.eventType == 'world' && position) {
-							// Check if we need to draw a path across a switchtrack before the current world
-							if (!stop.fastTravel && stop.accessMethod == 'lightship' && previousNexus != '' && previousNexus != position?.nexusId) {
-								const switchtrack = this.getSwitchtrack(previousNexus, position.nexusId, false);
-								if (switchtrack) {
-									this.drawConnection(ctx, switchtrack, true, {x:-5, y:yOffset});
-								}
-							}
-
-							// draw the actual line
-							ctx.lineTo((position.x + stopSpaceMods[i].x) * this.mapUnitScale, (position.y + stopSpaceMods[i].y) * this.mapUnitScale + yOffset);
-						}
-
-						// if (i-1 == stops.length && log.token && position) {
-						// 	ctx.drawImage(log.token, position.x * this.mapUnitScale, position.y * this.mapUnitScale, this.mapUnitScale, this.mapUnitScale);
-						// }
-						previousNexus = position?.nexusId || previousNexus;
-					});
-					ctx.stroke();
-
-					// draw points at stops
-					ctx.globalAlpha = 1;
-					ctx.lineWidth = this.adjustDPR(3);
-					ctx.setLineDash([]);
-					ctx.strokeStyle = shadeColor(ctx.strokeStyle as string, -40);
-					stops.forEach((stop, i) => {
-						const position = this.worldPositions.find(w => w.worldId == stop.locationId);
-						if (stop.eventType == 'world' && position && stop.stopped) {
-							ctx.beginPath();
-							ctx.ellipse((position.x + stopSpaceMods[i].x) * this.mapUnitScale, (position.y + stopSpaceMods[i].y) * this.mapUnitScale + yOffset, this.adjustDPR(travelStopIconRadius), this.adjustDPR(travelStopIconRadius), 0, 0, 2 * Math.PI);
-							ctx.stroke();
-							ctx.fill();
-						}
-					});
-
-					// Draw the traveler icon and label
-					if (log.token) {
-						const image = this.getImageElement(log.token) as HTMLImageElement|undefined;
-						if (image) {
-							const travelerTokenRadius = 0.3 * worldTokenMultiplier;
-							const basePos = this.getTravelerPosition(log);
-							const pos = {
-								x: basePos.x + travelerTokenRadius + 0.25,
-								y: basePos.y + 0.5 * travelerTokenRadius - 0.1
-							};
-							const size = {width: 1, height: 1};
-
-							// draw outline
-							ctx.globalAlpha = 0.4;
-							ctx.lineWidth = this.adjustDPR(1);
-							ctx.setLineDash([this.adjustDPR(5),this.adjustDPR(2)]);
-							ctx.fillStyle = shadeColor(log.themeColor as string, -20);
-							ctx.strokeStyle = log.themeColor;
-							ctx.beginPath();
-							ctx.ellipse(pos.x * this.mapUnitScale, pos.y * this.mapUnitScale, travelerTokenRadius * this.mapUnitScale, travelerTokenRadius * this.mapUnitScale, 0, 0, 2 * Math.PI);
-							ctx.fill();
-							// ctx.globalAlpha = 1;
-							// ctx.stroke();
-							
-							// draw token
-							ctx.globalAlpha = 1;
-							ctx.drawImage(image, (pos.x - size.width/2) * this.mapUnitScale, (pos.y - size.height/2) * this.mapUnitScale, size.width * this.mapUnitScale, size.height * this.mapUnitScale);
-
-							// draw label
-							drawTextWithBG(
-								ctx,
-								log.name,
-								`${this.adjustDPR(6)}px sans-serif`,
-								pos.x * this.mapUnitScale,
-								((pos.y + (size.height/2)) * this.mapUnitScale),
-								log.themeColor,
-								this.adjustDPR(2)
-							)
-						}
+					if (!penDown) {
+						ctx.moveTo( x, y );
+						penDown = true;
 					}
+					else {
+						//#region actually draw the point
+						if (pt.controlPoint && pt.controlPoint2) {
+							ctx.moveTo( lastPoint.x, lastPoint.y );
+							// draw curve with two control points
+							ctx.bezierCurveTo(
+								(pt.controlPoint.x * this.mapUnitScale),
+								(pt.controlPoint.y * this.mapUnitScale),
+								pt.controlPoint2.x * this.mapUnitScale,
+								pt.controlPoint2.y * this.mapUnitScale,
+								x,
+								y,
+							);
+							penDown = false;
+						}
+						else if (pt.controlPoint) {
+							ctx.moveTo( lastPoint.x, lastPoint.y );
+							// draw curve with one control point
+							ctx.quadraticCurveTo(
+								pt.controlPoint.x * this.mapUnitScale,
+								pt.controlPoint.y * this.mapUnitScale,
+								x,
+								y,
+							);
+							penDown = false;
+						}
+						else {
+							ctx.lineTo( x, y );
+						}
+						//#endregion actually draw the point
+					}
+					if (pt.break) {
+						penDown = false;
+					}
+					lastPoint = {x,y};
+				});
+					
+				ctx.stroke();
+				ctx.restore();
+
+				// draw points at stops
+				ctx.globalAlpha = 1;
+				ctx.lineWidth = this.adjustDPR(3);
+				ctx.setLineDash([]);
+				ctx.strokeStyle = shadeColor(ctx.strokeStyle as string, -40);
+				log.stopPoints.forEach((pt) => {
+					const x = pt.x * this.mapUnitScale;
+					const y = pt.y * this.mapUnitScale;
+					ctx.beginPath();
+					ctx.ellipse(x, y + yOffset, this.adjustDPR(travelStopIconRadius), this.adjustDPR(travelStopIconRadius), 0, 0, 2 * Math.PI);
+					ctx.stroke();
+					ctx.fill();
+				});
+
+				// Draw the traveler icon and label
+				const image = this.getImageElement(log.token) as HTMLImageElement|undefined;
+				if (image) {
+					const travelerTokenRadius = 0.3 * worldTokenMultiplier;
+					const basePos = log.travelerPosition;
+					const pos = {
+						x: basePos.x + travelerTokenRadius + 0.25,
+						y: basePos.y + 0.5 * travelerTokenRadius - 0.1
+					};
+					const size = {width: 1, height: 1};
+
+					// draw outline
+					ctx.globalAlpha = 0.4;
+					ctx.lineWidth = this.adjustDPR(1);
+					ctx.setLineDash([this.adjustDPR(5),this.adjustDPR(2)]);
+					ctx.fillStyle = shadeColor(log.themeColor as string, -20);
+					ctx.strokeStyle = log.themeColor;
+					ctx.beginPath();
+					ctx.ellipse(pos.x * this.mapUnitScale, pos.y * this.mapUnitScale, travelerTokenRadius * this.mapUnitScale, travelerTokenRadius * this.mapUnitScale, 0, 0, 2 * Math.PI);
+					ctx.fill();
+					// ctx.globalAlpha = 1;
+					// ctx.stroke();
+					
+					// draw token
+					ctx.globalAlpha = 1;
+					ctx.drawImage(image, (pos.x - size.width/2) * this.mapUnitScale, (pos.y - size.height/2) * this.mapUnitScale, size.width * this.mapUnitScale, size.height * this.mapUnitScale);
+
+					// draw label
+					drawTextWithBG(
+						ctx,
+						log.name,
+						`${this.adjustDPR(6)}px sans-serif`,
+						pos.x * this.mapUnitScale,
+						((pos.y + (size.height/2)) * this.mapUnitScale),
+						log.themeColor,
+						this.adjustDPR(2)
+					)
 				}
-			});	
+			});
+
 			ctx.restore();
 			//#endregion Draw travel paths
 
@@ -1040,7 +1146,26 @@ export default defineComponent({
 		/** Get the segment indexes of the switchtracks in a given nexus. */
 		getSwitchtrack(nexusFrom: string, nexusTo: string, drawnOnly: boolean = true): IDrawnSwitchtrack | undefined {
 			const switchtracks = drawnOnly ? this.drawnSwitchtracks : this.dataSwitchtracksAll;
-			return switchtracks.find(s => (s._from == nexusFrom && s.to == nexusTo) || (s._from == nexusTo && s.to == nexusFrom));
+			let result = switchtracks.find(s => s._from == nexusFrom && s.to == nexusTo);
+			if (result) {
+				// result is mapped the same as the query. Send it as is.
+				return result;
+			}
+			result = switchtracks.find(s => s._from == nexusTo && s.to == nexusFrom);
+			result = result ? JSON.parse(JSON.stringify(result)) : undefined;
+			if (result) {
+				// result is mapped in the opposite direction of what was searched. Swap the start and end points to compensate.
+				let newStartPoint = result.endPoint;
+				result.endPoint = result.startPoint;
+				result.startPoint = newStartPoint;
+				if (result.controlPoint && result.controlPoint2) {
+					let newControl1 = result.controlPoint2;
+					result.controlPoint2 = result.controlPoint;
+					result.controlPoint = newControl1;
+				}
+				return result
+			}
+			return result;
 		},
 		/** Get the current position of the traveler from the given log */
 		getTravelerPosition(log: ITravelLog): ISimplePoint {
@@ -1163,6 +1288,12 @@ export default defineComponent({
 
 function getMidpoint(a: ISimplePoint, b: ISimplePoint): ISimplePoint {
 	return { x: (a.x + b.x)/2, y: (a.y + b.y)/2}
+}
+
+function animateLine(lineStart: ISimplePoint, lineEnd: ISimplePoint, percentage: number = 0.5): ISimplePoint {
+	const diffX = (lineEnd.x - lineStart.x) * percentage;
+	const diffY = (lineEnd.y - lineStart.y) * percentage;
+	return { x: lineStart.x + diffX, y: lineStart.y + diffY}
 }
 /** Gets the index of the segments bordering a world or point. 
  * TODO: Actually implement. */

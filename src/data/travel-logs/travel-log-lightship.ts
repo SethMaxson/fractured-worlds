@@ -1,6 +1,6 @@
-import type { ITravelLog } from "@/interfaces/travel-log/ITravelLog";
+import type { ITravelLogServer } from "@/interfaces/travel-log/ITravelLog";
 
-export const TravelLogLightship: ITravelLog[] = [
+export const TravelLogLightship: ITravelLogServer[] = [
 	{
 		name: "The Brightside",
 		id: "brightside",

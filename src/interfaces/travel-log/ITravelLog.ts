@@ -14,7 +14,7 @@ export interface ITravelLogReference {
 }
 
 /** An event on a travel log. */
-export interface ITravelLogTimelineEvent {
+export interface ITravelLogTimelineEventServer {
 	/** The ID of the location in this event, e.g. 'somewhere' */
 	locationId: string;
 	/** How did they get there? */
@@ -33,8 +33,16 @@ export interface ITravelLogTimelineEvent {
 	fastTravel?: boolean;
 }
 
-/** A JSON definition for an Overworld travel log. */
-export interface ITravelLog {
+/** An event on a travel log. */
+export interface ITravelLogTimelineEvent extends ITravelLogTimelineEventServer {
+	/** Time in ms for JavaScript date object */
+	timeStart: number;
+	/** Time in ms for JavaScript date object */
+	timeEnd?: number;
+}
+
+/** Model for Overworld travel log (server-side). */
+export interface ITravelLogServer {
     /** e.g. 'The Brightside' */
 	name: string;
 	/** e.g. 'brightside' */
@@ -47,6 +55,12 @@ export interface ITravelLog {
 	type: 'character'|'lightship'|'party';
 	/** Copy travel history from other travel paths for the specified dates. */
 	reference: ITravelLogReference[];
+	/** history */
+	history: ITravelLogTimelineEventServer[];
+}
+
+/** Model for Overworld travel log (client-side). */
+export interface ITravelLog extends ITravelLogServer {
 	/** history */
 	history: ITravelLogTimelineEvent[];
 }
