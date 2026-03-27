@@ -6,7 +6,6 @@ import type { INexusPointData, ISwitchtrackData, IWorldNexusData } from '@/inter
 import { WorldDatas } from '@/data/world-datas';
 import type { ITravelLogTimelineEvent, ITravelLog } from "@/interfaces/travel-log/ITravelLog";
 import { ExplorationState, KnownWorldDisplayType, type IKnownWorldData } from "@/interfaces/IKnownWorldData";
-import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
 </script>
 
 <template>
@@ -54,21 +53,25 @@ import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
 				{{ Utils.Dates.Format.MDY(Utils.Dates.Convert.JavascriptDate.toCampaignDate(shownDate)) }}
 				<span class="fs-5">/</span>
 				{{ Utils.Dates.Format.MDY(Utils.Dates.Convert.JavascriptDate.toCampaignDate(maximumPlaybackDate)) }}
-				<!-- Need to turn this into a scrubbable progress bar -->
-				<!-- <div class="progress" role="progressbar" aria-label="Animated striped example" :aria-valuenow="state.progress" aria-valuemin="0" aria-valuemax="100">
-					<div class="progress-bar text-bg-info progress-bar-striped progress-bar-animated py-1 text-light" :style="{width: state.progress + '%'}">{{ Utils.Dates.Format.MDY(Utils.Dates.Convert.JavascriptDate.toCampaignDate(shownDate)) }}</div>
-				</div>
-				<input type="range" name="progress" min="0" max="1" step="0.05" value="1" /> -->
 			</div>
-			<!-- <div class="col-md-2" style="display: inline-block;">
-				<select class="form-select form-select-sm" name="playback-speed">
-					<option value="0.5">0.5</option>
-					<option value="0.75">0.75</option>
-					<option value="1" selected>Normal</option>
-					<option value="1.5">1.5</option>
-					<option value="2">2</option>
+			<div class="col-md-2" style="display: inline-block;">
+				<select class="form-select form-select-sm" id="playback-speed" v-model="playbackSettings.timeScale">
+					<option value="0.25">0.25x</option>
+					<option value="0.5">0.5x</option>
+					<option value="1">1x</option>
+					<option value="2">2x</option>
+					<option value="4">4x</option>
 				</select>
-			</div> -->
+				<!-- <label for="playback-speed">Speed</label> -->
+			</div>
+			<div>
+				<input type="checkbox" class="btn-check" id="btn-repeat" autocomplete="off" v-model="playbackSettings.loop" />
+				<label class="btn playback-button" for="btn-repeat">
+					<svg class="menu-button-icon theme-color d-inline ms-1 small" :class="{'checked': playbackSettings.loop}">
+						<use href="#repeat"></use>
+					</svg>
+				</label>
+			</div>
 			<button class="btn playback-button" title="Toggle Fullscreen">⛶</button>
 		</div>
 	</div>
@@ -81,20 +84,23 @@ import type { IComponentMenuOption } from "@/interfaces/IComponentMenuOption";
     left: 0;
     right: 0; */
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
+    /* padding: 10px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.checked {
+	color: var(--color-heading);
 }
 </style>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import { CampaignState } from '@/data/campaign-state';
-import { Config } from '@/scripts/config';
 import type { IKindredPortal } from '@/interfaces/IKindredPortal';
+import { Config } from '@/scripts/config';
 import { id_ify } from '@/scripts/id_ify';
-import { CampaignDate } from '@/objects/CampaignDate';
 
 interface ISimplePoint { x: number, y: number };
 interface IWorldPositionEntry extends ISimplePoint {
@@ -258,6 +264,7 @@ export default defineComponent({
 				progress: 75,
 				shownTime: Utils.Dates.Convert.CampaignDate.toJSDate(CampaignState.CurrentDate).getTime(),
 				travelerPositions: [] as ITravelerPosition[],
+				unmounted: false,
 				unpauseAfterScrub: false,
 			},
 		}
@@ -460,7 +467,9 @@ export default defineComponent({
 							const nextStopPosition = this.worldPositions.find(w => w.worldId == nextStop.locationId);
 							if (nextStopPosition) {
 								const percentage = (this.state.shownTime - end) / (nextStop.timeStart - end);
-								console.log("currentTime, percentage", this.state.shownTime, percentage);
+								if (Config.IsDebug) {
+									console.log("currentTime, percentage", this.state.shownTime, percentage);
+								}
 								const currentPoint = animateLine(lastPosition, nextStopPosition, percentage);
 								travelerPosition = currentPoint;
 								pathPoints.push(currentPoint);
@@ -608,7 +617,6 @@ export default defineComponent({
 				minDate = Math.min(minDate, earliest);
 			});
 			return new Date(minDate);
-			return Utils.Dates.Convert.CampaignDate.toJSDate(new CampaignDate(0, 1, 0));
 		},
 		/** The latest possible date viewable on the map.
 		 * TODO: currently just defaults to the current campaign date.
@@ -691,7 +699,7 @@ export default defineComponent({
 			const now = performance.now();
 			const delta = now - this.state.lastFrame;
 			const canvas = document.getElementById("map-canvas") as HTMLCanvasElement;
-			const ctx = canvas.getContext("2d");
+			const ctx = canvas ? canvas.getContext("2d") : undefined;
 			let redrawnThisCycle = false;
 
 			if (this.state.lastTimeShown != this.state.shownTime) {
@@ -702,6 +710,7 @@ export default defineComponent({
 				this.scaleFix(canvas, ctx);
 			}
 			
+			// TODO: remove this 'true'
 			if (true || this.needsRedraw || imgLoaded) {
 				if (ctx) {
 					this.draw(ctx);
@@ -735,14 +744,16 @@ export default defineComponent({
 					}
 				}
 				else {
-					this.state.shownTime = this.state.shownTime + (delta * minuteInMs * 100);
+					this.state.shownTime = this.state.shownTime + (delta * minuteInMs * 10 * this.playbackSettings.timeScale);
 				}
 			}
 
 			this.state.lastFrame = now;
 
 			// queue next frame
-			requestAnimationFrame(this.cycle);
+			if (!this.state.unmounted) {
+				requestAnimationFrame(this.cycle);
+			}
 		},
 		draw(ctx: CanvasRenderingContext2D) {
 			const nexusOpacity = 0.9;
@@ -1280,6 +1291,7 @@ export default defineComponent({
 	},
 	beforeUnmount() {
 		this.panzoom?.destroy();
+		this.state.unmounted = true;
 		if (this.$props.useCanvas) {
 			window.removeEventListener('resize', this.resize);
 		}
