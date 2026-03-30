@@ -54,7 +54,7 @@ import { ExplorationState, KnownWorldDisplayType, type IKnownWorldData } from "@
 				<span class="fs-5">/</span>
 				{{ Utils.Dates.Format.MDY(Utils.Dates.Convert.JavascriptDate.toCampaignDate(maximumPlaybackDate)) }}
 			</div>
-			<div class="col-md-2" style="display: inline-block;">
+			<div>
 				<select class="form-select form-select-sm" id="playback-speed" v-model="playbackSettings.timeScale">
 					<option value="0.25">0.25x</option>
 					<option value="0.5">0.5x</option>
@@ -72,17 +72,13 @@ import { ExplorationState, KnownWorldDisplayType, type IKnownWorldData } from "@
 					</svg>
 				</label>
 			</div>
-			<button class="btn playback-button" title="Toggle Fullscreen">⛶</button>
+			<!-- <button class="btn playback-button" title="Toggle Fullscreen">⛶</button> -->
 		</div>
 	</div>
 	<div id="images-for-canvas" style="display: none;"></div>
 </template>
 <style>
 .playback-controls-holder {
-    /* position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0; */
     background-color: rgba(0, 0, 0, 0.5);
     /* padding: 10px; */
     display: flex;
@@ -120,7 +116,6 @@ interface IDrawnNexusPath extends IDrawnPath {
 interface IDrawnPath {
 	points: IDrawnPathPoint[];
 }
-
 
 interface IDrawnPathPoint extends ISimplePoint {
 	break?: boolean;
