@@ -117,7 +117,7 @@ onMounted(() => {
 							</p>
 							<figure class="figure mx-5 rounded-top-5 rounded-bottom-4 px-1 pt-1">
 								<Image
-									src="/public/img/reference/prism_keys.jpg"
+									src="/img/reference/prism_keys.jpg"
 									alt="Prism Keys"
 									class="figure-img img-fluid rounded-top-5 rounded-bottom-4"
 								 />
@@ -239,6 +239,19 @@ onMounted(() => {
 
 							<dt class="col-sm-3">Lightship</dt>
 							<dd class="col-sm-9">A type of ship that is capable of traversing <em>Voidspace</em> via the pathways of light that connect the World Remnants.</dd>
+							<hr />
+
+							<dt class="col-sm-3">Kindred Portals</dt>
+							<dd class="col-sm-9">See Kindred Worlds.</dd>
+							<hr />
+
+							<dt class="col-sm-3">Kindred Worlds</dt>
+							<dd class="col-sm-9">
+								<p>Sometimes two or more worlds resemble each other in meaningful ways that are often subtle to the observer. Some worlds that share enough resemblances are bonded, resulting in an object in both worlds to become a portal. Canny travelers can use these portals to easily traverse between one world and another without the use of a Lightship. Natives of a world are unable to use such portals without both having been made aware of the existence of other worlds and having the aid of an outsider.</p>
+								<div class="gm-only">
+									<p>[DM Only: Kindred World Portals are usually objects that invoke an aesthetic or theme of the world that awaits on the other side. For example, a portal in Oz that leads to Wonderland may be in an object with a heart motif, thus tying it to the Queen of Hearts. The object that serves as a link must be native to the world on which it is found.]</p>
+								</div>
+							</dd>
 							<hr />
 
 							<dt class="col-sm-3">
