@@ -13,15 +13,19 @@ Utils.LocalStorage.Dates.LastPageView.setNow("WorldAnchors");
 const list = document.querySelector('.sortable-list');
 let draggingItem: HTMLElement|null = null;
 
-list?.addEventListener('dragstart', (e) => {
-	draggingItem = e.target as HTMLElement;
-	(e.target as HTMLElement).classList.add('dragging');
+['dragstart', 'touchstart'].forEach(eventName => {
+	list?.addEventListener(eventName, (e) => {
+		draggingItem = e.target as HTMLElement;
+		(e.target as HTMLElement).classList.add('dragging');
+	});
 });
 
-list?.addEventListener('dragend', (e) => {
-	(e.target as HTMLElement).classList.remove('dragging');
-	document.querySelectorAll('.sortable-item').forEach(item => item.classList.remove('over'));
-	draggingItem = null;
+['dragend', 'touchend'].forEach(eventName => {
+	list?.addEventListener(eventName, (e) => {
+		(e.target as HTMLElement).classList.remove('dragging');
+		document.querySelectorAll('.sortable-item').forEach(item => item.classList.remove('over'));
+		draggingItem = null;
+	});
 });
 
 list?.addEventListener('dragover', (e) => {
@@ -157,6 +161,14 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 					</div>
 					<span class="m-0 p-0">
 						<span class="badge text-bg-secondary rounded-pill">Shadow Moses Island*</span>
+					</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-start sortable-item" draggable="true">
+					<div class="me-auto">
+						"to encircle the Fated World, and the worthy shall gather no fewer than"
+					</div>
+					<span class="m-0 p-0">
+						<span class="badge text-bg-info rounded-pill">The Suburbs</span>
 					</span>
 				</li>
 			</ul>
